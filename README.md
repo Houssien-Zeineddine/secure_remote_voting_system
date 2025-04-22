@@ -2,7 +2,7 @@
 
 <br><br>
 
-<!-- Project Philosophy -->
+<!-- project overview -->
 <img src="./readme/title2.svg"/>
 
 > This system allows users to vote remotely in a secure, transparent, and intelligent manner. It leverages AI to detect suspicious activity, ensures that votes are geographically legitimate, and provides a smooth and reliable user experience.
@@ -11,7 +11,7 @@
 
 <br><br>
 
-<!-- Tech Stack -->
+<!-- System Design -->
 <img src="./readme/title3.svg"/>
 
 ### Add Title Here
@@ -20,26 +20,17 @@
 
 <br><br>
 
-<!-- UI/UX -->
+<!-- Project Highlights -->
 <img src="./readme/title4.svg"/>
 
 ### Add Title Here
 
-- To be decided on later on.
+- List the sexy features.
 
 <br><br>
 
-<!-- Database Design -->
+<!-- Demo -->
 <img src="./readme/title5.svg"/>
-
-### Add Title Here
-
-- To be decided on later on.
-
-<br><br>
-
-<!-- Implementation -->
-<img src="./readme/title6.svg"/>
 
 <!-- ### User Screens (Mobile)
 
@@ -55,30 +46,8 @@
 
 <br><br>
 
-<!-- Prompt Engineering -->
-<img src="./readme/title7.svg"/>
-
-### Add Title Here
-
-- List the sexy features.
-
-<br><br>
-
-<!-- AWS Deployment -->
-<img src="./readme/title8.svg"/>
-
-### Add Title Here
-
-- Description here.
-
-| Postman API 1                           | Postman API 2                         | Postman API 3                         |
-| --------------------------------------- | ------------------------------------- | ------------------------------------- |
-| ![Landing](./readme/demo/1440x1024.png) | ![fsdaf](./readme/demo/1440x1024.png) | ![fsdaf](./readme/demo/1440x1024.png) |
-
-<br><br>
-
-<!-- Unit Testing -->
-<img src="./readme/title9.svg"/>
+<!-- Development & Testing -->
+<img src="./readme/title6.svg"/>
 
 ### Add Title Here
 
@@ -88,11 +57,15 @@
 
 <br><br>
 
-<!-- How to Run -->
-<img src="./readme/title10.svg"/>
+<!-- Deployment -->
+<img src="./readme/title7.svg"/>
 
 ### Add Title Here
 
-- To be decided on later on.
+- Description here.
+
+| Postman API 1                           | Postman API 2                         | Postman API 3                         |
+| --------------------------------------- | ------------------------------------- | ------------------------------------- |
+| ![Landing](./readme/demo/1440x1024.png) | ![fsdaf](./readme/demo/1440x1024.png) | ![fsdaf](./readme/demo/1440x1024.png) |
 
 <br><br>
