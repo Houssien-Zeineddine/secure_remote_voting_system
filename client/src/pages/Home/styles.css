@@ -1,0 +1,41 @@
+.landing-page-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 6rem;
+    padding: 4rem;
+}
+
+.landing-page-description {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 5rem;
+    width: 90%;
+}
+
+.landing-page-description img {
+    width: 50%;
+    height: auto;
+}
+
+.landing-page-text {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    color: var(--primary-color);
+}
+
+.landing-page-text h2 {
+    font-size: var(--font-size-header-2);
+    font-weight: var(--font-weight-bold);
+    width: 63%;
+}
+
+.landing-page-text p {
+    font-size: var(--font-size-header-4);
+}
+
+.landing-page-btn {
+    width: 9rem;
+}
