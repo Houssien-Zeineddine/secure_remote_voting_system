@@ -7,6 +7,9 @@ import voteOnline from "../../assets/developer 1.svg";
 import securedPlatform from "../../assets/web-security 2.svg";
 import realTimeResults from "../../assets/pie-chart 1.svg";
 import aboutUs from "../../assets/about us.svg";
+import faqs from "../../assets/question (1) 1.svg";
+import collapse from "../../assets/Shape.svg";
+import expand from "../../assets/expand.svg";
 import Button from "../../components/Button";
 import { useNavigate } from "react-router-dom";
 import "./styles.css";
@@ -180,10 +183,175 @@ const Home = () => {
         </div>
       </div>
       <div className="faqs-container">
-        <div className="faqs-title">
-          <h2>Got Questions? We've Got Answers</h2>
+        <h2 className="faqs-title">Got Questions? We've Got Answers</h2>
+
+        <div className="faqs-body">
+          <div className="questions-container">
+            <div className="questions">
+              <p className="rounded-number">1</p>
+              <div className="question-section">
+                <div className="question">
+                  <p>Can I vote more than once?</p>
+                  <img
+                    src={collapse}
+                    alt="Collapse Question"
+                    className="collapse-question"
+                  />
+                  <img
+                    src={expand}
+                    alt="Expand Question"
+                    className="expand-question"
+                  />
+                </div>
+                <p>
+                  No. Each voter is allowed to cast only one vote. Any attempt
+                  to vote more than once will be blocked and logged for security
+                  review.
+                </p>
+              </div>
+            </div>
+            <div className="questions">
+              <p className="rounded-number">2</p>
+              <div className="question-section">
+                <div className="question">
+                  <p>Why do you need my location and IP address?</p>
+                  <img
+                    src={collapse}
+                    alt="Collapse Question"
+                    className="collapse-question"
+                  />
+                  <img
+                    src={expand}
+                    alt="Expand Question"
+                    className="expand-question"
+                  />
+                </div>
+                <p>
+                  Your location and IP are used to confirm that you’re voting
+                  from an approved region and to prevent fraud. This information
+                  is securely processed and never shared.
+                </p>
+              </div>
+            </div>
+            <div className="questions">
+              <p className="rounded-number">3</p>
+              <div className="question-section">
+                <div className="question">
+                  <p>What devices and browsers are supported?</p>
+                  <img
+                    src={collapse}
+                    alt="Collapse Question"
+                    className="collapse-question"
+                  />
+                  <img
+                    src={expand}
+                    alt="Expand Question"
+                    className="expand-question"
+                  />
+                </div>
+                <p>
+                  You can vote using most modern web browsers on desktop,
+                  tablet, or smartphone. However, avoid using VPNs, outdated
+                  browsers, or automated tools (like scripts), which may cause
+                  your session to be flagged.
+                </p>
+              </div>
+            </div>
+            <div className="questions">
+              <p className="rounded-number">4</p>
+              <div className="question-section">
+                <div className="question">
+                  <p>Can I change my vote after submitting it?</p>
+                  <img
+                    src={collapse}
+                    alt="Collapse Question"
+                    className="collapse-question"
+                  />
+                  <img
+                    src={expand}
+                    alt="Expand Question"
+                    className="expand-question"
+                  />
+                </div>
+                <p>
+                  No. Once a vote is submitted and confirmed, it is final and
+                  cannot be changed. Please review your choices carefully before
+                  voting.
+                </p>
+              </div>
+            </div>
+            <div className="questions">
+              <p className="rounded-number">5</p>
+              <div className="question-section">
+                <div className="question">
+                  <p>What if I lose connection while voting?</p>
+                  <img
+                    src={collapse}
+                    alt="Collapse Question"
+                    className="collapse-question"
+                  />
+                  <img
+                    src={expand}
+                    alt="Expand Question"
+                    className="expand-question"
+                  />
+                </div>
+                <p>
+                  If your session is interrupted before you submit your vote,
+                  you may log back in and complete the process. If you already
+                  submitted your vote, it will be saved and confirmed.
+                </p>
+              </div>
+            </div>
+            <div className="questions">
+              <p className="rounded-number">6</p>
+              <div className="question-section">
+                <div className="question">
+                  <p>How is my personal data protected?</p>
+                  <img
+                    src={collapse}
+                    alt="Collapse Question"
+                    className="collapse-question"
+                  />
+                  <img
+                    src={expand}
+                    alt="Expand Question"
+                    className="expand-question"
+                  />
+                </div>
+                <p>
+                  Your data is encrypted and stored securely in accordance with
+                  best practices. We do not share personal information with any
+                  third parties.
+                </p>
+              </div>
+            </div>
+            <div className="questions">
+              <p className="rounded-number">7</p>
+              <div className="question-section">
+                <div className="question">
+                  <p> Who can I contact if I need help?</p>
+                  <img
+                    src={collapse}
+                    alt="Collapse Question"
+                    className="collapse-question"
+                  />
+                  <img
+                    src={expand}
+                    alt="Expand Question"
+                    className="expand-question"
+                  />
+                </div>
+                <p>
+                  You can reach our support team info through the “Contact Us”
+                  link on your dashboard. We’re here to assist you throughout
+                  the voting process.
+                </p>
+              </div>
+            </div>
+          </div>
+          <img src={faqs} alt="Frequently Asked Questions" />
         </div>
-        <div></div>
       </div>
     </div>
   );
