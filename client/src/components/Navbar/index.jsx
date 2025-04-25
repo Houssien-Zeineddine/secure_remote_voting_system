@@ -1,5 +1,6 @@
 import React, { use } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import { HashLink } from "react-router-hash-link";
 import { AuthContext } from "../context/AuthContext";
 import "./style.css";
 import "../Button/style.css";
@@ -33,7 +34,9 @@ const Navbar = () => {
                 <Link to={"/"}>Home</Link>
               </li>
               <li className="nav-link">
-                <Link to={"AboutUs"}>About Us</Link>
+                <HashLink smooth to="/#about-us">
+                  About Us
+                </HashLink>
               </li>
               <li className="nav-link">
                 <Link to={"faqs"}>FAQs</Link>

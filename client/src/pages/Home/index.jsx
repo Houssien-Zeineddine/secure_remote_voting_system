@@ -3,6 +3,10 @@ import politician from "../../assets/Politician giving his speech to public.svg"
 import login from "../../assets/Login.svg";
 import vote from "../../assets/online vote.svg";
 import viewResults from "../../assets/card view result.svg";
+import voteOnline from "../../assets/developer 1.svg";
+import securedPlatform from "../../assets/web-security 2.svg";
+import realTimeResults from "../../assets/pie-chart 1.svg";
+import aboutUs from "../../assets/about us.svg";
 import Button from "../../components/Button";
 import { useNavigate } from "react-router-dom";
 import "./styles.css";
@@ -75,14 +79,111 @@ const Home = () => {
           </p>
         </div>
       </div>
-      <div className="our-features">
-        <p>our features</p>
+      <div className="our-features-container">
+        <h2>Our Features</h2>
+        <p>
+          We offer a robust and reliable online voting solution designed to
+          exceed expectations. Our platform combines secure, user-friendly
+          polling software with intelligent threat detection systems to ensure
+          the integrity of every vote.
+        </p>
+        <div className="our-features-cards">
+          <div className="our-features-card">
+            <img src={securedPlatform} alt="Secured Platform" />
+            <h4>Secured Platform</h4>
+            <p>With our system your data is secured</p>
+          </div>
+          <div className="our-features-card">
+            <img src={voteOnline} alt="Vote Online" />
+            <h4>Vote Online</h4>
+            <p>In just few clicks, you can vote for your best candidate</p>
+          </div>
+          <div className="our-features-card">
+            <img src={realTimeResults} alt="Real Time Results" />
+            <h4>Real Time Results</h4>
+            <p>View real-time voting results and scores of each candidate</p>
+          </div>
+        </div>
       </div>
-      <div className="about-us">
-        <p>about us</p>
+      <div className="about-us" id="about-us">
+        <div className="about-us-text">
+          <h2>About US</h2>
+          <p>
+            Secure remote voting is an online voting system that is used to
+            gather instant and trustworthy results
+          </p>
+          <p>We aim to make voting and elections easy, seamless and fair</p>
+        </div>
+        <div className="about-us-body">
+          <div>
+            <div className="about-us-list">
+              <div className="rounded-number">1</div>
+              <div>
+                <h4>What We Do</h4>
+                <p>
+                  We combine cutting-edge artificial intelligence, geolocation
+                  tracking, and real-time monitoring to:
+                </p>
+                <ul>
+                  <li>
+                    <strong>Ensure Voter Legitimacy:</strong> By detecting
+                    suspicious activity such as duplicate votes, bots, or
+                    abnormal behavior.
+                  </li>
+                  <li>
+                    <strong>Protect the Voting Process:</strong> Using location
+                    and device checks to reduce fraud and maintain fairness.
+                  </li>
+                  <li>
+                    <strong>Simplify Participation:</strong> Giving voters a
+                    secure, user-friendly interface to cast their vote remotely
+                    from approved regions.
+                  </li>
+                </ul>
+              </div>
+            </div>
+            <div className="about-us-list">
+              <div className="rounded-number">2</div>
+              <div>
+                <h4>Our Core Values</h4>
+                <ul>
+                  <li>
+                    <strong>Security First:</strong> Every vote is protected
+                    using smart detection systems and encryption.
+                  </li>
+                  <li>
+                    <strong>Transparency:</strong> Users are informed of every
+                    step, from verification to vote confirmation.
+                  </li>
+                  <li>
+                    <strong>Inclusion:</strong> We believe in equal access to
+                    democracy, regardless of physical location
+                  </li>
+                </ul>
+              </div>
+            </div>
+            <div className="about-us-list">
+              <div className="rounded-number">3</div>
+              <div>
+                <h4>What We Do</h4>
+                <p>
+                  This project was developed by Houssien Zeineddine a software
+                  engineering bootcamp graduate from SE Factory, with
+                  backgrounds in technology, defense, and public service. We are
+                  proud to contribute to the future of digital democracy.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <img src={aboutUs} alt="About" />
+        </div>
       </div>
-      <div className="faqs">
-        <p>faqs</p>
+      <div className="faqs-container">
+        <div className="faqs-title">
+          <h2>Got Questions? We've Got Answers</h2>
+        </div>
+        <div></div>
       </div>
     </div>
   );
