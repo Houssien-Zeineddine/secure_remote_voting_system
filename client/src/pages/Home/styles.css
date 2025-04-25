@@ -3,7 +3,6 @@
     flex-direction: column;
     align-items: center;
     gap: 6rem;
-    padding: 4rem;
 }
 
 .landing-page-description {
@@ -29,7 +28,7 @@
 .landing-page-text h2 {
     font-size: var(--font-size-header-2);
     font-weight: var(--font-weight-bold);
-    width: 63%;
+    width: 54%;
 }
 
 .landing-page-text p {
@@ -39,3 +38,58 @@
 .landing-page-btn {
     width: 9rem;
 }
+
+.landing-page-cards-container {
+    width: 100%;
+}
+
+.landing-page-cards {
+    display: flex;
+    justify-content: space-evenly;
+    align-items: flex-end;
+    height: 12.5rem;
+    width: 100%;
+    background-color: var(--primary-color);
+}
+
+.card {
+    background-color: var(--secondary-color);
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    border-radius: 10px 10px 0 0;
+    height: 14rem;
+    width: 25rem;
+    color: var(--primary-color);
+}
+
+.card-text {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    gap: 1rem;
+    width: 12rem;
+    height: 12.5rem;
+}
+
+.card-text h4 {
+    font-size: var(--font-size-header-4);
+}
+
+.card-text p {
+    font-weight: var(--font-weight-medium);
+}
+
+.landing-page-cards-text {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+    color: var(--primary-color);
+    background-color: var(--tertiary-color);
+    font-size: var(--font-size-header-4);
+    height: 12.5rem;
+}
+
