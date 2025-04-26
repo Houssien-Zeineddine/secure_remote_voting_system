@@ -294,15 +294,7 @@ div > h4 {
     cursor: pointer;
 }
 
-.collapse-question {
-    display: none;
-}
-
-.question-section > p {
-    display: none;
-}
-
 #about-us, 
 #faqs {
-  scroll-margin-top: 6rem; /* Matches navbar height */
+  scroll-margin-top: 6rem;
 }
