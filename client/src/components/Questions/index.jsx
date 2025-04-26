@@ -2,7 +2,7 @@ import React from "react";
 import { useState } from "react";
 import collapse from "../../assets/Shape.svg";
 import expand from "../../assets/expand.svg";
-import "C:/Users/COMPUTOP/Desktop/Final Project/remote_voting_system/client/src/pages/Home/styles.css";
+import "./syle.css";
 
 const Questions = () => {
   const questions = [
