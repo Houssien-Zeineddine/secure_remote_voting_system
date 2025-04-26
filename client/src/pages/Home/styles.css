@@ -301,3 +301,8 @@ div > h4 {
 .question-section > p {
     display: none;
 }
+
+#about-us, 
+#faqs {
+  scroll-margin-top: 6rem; /* Matches navbar height */
+}

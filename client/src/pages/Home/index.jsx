@@ -182,7 +182,7 @@ const Home = () => {
           <img src={aboutUs} alt="About" />
         </div>
       </div>
-      <div className="faqs-container">
+      <div className="faqs-container" id="faqs">
         <h2 className="faqs-title">Got Questions? We've Got Answers</h2>
 
         <div className="faqs-body">
