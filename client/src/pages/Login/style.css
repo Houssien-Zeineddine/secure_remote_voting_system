@@ -1,3 +1,4 @@
+/* left half of login page */
 .login-page-container {
     display: flex;
     justify-content: center;
@@ -10,12 +11,6 @@
     display: flex;
     justify-content: center;
     align-items: center;
-}
-
-.description-container {
-    height: 100%;
-    width: 50%;
-    background-image: linear-gradient(var(--primary-color), var(--secondary-color));
 }
 
 .inside-form-container {
@@ -47,4 +42,52 @@
 
 .no-account{
     color: var(--primary-color);
+}
+
+
+/* right half of login page */
+
+.description-container {
+    height: 100%;
+    width: 50%;
+    background-image: linear-gradient(var(--primary-color), var(--secondary-color));
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.inside-description-container {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 2rem;
+}
+
+.inside-description-container > img {
+    width: 70%;
+}
+
+.inside-description-container > h1 {
+    font-size: var(--font-size-header-2);
+    color: var(--white-color);
+   
+}
+
+.inside-description-container > p {
+    color: var(--white-color);
+    font-size: var(--font-size-header-4);
+    text-align: center;
+    
+}
+
+.description-wrapper {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-end;
+    width: 70%;
+    gap: 4rem;
 }
