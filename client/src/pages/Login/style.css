@@ -32,6 +32,10 @@
     gap: 1rem;
 }
 
+.full-width {
+    width: 100%;
+}
+
 .no-account{
     color: var(--primary-color);
 }
