@@ -26,4 +26,5 @@ input {
     outline: none;
     font-weight: var(--font-weight-medium);
     width: 100%;
+    height: 2.5rem;
 }

@@ -38,7 +38,7 @@ const Login = () => {
             <Button
               text="Login"
               variant="blue"
-              size="medium"
+              size="small"
               onClick={handleLogin}
               className="login-page-btn "
             />
