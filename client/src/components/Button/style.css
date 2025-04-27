@@ -4,7 +4,7 @@
     align-items: center;
     cursor: pointer;
     transition:  transform 0.25s ease, background-color 0.25s ease, outline-offset 0.15s ease;
-    padding: 20px 35px;
+    padding: 1.25rem 2rem;
     outline: none;  
     border: none;
 }
@@ -24,36 +24,36 @@
 }
 
 .btn--small {
-    height: 40px;
+    height: 2.5rem;
     font-size: var(--font-size-body);
 }
 
 .btn--medium {
-    height: 50px;
+    height: 3rem;
     font-size: var(--font-size-body);
 }
 
 .btn--big{
-    height: 60px;
+    height: 4rem;
     font-size: var(--font-size-header-4);
 }
 
 .btn--white {
     background-color: var(--white-color);
     color: var(--primary-color);
-    border-radius: 50px;
+    border-radius: 100px;
 }
 
 .btn--blue {
     background-color: var(--primary-color);
     color: var(--white-color);
-    border-radius: 50px;
+    border-radius: 100px;
 }
 
 .btn--transparent {
     background-color: transparent;
     color: var(--white-color);
-    border-radius: 50px;
+    border-radius: 100px;
     border:1px solid var(--white-color);
 }
 
@@ -64,5 +64,5 @@
 
 .btn-logout {
     font-size: var(--font-size-header-4);
-    width: 166px;
+    width: 10rem;
 }
