@@ -117,8 +117,6 @@
     display: flex;
     justify-content: space-evenly;
     align-items: center;
-    /* height: 18rem;
-    width: 13.5rem; */
     gap: 2rem;
     width: 100%;
 }
@@ -257,43 +255,8 @@ div > h4 {
     max-height: 100vh;
 }
 
-/* .questions-container{
-    display: flex;
-    flex-direction: column;
-    gap: 4rem;
-    width: 65%;
-} */
-
-/* .questions {
-    display: flex;
-    gap: 1rem;
-    width: 90%;
-} */
-
-/* .question-section {
-    display: flex;
-    flex-direction: column;
-    gap: 1rem;
-    width: 100%;
-} */
-
-/* .question {
-    display: flex;
-    justify-content: space-between;
-    width: 100%;
-} */
-
-/* .questions > p, .question > p {
-    font-size: var(--font-size-header-4);
-    font-weight: var(--font-weight-semibold);
-} */
-
-/* .question > img {
-    height: 1rem;
-    width: 1rem;
-    cursor: pointer;
-} */
-
+/* when scrolling to these sections tha navbar dont cover them */
+#home,
 #about-us, 
 #faqs {
   scroll-margin-top: 6rem;

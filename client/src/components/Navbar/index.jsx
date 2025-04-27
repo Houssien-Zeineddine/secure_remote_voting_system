@@ -1,5 +1,5 @@
-import React, { use } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import React, { useContext } from "react";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { HashLink } from "react-router-hash-link";
 import { AuthContext } from "../context/AuthContext";
 import "./style.css";
@@ -8,8 +8,9 @@ import Button from "../Button";
 import logo from "../../assets/AI-powered-secure-remote-voting-system-logo-white-bg 2.svg";
 
 const Navbar = () => {
-  const { user, setUser } = use(AuthContext);
+  const { user, setUser } = useContext(AuthContext);
   const navigate = useNavigate();
+  const { pathname, hash } = useLocation();
 
   const handleLogout = () => {
     setUser(null);
@@ -30,15 +31,29 @@ const Navbar = () => {
 
           <div className="nav-items">
             <div className="nav-links">
-              <li className="nav-link">
-                <Link to={"/"}>Home</Link>
+              <li
+                className={`nav-link ${
+                  pathname === "/" && hash === "#home" ? "active" : ""
+                }`}
+              >
+                <HashLink smooth to={"/#home"}>
+                  Home
+                </HashLink>
               </li>
-              <li className="nav-link">
+              <li
+                className={`nav-link ${
+                  pathname === "/" && hash === "#about-us" ? "active" : ""
+                }`}
+              >
                 <HashLink smooth to="/#about-us">
                   About Us
                 </HashLink>
               </li>
-              <li className="nav-link">
+              <li
+                className={`nav-link ${
+                  pathname === "/" && hash === "#faqs" ? "active" : ""
+                }`}
+              >
                 <HashLink smooth to={"/#faqs"}>
                   FAQs
                 </HashLink>
