@@ -18,7 +18,7 @@ import Questions from "../../components/Questions";
 const Home = () => {
   const navigate = useNavigate();
   return (
-    <div className="landing-page-container">
+    <div className="landing-page-container" id="home">
       <div className="landing-page-description">
         <img src={politician} alt="Politician giving his speech to public" />
         <div className="landing-page-text">
