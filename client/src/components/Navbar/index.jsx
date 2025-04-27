@@ -5,7 +5,7 @@ import { AuthContext } from "../context/AuthContext";
 import "./style.css";
 import "../Button/style.css";
 import Button from "../Button";
-import logo from "../../assets/AI-powered-secure-remote-voting-system-logo-white-bg 2.svg";
+import logo from "../../assets/logos/AI-powered-secure-remote-voting-system-logo-white-bg 2.svg";
 
 const Navbar = () => {
   const { user, setUser } = useContext(AuthContext);
@@ -23,9 +23,13 @@ const Navbar = () => {
         <nav className="nav-content">
           <div className="nav-logo">
             <li>
-              <Link to={"/"}>
-                <img src={logo} alt="Secure Remote Voting" />
-              </Link>
+              <HashLink smooth to={"/#home"}>
+                <img
+                  src={logo}
+                  alt="Secure Remote Voting"
+                  className="navbar-logo"
+                />
+              </HashLink>
             </li>
           </div>
 
