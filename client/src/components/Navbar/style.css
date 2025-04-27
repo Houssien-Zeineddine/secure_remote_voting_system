@@ -62,3 +62,8 @@
      border-bottom: 2px solid currentColor;
     padding-bottom: 4px; 
   }
+
+.navbar-logo {
+    height: 4rem;
+    width: auto;
+}

@@ -25,4 +25,5 @@ input {
     color: var(--primary-color);
     outline: none;
     font-weight: var(--font-weight-medium);
+    width: 100%;
 }
