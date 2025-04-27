@@ -4,7 +4,7 @@
     align-items: center;
     cursor: pointer;
     transition:  transform 0.25s ease, background-color 0.25s ease, outline-offset 0.15s ease;
-    padding: 1.25rem 2rem;
+    padding: 1.25rem 1.5rem;
     outline: none;  
     border: none;
 }

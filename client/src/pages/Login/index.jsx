@@ -8,7 +8,7 @@ import "./style.css";
 
 const Login = () => {
   const navigate = useNavigate();
-  const handleLogin = () => {
+  const handleSubmit = () => {
     //calling login API
   };
   return (
@@ -16,7 +16,7 @@ const Login = () => {
       <div className="form-conatiner">
         <div className="inside-form-container">
           <img src={logo} alt="Blue Logo" />
-          <div className="form-box">
+          <form action={handleSubmit} className="form-box">
             <Input
               label="email"
               labelText="Email"
@@ -39,13 +39,13 @@ const Login = () => {
               text="Login"
               variant="blue"
               size="small"
-              onClick={handleLogin}
+              type="submit"
               className="login-page-btn "
             />
             <p className="no-account">
               Don't have an account?<Link to="/register">Register</Link>
             </p>
-          </div>
+          </form>
         </div>
       </div>
       <div className="description-container">
@@ -53,7 +53,7 @@ const Login = () => {
           <Button
             text="Home"
             variant="transparent"
-            size="medium"
+            size="small"
             onClick={() => {
               navigate("/");
             }}
