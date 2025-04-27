@@ -23,6 +23,10 @@
     gap: 3rem;
 }
 
+.inside-form-container > img{
+    width: 60%;
+}
+
 .form-box {
     width: 100%;
     display: flex;
