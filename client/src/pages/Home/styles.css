@@ -255,6 +255,8 @@ div > h4 {
     max-height: 100vh;
 }
 
+/* when scrolling to these sections tha navbar dont cover them */
+#home,
 #about-us, 
 #faqs {
   scroll-margin-top: 6rem;
