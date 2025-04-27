@@ -43,7 +43,7 @@ const Login = () => {
               className="login-page-btn "
             />
             <p className="no-account">
-              Don't have an account?<Link to="/register">Register</Link>
+              Don't have an account?<Link to="/register"> Register</Link>
             </p>
           </form>
         </div>

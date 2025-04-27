@@ -1,11 +1,116 @@
 import React from "react";
+import { Link, useNavigate } from "react-router-dom";
 import Button from "../../components/Button";
+import Input from "../../components/Input";
+import logo from "../../assets/logos/blue-web-logo-no-bg.svg";
 import welcomeIllustration from "../../assets/register illautration.svg";
+import "./style.css";
 
 const Register = () => {
+  const navigate = useNavigate();
+  const handleSubmit = () => {
+    //handling registration form
+  };
   return (
-    <div className="login-page-container">
-      <div></div>
+    <div className="registeration-page-container">
+      <div className="inside-registeration-page-container">
+        <div className="registeration-page-logo">
+          <div>
+            <h2>Fill your Information</h2>
+            <h4>Please fill your information</h4>
+          </div>
+          <img src={logo} alt="Blue Logo" />
+        </div>
+        <form action={handleSubmit} className="registeration-form">
+          <div className="two-inputs-container">
+            <Input
+              label="first_name"
+              labelText="First Name"
+              type="text"
+              name="first_name"
+              id="first_name"
+              placeholder="Enter your first name"
+              classNames="input-vertical full-width"
+            />
+            <Input
+              label="middle_name"
+              labelText="Middle Name"
+              type="text"
+              name="middle_name"
+              id="middle_name"
+              placeholder="Enter your middle name"
+              classNames="input-vertical full-width"
+            />
+          </div>
+          <div className="two-inputs-container">
+            <Input
+              label="last_name"
+              labelText="Last Name"
+              type="text"
+              name="last_name"
+              id="last_name"
+              placeholder="Enter your last name"
+              classNames="input-vertical full-width"
+            />
+            <Input
+              label="id_number"
+              labelText="Birthday"
+              type="text"
+              name="id_number"
+              id="idNumber"
+              placeholder="Enter your Id number"
+              classNames="input-vertical full-width"
+            />
+          </div>
+          <Input
+            label="id_number"
+            labelText="ID Number"
+            type="text"
+            name="id_number"
+            id="id_number"
+            placeholder="Enter your Id number"
+            classNames="input-vertical full-width"
+          />
+          <Input
+            label="email"
+            labelText="Email"
+            type="text"
+            name="email"
+            id="email"
+            placeholder="Enter your email"
+            classNames="input-vertical full-width"
+          />
+          <Input
+            label="password"
+            labelText="Password"
+            type="password"
+            name="password"
+            id="password"
+            placeholder="Enter your password"
+            classNames="input-vertical full-width"
+          />
+          <Input
+            label="confirmed_password"
+            labelText="Password Confirmation"
+            type="password"
+            name="confirmed_password"
+            id="confirmed_password"
+            placeholder="Confirm youe entered password"
+            classNames="input-vertical full-width"
+          />
+          <Button
+            text="Register"
+            variant="blue"
+            size="small"
+            type="submit"
+            className="login-page-btn register-btn"
+          />
+          <p className="no-account">
+            Already have an account?<Link to="/login"> Login</Link>
+          </p>
+        </form>
+      </div>
+
       <div className="description-container">
         <div className="description-wrapper">
           <Button
