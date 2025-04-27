@@ -10,6 +10,7 @@ import Candidates from "./pages/Candidates";
 import Guidelines from "./pages/Guidelines";
 import Settings from "./pages/Settings";
 import { AuthProvider } from "./components/context/AuthContext";
+import Sidebar from "./components/Sidebar";
 
 const App = () => {
   return (
@@ -28,11 +29,20 @@ const App = () => {
               }
             >
               <Route path="/" element={<Home />} />
-              <Route path="/dashboard" element={<Dashboard />} />
-              <Route path="/profile" element={<Profile />} />
-              <Route path="/candidates" element={<Candidates />} />
-              <Route path="/guidelines" element={<Guidelines />} />
-              <Route path="/settings" element={<Settings />} />
+              <Route
+                element={
+                  <>
+                    <Sidebar />
+                    <Outlet />
+                  </>
+                }
+              >
+                <Route path="/dashboard" element={<Dashboard />} />
+                <Route path="/profile" element={<Profile />} />
+                <Route path="/candidates" element={<Candidates />} />
+                <Route path="/guidelines" element={<Guidelines />} />
+                <Route path="/settings" element={<Settings />} />
+              </Route>
             </Route>
           </Routes>
         </AuthProvider>
