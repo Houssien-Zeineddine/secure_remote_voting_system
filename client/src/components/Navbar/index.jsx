@@ -23,9 +23,9 @@ const Navbar = () => {
         <nav className="nav-content">
           <div className="nav-logo">
             <li>
-              <Link to={"/"}>
+              <HashLink smooth to={"/#home"}>
                 <img src={logo} alt="Secure Remote Voting" />
-              </Link>
+              </HashLink>
             </li>
           </div>
 
