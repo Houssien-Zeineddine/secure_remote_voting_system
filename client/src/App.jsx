@@ -9,7 +9,10 @@ import Profile from "./pages/Profile";
 import Candidates from "./pages/Candidates";
 import Guidelines from "./pages/Guidelines";
 import Settings from "./pages/Settings";
+import AddCampaign from "./pages/AddCampaign";
+import AddElections from "./pages/AddElections";
 import { AuthProvider } from "./components/context/AuthContext";
+import Sidebar from "./components/Sidebar";
 
 const App = () => {
   return (
@@ -28,11 +31,22 @@ const App = () => {
               }
             >
               <Route path="/" element={<Home />} />
-              <Route path="/dashboard" element={<Dashboard />} />
-              <Route path="/profile" element={<Profile />} />
-              <Route path="/candidates" element={<Candidates />} />
-              <Route path="/guidelines" element={<Guidelines />} />
-              <Route path="/settings" element={<Settings />} />
+              <Route
+                element={
+                  <>
+                    <Sidebar />
+                    <Outlet />
+                  </>
+                }
+              >
+                <Route path="/dashboard" element={<Dashboard />} />
+                <Route path="/profile" element={<Profile />} />
+                <Route path="/candidates" element={<Candidates />} />
+                <Route path="/guidelines" element={<Guidelines />} />
+                <Route path="/settings" element={<Settings />} />
+                <Route path="/addelections" element={<AddElections />}></Route>
+                <Route path="/addcampaign" element={<AddCampaign />}></Route>
+              </Route>
             </Route>
           </Routes>
         </AuthProvider>
