@@ -60,5 +60,7 @@
     height: 3rem;
     text-decoration: none;
     color: var(--white-color);
+    background-color: var(--primary-color);
     font-weight: var(--font-weight-bold);
+    border-radius: 0 50px 50px 0;
 }
