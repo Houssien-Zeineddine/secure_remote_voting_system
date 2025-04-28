@@ -1,0 +1,88 @@
+.elections-dashboard-container{
+    display: flex;
+    gap: 2rem;
+    margin: 2rem;
+}
+
+.dashboard-description {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    gap: 2rem;
+    color: var(--primary-color);
+    
+}
+
+.dashboard-description > h2 {
+    font-size: var(--font-size-header-2);
+}
+
+.dashboard-description-container {
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    gap: 2rem;
+    border: 1px solid var(--border-color);
+    border-radius: 20px;
+}
+
+.dashboard-description-container > img {
+    width: 40%;
+    height: auto;
+}
+
+.description-live-results-container {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
+
+.statistics-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 2rem;
+    border: 1px solid var(--border-color);
+    border-radius: 20px;
+    padding: 1rem;
+    text-align: center;
+}
+
+.statistics-container p:nth-child(3) {
+    color: var(--primary-color);
+}
+
+.statistics-container p:nth-child(5) {
+    color: var(--navbar-gradient-color);
+}
+
+.statistics-container p:nth-child(7) {
+    color: red;
+}
+
+.round-div {
+    width: 5rem;
+    height: 5rem;
+    border-radius: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: var(--font-weight-bold);
+}
+
+.registered-voter {
+    border: 8px solid var(--primary-color);
+    color: var(--primary-color);
+}
+
+.total-votes{
+    border: 8px solid var(--navbar-gradient-color);
+    color: var(--navbar-gradient-color);
+}
+
+.maliscious-votes{
+    border: 8px solid red;
+    color: red;
+}
