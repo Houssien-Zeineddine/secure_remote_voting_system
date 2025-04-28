@@ -18,7 +18,8 @@ import Candidates from "../../pages/Candidates";
 
 const Sidebar = () => {
   const location = useLocation().pathname;
-  console.log(location);
+
+  const user = "admin";
 
   return (
     <div className="sidebar-container">
@@ -55,20 +56,42 @@ const Sidebar = () => {
           />
           <p className="sidebar-tag">View Profile</p>
         </Link>
-        <Link
-          to="/addelections"
-          className={
-            location === "/addelections"
-              ? "sidebar-link-current"
-              : "sidebar-link"
-          }
-        >
-          <img
-            src={location === "/addelections" ? addElections : blueAddElections}
-            alt=""
-          />
-          <p className="sidebar-tag">Add Elections</p>
-        </Link>
+        {user === "admin" && (
+          <Link
+            to="/addelections"
+            className={
+              location === "/addelections"
+                ? "sidebar-link-current"
+                : "sidebar-link"
+            }
+          >
+            <img
+              src={
+                location === "/addelections" ? addElections : blueAddElections
+              }
+              alt=""
+            />
+            <p className="sidebar-tag">Add Elections</p>
+          </Link>
+        )}
+        {user === "candidate" && (
+          <Link
+            to="/addcampaign"
+            className={
+              location === "/addcampaign"
+                ? "sidebar-link-current"
+                : "sidebar-link"
+            }
+          >
+            <img
+              src={
+                location === "/addcampaign" ? addElections : blueAddElections
+              }
+              alt=""
+            />
+            <p className="sidebar-tag">Add Campaign</p>
+          </Link>
+        )}
         <Link
           to="/candidates"
           className={
