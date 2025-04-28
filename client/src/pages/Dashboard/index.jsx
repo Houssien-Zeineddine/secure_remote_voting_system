@@ -3,7 +3,7 @@ import "./style.css";
 
 const Dashboard = () => {
   return (
-    <div className="dashboard-positioning">
+    <div className="along-sidebar-positioning">
       <h1>Dashboard</h1>
       <p>Welcome to the dashboard!</p>
     </div>
