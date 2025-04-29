@@ -5,7 +5,6 @@
     gap: 2rem;
     margin: 2rem;
     height: 100%;
-    /* width: 100%; */
 }
 
 .dashboard-description {
@@ -40,6 +39,8 @@
     flex-direction: column;
     width: 70%; 
     gap: 2rem;
+    color: var(--primary-color);
+    font-weight: var(--font-weight-bold);
 }
 
 /* live results container */
@@ -49,30 +50,31 @@
     border-radius: 20px;
     padding: 2rem;
     display: flex;
-    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    /* width: 100%; */
     gap: 2rem;
 }
 
 .candidates-names {
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     align-items: center;
     justify-content: center;
     width: fit-content;
     gap: 2rem;
 }
-.candidate-row {
-    display: flex;
-    gap: 1rem;
-}
-
-.live-results-bar {
-    border: 1px 1px 0 0 solid var(--border-color);
-}
 
 .vote-bar {
     height: 2rem;
     background-color: var(--primary-color);
+}
+
+.bars-container {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    width: 100%;
 }
 
 /* statistics container */

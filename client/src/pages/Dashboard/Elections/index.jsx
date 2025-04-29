@@ -76,17 +76,20 @@ const Elections = () => {
           <img src={politician} alt="Politician giving his speech to public" />
         </div>
         <div className="dashboard-live-results">
-          {Object.entries(results).map(([id, candidate]) => (
-            <div key={id} className="candidate-row">
-              <span className="candidates-names">
-                {candidate.candidate_name}
-              </span>
+          <div className="candidates-names">
+            {Object.entries(results).map(([id, candidate]) => (
+              <p key={id}>{candidate.candidate_name}</p>
+            ))}
+          </div>
+          <div className="bars-container">
+            {Object.entries(results).map(([id, candidate]) => (
               <div
+                key={id}
                 className="vote-bar"
                 style={{ width: `${candidate.result}%` }}
               />
-            </div>
-          ))}
+            ))}
+          </div>
         </div>
       </div>
       <div className="statistics-container">
