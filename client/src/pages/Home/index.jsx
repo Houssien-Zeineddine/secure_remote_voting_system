@@ -84,13 +84,15 @@ const Home = () => {
         </div>
       </div>
       <div className="our-features-container">
-        <h2>Our Features</h2>
-        <p>
-          We offer a robust and reliable online voting solution designed to
-          exceed expectations. Our platform combines secure, user-friendly
-          polling software with intelligent threat detection systems to ensure
-          the integrity of every vote.
-        </p>
+        <div className="our-features-header">
+          <h2>Our Features</h2>
+          <p>
+            We offer a robust and reliable online voting solution designed to
+            exceed expectations. Our platform combines secure, user-friendly
+            polling software with intelligent threat detection systems to ensure
+            the integrity of every vote.
+          </p>
+        </div>
         <div className="our-features-cards">
           <div className="our-features-card">
             <img src={securedPlatform} alt="Secured Platform" />
@@ -119,7 +121,7 @@ const Home = () => {
           <p>We aim to make voting and elections easy, seamless and fair</p>
         </div>
         <div className="about-us-body">
-          <div>
+          <div className="about-us-wrapper">
             <div className="about-us-list">
               <div className="rounded-number">1</div>
               <div>
@@ -128,42 +130,46 @@ const Home = () => {
                   We combine cutting-edge artificial intelligence, geolocation
                   tracking, and real-time monitoring to:
                 </p>
-                <ul>
-                  <li>
-                    <strong>Ensure Voter Legitimacy:</strong> By detecting
-                    suspicious activity such as duplicate votes, bots, or
-                    abnormal behavior.
-                  </li>
-                  <li>
-                    <strong>Protect the Voting Process:</strong> Using location
-                    and device checks to reduce fraud and maintain fairness.
-                  </li>
-                  <li>
-                    <strong>Simplify Participation:</strong> Giving voters a
-                    secure, user-friendly interface to cast their vote remotely
-                    from approved regions.
-                  </li>
-                </ul>
+                <div>
+                  <p>
+                    <strong>Ensure Voter Legitimacy</strong>
+                    <br /> By detecting suspicious activity such as duplicate
+                    votes, bots, or abnormal behavior.
+                  </p>
+                  <p>
+                    <strong>Protect the Voting Process</strong>
+                    <br /> Using location and device checks to reduce fraud and
+                    maintain fairness.
+                  </p>
+                  <p>
+                    <strong>Simplify Participation</strong>
+                    <br /> Giving voters a secure, user-friendly interface to
+                    cast their vote remotely from approved regions.
+                  </p>
+                </div>
               </div>
             </div>
             <div className="about-us-list">
               <div className="rounded-number">2</div>
               <div>
                 <h4>Our Core Values</h4>
-                <ul>
-                  <li>
-                    <strong>Security First:</strong> Every vote is protected
-                    using smart detection systems and encryption.
-                  </li>
-                  <li>
-                    <strong>Transparency:</strong> Users are informed of every
-                    step, from verification to vote confirmation.
-                  </li>
-                  <li>
-                    <strong>Inclusion:</strong> We believe in equal access to
-                    democracy, regardless of physical location
-                  </li>
-                </ul>
+                <div>
+                  <p>
+                    <strong>Security First</strong>
+                    <br /> Every vote is protected using smart detection systems
+                    and encryption.
+                  </p>
+                  <p>
+                    <strong>Transparency</strong>
+                    <br /> Users are informed of every step, from verification
+                    to vote confirmation.
+                  </p>
+                  <p>
+                    <strong>Inclusion</strong>
+                    <br /> We believe in equal access to democracy, regardless
+                    of physical location
+                  </p>
+                </div>
               </div>
             </div>
             <div className="about-us-list">
