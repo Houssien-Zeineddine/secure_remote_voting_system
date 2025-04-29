@@ -15,11 +15,11 @@ const Register = () => {
     <div className="registeration-page-container">
       <div className="inside-registeration-page-container">
         <div className="registeration-page-logo">
+          <img src={logo} alt="Blue Logo" />
           <div>
             <h2>Fill your Information</h2>
             <h4>Please fill your information</h4>
           </div>
-          <img src={logo} alt="Blue Logo" />
         </div>
         <form action={handleSubmit} className="registeration-form">
           <div className="two-inputs-container">
@@ -30,7 +30,7 @@ const Register = () => {
               name="first_name"
               id="first_name"
               placeholder="Enter your first name"
-              classNames="input-vertical full-width"
+              classNames="input-vertical"
             />
             <Input
               label="middle_name"
@@ -39,7 +39,7 @@ const Register = () => {
               name="middle_name"
               id="middle_name"
               placeholder="Enter your middle name"
-              classNames="input-vertical full-width"
+              classNames="input-vertical"
             />
           </div>
           <div className="two-inputs-container">
@@ -50,7 +50,7 @@ const Register = () => {
               name="last_name"
               id="last_name"
               placeholder="Enter your last name"
-              classNames="input-vertical full-width"
+              classNames="input-vertical"
             />
             <Input
               label="id_number"
@@ -59,7 +59,7 @@ const Register = () => {
               name="id_number"
               id="idNumber"
               placeholder="Enter your Id number"
-              classNames="input-vertical full-width"
+              classNames="input-vertical"
             />
           </div>
           <Input
@@ -69,7 +69,7 @@ const Register = () => {
             name="id_number"
             id="id_number"
             placeholder="Enter your Id number"
-            classNames="input-vertical full-width"
+            classNames="input-vertical"
           />
           <Input
             label="email"
@@ -78,7 +78,7 @@ const Register = () => {
             name="email"
             id="email"
             placeholder="Enter your email"
-            classNames="input-vertical full-width"
+            classNames="input-vertical"
           />
           <Input
             label="password"
@@ -87,7 +87,7 @@ const Register = () => {
             name="password"
             id="password"
             placeholder="Enter your password"
-            classNames="input-vertical full-width"
+            classNames="input-vertical"
           />
           <Input
             label="confirmed_password"
@@ -96,7 +96,7 @@ const Register = () => {
             name="confirmed_password"
             id="confirmed_password"
             placeholder="Confirm youe entered password"
-            classNames="input-vertical full-width"
+            classNames="input-vertical"
           />
           <Button
             text="Register"
