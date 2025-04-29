@@ -25,7 +25,18 @@ const Elections = () => {
           <img src={politician} alt="Politician giving his speech to public" />
         </div>
         <div className="dashboard-live-results">
-          <p>result</p>
+          <div className="candidates-names">
+            <p>candidate 1</p>
+            <p>candidate 1</p>
+            <p>candidate 1</p>
+            <p>candidate 1</p>
+            <p>candidate 1</p>
+            <p>candidate 1</p>
+            <p>candidate 1</p>
+            <p>candidate 1</p>
+            <p>candidate 1</p>
+          </div>
+          <div className="live-results-bar"></div>
         </div>
       </div>
       <div className="statistics-container">
