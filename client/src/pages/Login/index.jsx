@@ -24,7 +24,7 @@ const Login = () => {
               name="email"
               id="email"
               placeholder="Enter your email"
-              classNames="input-vertical full-width"
+              classNames="input-vertical input-width"
             />
             <Input
               label="password"
@@ -33,7 +33,7 @@ const Login = () => {
               name="password"
               id="password"
               placeholder="Enter your password"
-              classNames="input-vertical full-width"
+              classNames="input-vertical input-width"
             />
             <Button
               text="Login"

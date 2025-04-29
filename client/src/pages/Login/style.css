@@ -24,7 +24,7 @@
 }
 
 .inside-form-container > img{
-    width: 60%;
+    width: 40%;
 }
 
 .form-box {
@@ -36,8 +36,8 @@
     gap: 1rem;
 }
 
-.full-width {
-    width: 100%;
+.input-width {
+    width: 80%;
 }
 
 .no-account{
