@@ -1,0 +1,38 @@
+.profile-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 2rem;
+    height: calc(100vh - 6rem);
+    width: 100%;
+    font-size: var(--font-size-body);
+}
+
+.input-wrapper {
+    position: relative;
+    align-items: center;
+  }
+  
+  .birthday-calendar {
+    position: absolute;
+    right: 10px;
+    top: 65%;
+    right: 4%;
+    cursor: pointer;
+    z-index: 1;
+  }
+
+  .profile-form-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+    width: 40%;
+  }
+
+  .profile-form-container-input {
+    width: 100%;
+    font-size: var(--font-size-header-2);
+  }
