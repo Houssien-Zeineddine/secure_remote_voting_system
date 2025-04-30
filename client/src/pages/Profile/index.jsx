@@ -7,12 +7,31 @@ import "./style.css";
 
 const Profile = () => {
   const [isEditing, setIsEditing] = useState(false);
-  const profileData = {
+  const [profileData, setProfileData] = useState({
     first_name: "Houssien",
     middle_name: "mahdi",
     last_name: "Zeineddine",
     birthday: "11/10/1993",
     id_number: "1234 2144 5215",
+  });
+
+  const [tempData, setTempData] = useState({ ...profileData });
+
+  const handleEdit = () => {
+    setIsEditing(true);
+  };
+
+  const handleChange = (e) => {
+    setTempData({
+      ...tempData,
+      [e.target.name]: e.target.value,
+    });
+  };
+
+  const handleSave = () => {
+    setProfileData({ ...tempData });
+    setIsEditing(false);
+    //API added here to send the saved data to bachend to database
   };
 
   return (
@@ -33,6 +52,8 @@ const Profile = () => {
               id="first_name"
               placeholder="Enter your first name"
               classNames="profile-form-container-input"
+              value={tempData.first_name}
+              onChange={handleChange}
             />
             <Input
               label="middle_name"
@@ -42,6 +63,8 @@ const Profile = () => {
               id="middle_name"
               placeholder="Enter your first name"
               classNames="profile-form-container-input"
+              value={tempData.middle_name}
+              onChange={handleChange}
             />
             <Input
               label="last_name"
@@ -51,6 +74,8 @@ const Profile = () => {
               id="last_name"
               placeholder="Enter your last name"
               classNames="profile-form-container-input"
+              value={tempData.last_name}
+              onChange={handleChange}
             />
             <div className="input-wrapper profile-form-container-input">
               <Input
@@ -61,6 +86,8 @@ const Profile = () => {
                 id="birthday"
                 placeholder="Birthday"
                 classNames="profile-form-container-input"
+                value={tempData.birthday}
+                onChange={handleChange}
               />
               <img src={Calendar} alt="" className="birthday-calendar" />
             </div>
@@ -72,12 +99,14 @@ const Profile = () => {
               id="id_number"
               placeholder="ID Number"
               classNames="profile-form-container-input"
+              value={tempData.id_number}
+              onChange={handleChange}
             />
             <Button
-              text="Edit Profile"
-              variant="white"
+              text="Save Changes"
+              variant="blue"
               size="small"
-              type="submit"
+              onClick={handleSave}
             />
           </div>
         ) : (
@@ -103,11 +132,12 @@ const Profile = () => {
               <span>{profileData.id_number}</span>
             </div>
             <Button
-              text="Save Changes"
-              variant="blue"
+              text="Edit Profile"
+              variant="white"
               size="small"
               type="submit"
-              className="save-changes-btn"
+              className="edit-profile-btn"
+              onClick={handleEdit}
             />
           </div>
         )}
