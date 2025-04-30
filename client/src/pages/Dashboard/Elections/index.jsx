@@ -58,16 +58,13 @@ const Elections = () => {
           </div>
           <div className="bars-container">
             {results.map((candidate, index) => (
-              <>
-                <div className="bar-result-container">
-                  <div
-                    key={index}
-                    className="vote-bar"
-                    style={{ width: `${candidate.result}%` }}
-                  ></div>
-                  <p>{candidate.result}%</p>
-                </div>
-              </>
+              <div key={index} className="bar-result-container">
+                <div
+                  className="vote-bar"
+                  style={{ "--target-width": `${candidate.result}%` }}
+                ></div>
+                <p>{candidate.result}%</p>
+              </div>
             ))}
           </div>
         </div>
