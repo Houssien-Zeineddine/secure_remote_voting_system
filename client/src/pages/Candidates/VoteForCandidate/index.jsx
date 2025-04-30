@@ -5,6 +5,8 @@ import "./style.css";
 
 const VoteForCandidate = () => {
   const [candidates, setCandidates] = useState([]);
+  const [selectedCandidate, setSelectedCandidate] = useState(null);
+  const [isDialogueOpen, setIsDialogueOpen] = useState(false);
 
   useEffect(() => {
     const fetchCandidates = () => {
@@ -49,8 +51,13 @@ const VoteForCandidate = () => {
     //function to add vote to the corresponding candidate
   };
 
-  const handleViewDetails = () => {
-    //function to get each candidate's campaign
+  const handleViewDetails = (candidate) => {
+    setSelectedCandidate(candidate);
+    setIsDialogueOpen(true);
+  };
+
+  const closeDialogue = () => {
+    setIsDialogueOpen(false);
   };
 
   return (
@@ -85,6 +92,31 @@ const VoteForCandidate = () => {
           </div>
         ))}
       </div>
+
+      {/* dialogue/Dialog for candidate details */}
+      {isDialogueOpen && (
+        <div className="dialogue-overlay">
+          <div className="dialogue-content">
+            <div className="dialogue-header">
+              <h2>{selectedCandidate?.candidate_name}'s Campaign</h2>
+              <button className="close-button" onClick={closeDialogue}>
+                &times;
+              </button>
+            </div>
+            <div className="dialogue-body">
+              <p>{selectedCandidate?.campaign}</p>
+            </div>
+            <div className="dialogue-footer">
+              <Button
+                text="Close"
+                variant="white"
+                size="small"
+                onClick={closeDialogue}
+              />
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 };
