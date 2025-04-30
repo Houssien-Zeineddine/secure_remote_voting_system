@@ -8,12 +8,21 @@ const Input = ({
   name = "",
   id = "",
   placeholder = "",
+  value,
   classNames = "",
+  onChange,
 }) => {
   return (
     <div className={classNames}>
       <label htmlFor={label}>{labelText}</label>
-      <input type={type} name={name} id={id} placeholder={placeholder} />
+      <input
+        type={type}
+        name={name}
+        id={id}
+        placeholder={placeholder}
+        value={value}
+        onChange={onChange}
+      />
     </div>
   );
 };
