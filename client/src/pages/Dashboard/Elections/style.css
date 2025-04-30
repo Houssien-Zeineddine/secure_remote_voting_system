@@ -59,10 +59,18 @@
 .candidates-names {
     display: flex;
     flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    width: fit-content;
+    align-items: flex-end;
+    justify-content: flex-start;
+    width: 30%;
+    height: 100%;
     gap: 2rem;
+}
+
+.candidates-names div {
+    height: 2rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .vote-bar {
@@ -73,6 +81,7 @@
 .bars-container {
     display: flex;
     flex-direction: column;
+    justify-content: flex-start;
     gap: 2rem;
     width: 100%;
 }
@@ -96,7 +105,7 @@
     position: sticky;
     top: 8rem;
     right: 2rem;
-    font-size: var(--font-size-header-4);
+    /* font-size: var(--font-size-header-4); */
 }
 
 .statistics-container > h4 {
@@ -114,7 +123,7 @@
 .round-div {
     width: 5rem;
     height: 5rem;
-    border-radius: 50px;
+    border-radius: 100px;
     display: flex;
     justify-content: center;
     align-items: center;

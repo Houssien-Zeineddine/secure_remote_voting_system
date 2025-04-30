@@ -38,7 +38,7 @@ const Elections = () => {
     },
     {
       candidate_name: "candidate 7",
-      result: 1,
+      result: 100,
     },
     {
       candidate_name: "candidate 8",
@@ -78,7 +78,9 @@ const Elections = () => {
         <div className="dashboard-live-results">
           <div className="candidates-names">
             {Object.entries(results).map(([id, candidate]) => (
-              <p key={id}>{candidate.candidate_name}</p>
+              <div>
+                <p key={id}>{candidate.candidate_name}</p>
+              </div>
             ))}
           </div>
           <div className="bars-container">
