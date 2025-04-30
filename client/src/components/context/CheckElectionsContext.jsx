@@ -7,9 +7,20 @@ export const CheckElectionsProvider = ({ children }) => {
   const [ongoingActiveElections, setOngoingActiveElections] = useState(null);
 
   useEffect(() => {
-    const fetchElections = "municipality elections"; //expecting calling API to get elections name if exist, or null if not
-    if (fetchElections) {
-      setOngoingActiveElections(fetchElections);
+    const fetchElections = () => {
+      //expecting calling API to get elections name if exist, or null if not
+
+      return {
+        elections_name: "Municipality Elections",
+        id: 1,
+        status: "ongoing",
+      };
+    };
+
+    const ongoingElections = fetchElections();
+
+    if (ongoingElections) {
+      setOngoingActiveElections(ongoingElections);
     } else {
       setOngoingActiveElections(null);
     }
