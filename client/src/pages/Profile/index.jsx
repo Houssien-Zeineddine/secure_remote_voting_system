@@ -50,7 +50,7 @@ const Profile = () => {
               type="text"
               name="first_name"
               id="first_name"
-              placeholder="Enter your first name"
+              // placeholder="Enter your first name"
               classNames="profile-form-container-input"
               value={tempData.first_name}
               onChange={handleChange}
@@ -61,7 +61,7 @@ const Profile = () => {
               type="text"
               name="middle_name"
               id="middle_name"
-              placeholder="Enter your first name"
+              // placeholder="Enter your first name"
               classNames="profile-form-container-input"
               value={tempData.middle_name}
               onChange={handleChange}
@@ -72,7 +72,7 @@ const Profile = () => {
               type="text"
               name="last_name"
               id="last_name"
-              placeholder="Enter your last name"
+              // placeholder="Enter your last name"
               classNames="profile-form-container-input"
               value={tempData.last_name}
               onChange={handleChange}
@@ -84,7 +84,7 @@ const Profile = () => {
                 type="text"
                 name="birthday"
                 id="birthday"
-                placeholder="Birthday"
+                // placeholder="Birthday"
                 classNames="profile-form-container-input"
                 value={tempData.birthday}
                 onChange={handleChange}
@@ -97,7 +97,7 @@ const Profile = () => {
               type="text"
               name="id_number"
               id="id_number"
-              placeholder="ID Number"
+              // placeholder={tempData.id_number}
               classNames="profile-form-container-input"
               value={tempData.id_number}
               onChange={handleChange}
