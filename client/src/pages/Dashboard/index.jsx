@@ -1,10 +1,7 @@
-import React, { useCallback, useContext } from "react";
+import React, { useContext } from "react";
 import Elections from "./Elections";
 import NoElections from "../../components/NoElections";
-import {
-  CheckElectionsContext,
-  CheckElectionsProvider,
-} from "../../components/Context/CheckElectionsContext";
+import { CheckElectionsContext } from "../../components/Context/CheckElectionsContext";
 import "./style.css";
 
 const Dashboard = () => {
