@@ -1,11 +1,13 @@
 import React from "react";
+import Elections from "./Elections";
+import NoElections from "../../components/NoElections";
 import "./style.css";
 
 const Dashboard = () => {
+  const elections = true; //calling api to get elections
   return (
     <div className="along-sidebar-positioning">
-      <h1>Dashboard</h1>
-      <p>Welcome to the dashboard!</p>
+      {elections ? <Elections /> : <NoElections />}
     </div>
   );
 };

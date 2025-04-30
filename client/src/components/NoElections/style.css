@@ -1,0 +1,23 @@
+.no-elections-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 3rem;
+}
+
+.no-elections-image{
+    height: auto;
+    width: 35%;
+}
+
+.no-elections-container > h1 {
+    color: var(--primary-color);
+    font-size: var(--font-size-header-2);
+}
+
+.no-elections-container > h4 {
+    color: var(--primary-color);
+    font-size: var(--font-size-header-4);
+}
+
