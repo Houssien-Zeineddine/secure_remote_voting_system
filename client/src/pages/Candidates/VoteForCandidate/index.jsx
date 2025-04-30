@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from "react";
 import defaultProfilePicture from "../../../assets/sidebar icons/default profile picture.jpg";
+import Button from "../../../components/Button";
+import "./style.css";
 
 const VoteForCandidate = () => {
   const [candidates, setCandidates] = useState([]);
@@ -11,37 +13,45 @@ const VoteForCandidate = () => {
         {
           candidate_name: "candidate 1",
           campaign: "candidate's campaign",
-          profile_picture: "oicture path",
+          profile_picture: false,
         },
         {
           candidate_name: "candidate 2",
           campaign: "candidate's campaign",
-          profile_picture: "oicture path",
+          profile_picture: false,
         },
         {
           candidate_name: "candidate 3",
           campaign: "candidate's campaign",
-          profile_picture: "oicture path",
+          profile_picture: false,
         },
         {
           candidate_name: "candidate 4",
           campaign: "candidate's campaign",
-          profile_picture: "oicture path",
+          profile_picture: false,
         },
         {
           candidate_name: "candidate 5",
           campaign: "candidate's campaign",
-          profile_picture: "oicture path",
+          profile_picture: false,
         },
         {
           candidate_name: "candidate 6",
           campaign: "candidate's campaign",
-          profile_picture: "oicture path",
+          profile_picture: false,
         },
       ];
     };
     setCandidates(fetchCandidates);
   }, []);
+
+  const handleVote = () => {
+    //function to add vote to the corresponding candidate
+  };
+
+  const handleViewDetails = () => {
+    //function to get each candidate's campaign
+  };
 
   return (
     <div className="candidates-container">
@@ -57,6 +67,21 @@ const VoteForCandidate = () => {
               }
               alt=""
             />
+            <h2>{candidate_info.candidate_name}</h2>
+            <div className="vote-view-details-btns">
+              <Button
+                text="Vote"
+                variant="blue"
+                size="small"
+                onClick={handleVote}
+              />
+              <Button
+                text="View Details"
+                variant="white"
+                size="small"
+                onClick={handleViewDetails}
+              />
+            </div>
           </div>
         ))}
       </div>

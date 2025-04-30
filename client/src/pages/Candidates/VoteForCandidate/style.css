@@ -1,0 +1,43 @@
+.candidates-container {
+    display: flex;
+    flex-direction: column;
+    gap: 3rem;
+    width: 100%;
+    height: 100%;
+    padding: 2.5rem 6rem; 
+    color: var(--primary-color);
+}
+
+.candidates-container h1 {
+    font-size: var(--font-size-header-2);
+}
+
+.candidates-cards-container {
+    display: flex;
+    justify-content: space-evenly;
+    flex-wrap: wrap;
+    gap: 4rem;
+}
+
+ .candidate-card img{
+    height: 53%;
+    border-radius: 100px;
+} 
+
+.candidate-card {
+    height: 19rem;
+    width: 17.5rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+    border: 1px solid var(--border-color);
+    border-radius: 20px;
+    background-image: linear-gradient(var(--secondary-color), var(--white-color));;
+}
+
+.vote-view-details-btns {
+    display: flex;
+    gap: 1rem;
+}
