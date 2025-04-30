@@ -6,7 +6,15 @@ import { useState } from "react";
 import "./style.css";
 
 const Profile = () => {
-  const [isEditing, setIsEditing] = useState(true);
+  const [isEditing, setIsEditing] = useState(false);
+  const profileData = {
+    first_name: "Houssien",
+    middle_name: "mahdi",
+    last_name: "Zeineddine",
+    birthday: "11/10/1993",
+    id_number: "1234 2144 5215",
+  };
+
   return (
     <div className="along-sidebar-positioning">
       <div className="profile-container">
@@ -73,15 +81,35 @@ const Profile = () => {
             />
           </div>
         ) : (
-          <Input
-            label="first_name"
-            labelText="First Name"
-            type="text"
-            name="first_name"
-            id="first_name"
-            placeholder="Enter your first name"
-            classNames="input-vertical"
-          />
+          <div className="view-mode">
+            <div className="view-mode-label">
+              <label htmlFor="first_name">First Name</label>
+              <span>{profileData.first_name}</span>
+            </div>
+            <div className="view-mode-label">
+              <label htmlFor="middle_name">Middle Name</label>
+              <span>{profileData.middle_name}</span>
+            </div>
+            <div className="view-mode-label">
+              <label htmlFor="last_name">Last Name</label>
+              <span>{profileData.last_name}</span>
+            </div>
+            <div className="view-mode-label">
+              <label htmlFor="birthday">Birthday</label>
+              <span>{profileData.birthday}</span>
+            </div>
+            <div className="view-mode-label">
+              <label htmlFor="id_number">ID Number</label>
+              <span>{profileData.id_number}</span>
+            </div>
+            <Button
+              text="Save Changes"
+              variant="blue"
+              size="small"
+              type="submit"
+              className="save-changes-btn"
+            />
+          </div>
         )}
       </div>
     </div>

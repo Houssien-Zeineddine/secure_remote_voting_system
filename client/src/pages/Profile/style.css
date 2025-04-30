@@ -36,3 +36,33 @@
     width: 100%;
     font-size: var(--font-size-header-2);
   }
+
+  .view-mode-label {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .view-mode {
+    display: flex;
+    flex-direction: column;
+    /* justify-content: center; */
+    /* align-items: center; */
+    gap: 1rem;
+    width: 40%
+  }
+
+  .view-mode-label span {
+    height: 40px;
+    border: 1px solid var(--border-color);
+    border-radius: 50px;
+    color: var(--primary-color);
+    display: flex;
+    align-items: center;
+    padding-left: 1rem;
+  }
+
+  .save-changes-btn {
+    width:fit-content;
+    margin: 0 auto;
+  }
