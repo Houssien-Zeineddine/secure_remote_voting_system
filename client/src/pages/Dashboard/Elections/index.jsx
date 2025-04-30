@@ -12,42 +12,15 @@ const Elections = () => {
 
   //hardcoded results object for testing
   const results = [
-    {
-      candidate_name: "candidate 1",
-      result: 12,
-    },
-    {
-      candidate_name: "candidate 2",
-      result: 40,
-    },
-    {
-      candidate_name: "candidate 3",
-      result: 4,
-    },
-    {
-      candidate_name: "candidate 4",
-      result: 22,
-    },
-    {
-      candidate_name: "candidate 5",
-      result: 2,
-    },
-    {
-      candidate_name: "candidate 6",
-      result: 9,
-    },
-    {
-      candidate_name: "candidate 7",
-      result: 100,
-    },
-    {
-      candidate_name: "candidate 8",
-      result: 3,
-    },
-    {
-      candidate_name: "candidate 9",
-      result: 7,
-    },
+    { candidate_name: "candidate 1", result: 12 },
+    { candidate_name: "candidate 2", result: 40 },
+    { candidate_name: "candidate 3", result: 4 },
+    { candidate_name: "candidate 4", result: 22 },
+    { candidate_name: "candidate 5", result: 2 },
+    { candidate_name: "candidate 6", result: 9 },
+    { candidate_name: "candidate 7", result: 100 },
+    { candidate_name: "candidate 8", result: 3 },
+    { candidate_name: "candidate 9", result: 7 },
   ];
 
   //calling the results API
@@ -77,19 +50,24 @@ const Elections = () => {
         </div>
         <div className="dashboard-live-results">
           <div className="candidates-names">
-            {Object.entries(results).map(([id, candidate]) => (
-              <div>
-                <p key={id}>{candidate.candidate_name}</p>
+            {results.map((candidate, index) => (
+              <div key={index}>
+                <p>{candidate.candidate_name}</p>
               </div>
             ))}
           </div>
           <div className="bars-container">
-            {Object.entries(results).map(([id, candidate]) => (
-              <div
-                key={id}
-                className="vote-bar"
-                style={{ width: `${candidate.result}%` }}
-              />
+            {results.map((candidate, index) => (
+              <>
+                <div className="bar-result-container">
+                  <div
+                    key={index}
+                    className="vote-bar"
+                    style={{ width: `${candidate.result}%` }}
+                  ></div>
+                  <p>{candidate.result}%</p>
+                </div>
+              </>
             ))}
           </div>
         </div>

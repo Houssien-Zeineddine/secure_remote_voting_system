@@ -76,6 +76,7 @@
 .vote-bar {
     height: 2rem;
     background-color: var(--primary-color);
+    border-radius: 0 8px 8px 0;
 }
 
 .bars-container {
@@ -84,6 +85,12 @@
     justify-content: flex-start;
     gap: 2rem;
     width: 100%;
+}
+
+.bar-result-container {
+    display: flex;
+    gap: 1rem;
+    align-items: center;
 }
 
 /* statistics container */
