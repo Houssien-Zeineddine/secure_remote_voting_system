@@ -38,7 +38,7 @@ const Profile = () => {
     <div className="along-sidebar-positioning">
       <div className="profile-container">
         <h1>Profile</h1>
-        <div>
+        <div className="add-remove-photo">
           <a href="">Add Photo</a>
           <a href="">Remove Photo</a>
         </div>
@@ -105,67 +105,6 @@ const Profile = () => {
             />
           </div>
         ) : (
-          // <div className="profile-form-container">
-          //   <Input
-          //     label="first_name"
-          //     labelText="First Name"
-          //     type="text"
-          //     name="first_name"
-          //     id="first_name"
-          //     classNames="profile-form-container-input input-vertical"
-          //     value={tempData.first_name}
-          //     onChange={handleChange}
-          //   />
-          //   <Input
-          //     label="middle_name"
-          //     labelText="Middle Name"
-          //     type="text"
-          //     name="middle_name"
-          //     id="middle_name"
-          //     classNames="profile-form-container-input input-vertical"
-          //     value={tempData.middle_name}
-          //     onChange={handleChange}
-          //   />
-          //   <Input
-          //     label="last_name"
-          //     labelText="Last Name"
-          //     type="text"
-          //     name="last_name"
-          //     id="last_name"
-          //     classNames="profile-form-container-input input-vertical"
-          //     value={tempData.last_name}
-          //     onChange={handleChange}
-          //   />
-          //   <div className="input-wrapper profile-form-container-input">
-          //     <Input
-          //       label="birthday"
-          //       labelText="Birthday"
-          //       type="text"
-          //       name="birthday"
-          //       id="birthday"
-          //       classNames="profile-form-container-input input-vertical"
-          //       value={tempData.birthday}
-          //       onChange={handleChange}
-          //     />
-          //     <img src={Calendar} alt="" className="birthday-calendar" />
-          //   </div>
-          //   <Input
-          //     label="id_number"
-          //     labelText="ID Number"
-          //     type="text"
-          //     name="id_number"
-          //     id="id_number"
-          //     classNames="profile-form-container-input input-vertical"
-          //     value={tempData.id_number}
-          //     onChange={handleChange}
-          //   />
-          //   <Button
-          //     text="Edit Profile"
-          //     variant="white"
-          //     size="small"
-          //     onClick={handleEdit}
-          //   />
-          // </div>
           <div className="view-mode">
             <div className="view-mode-label">
               <label htmlFor="first_name">First Name</label>
