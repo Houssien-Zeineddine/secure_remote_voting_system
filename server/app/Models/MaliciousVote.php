@@ -12,4 +12,8 @@ class MaliciousVote extends Model
         'candidate_id',
         'cancelation_reason'
     ];
+
+    public function user() {
+        return $this->belongsTo(User::class);
+    }
 }

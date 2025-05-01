@@ -51,4 +51,20 @@ class User extends Authenticatable
             'password' => 'hashed',
         ];
     }
+
+    public function counted_votes() {
+        return $this->hasOne(CountedVote::class);
+    }
+
+    public function malicious_votes() {
+        return $this->hasMany(MaliciousVote::class);
+    }
+
+    public function campaign() {
+        return $this->hasOne(Campaign::class);
+    }
+
+    public function user_type() {
+        return $this->hasMany(UserType::class);
+    }
 }

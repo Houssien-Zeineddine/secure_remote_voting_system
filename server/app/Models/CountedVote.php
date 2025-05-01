@@ -11,4 +11,8 @@ class CountedVote extends Model
         'user_id',
         'candidate_id'
     ];
+
+    public function user() {
+        return $this->belongsTo(User::class);
+    }
 }

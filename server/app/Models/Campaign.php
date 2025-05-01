@@ -10,4 +10,8 @@ class Campaign extends Model
         'user_id',
         'campaign'
     ];
+
+    public function user() {
+        return $this->hasMany(MaliciousVote::class);
+    }
 }
