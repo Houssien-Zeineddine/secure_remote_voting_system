@@ -1,6 +1,6 @@
 .along-sidebar-positioning {
     position: relative;
-    left: 15rem;
-    width: calc(100% - 15rem);
+    left: 19rem;
+    width: calc(100% - 19rem);
     height: 100%;
 }

@@ -1,6 +1,6 @@
 .sidebar-container {
     background-color: var(--secondary-color);
-    width: 15rem;
+    width: 19rem;
     height: 100vh;
     position: fixed;
     left: 0;
@@ -58,7 +58,7 @@
     align-items: center;
     gap: 2rem;
     padding-left: 2rem;
-    width: 13rem;
+    width: 15rem;
     height: 3rem;
     text-decoration: none;
     color: var(--white-color);
