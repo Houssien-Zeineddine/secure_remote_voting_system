@@ -18,6 +18,7 @@ return new class extends Migration
             $table->text('description');
             $table->boolean('ongoing');
             $table->timestamps();
+            $table->timestamp('deleted_at')->nullable();
         });
     }
 
