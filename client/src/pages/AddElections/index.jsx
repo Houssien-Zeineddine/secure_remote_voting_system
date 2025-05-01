@@ -7,7 +7,11 @@ const AdminPage = () => {
   const { ongoingActiveElections } = useContext(CheckElectionsContext);
   return (
     <div className="along-sidebar-positioning">
-      {ongoingActiveElections ? <ManageElections /> : <CreateElections />}
+      {ongoingActiveElections ? (
+        <ManageElections />
+      ) : (
+        <CreateElections header="Create Elections" />
+      )}
     </div>
   );
 };
