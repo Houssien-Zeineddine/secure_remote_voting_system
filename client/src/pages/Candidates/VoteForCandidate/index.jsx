@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import defaultProfilePicture from "../../../assets/sidebar icons/default profile picture.jpg";
 import Button from "../../../components/Button";
 import "./style.css";
+import Dialogue from "../../../components/Dialogue";
 
 const VoteForCandidate = () => {
   const [candidates, setCandidates] = useState([]);
@@ -94,29 +95,21 @@ const VoteForCandidate = () => {
       </div>
 
       {/* dialogue/Dialog for candidate details */}
-      {isDialogueOpen && (
-        <div className="dialogue-overlay">
-          <div className="dialogue-content">
-            <div className="dialogue-header">
-              <h2>{selectedCandidate?.candidate_name}'s Campaign</h2>
-              <button className="close-button" onClick={closeDialogue}>
-                &times;
-              </button>
-            </div>
-            <div className="dialogue-body">
-              <p>{selectedCandidate?.campaign}</p>
-            </div>
-            <div className="dialogue-footer">
-              <Button
-                text="Close"
-                variant="white"
-                size="small"
-                onClick={closeDialogue}
-              />
-            </div>
-          </div>
-        </div>
-      )}
+      <Dialogue
+        isOpen={isDialogueOpen}
+        onClose={closeDialogue}
+        title={`${selectedCandidate?.candidate_name}'s Campaign`}
+        footerContent={
+          <Button
+            text="Close"
+            variant="white"
+            size="small"
+            onClick={closeDialogue}
+          />
+        }
+      >
+        <p>{selectedCandidate?.campaign}</p>
+      </Dialogue>
     </div>
   );
 };
