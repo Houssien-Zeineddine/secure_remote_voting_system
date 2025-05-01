@@ -1,0 +1,15 @@
+.create-elections-container{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 2rem;
+    color: var(--primary-color);
+    font-size: var(--font-size-header-4);
+    height: 100%;
+    width: 100%;
+}
+
+.create-elections-container img {
+    cursor: pointer;
+}
