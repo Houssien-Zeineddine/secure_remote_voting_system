@@ -14,7 +14,6 @@ import blueVote from "../../assets/sidebar icons/blue icons/vote icon.svg";
 import blueGuidelines from "../../assets/sidebar icons/blue icons/guidelines icon.svg";
 import blueSettings from "../../assets/sidebar icons/blue icons/settings icon.svg";
 import "./style.css";
-import Candidates from "../../pages/Candidates";
 
 const Sidebar = () => {
   const location = useLocation().pathname;

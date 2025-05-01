@@ -12,7 +12,7 @@ import Settings from "./pages/Settings";
 import AddCampaign from "./pages/AddCampaign";
 import AddElections from "./pages/AddElections";
 import { AuthProvider } from "./components/context/AuthContext";
-import Sidebar from "./components/Sidebar";
+import LayoutWithSidebarAndProvider from "./layouts/LayoutWithSidebarAndProvider";
 
 const App = () => {
   return (
@@ -31,21 +31,14 @@ const App = () => {
               }
             >
               <Route path="/" element={<Home />} />
-              <Route
-                element={
-                  <>
-                    <Sidebar />
-                    <Outlet />
-                  </>
-                }
-              >
+              <Route element={<LayoutWithSidebarAndProvider />}>
                 <Route path="/dashboard" element={<Dashboard />} />
                 <Route path="/profile" element={<Profile />} />
                 <Route path="/candidates" element={<Candidates />} />
                 <Route path="/guidelines" element={<Guidelines />} />
                 <Route path="/settings" element={<Settings />} />
-                <Route path="/addelections" element={<AddElections />}></Route>
-                <Route path="/addcampaign" element={<AddCampaign />}></Route>
+                <Route path="/addelections" element={<AddElections />} />
+                <Route path="/addcampaign" element={<AddCampaign />} />
               </Route>
             </Route>
           </Routes>
