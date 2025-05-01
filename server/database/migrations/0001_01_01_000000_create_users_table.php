@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('users', function (Blueprint $table) {
             $table->id();
-            $table->integer('user_type')->constrained('users_types');
+            $table->foreignId('user_type')->constrained('users_types');
             $table->string('first_name');
             $table->string('middle_name');
             $table->string('last_name');
@@ -22,7 +22,7 @@ return new class extends Migration
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
-            $table->string('profile_picture_path');
+            $table->text('profile_picture_path');
             $table->rememberToken();
             $table->timestamps();
         });

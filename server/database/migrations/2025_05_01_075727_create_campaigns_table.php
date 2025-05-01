@@ -11,12 +11,10 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('elections', function (Blueprint $table) {
+        Schema::create('campaigns', function (Blueprint $table) {
             $table->id();
-            $table->integer('regions_id')->constrained('regions');
-            $table->string('title');
-            $table->text('description');
-            $table->boolean('ongoing');
+            $table->foreignId('user_id')->constrained('users');
+            $table->text('campaign');
             $table->timestamps();
         });
     }
@@ -26,6 +24,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('elections');
+        Schema::dropIfExists('campaigns');
     }
 };
