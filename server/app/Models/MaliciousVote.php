@@ -18,6 +18,6 @@ class MaliciousVote extends Model
     }
 
     public function election() {
-        return $this->belongsTO(Elections::class);
+        return $this->belongsTo(Elections::class);
     }
 }

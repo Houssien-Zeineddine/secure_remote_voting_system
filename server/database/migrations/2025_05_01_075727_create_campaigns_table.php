@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::create('campaigns', function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_id')->constrained('users');
+            $table->foreignId('elections_id')->constrained('elections');
             $table->text('campaign');
             $table->timestamps();
         });

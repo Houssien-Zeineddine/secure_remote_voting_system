@@ -12,7 +12,7 @@ class Campaign extends Model
     ];
 
     public function user() {
-        return $this->hasMany(MaliciousVote::class);
+        return $this->belongsTo(User::class);
     }
 
     public function elections() {

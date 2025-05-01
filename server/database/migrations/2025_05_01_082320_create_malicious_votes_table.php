@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->foreignId('user_id')->constrained('users');
             $table->foreignId('elections_id')->constrained('elections');
+            $table->integer('candidate_id');
             $table->text('cancelation_reason');
             $table->timestamps();
         });
