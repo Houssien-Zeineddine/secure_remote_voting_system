@@ -20,7 +20,7 @@ export const CheckElectionsProvider = ({ children }) => {
     const ongoingElections = fetchElections();
 
     if (ongoingElections) {
-      setOngoingActiveElections(ongoingElections);
+      setOngoingActiveElections(null);
     } else {
       setOngoingActiveElections(null);
     }

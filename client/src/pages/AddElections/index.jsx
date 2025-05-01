@@ -1,11 +1,15 @@
-import React from "react";
+import React, { useContext } from "react";
+import { CheckElectionsContext } from "../../components/Context/CheckElectionsContext";
+import ManageElections from "./ManageElections";
+import CreateElections from "../../components/CreateElections";
 
-const AddElections = () => {
+const AdminPage = () => {
+  const { ongoingActiveElections } = useContext(CheckElectionsContext);
   return (
     <div className="along-sidebar-positioning">
-      <p>Add Campaign</p>
+      {ongoingActiveElections ? <ManageElections /> : <CreateElections />}
     </div>
   );
 };
 
-export default AddElections;
+export default AdminPage;
