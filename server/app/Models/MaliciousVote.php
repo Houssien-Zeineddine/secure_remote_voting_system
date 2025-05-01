@@ -16,4 +16,8 @@ class MaliciousVote extends Model
     public function user() {
         return $this->belongsTo(User::class);
     }
+
+    public function election() {
+        return $this->belongsTO(Elections::class);
+    }
 }

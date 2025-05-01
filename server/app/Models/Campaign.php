@@ -14,4 +14,8 @@ class Campaign extends Model
     public function user() {
         return $this->hasMany(MaliciousVote::class);
     }
+
+    public function elections() {
+        return $this->belongsTo(Elections::class);
+    }
 }
