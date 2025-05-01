@@ -90,11 +90,11 @@ const Register = () => {
             classNames="input-vertical"
           />
           <Input
-            label="confirmed_password"
+            label="password_confirmation"
             labelText="Password Confirmation"
             type="password"
-            name="confirmed_password"
-            id="confirmed_password"
+            name="password_confirmation"
+            id="password_confirmation"
             placeholder="Confirm youe entered password"
             classNames="input-vertical"
           />
