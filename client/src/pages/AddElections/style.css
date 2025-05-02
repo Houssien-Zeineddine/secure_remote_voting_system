@@ -69,12 +69,12 @@
   .inside-add-candidate-container {
     display: flex;
     flex-direction: column;
-    gap: 1rem;
+    gap: 2rem;
     width: 70%;
     height: 80%;
   }
 
-  .inside-add-candidate-container div{
+  .add-candidate-btn-wrapper{
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -96,4 +96,10 @@
 
   td {
     text-align: center;
+  }
+
+  .stop-elections-btn-wrapper {
+    width: 100%;
+    display: flex;
+    justify-content: flex-end;
   }

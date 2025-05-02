@@ -51,6 +51,12 @@
     border-radius: 100px;
 }
 
+.btn--red {
+    background-color: #FF0000;
+    color: var(--white-color);
+    border-radius: 100px;
+}
+
 .btn--transparent {
     background-color: transparent;
     color: var(--white-color);

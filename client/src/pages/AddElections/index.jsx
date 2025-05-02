@@ -38,7 +38,7 @@ const AdminPage = () => {
         <div className="add-candidate-container">
           <div className="inside-add-candidate-container">
             <h2>{ongoingActiveElections.title}</h2>
-            <div>
+            <div className="add-candidate-btn-wrapper">
               <h4>Candidates List</h4>
               <Button
                 text="Add Candidate"
@@ -68,6 +68,9 @@ const AdminPage = () => {
                 ))}
               </tbody>
             </table>
+            <div className="stop-elections-btn-wrapper">
+              <Button text="Stop Elections" variant="red" size="medium" />
+            </div>
           </div>
         </div>
       ) : (
