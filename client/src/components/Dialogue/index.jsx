@@ -1,6 +1,5 @@
 // components/Dialogue/index.js
 import React from "react";
-import Button from "../../components/Button";
 import "./style.css"; // You might want to create separate styles
 
 const Dialogue = ({

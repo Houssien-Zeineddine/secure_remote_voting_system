@@ -26,8 +26,12 @@ const AdminPage = () => {
     //API adding elections
   };
 
+  const handleOpenDialogue = () => {
+    setIsDialogueOpen(true);
+  };
+
   const handleAddCandidate = () => {
-    //Api adding a candidate
+    //API to add candidate
   };
 
   console.log("ongoing active elections: ", ongoingActiveElections);
@@ -44,7 +48,7 @@ const AdminPage = () => {
                 text="Add Candidate"
                 variant="blue"
                 size="medium"
-                onClick={handleAddCandidate}
+                onClick={handleOpenDialogue}
               />
             </div>
             {/* table of candidates */}
@@ -71,6 +75,38 @@ const AdminPage = () => {
             <div className="stop-elections-btn-wrapper">
               <Button text="Stop Elections" variant="red" size="medium" />
             </div>
+            <Dialogue
+              isOpen={isDialogueOpen}
+              onClose={closeDialogue}
+              title={"Add Candidate"}
+              footerContent={
+                <Button
+                  text="Add Candidate"
+                  variant="blue"
+                  size="small"
+                  onClick={handleAddCandidate}
+                />
+              }
+            >
+              <Input
+                label="candidate_email"
+                labelText="Candidate Email"
+                type="text"
+                name="candidate_email"
+                id="candidate_email"
+                placeholder="Enter candidate email"
+                classNames="input-vertical"
+              />
+              <Input
+                label="candidate_name"
+                labelText="Candidate Full Name"
+                type="text"
+                name="candidate_fullname"
+                id="candidate_fullname"
+                placeholder="Enter candidate full name"
+                classNames="input-vertical"
+              />
+            </Dialogue>
           </div>
         </div>
       ) : (
