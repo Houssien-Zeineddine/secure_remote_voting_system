@@ -80,7 +80,7 @@
     align-items: center;
   }
 
-  .inside-add-candidate-container h2 {
+  .inside-add-candidate-container-header {
     font-size: var(--font-size-header-2);
   }
 
@@ -102,4 +102,15 @@
     width: 100%;
     display: flex;
     justify-content: flex-end;
+  }
+
+  .yes-no-btn-wrapper {
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+    width: 100%;
+  }
+
+  .dialogue-body p {
+    font-size: var(--font-size-body);
   }

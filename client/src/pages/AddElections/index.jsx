@@ -10,12 +10,22 @@ import "./style.css";
 const AdminPage = () => {
   const { ongoingActiveElections } = useContext(CheckElectionsContext);
   const { candidates } = useContext(FetchCandidatesContext);
-  console.log(candidates);
 
   const [isDialogueOpen, setIsDialogueOpen] = useState(false);
+  const [isStopElectionsDialogue, setIsStopElectionsDialogue] = useState(false);
+
+  const [isRemoveCandidateDialogueOpen, setIsRemoveCandidateDialogueOpen] =
+    useState(false);
+  const [selectedCandidate, setSelectedCandidate] = useState(null);
 
   const closeDialogue = () => {
     setIsDialogueOpen(false);
+    setIsStopElectionsDialogue(false);
+  };
+
+  const closeRemoveCandidateDialogue = () => {
+    setIsRemoveCandidateDialogueOpen(false);
+    setSelectedCandidate(null);
   };
 
   const handleViewDetails = (candidate) => {
@@ -32,16 +42,37 @@ const AdminPage = () => {
 
   const handleAddCandidate = () => {
     //API to add candidate
+    closeDialogue();
   };
 
-  console.log("ongoing active elections: ", ongoingActiveElections);
+  const handleOpenStopElectionsDialogue = () => {
+    setIsStopElectionsDialogue(true);
+  };
+
+  const handleStopElections = () => {
+    //API to delete electoins
+    setIsStopElectionsDialogue(false);
+  };
+
+  const handleRemoveCandidateClick = (candidate) => {
+    setSelectedCandidate(candidate);
+    setIsRemoveCandidateDialogueOpen(true);
+  };
+
+  const handleConfirmRemoveCandidate = () => {
+    // API to remove candidate
+    console.log("Removing candidate:", selectedCandidate);
+    closeRemoveCandidateDialogue();
+  };
 
   return (
     <div className="along-sidebar-positioning">
       {ongoingActiveElections?.ongoing ? (
         <div className="add-candidate-container">
           <div className="inside-add-candidate-container">
-            <h2>{ongoingActiveElections.title}</h2>
+            <h2 className="inside-add-candidate-container-header">
+              {ongoingActiveElections.title}
+            </h2>
             <div className="add-candidate-btn-wrapper">
               <h4>Candidates List</h4>
               <Button
@@ -66,15 +97,29 @@ const AdminPage = () => {
                     <td>{candidate.candidate_name}</td>
                     <td>{candidate.email}</td>
                     <td>
-                      <a href="">Remove Candidate</a>
+                      <a
+                        href="#remove"
+                        onClick={(e) => {
+                          e.preventDefault();
+                          handleRemoveCandidateClick(candidate);
+                        }}
+                      >
+                        Remove Candidate
+                      </a>
                     </td>
                   </tr>
                 ))}
               </tbody>
             </table>
             <div className="stop-elections-btn-wrapper">
-              <Button text="Stop Elections" variant="red" size="medium" />
+              <Button
+                text="Stop Elections"
+                variant="red"
+                size="medium"
+                onClick={handleOpenStopElectionsDialogue}
+              />
             </div>
+            {/* Add candidate dialogue */}
             <Dialogue
               isOpen={isDialogueOpen}
               onClose={closeDialogue}
@@ -106,6 +151,64 @@ const AdminPage = () => {
                 placeholder="Enter candidate full name"
                 classNames="input-vertical"
               />
+            </Dialogue>
+            {/* check for elections cancelation dialogue */}
+            <Dialogue
+              isOpen={isStopElectionsDialogue}
+              onClose={closeDialogue}
+              title={"Are you sure you want to stop elections?"}
+            >
+              <div className="yes-no-btn-wrapper">
+                <Button
+                  text="Yes"
+                  variant="blue"
+                  size="small"
+                  onClick={handleStopElections}
+                />
+                <Button
+                  text="No"
+                  variant="red"
+                  size="small"
+                  onClick={closeDialogue}
+                />
+              </div>
+            </Dialogue>
+            {/* checko for candidate removal dialogue */}
+            <Dialogue
+              isOpen={isRemoveCandidateDialogueOpen}
+              onClose={closeRemoveCandidateDialogue}
+              title={"Confirm Remove Candidate"}
+              footerContent={
+                <>
+                  <div className="yes-no-btn-wrapper">
+                    <Button
+                      text="No"
+                      variant="blue"
+                      size="small"
+                      onClick={closeRemoveCandidateDialogue}
+                    />
+                    <Button
+                      text="Yes"
+                      variant="red"
+                      size="small"
+                      onClick={handleConfirmRemoveCandidate}
+                    />
+                  </div>
+                </>
+              }
+            >
+              {selectedCandidate && (
+                <>
+                  <p>Are you sure you want to remove this candidate?</p>
+                  <p>
+                    <strong>Name:</strong> {selectedCandidate.candidate_name}
+                  </p>
+                  <p>
+                    <strong>Email:</strong> {selectedCandidate.email}
+                  </p>
+                  <p>This action cannot be undone.</p>
+                </>
+              )}
             </Dialogue>
           </div>
         </div>
