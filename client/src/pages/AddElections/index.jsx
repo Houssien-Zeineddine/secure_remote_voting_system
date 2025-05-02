@@ -23,9 +23,11 @@ const AdminPage = () => {
     //API adding elections
   };
 
+  console.log(ongoingActiveElections);
+
   return (
     <div className="along-sidebar-positioning">
-      {ongoingActiveElections ? (
+      {ongoingActiveElections.ongoing ? (
         <div>there is elections</div>
       ) : (
         <div className="create-elections-container">
