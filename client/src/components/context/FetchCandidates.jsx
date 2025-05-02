@@ -13,31 +13,37 @@ export const FetchCandidatesProvider = ({ children }) => {
         {
           candidate_name: "candidate 1",
           campaign: "candidate's campaign",
+          email: "email@gmail.com",
           profile_picture: false,
         },
         {
           candidate_name: "candidate 2",
           campaign: "candidate's campaign",
+          email: "email@gmail.com",
           profile_picture: false,
         },
         {
           candidate_name: "candidate 3",
           campaign: "candidate's campaign",
+          email: "email@gmail.com",
           profile_picture: false,
         },
         {
           candidate_name: "candidate 4",
           campaign: "candidate's campaign",
+          email: "email@gmail.com",
           profile_picture: false,
         },
         {
           candidate_name: "candidate 5",
           campaign: "candidate's campaign",
+          email: "email@gmail.com",
           profile_picture: false,
         },
         {
           candidate_name: "candidate 6",
           campaign: "candidate's campaign",
+          email: "email@gmail.com",
           profile_picture: false,
         },
       ];
