@@ -19,6 +19,10 @@ const AdminPage = () => {
     setIsDialogueOpen(true);
   };
 
+  const handleAddElections = () => {
+    //API adding elections
+  };
+
   return (
     <div className="along-sidebar-positioning">
       {ongoingActiveElections ? (
@@ -37,10 +41,10 @@ const AdminPage = () => {
             title={"Add Elections"}
             footerContent={
               <Button
-                text="Close"
-                variant="white"
+                text="Add Elections"
+                variant="blue"
                 size="small"
-                onClick={closeDialogue}
+                onClick={handleAddElections}
               />
             }
           >
@@ -53,16 +57,21 @@ const AdminPage = () => {
               placeholder="Enter elections title"
               classNames="input-vertical"
             />
-            {/* need to change the below input to select region from list */}
-            {/* <Input
-              label="description"
-              labelText="Description"
-              type="text"
-              name="description"
-              id="description"
-              placeholder="Enter elections description"
-              classNames="input-vertical"
-            /> */}
+            <div className="selection-container">
+              <label htmlFor="region">Select Region</label>
+              <select
+                name="region"
+                id="region"
+                className="dialogue-select-region"
+              >
+                <option value="beirut">Beirut</option>
+                <option value="beqaa">Beqaa</option>
+                <option value="mount_lebanon">Mount Lebanon</option>
+                <option value="north">North</option>
+                <option value="south">South</option>
+                <option value="whole_country">Whole Country</option>
+              </select>
+            </div>
             <textarea
               className="create-elections-textarea"
               placeholder="Enter elections description here..."
