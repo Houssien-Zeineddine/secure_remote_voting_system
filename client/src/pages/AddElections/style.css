@@ -1,0 +1,116 @@
+.create-elections-container{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 2rem;
+    color: var(--primary-color);
+    font-size: var(--font-size-header-4);
+    height: 100%;
+    width: 100%;
+}
+
+.create-elections-container img {
+    cursor: pointer;
+}
+
+/* Textarea styling */
+.create-elections-textarea {
+    width: 100%;
+    padding: 12px;
+    margin: 8px 0;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-family: inherit;
+    font-size: 14px;
+    resize: vertical;
+    min-height: 100px;
+    box-sizing: border-box;
+    transition: border-color 0.3s ease;
+  }
+  
+  .create-elections-textarea:focus {
+    outline: none;
+    border-color: var(--border-color); 
+    box-shadow: 0 0 0 2px rgba(74, 144, 226, 0.2); 
+  }
+  /* Placeholder styling */
+  .create-elections-textarea::placeholder {
+    color: #999;
+    font-style: italic;
+  }
+
+  .selection-container {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  .dialogue-select-region {
+    border-radius: 4px;
+    height: auto;
+    padding: 0.75rem 0.75rem;
+    border: 1px solid var(--border-color);
+    color: var(--primary-color);
+    font-size: var(--font-size-body);
+    outline: none;
+  }
+
+  .add-candidate-container {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--primary-color);
+
+  }
+
+  .inside-add-candidate-container {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    width: 70%;
+    height: 80%;
+  }
+
+  .add-candidate-btn-wrapper{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .inside-add-candidate-container-header {
+    font-size: var(--font-size-header-2);
+  }
+
+  table, td, th {
+    border: 1px solid;
+    padding: 0.5rem;
+  }
+  
+
+  table {
+    border-collapse: collapse;
+  }
+
+  td {
+    text-align: center;
+  }
+
+  .stop-elections-btn-wrapper {
+    width: 100%;
+    display: flex;
+    justify-content: flex-end;
+  }
+
+  .yes-no-btn-wrapper {
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+    width: 100%;
+  }
+
+  .dialogue-body p {
+    font-size: var(--font-size-body);
+  }

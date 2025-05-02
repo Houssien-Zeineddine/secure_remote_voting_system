@@ -6,6 +6,7 @@ import "./style.css";
 
 const Dashboard = () => {
   const { ongoingActiveElections } = useContext(CheckElectionsContext);
+
   return (
     <div className="along-sidebar-positioning">
       {ongoingActiveElections ? <Elections /> : <NoElections />}

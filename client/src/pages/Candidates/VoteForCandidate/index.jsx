@@ -1,51 +1,15 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useState } from "react";
 import defaultProfilePicture from "../../../assets/sidebar icons/default profile picture.jpg";
 import Button from "../../../components/Button";
 import "./style.css";
+import Dialogue from "../../../components/Dialogue";
+import { FetchCandidatesContext } from "../../../components/Context/FetchCandidates";
 
 const VoteForCandidate = () => {
-  const [candidates, setCandidates] = useState([]);
+  const { candidates } = useContext(FetchCandidatesContext);
+
   const [selectedCandidate, setSelectedCandidate] = useState(null);
   const [isDialogueOpen, setIsDialogueOpen] = useState(false);
-
-  useEffect(() => {
-    const fetchCandidates = () => {
-      //calling getcandidates API
-      return [
-        {
-          candidate_name: "candidate 1",
-          campaign: "candidate's campaign",
-          profile_picture: false,
-        },
-        {
-          candidate_name: "candidate 2",
-          campaign: "candidate's campaign",
-          profile_picture: false,
-        },
-        {
-          candidate_name: "candidate 3",
-          campaign: "candidate's campaign",
-          profile_picture: false,
-        },
-        {
-          candidate_name: "candidate 4",
-          campaign: "candidate's campaign",
-          profile_picture: false,
-        },
-        {
-          candidate_name: "candidate 5",
-          campaign: "candidate's campaign",
-          profile_picture: false,
-        },
-        {
-          candidate_name: "candidate 6",
-          campaign: "candidate's campaign",
-          profile_picture: false,
-        },
-      ];
-    };
-    setCandidates(fetchCandidates);
-  }, []);
 
   const handleVote = () => {
     //function to add vote to the corresponding candidate
@@ -94,29 +58,21 @@ const VoteForCandidate = () => {
       </div>
 
       {/* dialogue/Dialog for candidate details */}
-      {isDialogueOpen && (
-        <div className="dialogue-overlay">
-          <div className="dialogue-content">
-            <div className="dialogue-header">
-              <h2>{selectedCandidate?.candidate_name}'s Campaign</h2>
-              <button className="close-button" onClick={closeDialogue}>
-                &times;
-              </button>
-            </div>
-            <div className="dialogue-body">
-              <p>{selectedCandidate?.campaign}</p>
-            </div>
-            <div className="dialogue-footer">
-              <Button
-                text="Close"
-                variant="white"
-                size="small"
-                onClick={closeDialogue}
-              />
-            </div>
-          </div>
-        </div>
-      )}
+      <Dialogue
+        isOpen={isDialogueOpen}
+        onClose={closeDialogue}
+        title={`${selectedCandidate?.candidate_name}'s Campaign`}
+        footerContent={
+          <Button
+            text="Close"
+            variant="white"
+            size="small"
+            onClick={closeDialogue}
+          />
+        }
+      >
+        <p>{selectedCandidate?.campaign}</p>
+      </Dialogue>
     </div>
   );
 };

@@ -2,5 +2,5 @@
     position: relative;
     left: 19rem;
     width: calc(100% - 19rem);
-    height: 100%;
+    height: calc(100vh - 6rem);
 }
