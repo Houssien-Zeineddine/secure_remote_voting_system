@@ -28,7 +28,10 @@ const AdminPage = () => {
   return (
     <div className="along-sidebar-positioning">
       {ongoingActiveElections.ongoing ? (
-        <div>there is elections</div>
+        <div>
+          <h2>{ongoingActiveElections.title}</h2>
+          <h4>Candidates List</h4>
+        </div>
       ) : (
         <div className="create-elections-container">
           <h1>Create Elections</h1>

@@ -46,7 +46,7 @@ export const FetchCandidatesProvider = ({ children }) => {
   }, []);
 
   return (
-    <FetchCandidatesContext.Provider value={candidates}>
+    <FetchCandidatesContext.Provider value={{ candidates }}>
       {children}
     </FetchCandidatesContext.Provider>
   );
