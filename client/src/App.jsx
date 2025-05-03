@@ -11,7 +11,7 @@ import Guidelines from "./pages/Guidelines";
 import Settings from "./pages/Settings";
 import AddCampaign from "./pages/AddCampaign";
 import AddElections from "./pages/AddElections";
-import { AuthProvider } from "./components/context/AuthContext";
+import { AuthProvider } from "./components/Context/AuthContext";
 import LayoutWithSidebarAndProvider from "./layouts/LayoutWithSidebarAndProvider";
 
 const App = () => {

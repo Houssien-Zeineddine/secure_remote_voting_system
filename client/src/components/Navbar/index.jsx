@@ -1,7 +1,7 @@
 import React, { useContext } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { HashLink } from "react-router-hash-link";
-import { AuthContext } from "../context/AuthContext";
+import { AuthContext } from "../Context/AuthContext";
 import "./style.css";
 import "../Button/style.css";
 import Button from "../Button";
