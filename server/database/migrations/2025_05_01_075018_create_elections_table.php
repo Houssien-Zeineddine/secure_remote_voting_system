@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('elections', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('regions_id')->constrained('regions');
+            $table->foreignId('regions_id');
             $table->string('title');
             $table->text('description');
             $table->boolean('ongoing');

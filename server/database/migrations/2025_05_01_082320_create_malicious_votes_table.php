@@ -13,8 +13,8 @@ return new class extends Migration
     {
         Schema::create('malicious_votes', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('user_id')->constrained('users');
-            $table->foreignId('elections_id')->constrained('elections');
+            $table->foreignId('user_id');
+            $table->foreignId('elections_id');
             $table->integer('candidate_id');
             $table->text('cancelation_reason');
             $table->timestamps();
