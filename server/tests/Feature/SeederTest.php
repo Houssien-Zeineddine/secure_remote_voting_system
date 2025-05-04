@@ -55,23 +55,23 @@ class SeederTest extends TestCase
         ]);
     }
 
-    public function user_types_seeder_populates_correct_data() 
+    public function users_types_seeder_populates_correct_data() 
     {
         $this->seed(\UsersTypesSeeder::class);
 
         $userTypes = UserType::all;
 
-        $this->assertDatabaseHas('user_types', [
+        $this->assertDatabaseHas('users_types', [
             'id' => 1,
             'user_type' => 'admin'
         ]);
 
-        $this->assertDatabaseHas('user_types', [
+        $this->assertDatabaseHas('users_types', [
             'id' => 2,
             'user_type' => 'candidate'
         ]);
 
-        $this->assertDatabaseHas('user_types', [
+        $this->assertDatabaseHas('users_types', [
             'id' => 3,
             'user_type' => 'voter'
         ]);
@@ -99,4 +99,15 @@ class SeederTest extends TestCase
             'password'=>bcrypt('123456'),
         ]);
     }   
+
+    public function all_seeders_run_successfully () 
+    {
+        $this->seed(\DatabaseSeeder::class);
+
+        $this->assertDatabaseCount('regions', 6);
+        $this->assertDatabaseCount('users_types', 3);
+        $this->assertDatabaseHas('users', [
+            'email' => 'test@example.com'
+        ]);
+    }
 }
