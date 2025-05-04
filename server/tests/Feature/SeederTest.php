@@ -37,32 +37,32 @@ class SeederTest extends TestCase
         $this->assertCount(6, $regions);
 
         $this->assertDatabaseHas('regions', [
-            // 'id' => 1, 
+            'id' => 1, 
             'region' => 'Beqaa'
         ]);
 
         $this->assertDatabaseHas('regions', [
-            // 'id' => 2, 
+            'id' => 2, 
             'region' => 'South'
         ]);
         
         $this->assertDatabaseHas('regions', [
-            // 'id' => 3, 
+            'id' => 3, 
             'region' => 'North'
         ]);
 
         $this->assertDatabaseHas('regions', [
-            // 'id' => 4, 
+            'id' => 4, 
             'region' => 'Mount Lebanon'
         ]);
 
         $this->assertDatabaseHas('regions', [
-            // 'id' => 5, 
+            'id' => 5, 
             'region' => 'Beirut'
         ]);
 
         $this->assertDatabaseHas('regions', [
-            // 'id' => 6, 
+            'id' => 6, 
             'region' => 'Lebanon'
         ]);
     }
@@ -74,17 +74,17 @@ class SeederTest extends TestCase
         $userTypes = UserType::all();
 
         $this->assertDatabaseHas('user_types', [
-            // 'id' => 1,
+            'id' => 1,
             'user_type' => 'admin'
         ]);
 
         $this->assertDatabaseHas('user_types', [
-            // 'id' => 2,
+            'id' => 2,
             'user_type' => 'candidate'
         ]);
 
         $this->assertDatabaseHas('user_types', [
-            // 'id' => 3,
+            'id' => 3,
             'user_type' => 'user'
         ]);
     }
@@ -111,15 +111,4 @@ class SeederTest extends TestCase
         ]);
         $this->assertTrue(\Hash::check('123456', $adminUser->password));
     }   
-
-    // public function test_all_seeders_run_successfully () 
-    // {
-    //     $this->seed(\DatabaseSeeder::class);
-
-    //     $this->assertDatabaseCount('regions', 6);
-    //     $this->assertDatabaseCount('user_types', 3);
-    //     $this->assertDatabaseHas('users', [
-    //         'email' => 'test@example.com'
-    //     ]);
-    // }
 }
