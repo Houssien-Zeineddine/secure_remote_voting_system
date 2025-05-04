@@ -55,5 +55,25 @@ class SeederTest extends TestCase
         ]);
     }
 
-    
+    public function user_types_seeder_populates_correct_data() 
+    {
+        $this->seed(\UsersTypesSeeder::class);
+
+        $userTypes = UserType::all;
+
+        $this->assertDatabaseHas('user_types', [
+            'id' => 1,
+            'user_type' => 'admin'
+        ]);
+
+        $this->assertDatabaseHas('user_types', [
+            'id' => 2,
+            'user_type' => 'candidate'
+        ]);
+
+        $this->assertDatabaseHas('user_types', [
+            'id' => 3,
+            'user_type' => 'voter'
+        ]);
+    }
 }
