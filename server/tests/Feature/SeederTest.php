@@ -76,4 +76,27 @@ class SeederTest extends TestCase
             'user_type' => 'voter'
         ]);
     }
+
+    public function admin_user_seeder_creates_admin_account() 
+    {
+        $this->seed([
+            \UsersTypesSeeder::class,
+            \AdminSeeder::class,
+        ]);
+
+        $adminUser = User::where('email', 'test@example.com')->first();
+
+        $this->assertNotNull($adminUser);
+    
+        $this->assertDatabaseHas('users', [
+            'user_type'=>'1',
+            'first_name'=>'Houssien',
+            'middle_name'=>'Mahdi',
+            'last_name'=>'Zeineddine',
+            'birthday'=>'1993-10-11',
+            'id_number'=>'00012247893469',
+            'email'=>'test@example.com',
+            'password'=>bcrypt('123456'),
+        ]);
+    }   
 }
