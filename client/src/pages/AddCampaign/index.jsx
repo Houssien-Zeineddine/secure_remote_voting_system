@@ -29,7 +29,7 @@ const AddCampaign = () => {
 
   return (
     <div className="along-sidebar-positioning">
-      <p>Add Campaign</p>
+      {campaign ? <div>there is a campaign</div> : <div></div>}
     </div>
   );
 };

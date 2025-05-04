@@ -18,7 +18,7 @@ import "./style.css";
 const Sidebar = () => {
   const location = useLocation().pathname;
 
-  const user = "candidate";
+  const user = "admin";
 
   return (
     <div className="sidebar-container">
