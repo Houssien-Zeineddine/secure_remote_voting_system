@@ -13,10 +13,12 @@ class UsersTypesSeeder extends Seeder
      */
     public function run(): void
     {
-        DB::table('users_types')->insert([
-            ['user_type'=>'admin'],
-            ['user_type'=>'candidate'],
-            ['user_type'=>'user'],
-        ]);
+        if (DB::table('user_types')->count() === 0) {
+            DB::table('user_types')->insert([
+                ['user_type'=>'admin'],
+                ['user_type'=>'candidate'],
+                ['user_type'=>'user'],
+            ]);
+        }
     }
 }

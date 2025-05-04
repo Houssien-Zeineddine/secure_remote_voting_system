@@ -13,6 +13,7 @@ class RegionsSeeder extends Seeder
      */
     public function run(): void
     {
+        if (DB::table('regions')->count() === 0) {
         DB::table('regions')->insert([
             ['region'=>'Beqaa'],
             ['region'=>'South'],
@@ -21,5 +22,6 @@ class RegionsSeeder extends Seeder
             ['region'=>'Beirut'],
             ['region'=>'Lebanon'],
         ]);
+    }
     }
 }

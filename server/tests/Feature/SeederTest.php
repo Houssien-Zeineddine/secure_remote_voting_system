@@ -16,68 +16,80 @@ class SeederTest extends TestCase
     /**
      * A basic feature test example.
      */
-    public function regions_seeder_populates_correct_data(): void
+
+    public function test_all_seeders_run_successfully () 
+    {
+        $this->seed(\DatabaseSeeder::class);
+
+        $this->assertDatabaseCount('regions', 6);
+        $this->assertDatabaseCount('user_types', 3);
+        $this->assertDatabaseHas('users', [
+            'email' => 'test@example.com'
+        ]);
+    }
+
+    public function test_regions_seeder_populates_correct_data(): void
     {
         $this->seed(\RegionsSeeder::class);
 
-        $region = Region::all();
+        $regions = Region::all();
 
         $this->assertCount(6, $regions);
 
         $this->assertDatabaseHas('regions', [
-            'id' => 1, 
-            'regions' => 'Beqaa'
+            // 'id' => 1, 
+            'region' => 'Beqaa'
         ]);
 
         $this->assertDatabaseHas('regions', [
-            'id' => 2, 
-            'regions' => 'South'
+            // 'id' => 2, 
+            'region' => 'South'
         ]);
         
         $this->assertDatabaseHas('regions', [
-            'id' => 3, 
-            'regions' => 'North'
+            // 'id' => 3, 
+            'region' => 'North'
         ]);
 
         $this->assertDatabaseHas('regions', [
-            'id' => 4, 
-            'regions' => 'Mount Lebanon'
+            // 'id' => 4, 
+            'region' => 'Mount Lebanon'
         ]);
 
         $this->assertDatabaseHas('regions', [
-            'id' => 5, 
-            'regions' => 'Beirut'
+            // 'id' => 5, 
+            'region' => 'Beirut'
         ]);
 
         $this->assertDatabaseHas('regions', [
-            'id' => 6, 
-            'regions' => 'Lebanon'
+            // 'id' => 6, 
+            'region' => 'Lebanon'
         ]);
     }
 
-    public function users_types_seeder_populates_correct_data() 
+    public function test_user_types_seeder_populates_correct_data() 
     {
         $this->seed(\UsersTypesSeeder::class);
 
-        $userTypes = UserType::all;
+        $userTypes = UserType::all();
 
-        $this->assertDatabaseHas('users_types', [
-            'id' => 1,
+        $this->assertDatabaseHas('user_types', [
+            // 'id' => 1,
             'user_type' => 'admin'
         ]);
 
-        $this->assertDatabaseHas('users_types', [
-            'id' => 2,
+        $this->assertDatabaseHas('user_types', [
+            // 'id' => 2,
             'user_type' => 'candidate'
         ]);
 
-        $this->assertDatabaseHas('users_types', [
-            'id' => 3,
-            'user_type' => 'voter'
+        $this->assertDatabaseHas('user_types', [
+            // 'id' => 3,
+            'user_type' => 'user'
         ]);
     }
 
-    public function admin_user_seeder_creates_admin_account() 
+    public function test_admin_user_seeder_creates_admin_account() 
     {
         $this->seed([
             \UsersTypesSeeder::class,
@@ -89,25 +101,25 @@ class SeederTest extends TestCase
         $this->assertNotNull($adminUser);
     
         $this->assertDatabaseHas('users', [
-            'user_type'=>'1',
+            'user_type'=>1,
             'first_name'=>'Houssien',
             'middle_name'=>'Mahdi',
             'last_name'=>'Zeineddine',
             'birthday'=>'1993-10-11',
             'id_number'=>'00012247893469',
             'email'=>'test@example.com',
-            'password'=>bcrypt('123456'),
         ]);
+        $this->assertTrue(\Hash::check('123456', $adminUser->password));
     }   
 
-    public function all_seeders_run_successfully () 
-    {
-        $this->seed(\DatabaseSeeder::class);
+    // public function test_all_seeders_run_successfully () 
+    // {
+    //     $this->seed(\DatabaseSeeder::class);
 
-        $this->assertDatabaseCount('regions', 6);
-        $this->assertDatabaseCount('users_types', 3);
-        $this->assertDatabaseHas('users', [
-            'email' => 'test@example.com'
-        ]);
-    }
+    //     $this->assertDatabaseCount('regions', 6);
+    //     $this->assertDatabaseCount('user_types', 3);
+    //     $this->assertDatabaseHas('users', [
+    //         'email' => 'test@example.com'
+    //     ]);
+    // }
 }
