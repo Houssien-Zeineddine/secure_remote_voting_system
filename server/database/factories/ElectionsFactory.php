@@ -19,9 +19,33 @@ class ElectionsFactory extends Factory
         return [
         'regions_id' => $this->faker->numberBetween(1, 6),
         'title' => $this->faker->sentence(3),
-        'description' => $this->faker->paragraph(),
+        'description' => $this->faker->sentence(),
         'on_going' => $this->faker->boolean(),
         'deleted_at' -> null,
         ];
+    }
+
+    public function ongoing() {
+        return $this->state(function (array $attributes) {
+            return [
+                'on_going' => true,
+            ];
+        });
+    }
+
+    public function ended() {
+        return $this-state(function (array $attributes) {
+            return [
+                'on_going' => false,
+            ];
+        });
+    }
+
+    public function deleted() {
+        return $this-state(function (array $attributes) {
+            return [
+                'deleted_at' => now(),
+            ];
+        });
     }
 }
