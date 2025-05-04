@@ -1,0 +1,55 @@
+version: '3.8'
+
+services:
+  backend:
+    build:
+      context: ./server
+      dockerfile: Dockerfile
+    container_name: backend
+    ports:
+      - "8000:8000"
+    environment:
+      - LARAVEL_DATABASE_HOST=127.0.0.1
+      - LARAVEL_DATABASE_NAME=secure_voting_system
+      - LARAVEL_DATABASE_PORT=3306
+    depends_on:
+      - db
+    volumes:
+      - ./server:/app
+      - ./server/storage:/app/storage
+
+  frontend:
+    build:
+      context: ./client
+      dockerfile: Dockerfile
+    container_name: frontend
+    ports:
+      - "80:80"
+    depends_on:
+      - backend
+
+  db:
+    image: mysql:8.0
+    container_name: db
+    environment:
+      - MYSQL_ALLOW_EMPTY_PASSWORD=yes  
+      - MYSQL_DATABASE=secure_voting_system
+    ports:
+      - "3306:3306"
+    volumes:
+      - mysql_data:/var/lib/mysql
+
+  db_testing:
+    image: mysql:8.0
+    container_name: db_testing
+    environment:
+      - MYSQL_ALLOW_EMPTY_PASSWORD=yes  
+      - MYSQL_DATABASE=secure_voting_system_testing 
+    ports:
+      - "3307:3306"
+    volumes:
+      - mysql_testing_data:/var/lib/mysql
+
+volumes:
+  mysql_data:
+  mysql_testing_data:
