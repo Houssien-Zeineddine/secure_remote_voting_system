@@ -3,12 +3,20 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
+use App\Models\User;
 use App\Http\Requests\LoginRequest;
 use App\Http\Requests\RegisterationRequest;
 use App\Services\AuthService;
 
 class AuthController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth:api', ['except' => ['login','register']]);
+    }
+
     public function register(RegisterationRequest $request) {
         $registerUser = new AuthService();
         $newUser = $registerUser->registerUser($request);
