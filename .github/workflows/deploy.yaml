@@ -29,7 +29,6 @@ jobs:
           cp .env.testing .env
           php artisan config:clear
           php artisan key:generate --env=testing
-          php artisan jwt:secret --force --env=testing
           php artisan config:cache
           php artisan migrate --env=testing
           php artisan test
