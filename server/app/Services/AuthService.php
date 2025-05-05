@@ -33,16 +33,19 @@ class AuthService extends Controller
     }
 
     public function loginUser(LoginRequest $request) {
-        $token = Auth::attempt($request->only('email', 'password'));//Auth:attempt() expects as array of credentials not the whole object
+        $credentials = $request->only('email', 'password');
+        $token = Auth::attempt($credentials);//Auth:attempt() expects as array of credentials not the whole object
         
         if (!$token) {
             return $this->errorResponse('Invalid Credentials', 422);
         }
 
+        $user = Auth::user();
+
         return ([
             'access_token' => $token,
             'token_type' => 'bearer',
-            'user' => Auth::user()
+            'user' => $user
         ]);
     }
     

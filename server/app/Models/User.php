@@ -89,4 +89,6 @@ class User extends Authenticatable implements JWTSubject
     public function user_type() {
         return $this->belongsTo(UserType::class);
     }
+
+    public $timestamps = true;
 }
