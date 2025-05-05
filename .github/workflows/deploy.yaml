@@ -62,14 +62,14 @@ jobs:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
 
-      - name: Build and push Laravel image
+      - name: Build laravel image
         working-directory: server
-        run: |
-          docker build -t ${{ secrets.DOCKERHUB_USERNAME }}/final_project_laravel_image:latest .
-          docker push ${{ secrets.DOCKERHUB_USERNAME }}/final_project_laravel_image:latest
+        run: docker build -t ${{ secrets.DOCKERHUB_USERNAME }}/final_project_laravel_image:latest .
+
+      - name: Push laravel image
+        run: docker push ${{ secrets.DOCKERHUB_USERNAME }}/final_project_laravel_image:latest
 
   build-and-push-react-image:
-    needs: build-and-push-laravel-image
     runs-on: ubuntu-latest
 
     steps:
@@ -85,14 +85,15 @@ jobs:
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v2
 
-      - name: Build and push react image
+      - name: Build react image
         working-directory: client
-        run: |
-          docker build -t ${{ secrets.DOCKERHUB_USERNAME }}/final_project_react_image:latest .
-          docker push ${{ secrets.DOCKERHUB_USERNAME }}/final_project_react_image:latest
+        run: docker build -t ${{ secrets.DOCKERHUB_USERNAME }}/final_project_react_image:latest .
+
+      - name: Push react image
+        run: docker push ${{ secrets.DOCKERHUB_USERNAME }}/final_project_react_image:latest
 
   Copy-docker-compose-to-EC2:
-    needs: build-and-push-react-image
+    needs: build-and-push-laravel-image
     runs-on: ubuntu-latest
 
     steps:
