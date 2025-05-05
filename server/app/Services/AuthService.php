@@ -33,17 +33,17 @@ class AuthService extends Controller
     }
 
     public function loginUser(LoginRequest $request) {
-        $token = Auth::attempt($request);
+        $token = Auth::attempt($request->only('email', 'password'));//Auth:attempt() expects as array of credentials not the whole object
         
         if (!$token) {
             return $this->errorResponse('Invalid Credentials', 422);
         }
 
-        $user = Auth::user();
-        $token = $user->createToken('auth_token')->plainTextToken; //createtoken is a method of the User model that saves the token in the database automatically
-        $user->access_token = $token;
-
-        return $user;
+        return ([
+            'access_token' => $token,
+            'token_type' => 'bearer',
+            'user' => Auth::user()
+        ]);
     }
     
 }

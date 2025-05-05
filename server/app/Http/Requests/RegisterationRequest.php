@@ -25,7 +25,7 @@ class RegisterationRequest extends FormRequest
             'first_name' => 'required|string|max:255',
             'middle_name' => 'required|string|max:255',
             'last_name' => 'required|string|max:255',
-            'birthday' => 'required|date|before: 18 years ago',
+            'birthday' => 'required|date|before:18 years ago',
             'id_number' => 'required|string|max:255|unique:users',
             'email' => 'required|string|email|max:255|unique:users',
             'password' => 'required|string|min:1|confirmed', //confirmed: Requires a matching password_confirmation field, min is 1 for testing purposes making it easier
