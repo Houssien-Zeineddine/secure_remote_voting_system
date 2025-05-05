@@ -5,6 +5,10 @@ on:
     branches:
       - main
 
+  pull_request:
+    branches:
+      - main
+
 jobs:
   test:
     runs-on: ubuntu-latest
@@ -88,7 +92,7 @@ jobs:
           docker push ${{ secrets.DOCKERHUB_USERNAME }}/final_project_react_image:latest
 
   Copy-docker-compose-to-EC2:
-    needs: build-and-push
+    needs: build-and-push-react-image
     runs-on: ubuntu-latest
 
     steps:
