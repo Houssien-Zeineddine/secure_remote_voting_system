@@ -11,6 +11,8 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
+        with:
+          path: "server"
 
       - name: Set up PHP
         uses: shivammathur/setup-php@v2
@@ -20,9 +22,11 @@ jobs:
           coverage: none
 
       - name: Install Composer dependencies
+        working-directory: server
         run: composer install --no-progress --prefer-dist --optimize-autoloader
 
       - name: Configure and test Laravel
+        working-directory: server
         run: |
           cp .env.testing .env
           php artisan config:clear
