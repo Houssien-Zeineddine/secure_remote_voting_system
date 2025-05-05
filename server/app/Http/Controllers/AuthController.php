@@ -10,12 +10,16 @@ use App\Services\AuthService;
 class AuthController extends Controller
 {
     public function register(RegisterationRequest $request) {
-        dd("anything");
         $registerUser = new AuthService();
         $newUser = $registerUser->registerUser($request);
 
-        dd($newUser);
+        return $this->successResponse($newUser, 200);
+    }
 
-        return $this->successResponse($newUser, 201);
+    public function login(LoginRequest $request) {
+        $user = new AuthService();
+        $loggedUser = $user->loginUser($request);
+
+        return $this->successResponse($loggedUser, 200);
     }
 }
