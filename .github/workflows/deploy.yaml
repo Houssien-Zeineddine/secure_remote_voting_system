@@ -93,7 +93,7 @@ jobs:
         run: docker push ${{ secrets.DOCKERHUB_USERNAME }}/final_project_react_image:latest
 
   Copy-docker-compose-to-EC2:
-    needs: build-and-push-laravel-image
+    needs: build-and-push-react-image
     runs-on: ubuntu-latest
 
     steps:
