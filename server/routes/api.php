@@ -4,6 +4,11 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\CandidatesController;
+use App\Http\Controllers\GuidelinesController;
+use App\Http\Controllers\SettingsController;
+use App\Http\Controllers\AddCampaignController;
+use App\Http\Controllers\AddElectionsController;
 
 Route::group(['prefix' => 'v0.1'], function () {
     
