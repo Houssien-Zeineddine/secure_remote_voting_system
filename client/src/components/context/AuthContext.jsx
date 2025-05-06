@@ -27,7 +27,7 @@ export const AuthProvider = ({ children }) => {
     };
 
     verifyToken();
-  });
+  }, []);
 
   return (
     <AuthContext.Provider value={{ user, setUser, authLoading }}>

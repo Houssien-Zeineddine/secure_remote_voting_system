@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext, useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import profilePicture from "../../assets/sidebar icons/default profile picture.jpg";
 import dashboardIcon from "../../assets/sidebar icons/white icons/dashboard icon.svg";
@@ -13,12 +13,23 @@ import blueAddElections from "../../assets/sidebar icons/blue icons/plus icon.sv
 import blueVote from "../../assets/sidebar icons/blue icons/vote icon.svg";
 import blueGuidelines from "../../assets/sidebar icons/blue icons/guidelines icon.svg";
 import blueSettings from "../../assets/sidebar icons/blue icons/settings icon.svg";
+import { AuthContext } from "../Context/AuthContext";
 import "./style.css";
 
 const Sidebar = () => {
+  const { user } = useContext(AuthContext);
   const location = useLocation().pathname;
 
-  const user = "admin";
+  // const [userType, setUserType] = useState(null);
+
+  const userType =
+    user?.user_type === 1
+      ? "admin"
+      : user?.user_type === 2
+      ? "candidate"
+      : "user";
+
+  // const user = "admin";
 
   return (
     <div className="sidebar-container">
@@ -55,7 +66,7 @@ const Sidebar = () => {
           />
           <p className="sidebar-tag">View Profile</p>
         </Link>
-        {user === "admin" && (
+        {userType === "admin" && (
           <Link
             to="/addelections"
             className={
@@ -73,7 +84,7 @@ const Sidebar = () => {
             <p className="sidebar-tag">Add Elections</p>
           </Link>
         )}
-        {user === "candidate" && (
+        {userType === "candidate" && (
           <Link
             to="/addcampaign"
             className={
