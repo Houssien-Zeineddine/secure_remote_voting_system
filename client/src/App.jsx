@@ -13,6 +13,7 @@ import AddCampaign from "./pages/AddCampaign";
 import AddElections from "./pages/AddElections";
 import { AuthProvider } from "./components/Context/AuthContext.jsx";
 import LayoutWithSidebarAndProvider from "./layouts/LayoutWithSidebarAndProvider";
+import PrivateRoute from "./components/PrivateRoute/index.jsx";
 
 const App = () => {
   return (
@@ -31,7 +32,13 @@ const App = () => {
               }
             >
               <Route path="/" element={<Home />} />
-              <Route element={<LayoutWithSidebarAndProvider />}>
+              <Route
+                element={
+                  <PrivateRoute>
+                    <LayoutWithSidebarAndProvider />
+                  </PrivateRoute>
+                }
+              >
                 <Route path="/dashboard" element={<Dashboard />} />
                 <Route path="/profile" element={<Profile />} />
                 <Route path="/candidates" element={<Candidates />} />

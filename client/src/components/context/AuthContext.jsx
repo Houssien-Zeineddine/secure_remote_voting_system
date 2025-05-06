@@ -12,7 +12,7 @@ export const AuthProvider = ({ children }) => {
       const token = localStorage.getItem("access_token");
       if (token) {
         try {
-          const response = axiosBaseUrl.get("/me", {
+          const response = await axiosBaseUrl.get("/me", {
             headers: {
               Authorization: `Bearer ${token}`,
             },

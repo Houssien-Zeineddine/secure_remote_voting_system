@@ -7,7 +7,6 @@ const axiosBaseUrl = axios.create({
 
   headers: {
     'Content-Type': 'application/json',
-    ...(token && { Authorization: `Bearer ${token}` }),
   },
 });
 

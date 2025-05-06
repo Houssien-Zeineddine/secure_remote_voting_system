@@ -39,11 +39,14 @@ Route::group(['prefix' => 'v0.1'], function () {
             }); 
         });
     });
+
+    Route::middleware('auth:api')->get('/me', function (Request $request) {
+        return response()->json($request->user());
+    });
+    
 });
 
-Route::middleware('auth:api')->get('/me', function (Request $request) {
-    return response()->json($request->user());
-});
+
 
 // Route::get('/user', function (Request $request) {
 //     return $request->user();
