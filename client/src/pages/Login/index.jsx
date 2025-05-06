@@ -27,28 +27,39 @@ const Login = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
+    if (!credentials.email.trim()) {
+      setError("Email is required");
+      return false;
+    }
+    if (!credentials.password.trim()) {
+      setError("Password is required");
+      return false;
+    }
+
     try {
       const response = await axiosBaseUrl.post("/guest/login", credentials);
-
-      console.log("response.data", response.data);
-
       const token = response.data.access_token;
 
       if (response.data.status === "error") {
-        setError(response.data.payload);
+        setError(response.data.message);
       } else {
         localStorage.setItem("access_token", token);
         setUser(response.data.user);
-        console.log(user);
+        setError(null);
         navigate("/dashboard");
       }
     } catch (err) {
-      setError("Invalid credentials");
+      if (err.response?.status === 422) {
+        setError(err.response.data.message || "Invalid email format");
+      } else {
+        setError(
+          err.response?.data?.message || "An error occurred during login"
+        );
+      }
     }
-
-    console.log("user: ", user);
-    console.log("error: ", error);
   };
+
   return (
     <div className="login-page-container">
       <div className="form-conatiner">

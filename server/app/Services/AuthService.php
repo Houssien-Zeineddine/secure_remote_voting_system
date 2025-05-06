@@ -37,7 +37,10 @@ class AuthService extends Controller
         $token = Auth::attempt($credentials);//Auth:attempt() expects as array of credentials not the whole object
         
         if (!$token) {
-            return $this->errorResponse('Invalid Credentials', 422);
+            return ([
+                'status' => 'error',
+                'message' => 'Invalid Credentials'
+            ]);
         }
 
         $user = Auth::user();
@@ -47,6 +50,11 @@ class AuthService extends Controller
             'token_type' => 'bearer',
             'user' => $user
         ]);
+        // return $this->successResponse([
+        //     'access_token' => $token,
+        //     'token_type' => 'bearer',
+        //     'user' => $user
+        // ], 200);
     }
     
 }

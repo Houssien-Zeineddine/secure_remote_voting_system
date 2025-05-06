@@ -23,10 +23,11 @@ class AuthController extends Controller
         $user = new AuthService();
         $loggedUser = $user->loginUser($request);
 
-        if ($loggedUser instanceof \Illuminate\Http\JsonResponse) {
-            return $loggedUser;
-        }
+        // if ($loggedUser instanceof \Illuminate\Http\JsonResponse) {
+        //     return $loggedUser;
+        // }
 
         return $this->successResponse($loggedUser, 200);
+        // return $loggedUser;
     }
 }
