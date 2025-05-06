@@ -1,11 +1,12 @@
 import React from "react";
-import { useState } from "react";
+import { useState, useContext } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import Input from "../../components/Input";
 import Button from "../../components/Button";
 import logo from "../../assets/logos/blue-web-logo-no-bg.svg";
 import secureIllustration from "../../assets/web-security login page.svg";
 import axiosBaseUrl from "../../Utils/axios";
+import { AuthContext } from "../../components/Context/AuthContext";
 import "./style.css";
 
 const Login = () => {
@@ -14,6 +15,7 @@ const Login = () => {
     email: "",
     password: "",
   });
+  const { user, setUser } = useContext(AuthContext);
   const [error, setError] = useState(null);
 
   const handleChange = (e) => {
@@ -29,25 +31,34 @@ const Login = () => {
       const response = await axiosBaseUrl.post("/guest/login", credentials);
 
       console.log("response.data", response.data);
-      if (!response.data.status == "success") {
-        setError(response.data.payload.original.payload);
+
+      const token = response.data.access_token;
+
+      if (response.data.status === "error") {
+        setError(response.data.payload);
       } else {
-        localStorage.setItem(
-          "access_token",
-          response.data.payload.access_token
-        );
-        setUser(response.data.payload);
+        localStorage.setItem("access_token", token);
+        setUser(response.data.user);
+        console.log(user);
         navigate("/dashboard");
       }
     } catch (err) {
       setError("Invalid credentials");
     }
+
+    console.log("user: ", user);
+    console.log("error: ", error);
   };
   return (
     <div className="login-page-container">
       <div className="form-conatiner">
         <div className="inside-form-container">
           <img src={logo} alt="Blue Logo" />
+          {error && (
+            <div className="error-box">
+              <p>{error}</p>
+            </div>
+          )}
           <form onSubmit={handleSubmit} className="form-box">
             <Input
               label="email"
