@@ -1,12 +1,12 @@
-import axios from "axios";
+import axios from 'axios';
 
-const token = localStorage.getItem("access_token");
+const token = localStorage.getItem('access_token');
 
 const axiosBaseUrl = axios.create({
-  baseURL: "http://127.0.0.1:8000/api/v0.1",
+  baseURL: 'http://127.0.0.1:8000/api/v0.1',
 
   headers: {
-    "Content-Type": "application/json",
+    'Content-Type': 'application/json',
     ...(token && { Authorization: `Bearer ${token}` }),
   },
 });

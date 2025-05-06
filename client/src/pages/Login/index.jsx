@@ -1,22 +1,54 @@
 import React from "react";
+import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import Input from "../../components/Input";
 import Button from "../../components/Button";
 import logo from "../../assets/logos/blue-web-logo-no-bg.svg";
 import secureIllustration from "../../assets/web-security login page.svg";
+import axiosBaseUrl from "../../Utils/axios";
 import "./style.css";
 
 const Login = () => {
   const navigate = useNavigate();
-  const handleSubmit = () => {
-    //calling login API
+  const [credentials, setCredentials] = useState({
+    email: "",
+    password: "",
+  });
+  const [error, setError] = useState(null);
+
+  const handleChange = (e) => {
+    setCredentials({
+      ...credentials,
+      [e.target.name]: e.target.value,
+    });
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      const response = await axiosBaseUrl.post("/guest/login", credentials);
+
+      console.log("response.data", response.data);
+      if (!response.data.status == "success") {
+        setError(response.data.payload.original.payload);
+      } else {
+        localStorage.setItem(
+          "access_token",
+          response.data.payload.access_token
+        );
+        setUser(response.data.payload);
+        navigate("/dashboard");
+      }
+    } catch (err) {
+      setError("Invalid credentials");
+    }
   };
   return (
     <div className="login-page-container">
       <div className="form-conatiner">
         <div className="inside-form-container">
           <img src={logo} alt="Blue Logo" />
-          <form action={handleSubmit} className="form-box">
+          <form onSubmit={handleSubmit} className="form-box">
             <Input
               label="email"
               labelText="Email"
@@ -25,6 +57,7 @@ const Login = () => {
               id="email"
               placeholder="Enter your email"
               classNames="input-vertical input-width"
+              onChange={handleChange}
             />
             <Input
               label="password"
@@ -34,6 +67,7 @@ const Login = () => {
               id="password"
               placeholder="Enter your password"
               classNames="input-vertical input-width"
+              onChange={handleChange}
             />
             <Button
               text="Login"
