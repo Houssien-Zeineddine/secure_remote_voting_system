@@ -15,7 +15,7 @@ const Login = () => {
     email: "",
     password: "",
   });
-  const { user, setUser } = useContext(AuthContext);
+  const { setUser } = useContext(AuthContext);
   const [error, setError] = useState(null);
 
   const handleChange = (e) => {
