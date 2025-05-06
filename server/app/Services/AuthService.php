@@ -50,11 +50,6 @@ class AuthService extends Controller
             'token_type' => 'bearer',
             'user' => $user
         ]);
-        // return $this->successResponse([
-        //     'access_token' => $token,
-        //     'token_type' => 'bearer',
-        //     'user' => $user
-        // ], 200);
     }
     
 }
