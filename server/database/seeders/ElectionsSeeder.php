@@ -14,8 +14,13 @@ class ElectionsSeeder extends Seeder
      */
 
     public function run(): void {
-        $region = Region::inRandomOrder()->first();
+        if (Elections::where('on_going', true)->exists()) {
+            $this->command->info('An ongoing election already exists. Skipping creation.');
+            return;
+        }
         
+        $region = Region::inRandomOrder()->first();
+
         Elections::factory()->create([
             'title' => '2025 Minicipality Elections',
             'description' => 'Lebanese Minicipality Elections ',

@@ -16,7 +16,7 @@ return new class extends Migration
             $table->foreignId('regions_id');
             $table->string('title');
             $table->text('description');
-            $table->boolean('ongoing');
+            $table->boolean('on_going');
             $table->timestamps();
             $table->timestamp('deleted_at')->nullable();
         });

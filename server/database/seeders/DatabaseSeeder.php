@@ -20,6 +20,7 @@ class DatabaseSeeder extends Seeder
         AdminSeeder::class,
         RegionsSeeder::class, 
         ElectionsSeeder::class,
+        UserSeeder::class,
         CountedVoteSeeder::class,
         MaliciousVoteSeeder::class   
       ]); 
