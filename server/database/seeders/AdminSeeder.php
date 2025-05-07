@@ -13,8 +13,7 @@ class AdminSeeder extends Seeder
     /**
      * Run the database seeds.
      */
-    public function run(): void
-    {
+    public function run(): void {
         $adminEmail = 'test@example.com';
 
         $existingUser = User::where('email', $adminEmail)->first();
