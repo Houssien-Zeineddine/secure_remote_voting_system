@@ -7,8 +7,7 @@ use Illuminate\Database\Seeder;
 use App\Models\Region;
 use App\Models\Elections;
 
-class ElectionsSeeder extends Seeder
-{
+class ElectionsSeeder extends Seeder {
     /**
      * Run the database seeds.
      */
