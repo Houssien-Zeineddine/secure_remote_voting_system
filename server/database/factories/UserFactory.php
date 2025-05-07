@@ -36,7 +36,7 @@ class UserFactory extends Factory {
             'remember_token' => Str::random(10),
             'created_at' => $this->faker->dateTimeBetween('-1 year', 'now'),
             'updated_at' => $this->faker->dateTimeBetween('-1 year', 'now'),
-            'user_type_id' => 3,
+            'user_type' => 3,
         ];
     }
 
