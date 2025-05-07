@@ -81,19 +81,16 @@ const Profile = () => {
               value={tempData.last_name}
               onChange={handleChange}
             />
-            <div className="input-wrapper profile-form-container-input">
-              <Input
-                label="birthday"
-                labelText="Birthday"
-                type="text"
-                name="birthday"
-                id="birthday"
-                classNames="profile-form-container-input input-vertical"
-                value={tempData.birthday}
-                onChange={handleChange}
-              />
-              <img src={Calendar} alt="" className="birthday-calendar" />
-            </div>
+            <Input
+              label="birthday"
+              labelText="Birthday"
+              type="date"
+              name="birthday"
+              id="birthday"
+              classNames="input-vertical edit-profile-birthday-input"
+              placeholder="Enter your birthday"
+              onChange={handleChange}
+            />
             <Input
               label="id_number"
               labelText="ID Number"
