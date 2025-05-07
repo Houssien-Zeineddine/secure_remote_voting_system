@@ -10,6 +10,7 @@ class Elections extends Model {
     use SoftDeletes, HasFactory;
 
     protected $fillable = [
+        'region_id',
         'title',
         'description',
         'on_going',

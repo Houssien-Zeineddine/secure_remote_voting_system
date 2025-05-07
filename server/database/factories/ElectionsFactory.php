@@ -19,7 +19,7 @@ class ElectionsFactory extends Factory {
 
     public function definition(): array {
         return [
-        'regions_id' => $this->faker->numberBetween(1, 6),
+        'region_id' => $this->faker->numberBetween(1, 6),
         'title' => $this->faker->sentence(3),
         'description' => $this->faker->sentence(),
         'on_going' => $this->faker->boolean(),
