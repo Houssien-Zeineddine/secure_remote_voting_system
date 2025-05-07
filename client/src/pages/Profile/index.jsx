@@ -35,10 +35,9 @@ const Profile = () => {
     });
   };
 
-  const handleSave = () => {
+  const handleSubmit = () => {
     setProfileData({ ...tempData });
     setIsEditing(false);
-    //API added here to send the saved data to bachend to database
   };
 
   return (
@@ -50,7 +49,7 @@ const Profile = () => {
           <a href="">Remove Photo</a>
         </div>
         {isEditing ? (
-          <div className="profile-form-container">
+          <form onSubmit={handleSubmit} className="profile-form-container">
             <Input
               label="first_name"
               labelText="First Name"
@@ -105,9 +104,9 @@ const Profile = () => {
               text="Save Changes"
               variant="blue"
               size="small"
-              onClick={handleSave}
+              onClick={handleSubmit}
             />
-          </div>
+          </form>
         ) : (
           <div className="view-mode">
             <div className="view-mode-label">
