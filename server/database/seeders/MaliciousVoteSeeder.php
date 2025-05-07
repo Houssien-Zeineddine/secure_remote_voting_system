@@ -11,7 +11,7 @@ class MaliciousVoteSeeder extends Seeder
      * Run the database seeds.
      */
     public function run(): void {
-        $election = Elections::where('ongoing', true)->first();
+        $election = Elections::where('on_going', true)->first();
         $users = User::all();
         $candidates = User::where('id', '=', 2)->get();
 
