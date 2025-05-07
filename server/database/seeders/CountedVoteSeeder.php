@@ -8,8 +8,7 @@ use App\Models\CountedVote;
 use App\Models\Elections;
 use App\Models\User;
 
-class CountedVoteSeeder extends Seeder
-{
+class CountedVoteSeeder extends Seeder {
     /**
      * Run the database seeds.
      */

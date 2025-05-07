@@ -4,9 +4,11 @@ namespace Database\Seeders;
 
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
+use App\Models\User;
+use App\Models\Elections;
+use App\Models\MaliciousVote;
 
-class MaliciousVoteSeeder extends Seeder
-{
+class MaliciousVoteSeeder extends Seeder {
     /**
      * Run the database seeds.
      */
