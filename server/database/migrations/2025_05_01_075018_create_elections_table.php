@@ -13,10 +13,10 @@ return new class extends Migration
     {
         Schema::create('elections', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('regions_id');
+            $table->foreignId('region_id');
             $table->string('title');
             $table->text('description');
-            $table->boolean('ongoing');
+            $table->boolean('on_going');
             $table->timestamps();
             $table->timestamp('deleted_at')->nullable();
         });
