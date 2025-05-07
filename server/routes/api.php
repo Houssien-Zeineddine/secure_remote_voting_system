@@ -9,6 +9,8 @@ use App\Http\Controllers\GuidelinesController;
 use App\Http\Controllers\SettingsController;
 use App\Http\Controllers\AddCampaignController;
 use App\Http\Controllers\AddElectionsController;
+use App\Http\Controllers\UserController;
+use App\Http\Middleware\CheckUserType;
 
 Route::group(['prefix' => 'v0.1'], function () {
     
@@ -23,6 +25,7 @@ Route::group(['prefix' => 'v0.1'], function () {
             Route::group(['prefix' => 'user'], function() {
                 Route::get('/dashboard', [DashboardController::class, 'index']);
                 Route::get('/candidates', [CandidatesController::class, 'index']);
+                Route::post('/editprofile', [UserController::class, 'updateProfile']);
                 // Route::get('/guidelines', [GuidelinesController::class, 'index']);
                 // Route::get('/settings', [SettingsController::class, 'index']);
                 
@@ -40,14 +43,8 @@ Route::group(['prefix' => 'v0.1'], function () {
         });
     });
 
-    Route::middleware('auth:api')->get('/me', function (Request $request) {
-        return response()->json($request->user());
-    });
+    // Route::middleware('auth:api')->get('/me', function (Request $request) {
+    //     return response()->json($request->user());
+    // });
     
 });
-
-
-
-// Route::get('/user', function (Request $request) {
-//     return $request->user();
-// })->middleware('auth:sanctum');

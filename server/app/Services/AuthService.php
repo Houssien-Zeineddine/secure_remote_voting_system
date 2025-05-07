@@ -11,8 +11,7 @@ use App\Http\Requests\RegisterationRequest;
 use App\Http\Requests\LoginRequest;
 use App\Http\Controllers\Controller;
 
-class AuthService extends Controller
-{
+class AuthService extends Controller {
     /**
      * Create a new class instance.
      */
