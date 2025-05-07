@@ -3,14 +3,14 @@
 namespace App\Services;
 
 use App\Models\User;
-use App\Http\Requests\EditProfile;
+use App\Http\Requests\EditProfileRequest;
 use Illuminate\Support\Facades\Auth;
 
 class UserService extends controller {
     /**
      * Create a new class instance.
      */
-    public function updateUser (EditProfile $request) {
+    public function updateUser (EditProfileRequest $request) {
 
         $updatedUser = Auth::user();
         
