@@ -10,8 +10,8 @@ use App\Http\Requests\LoginRequest;
 use App\Http\Requests\RegisterationRequest;
 use App\Services\AuthService;
 
-class AuthController extends Controller
-{
+class AuthController extends Controller{
+    
     public function register(RegisterationRequest $request) {
         $registerUser = new AuthService();
         $newUser = $registerUser->registerUser($request);
@@ -22,10 +22,6 @@ class AuthController extends Controller
     public function login(LoginRequest $request) {
         $user = new AuthService();
         $loggedUser = $user->loginUser($request);
-
-        if ($loggedUser instanceof \Illuminate\Http\JsonResponse) {
-            return $loggedUser;
-        }
 
         return $this->successResponse($loggedUser, 200);
     }

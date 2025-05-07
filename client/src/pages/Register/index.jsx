@@ -1,16 +1,72 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import Button from "../../components/Button";
 import Input from "../../components/Input";
 import logo from "../../assets/logos/blue-web-logo-no-bg.svg";
 import welcomeIllustration from "../../assets/register illautration.svg";
+import Calendar from "../../assets/calendar 1.svg";
+import axiosBaseUrl from "../../Utils/axios";
 import "./style.css";
 
 const Register = () => {
   const navigate = useNavigate();
-  const handleSubmit = () => {
-    //handling registration form
+  const [userData, setUserData] = useState({
+    first_name: "",
+    middle_name: "",
+    last_name: "",
+    id_number: "",
+    birthday: "",
+    email: "",
+    password: "",
+    password_confirmation: "",
+  });
+
+  const [error, setError] = useState(null);
+
+  //setting the data entered  by user
+  const handleChange = (e) => {
+    setUserData({
+      ...userData,
+      [e.target.name]: e.target.value,
+    });
   };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    if (userData.password !== userData.password_confirmation) {
+      setError("Passwords do not match");
+      return;
+    }
+
+    console.log(userData);
+
+    try {
+      const response = await axiosBaseUrl.post("guest/register", userData);
+      navigate("/login");
+      console.log(response.data);
+    } catch (err) {
+      console.error(err);
+
+      // Extract detailed Laravel error message
+      if (err.response && err.response.data) {
+        const { message, errors } = err.response.data;
+
+        // If specific field errors exist, flatten them
+        const allErrors = [];
+        if (errors) {
+          Object.values(errors).forEach((fieldErrors) => {
+            allErrors.push(...fieldErrors);
+          });
+          setError(allErrors.join(" | "));
+        } else {
+          setError(message || "An error occurred.");
+        }
+      } else {
+        setError("An unexpected error occurred.");
+      }
+    }
+  };
+
   return (
     <div className="registeration-page-container">
       <div className="inside-registeration-page-container">
@@ -21,7 +77,12 @@ const Register = () => {
             <h4>Please fill your information</h4>
           </div>
         </div>
-        <form action={handleSubmit} className="registeration-form">
+        <form onSubmit={handleSubmit} className="registeration-form">
+          {error && (
+            <div className="error-message">
+              <p>{error.split(" | ")[0]}</p>
+            </div>
+          )}
           <div className="two-inputs-container">
             <Input
               label="first_name"
@@ -31,6 +92,7 @@ const Register = () => {
               id="first_name"
               placeholder="Enter your first name"
               classNames="input-vertical"
+              onChange={handleChange}
             />
             <Input
               label="middle_name"
@@ -40,6 +102,7 @@ const Register = () => {
               id="middle_name"
               placeholder="Enter your middle name"
               classNames="input-vertical"
+              onChange={handleChange}
             />
           </div>
           <div className="two-inputs-container">
@@ -51,15 +114,17 @@ const Register = () => {
               id="last_name"
               placeholder="Enter your last name"
               classNames="input-vertical"
+              onChange={handleChange}
             />
             <Input
-              label="id_number"
+              label="birthday"
               labelText="Birthday"
-              type="text"
-              name="id_number"
-              id="idNumber"
-              placeholder="Enter your Id number"
-              classNames="input-vertical"
+              type="date"
+              name="birthday"
+              id="birthday"
+              classNames="input-vertical birthday-input"
+              placeholder="Enter your birthday"
+              onChange={handleChange}
             />
           </div>
           <Input
@@ -69,7 +134,8 @@ const Register = () => {
             name="id_number"
             id="id_number"
             placeholder="Enter your Id number"
-            classNames="input-vertical"
+            classNames="input-vertical "
+            onChange={handleChange}
           />
           <Input
             label="email"
@@ -79,6 +145,7 @@ const Register = () => {
             id="email"
             placeholder="Enter your email"
             classNames="input-vertical"
+            onChange={handleChange}
           />
           <Input
             label="password"
@@ -88,6 +155,7 @@ const Register = () => {
             id="password"
             placeholder="Enter your password"
             classNames="input-vertical"
+            onChange={handleChange}
           />
           <Input
             label="password_confirmation"
@@ -97,6 +165,7 @@ const Register = () => {
             id="password_confirmation"
             placeholder="Confirm youe entered password"
             classNames="input-vertical"
+            onChange={handleChange}
           />
           <Button
             text="Register"
@@ -104,6 +173,7 @@ const Register = () => {
             size="small"
             type="submit"
             className="login-page-btn register-btn"
+            onChange={handleChange}
           />
           <p className="no-account">
             Already have an account?<Link to="/login"> Login</Link>

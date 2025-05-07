@@ -23,8 +23,8 @@ Route::group(['prefix' => 'v0.1'], function () {
             Route::group(['prefix' => 'user'], function() {
                 Route::get('/dashboard', [DashboardController::class, 'index']);
                 Route::get('/candidates', [CandidatesController::class, 'index']);
-                Route::get('/guidelines', [GuidelinesController::class, 'index']);
-                Route::get('/settings', [SettingsController::class, 'index']);
+                // Route::get('/guidelines', [GuidelinesController::class, 'index']);
+                // Route::get('/settings', [SettingsController::class, 'index']);
                 
                 Route::middleware('CheckUserType:2')->group(function() {
                     Route::group(['prefix' => 'candidate'], function() {
@@ -39,8 +39,15 @@ Route::group(['prefix' => 'v0.1'], function () {
             }); 
         });
     });
+
+    Route::middleware('auth:api')->get('/me', function (Request $request) {
+        return response()->json($request->user());
+    });
+    
 });
 
-Route::get('/user', function (Request $request) {
-    return $request->user();
-})->middleware('auth:sanctum');
+
+
+// Route::get('/user', function (Request $request) {
+//     return $request->user();
+// })->middleware('auth:sanctum');
