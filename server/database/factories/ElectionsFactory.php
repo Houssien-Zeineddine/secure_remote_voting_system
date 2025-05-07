@@ -7,8 +7,7 @@ use Illuminate\Database\Eloquent\Factories\Factory;
 /**
  * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Elections>
  */
-class ElectionsFactory extends Factory
-{
+class ElectionsFactory extends Factory {
     /**
      * Define the model's default state.
      *
@@ -23,7 +22,7 @@ class ElectionsFactory extends Factory
         'title' => $this->faker->sentence(3),
         'description' => $this->faker->sentence(),
         'on_going' => $this->faker->boolean(),
-        'deleted_at' -> null,
+        'deleted_at' => null,
         ];
     }
 

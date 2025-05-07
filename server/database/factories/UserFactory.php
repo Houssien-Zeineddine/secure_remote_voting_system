@@ -8,8 +8,7 @@ use Illuminate\Support\Str;
 /**
  * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\User>
  */
-class UserFactory extends Factory
-{
+class UserFactory extends Factory {
     /**
      * The current password being used by the factory.
      */
