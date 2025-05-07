@@ -1,21 +1,28 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Input from "../../components/Input";
 import Button from "../../components/Button";
 import Calendar from "../../assets/calendar 1.svg";
-import { useState } from "react";
+import { useState, useContext } from "react";
+import { AuthContext } from "../../components/Context/AuthContext";
 import "./style.css";
 
 const Profile = () => {
-  const [isEditing, setIsEditing] = useState(false);
-  const [profileData, setProfileData] = useState({
-    first_name: "Houssien",
-    middle_name: "mahdi",
-    last_name: "Zeineddine",
-    birthday: "11/10/1993",
-    id_number: "1234 2144 5215",
-  });
+  const { user } = useContext(AuthContext);
 
+  const [isEditing, setIsEditing] = useState(false);
+  const [profileData, setProfileData] = useState(null);
   const [tempData, setTempData] = useState({ ...profileData });
+
+  useEffect(() => {
+    if (user) {
+      setProfileData(user);
+      setTempData(user);
+    }
+  }, [user]);
+
+  if (!profileData) {
+    return <div>Loading profile...</div>;
+  }
 
   const handleEdit = () => {
     setIsEditing(true);
@@ -28,10 +35,9 @@ const Profile = () => {
     });
   };
 
-  const handleSave = () => {
+  const handleSubmit = () => {
     setProfileData({ ...tempData });
     setIsEditing(false);
-    //API added here to send the saved data to bachend to database
   };
 
   return (
@@ -43,7 +49,7 @@ const Profile = () => {
           <a href="">Remove Photo</a>
         </div>
         {isEditing ? (
-          <div className="profile-form-container">
+          <form onSubmit={handleSubmit} className="profile-form-container">
             <Input
               label="first_name"
               labelText="First Name"
@@ -74,19 +80,16 @@ const Profile = () => {
               value={tempData.last_name}
               onChange={handleChange}
             />
-            <div className="input-wrapper profile-form-container-input">
-              <Input
-                label="birthday"
-                labelText="Birthday"
-                type="text"
-                name="birthday"
-                id="birthday"
-                classNames="profile-form-container-input input-vertical"
-                value={tempData.birthday}
-                onChange={handleChange}
-              />
-              <img src={Calendar} alt="" className="birthday-calendar" />
-            </div>
+            <Input
+              label="birthday"
+              labelText="Birthday"
+              type="date"
+              name="birthday"
+              id="birthday"
+              classNames="input-vertical edit-profile-birthday-input"
+              placeholder="Enter your birthday"
+              onChange={handleChange}
+            />
             <Input
               label="id_number"
               labelText="ID Number"
@@ -101,9 +104,9 @@ const Profile = () => {
               text="Save Changes"
               variant="blue"
               size="small"
-              onClick={handleSave}
+              onClick={handleSubmit}
             />
-          </div>
+          </form>
         ) : (
           <div className="view-mode">
             <div className="view-mode-label">

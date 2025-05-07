@@ -173,7 +173,7 @@ const Register = () => {
             size="small"
             type="submit"
             className="login-page-btn register-btn"
-            onChange={handleChange}
+            // onChange={handleChange}
           />
           <p className="no-account">
             Already have an account?<Link to="/login"> Login</Link>
