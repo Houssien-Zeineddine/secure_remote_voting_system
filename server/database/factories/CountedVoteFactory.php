@@ -2,6 +2,9 @@
 
 namespace Database\Factories;
 
+use App\Models\CountedVote;
+use App\Models\User;
+use App\Models\Elections;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
