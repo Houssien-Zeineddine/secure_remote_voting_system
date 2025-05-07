@@ -4,29 +4,26 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use App\Http\Requests\EditProfilRequest;
+use App\Services\UserService;
+
 
 class UserController extends Controller {
-    public function updateProfile(Request $request) {
-        // Validate the incoming data
-        $request->validate([
-            'first_name' => 'required|string|max:255',
-            'middle_name' => 'nullable|string|max:255',
-            'last_name' => 'required|string|max:255',
-            'birthday' => 'required|date',
-            'id_number' => 'required|string|max:20',
-        ]);
+    public function updateProfile(EditProfile $request) {
 
-        // Get the currently authenticated user
-        $user = Auth::user();
+        $user = new UserService();
 
-        // Update user's profile with validated data
-        $user->update([
-            'first_name' => $request->first_name,
-            'middle_name' => $request->middle_name,
-            'last_name' => $request->last_name,
-            'birthday' => $request->birthday,
-            'id_number' => $request->id_number,
-        ]);
+        $updatedUser = $user->updateUser($request);
+        // $user = Auth::user();
+
+        // // Update user's profile with validated data
+        // $user->update([
+        //     'first_name' => $request->first_name,
+        //     'middle_name' => $request->middle_name,
+        //     'last_name' => $request->last_name,
+        //     'birthday' => $request->birthday,
+        //     'id_number' => $request->id_number,
+        // ]);
 
         // Return updated user data
         return response()->json([
