@@ -9,6 +9,8 @@ use App\Http\Controllers\GuidelinesController;
 use App\Http\Controllers\SettingsController;
 use App\Http\Controllers\AddCampaignController;
 use App\Http\Controllers\AddElectionsController;
+use App\Http\Controllers\UserController;
+use App\Http\Middleware\CheckUserType;
 
 Route::group(['prefix' => 'v0.1'], function () {
     
