@@ -27,6 +27,7 @@ export const AuthProvider = ({ children }) => {
     };
 
     verifyToken();
+    console.log(user);
   }, []);
 
   return (

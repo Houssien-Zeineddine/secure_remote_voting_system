@@ -1,21 +1,28 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Input from "../../components/Input";
 import Button from "../../components/Button";
 import Calendar from "../../assets/calendar 1.svg";
-import { useState } from "react";
+import { useState, useContext } from "react";
+import { AuthContext } from "../../components/Context/AuthContext";
 import "./style.css";
 
 const Profile = () => {
-  const [isEditing, setIsEditing] = useState(false);
-  const [profileData, setProfileData] = useState({
-    first_name: "Houssien",
-    middle_name: "mahdi",
-    last_name: "Zeineddine",
-    birthday: "11/10/1993",
-    id_number: "1234 2144 5215",
-  });
+  const { user } = useContext(AuthContext);
 
+  const [isEditing, setIsEditing] = useState(false);
+  const [profileData, setProfileData] = useState(null);
   const [tempData, setTempData] = useState({ ...profileData });
+
+  useEffect(() => {
+    if (user) {
+      setProfileData(user);
+      setTempData(user);
+    }
+  }, [user]);
+
+  if (!profileData) {
+    return <div>Loading profile...</div>;
+  }
 
   const handleEdit = () => {
     setIsEditing(true);
