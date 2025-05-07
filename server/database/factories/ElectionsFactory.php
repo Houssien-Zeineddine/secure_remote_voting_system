@@ -14,8 +14,10 @@ class ElectionsFactory extends Factory
      *
      * @return array<string, mixed>
      */
-    public function definition(): array
-    {
+    
+    protected $model = Elections::class;
+
+    public function definition(): array {
         return [
         'regions_id' => $this->faker->numberBetween(1, 6),
         'title' => $this->faker->sentence(3),

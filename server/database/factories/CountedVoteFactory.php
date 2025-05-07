@@ -17,8 +17,10 @@ class CountedVoteFactory extends Factory
      *
      * @return array<string, mixed>
      */
-    public function definition(): array
-    {
+
+    protected $model = CountedVote::class;
+
+    public function definition(): array {
         return [
             'elections_id' => Elections::factory(),
             'user_id' => User::factory(),

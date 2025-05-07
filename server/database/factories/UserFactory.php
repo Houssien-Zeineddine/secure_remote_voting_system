@@ -20,11 +20,13 @@ class UserFactory extends Factory
      *
      * @return array<string, mixed>
      */
-    public function definition(): array
-    {
+
+    protected $model = User::class;
+
+    public function definition(): array {
         return [
             'first_name' => $this->faker->firstName(),
-            'middle_name' => $this->faker->lastName, 
+            'middle_name' => $this->faker->firstName(), 
             'last_name' => $this->faker->lastName(),
             'birthday' => $this->faker->dateTimeBetween('-70 years', '-18 years')->format('Y-m-d'),
             'id_number' => $this->faker->unique()->numerify('########'),

@@ -17,8 +17,10 @@ class MaliciouVoteFactory extends Factory
      *
      * @return array<string, mixed>
      */
-    public function definition(): array
-    {
+
+    protected $model = MaliciousVote::class;
+
+    public function definition(): array {
         return [
             'user_id' => User::factory(),
             'elections_id' => Elections::factory(),
