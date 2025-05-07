@@ -23,6 +23,7 @@ Route::group(['prefix' => 'v0.1'], function () {
             Route::group(['prefix' => 'user'], function() {
                 Route::get('/dashboard', [DashboardController::class, 'index']);
                 Route::get('/candidates', [CandidatesController::class, 'index']);
+                Route::post('/editprofile', [UserController::class, 'updateProfile']);
                 // Route::get('/guidelines', [GuidelinesController::class, 'index']);
                 // Route::get('/settings', [SettingsController::class, 'index']);
                 
@@ -45,9 +46,3 @@ Route::group(['prefix' => 'v0.1'], function () {
     });
     
 });
-
-
-
-// Route::get('/user', function (Request $request) {
-//     return $request->user();
-// })->middleware('auth:sanctum');
