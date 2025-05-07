@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class MaliciousVote extends Model
 {
-    protected $fillablle = [
+    protected $fillable = [
         'user_id',
         'elections_id',
         'candidate_id',

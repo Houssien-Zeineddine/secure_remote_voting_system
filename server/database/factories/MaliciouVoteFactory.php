@@ -2,6 +2,9 @@
 
 namespace Database\Factories;
 
+use App\Models\MaliciousVote;
+use App\Models\User;
+use App\Models\Elections;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -17,7 +20,10 @@ class MaliciouVoteFactory extends Factory
     public function definition(): array
     {
         return [
-            //
+            'user_id' => User::factory(),
+            'elections_id' => Elections::factory(),
+            'candidate_id' => User::factory(),
+            'cancelation_reason' => $this->faker->sentence(),
         ];
     }
 }
