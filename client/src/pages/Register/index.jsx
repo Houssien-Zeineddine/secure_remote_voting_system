@@ -4,6 +4,7 @@ import Button from "../../components/Button";
 import Input from "../../components/Input";
 import logo from "../../assets/logos/blue-web-logo-no-bg.svg";
 import welcomeIllustration from "../../assets/register illautration.svg";
+import Calendar from "../../assets/calendar 1.svg";
 import axiosBaseUrl from "../../Utils/axios";
 import "./style.css";
 
@@ -79,9 +80,7 @@ const Register = () => {
         <form onSubmit={handleSubmit} className="registeration-form">
           {error && (
             <div className="error-message">
-              {error.split(" | ").map((msg, idx) => (
-                <p key={idx}>{msg}</p>
-              ))}
+              <p>{error.split(" | ")[0]}</p>
             </div>
           )}
           <div className="two-inputs-container">
@@ -120,11 +119,11 @@ const Register = () => {
             <Input
               label="birthday"
               labelText="Birthday"
-              type="text"
+              type="date"
               name="birthday"
               id="birthday"
-              placeholder="Enter birthday"
-              classNames="input-vertical"
+              classNames="input-vertical birthday-input"
+              placeholder="Enter your birthday"
               onChange={handleChange}
             />
           </div>
@@ -135,7 +134,7 @@ const Register = () => {
             name="id_number"
             id="id_number"
             placeholder="Enter your Id number"
-            classNames="input-vertical"
+            classNames="input-vertical "
             onChange={handleChange}
           />
           <Input

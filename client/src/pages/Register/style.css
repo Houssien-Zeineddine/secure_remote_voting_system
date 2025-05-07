@@ -54,6 +54,10 @@
     width: 100px;
 }
 
+.birthday-input {
+    width: 50%;
+}
+
 .error-message {
     width: 80%;
     padding: 12px 16px;
