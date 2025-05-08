@@ -52,11 +52,11 @@ class UserService {
         }
 
         $candidate = User::FindOrFail($request->id);
-        if($candidate->user !== 3) {
+        if($candidate->user_type !== 3) {
             abort(400, 'Cannot promote to a candidate');
         }
 
-        $candidate->type_id = 2;
+        $candidate->user_type = 2;
         $candidate->save();
 
         return $candidate;
