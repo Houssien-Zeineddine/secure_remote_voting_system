@@ -4,6 +4,7 @@ namespace App\Services;
 
 use App\Models\User;
 use App\Http\Requests\EditProfileRequest;
+use App\Http\Requests\PromoteCandidateRequest;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 
@@ -45,15 +46,15 @@ class UserService {
         return $candidate;
     }
 
-    public function promoteToCandidate (Request $request) {
+    public function promoteToCandidate (PromoteCandidateRequest $request) {
         $admin = Auth::user();
         if($admin->user_type !== 1) {
             abort(403, 'Cannot update other users');
         }
 
-        $candidate = User::FindOrFail($request->id);
+        $candidate = User::where('email', $request->email)->firstOrFail();
         if($candidate->user_type !== 3) {
-            abort(400, 'Cannot promote to a candidate');
+            abort(400, 'User is not a regular user');
         }
 
         $candidate->user_type = 2;
