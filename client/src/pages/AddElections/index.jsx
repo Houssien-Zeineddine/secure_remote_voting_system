@@ -38,17 +38,16 @@ const AdminPage = () => {
         { headers: { Authorization: `Bearer ${accessToken}` } }
       );
 
-      // Remove locally:
-      setCandidates((prev) =>
-        prev.filter((c) => c.id !== selectedCandidate.id)
-      );
-      // OR re-fetch from server:
-      // await fetchCandidates();
+      await fetchCandidates();
     } catch (err) {
       console.error("Remove candidate failed", err);
     } finally {
       closeRemoveDialog();
     }
+  };
+
+  const handleAddCandidate = () => {
+    setIsAddCandidateOpen(false);
   };
 
   return (
@@ -119,10 +118,7 @@ const AdminPage = () => {
                   text="Add"
                   variant="blue"
                   size="small"
-                  onClick={() => {
-                    /* implement add candidate */
-                    setIsAddCandidateOpen(false);
-                  }}
+                  onClick={handleAddCandidate}
                 />
               }
             >
