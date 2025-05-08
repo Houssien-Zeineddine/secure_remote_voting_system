@@ -14,9 +14,9 @@ class UserService {
     public function updateUser (EditProfileRequest $request) {
         $user = Auth::user();
 
-        if ($user->id !== $request->user_id) {
-            abort(403, 'Unauthorized to update this user');
-        }
+        // if ($user->id !== $request->user_id) {
+        //     abort(403, 'Unauthorized to update this user');
+        // }
         
         $user->first_name = $request->first_name;
         $user->middle_name = $request->middle_name;
