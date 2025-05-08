@@ -142,17 +142,6 @@ const AdminPage = () => {
               title="Add Candidate"
               footerContent={
                 <>
-                  {error && (
-                    <div className="error-message">
-                      {error}
-                      <button
-                        className="close-error"
-                        onClick={() => setError(null)}
-                      >
-                        ×
-                      </button>
-                    </div>
-                  )}
                   <Button
                     text="Add"
                     variant="blue"
@@ -162,6 +151,7 @@ const AdminPage = () => {
                 </>
               }
             >
+              {error && <div className="error-message">{error}</div>}
               <Input
                 label="candidate_email"
                 labelText="Email"

@@ -124,17 +124,6 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
+    width: 100%;
   }
   
-  .close-error {
-    background: none;
-    border: none;
-    color: #dc3545;
-    font-size: 1.25rem;
-    cursor: pointer;
-    padding: 0 4px;
-  }
-  
-  .close-error:hover {
-    color: #b02a37;
-  }
