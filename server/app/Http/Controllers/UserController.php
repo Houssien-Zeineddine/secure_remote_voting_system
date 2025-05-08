@@ -18,4 +18,12 @@ class UserController extends Controller {
         return $this->successResponse($updatedUser, 200);
         
     }
+
+    public function getCandidates() {
+        $candidates = new UserService();
+
+        $currentCandidates = $candidates->getCandidates();
+
+        return $this->successResponse($currentCandidates, 200);
+    }
 }
