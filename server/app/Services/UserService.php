@@ -6,7 +6,7 @@ use App\Models\User;
 use App\Http\Requests\EditProfileRequest;
 use Illuminate\Support\Facades\Auth;
 
-class UserService extends controller {
+class UserService {
     /**
      * Create a new class instance.
      */

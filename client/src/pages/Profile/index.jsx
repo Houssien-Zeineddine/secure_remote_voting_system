@@ -1,17 +1,20 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import Input from "../../components/Input";
 import Button from "../../components/Button";
-import Calendar from "../../assets/calendar 1.svg";
-import { useState, useContext } from "react";
 import { AuthContext } from "../../components/Context/AuthContext";
 import "./style.css";
+import axiosBaseUrl from "../../Utils/axios";
 
 const Profile = () => {
-  const { user } = useContext(AuthContext);
+  const { user, setUser } = useContext(AuthContext);
 
   const [isEditing, setIsEditing] = useState(false);
   const [profileData, setProfileData] = useState(null);
   const [tempData, setTempData] = useState({ ...profileData });
+  const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState(null);
+
+  const access_token = localStorage.getItem("access_token");
 
   useEffect(() => {
     if (user) {
@@ -35,9 +38,27 @@ const Profile = () => {
     });
   };
 
-  const handleSubmit = () => {
-    setProfileData({ ...tempData });
-    setIsEditing(false);
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setIsLoading(true);
+    setError(null);
+
+    console.log("Access token:", access_token);
+    try {
+      const response = await axiosBaseUrl.post("/user/editprofile", tempData, {
+        headers: {
+          Authorization: `Bearer ${access_token}`,
+        },
+      });
+
+      console.log("Edit profile API response", response);
+
+      setProfileData({ ...tempData });
+      setIsEditing(false);
+      setUser(response.data);
+    } catch (err) {
+      // setError(err.response?.data?.message || "An error occurred");
+    }
   };
 
   return (
@@ -87,6 +108,7 @@ const Profile = () => {
               name="birthday"
               id="birthday"
               classNames="input-vertical edit-profile-birthday-input"
+              value={tempData.birthday}
               placeholder="Enter your birthday"
               onChange={handleChange}
             />
@@ -101,10 +123,10 @@ const Profile = () => {
               onChange={handleChange}
             />
             <Button
-              text="Save Changes"
+              text={isLoading ? "Saving..." : "Save Changes"}
               variant="blue"
               size="small"
-              onClick={handleSubmit}
+              type="submit"
             />
           </form>
         ) : (
