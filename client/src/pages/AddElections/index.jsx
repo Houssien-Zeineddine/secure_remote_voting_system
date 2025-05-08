@@ -18,7 +18,9 @@ const AdminPage = () => {
   const [isStopElectionsOpen, setIsStopElectionsOpen] = useState(false);
   const [isRemoveCandidateOpen, setIsRemoveCandidateOpen] = useState(false);
   const [selectedCandidate, setSelectedCandidate] = useState(null);
-  const accessToken = localStorage.getItem("access_token");
+  const [candidateEmail, setCandidateEmail] = useState("");
+  const [error, setError] = useState(null);
+  const access_token = localStorage.getItem("access_token");
 
   const openRemoveDialog = (candidate) => {
     setSelectedCandidate(candidate);
@@ -35,7 +37,7 @@ const AdminPage = () => {
       await axiosBaseUrl.put(
         "/user/admin/candidates",
         { id: selectedCandidate.id },
-        { headers: { Authorization: `Bearer ${accessToken}` } }
+        { headers: { Authorization: `Bearer ${access_token}` } }
       );
 
       await fetchCandidates();
@@ -46,8 +48,30 @@ const AdminPage = () => {
     }
   };
 
-  const handleAddCandidate = () => {
-    setIsAddCandidateOpen(false);
+  const handleEmailChange = (e) => {
+    setCandidateEmail(e.target.value);
+  };
+
+  const handleAddCandidate = async () => {
+    try {
+      const response = await axiosBaseUrl.put(
+        "/user/admin/addcandidate",
+        { email: candidateEmail },
+        { headers: { Authorization: `Bearer ${access_token}` } }
+      );
+
+      if (response.status === 200) {
+        await fetchCandidates();
+        setIsAddCandidateOpen(false);
+        setCandidateEmail("");
+      }
+    } catch (err) {
+      const errorMessage =
+        err.response?.data?.message ||
+        err.response?.data?.error ||
+        "Failed to add candidate. Please try again.";
+      setError(errorMessage);
+    }
   };
 
   return (
@@ -111,15 +135,31 @@ const AdminPage = () => {
             {/* Add Candidate Dialog */}
             <Dialogue
               isOpen={isAddCandidateOpen}
-              onClose={() => setIsAddCandidateOpen(false)}
+              onClose={() => {
+                setIsAddCandidateOpen(false);
+                setError(null);
+              }}
               title="Add Candidate"
               footerContent={
-                <Button
-                  text="Add"
-                  variant="blue"
-                  size="small"
-                  onClick={handleAddCandidate}
-                />
+                <>
+                  {error && (
+                    <div className="error-message">
+                      {error}
+                      <button
+                        className="close-error"
+                        onClick={() => setError(null)}
+                      >
+                        ×
+                      </button>
+                    </div>
+                  )}
+                  <Button
+                    text="Add"
+                    variant="blue"
+                    size="small"
+                    onClick={handleAddCandidate}
+                  />
+                </>
               }
             >
               <Input
@@ -129,6 +169,7 @@ const AdminPage = () => {
                 name="candidate_email"
                 placeholder="Enter candidate email"
                 classNames="input-vertical"
+                onChange={handleEmailChange}
               />
               {/* <Input
                 label="candidate_fullname"
