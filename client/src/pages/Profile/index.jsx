@@ -57,7 +57,7 @@ const Profile = () => {
       setIsEditing(false);
       setUser(response.data);
     } catch (err) {
-      // setError(err.response?.data?.message || "An error occurred");
+      setError(err.response?.data?.message || "An error occurred");
     }
   };
 

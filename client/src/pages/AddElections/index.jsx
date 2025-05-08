@@ -1,6 +1,6 @@
 import React, { useContext, useState } from "react";
 import { CheckElectionsContext } from "../../components/Context/CheckElectionsContext";
-import { FetchCandidatesContext } from "../../components/Context/FetchCandidates";
+import { FetchCandidatesContext } from "../../components/Context/FetchCandidatesContext";
 import addElections from "../../assets/plus (1) 1.svg";
 import Dialogue from "../../components/Dialogue";
 import Button from "../../components/Button";
@@ -32,21 +32,21 @@ const AdminPage = () => {
     setIsDialogueOpen(true);
   };
 
-  const handleAddElections = () => {
-    //API adding elections
-  };
-
   const handleOpenDialogue = () => {
     setIsDialogueOpen(true);
+  };
+
+  const handleOpenStopElectionsDialogue = () => {
+    setIsStopElectionsDialogue(true);
+  };
+
+  const handleAddElections = () => {
+    //API adding elections
   };
 
   const handleAddCandidate = () => {
     //API to add candidate
     closeDialogue();
-  };
-
-  const handleOpenStopElectionsDialogue = () => {
-    setIsStopElectionsDialogue(true);
   };
 
   const handleStopElections = () => {
@@ -94,7 +94,10 @@ const AdminPage = () => {
               <tbody>
                 {candidates.map((candidate, index) => (
                   <tr key={index}>
-                    <td>{candidate.candidate_name}</td>
+                    <td>
+                      {candidate.first_name} {candidate.middle_name}{" "}
+                      {candidate.last_name}
+                    </td>
                     <td>{candidate.email}</td>
                     <td>
                       <a
@@ -201,7 +204,9 @@ const AdminPage = () => {
                 <>
                   <p>Are you sure you want to remove this candidate?</p>
                   <p>
-                    <strong>Name:</strong> {selectedCandidate.candidate_name}
+                    <strong>Name:</strong> {selectedCandidate.first_name}{" "}
+                    {selectedCandidate.middle_name}{" "}
+                    {selectedCandidate.last_name}
                   </p>
                   <p>
                     <strong>Email:</strong> {selectedCandidate.email}

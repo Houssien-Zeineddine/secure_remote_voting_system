@@ -14,10 +14,12 @@ import blueVote from "../../assets/sidebar icons/blue icons/vote icon.svg";
 import blueGuidelines from "../../assets/sidebar icons/blue icons/guidelines icon.svg";
 import blueSettings from "../../assets/sidebar icons/blue icons/settings icon.svg";
 import { AuthContext } from "../Context/AuthContext";
+import { CheckElectionsContext } from "../Context/CheckElectionsContext";
 import "./style.css";
 
 const Sidebar = () => {
   const { user } = useContext(AuthContext);
+  const { ongoingActiveElections } = useContext(CheckElectionsContext);
   const location = useLocation().pathname;
 
   // const [userType, setUserType] = useState(null);
@@ -81,7 +83,9 @@ const Sidebar = () => {
               }
               alt=""
             />
-            <p className="sidebar-tag">Add Elections</p>
+            <p className="sidebar-tag">
+              {ongoingActiveElections ? "Add Candidates" : "Add Elections"}
+            </p>
           </Link>
         )}
         {userType === "candidate" && (
