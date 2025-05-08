@@ -36,6 +36,7 @@ Route::group(['prefix' => 'v0.1'], function () {
                 Route::middleware('CheckUserType:1')->group(function() {
                     Route::group(['prefix' => 'admin'], function() {
                         Route::post('/addelections', [AddElectionsController::class, 'store']);
+                        Route::put('/candidates', [UserController::class, 'updateCandidate']);
                     });
                 });
             }); 

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Requests\EditProfileRequest;
+use App\Http\Requests\RegisterationRequest;
 use App\Services\UserService;
 
 
@@ -25,5 +26,13 @@ class UserController extends Controller {
         $currentCandidates = $candidates->getCandidates();
 
         return $this->successResponse($currentCandidates, 200);
+    }
+
+    public function updateCandidate (Request $request) {
+        $candidate = new UserService;
+
+        $updatedCandidate = $candidate->updateCandidate($request);
+
+        return $this->successResponse($updatedCandidate, 200);
     }
 }
