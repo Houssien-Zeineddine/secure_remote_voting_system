@@ -13,10 +13,6 @@ class UserService {
      */
     public function updateUser (EditProfileRequest $request) {
         $user = Auth::user();
-
-        // if ($user->id !== $request->user_id) {
-        //     abort(403, 'Unauthorized to update this user');
-        // }
         
         $user->first_name = $request->first_name;
         $user->middle_name = $request->middle_name;
@@ -34,7 +30,7 @@ class UserService {
 
     public function updateCandidate (Request $request) {
         $admin = Auth::user();
-        if($admin->id !== 1) {
+        if($admin->user_type !== 1) {
             abort(403, 'Cannot update other users');
         }
 
@@ -47,5 +43,23 @@ class UserService {
         $candidate->save();
 
         return $candidate;
+    }
+
+    public function promoteToCandidate (Request $request) {
+        $admin = Auth::user();
+        if($admin->user_type !== 1) {
+            abort(403, 'Cannot update other users');
+        }
+
+        $candidate = User::FindOrFail($request->id);
+        if($candidate->user_type !== 3) {
+            abort(400, 'Cannot promote to a candidate');
+        }
+
+        $candidate->user_type = 2;
+        $candidate->save();
+
+        return $candidate;
+
     }
 }

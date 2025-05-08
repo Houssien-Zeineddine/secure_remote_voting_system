@@ -37,6 +37,7 @@ Route::group(['prefix' => 'v0.1'], function () {
                     Route::group(['prefix' => 'admin'], function() {
                         Route::post('/addelections', [AddElectionsController::class, 'store']);
                         Route::put('/candidates', [UserController::class, 'updateCandidate']);
+                        Route::put('/addcandidate', [UserController::class, 'addCandidate']);
                     });
                 });
             }); 
