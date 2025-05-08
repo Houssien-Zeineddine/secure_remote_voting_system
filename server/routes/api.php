@@ -4,7 +4,6 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\DashboardController;
-use App\Http\Controllers\CandidatesController;
 use App\Http\Controllers\GuidelinesController;
 use App\Http\Controllers\SettingsController;
 use App\Http\Controllers\AddCampaignController;
@@ -24,7 +23,7 @@ Route::group(['prefix' => 'v0.1'], function () {
         Route::middleware('CheckUserType')->group( function () {
             Route::group(['prefix' => 'user'], function() {
                 Route::get('/dashboard', [DashboardController::class, 'index']);
-                Route::get('/candidates', [CandidatesController::class, 'index']);
+                Route::get('/candidates', [UserController::class, 'getCandidates']);
                 Route::post('/editprofile', [UserController::class, 'updateProfile']);
                 // Route::get('/guidelines', [GuidelinesController::class, 'index']);
                 // Route::get('/settings', [SettingsController::class, 'index']);

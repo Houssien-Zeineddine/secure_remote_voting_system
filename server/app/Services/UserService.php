@@ -23,4 +23,8 @@ class UserService {
 
         return $updatedUser;
     }
+
+    public function getCandidates () {
+        return User::where('user_type', 2)->get();
+    }
 }

@@ -13,7 +13,9 @@ class UserSeeder extends Seeder
      */
     public function run(): void {
         User::factory()->count(249)->create();
+
+        User::factory()->count(6)->candidate()->create();
         
-        $this->command->info('250 users created successfully.');
+        $this->command->info('256 users created successfully.');
     }
 }

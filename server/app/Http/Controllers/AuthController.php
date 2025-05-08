@@ -10,7 +10,7 @@ use App\Http\Requests\LoginRequest;
 use App\Http\Requests\RegisterationRequest;
 use App\Services\AuthService;
 
-class AuthController extends Controller{
+class AuthController extends Controller {
     
     public function register(RegisterationRequest $request) {
         $registerUser = new AuthService();
