@@ -32,21 +32,21 @@ const AdminPage = () => {
     setIsDialogueOpen(true);
   };
 
-  const handleAddElections = () => {
-    //API adding elections
-  };
-
   const handleOpenDialogue = () => {
     setIsDialogueOpen(true);
+  };
+
+  const handleOpenStopElectionsDialogue = () => {
+    setIsStopElectionsDialogue(true);
+  };
+
+  const handleAddElections = () => {
+    //API adding elections
   };
 
   const handleAddCandidate = () => {
     //API to add candidate
     closeDialogue();
-  };
-
-  const handleOpenStopElectionsDialogue = () => {
-    setIsStopElectionsDialogue(true);
   };
 
   const handleStopElections = () => {
@@ -204,7 +204,9 @@ const AdminPage = () => {
                 <>
                   <p>Are you sure you want to remove this candidate?</p>
                   <p>
-                    <strong>Name:</strong> {selectedCandidate.candidate_name}
+                    <strong>Name:</strong> {selectedCandidate.first_name}{" "}
+                    {selectedCandidate.middle_name}{" "}
+                    {selectedCandidate.last_name}
                   </p>
                   <p>
                     <strong>Email:</strong> {selectedCandidate.email}
