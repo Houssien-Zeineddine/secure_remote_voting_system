@@ -35,4 +35,12 @@ class UserController extends Controller {
 
         return $this->successResponse($updatedCandidate, 200);
     }
+
+    public function addCandidate (Request $request) {
+        $user = new UserService;
+
+        $candidate = $user->promoteToCandidate($request);
+
+        return $this->successResponse($candidate, 200);
+    }
 }
