@@ -1,6 +1,6 @@
 import React, { useContext, useState } from "react";
 import { CheckElectionsContext } from "../../components/Context/CheckElectionsContext";
-import { FetchCandidatesContext } from "../../components/Context/FetchCandidates";
+import { FetchCandidatesContext } from "../../components/Context/FetchCandidatesContext";
 import addElections from "../../assets/plus (1) 1.svg";
 import Dialogue from "../../components/Dialogue";
 import Button from "../../components/Button";
@@ -94,7 +94,10 @@ const AdminPage = () => {
               <tbody>
                 {candidates.map((candidate, index) => (
                   <tr key={index}>
-                    <td>{candidate.candidate_name}</td>
+                    <td>
+                      {candidate.first_name} {candidate.middle_name}{" "}
+                      {candidate.last_name}
+                    </td>
                     <td>{candidate.email}</td>
                     <td>
                       <a
