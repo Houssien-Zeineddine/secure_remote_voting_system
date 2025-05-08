@@ -52,6 +52,6 @@ class UserFactory extends Factory {
     public function candidate() {
         return $this->state([
             'user_type' => 2,
-        ])
+        ]);
     }
 }
