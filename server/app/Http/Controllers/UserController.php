@@ -31,7 +31,7 @@ class UserController extends Controller {
     public function updateCandidate (Request $request) {
         $candidate = new UserService;
 
-        $updatedCandidate = $candidate->updateCandidate();
+        $updatedCandidate = $candidate->updateCandidate($request);
 
         return $this->successResponse($updatedCandidate, 200);
     }
