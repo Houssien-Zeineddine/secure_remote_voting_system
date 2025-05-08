@@ -31,7 +31,7 @@ class UserService {
         return User::where('user_type', 2)->get();
     }
 
-    public function updateCandidate (RegisterationRequest $request) {
+    public function updateCandidate (Request $request) {
         $admin = Auth::user();
         if($admin->id !== 1) {
             abort(403, 'Cannot update other users');

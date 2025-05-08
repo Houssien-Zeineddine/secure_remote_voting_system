@@ -28,8 +28,8 @@ class UserController extends Controller {
         return $this->successResponse($currentCandidates, 200);
     }
 
-    public function updateCandidate (RegisterationRequest $request) {
-        $candiate = new UserService;
+    public function updateCandidate (Request $request) {
+        $candidate = new UserService;
 
         $updatedCandidate = $candidate->updateCandidate();
 
