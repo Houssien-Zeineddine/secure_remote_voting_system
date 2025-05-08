@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Requests\EditProfileRequest;
+use App\Http\Requests\PromoteCandidateRequest;
 use App\Http\Requests\RegisterationRequest;
 use App\Services\UserService;
 
@@ -36,7 +37,7 @@ class UserController extends Controller {
         return $this->successResponse($updatedCandidate, 200);
     }
 
-    public function addCandidate (Request $request) {
+    public function addCandidate (PromoteCandidateRequest $request) {
         $user = new UserService;
 
         $candidate = $user->promoteToCandidate($request);
