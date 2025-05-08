@@ -6,63 +6,49 @@ import Dialogue from "../../components/Dialogue";
 import Button from "../../components/Button";
 import Input from "../../components/Input";
 import "./style.css";
+import axiosBaseUrl from "../../Utils/axios";
 
 const AdminPage = () => {
   const { ongoingActiveElections } = useContext(CheckElectionsContext);
-  const { candidates } = useContext(FetchCandidatesContext);
+  const { candidates, setCandidates, fetchCandidates } = useContext(
+    FetchCandidatesContext
+  );
 
-  const [isDialogueOpen, setIsDialogueOpen] = useState(false);
-  const [isStopElectionsDialogue, setIsStopElectionsDialogue] = useState(false);
-
-  const [isRemoveCandidateDialogueOpen, setIsRemoveCandidateDialogueOpen] =
-    useState(false);
+  const [isAddCandidateOpen, setIsAddCandidateOpen] = useState(false);
+  const [isStopElectionsOpen, setIsStopElectionsOpen] = useState(false);
+  const [isRemoveCandidateOpen, setIsRemoveCandidateOpen] = useState(false);
   const [selectedCandidate, setSelectedCandidate] = useState(null);
+  const accessToken = localStorage.getItem("access_token");
 
-  const closeDialogue = () => {
-    setIsDialogueOpen(false);
-    setIsStopElectionsDialogue(false);
-  };
-
-  const closeRemoveCandidateDialogue = () => {
-    setIsRemoveCandidateDialogueOpen(false);
-    setSelectedCandidate(null);
-  };
-
-  const handleViewDetails = (candidate) => {
-    setIsDialogueOpen(true);
-  };
-
-  const handleOpenDialogue = () => {
-    setIsDialogueOpen(true);
-  };
-
-  const handleOpenStopElectionsDialogue = () => {
-    setIsStopElectionsDialogue(true);
-  };
-
-  const handleAddElections = () => {
-    //API adding elections
-  };
-
-  const handleAddCandidate = () => {
-    //API to add candidate
-    closeDialogue();
-  };
-
-  const handleStopElections = () => {
-    //API to delete electoins
-    setIsStopElectionsDialogue(false);
-  };
-
-  const handleRemoveCandidateClick = (candidate) => {
+  const openRemoveDialog = (candidate) => {
     setSelectedCandidate(candidate);
-    setIsRemoveCandidateDialogueOpen(true);
+    setIsRemoveCandidateOpen(true);
   };
 
-  const handleConfirmRemoveCandidate = () => {
-    // API to remove candidate
-    console.log("Removing candidate:", selectedCandidate);
-    closeRemoveCandidateDialogue();
+  const closeRemoveDialog = () => {
+    setSelectedCandidate(null);
+    setIsRemoveCandidateOpen(false);
+  };
+
+  const handleConfirmRemoveCandidate = async () => {
+    try {
+      await axiosBaseUrl.put(
+        "/user/admin/candidates",
+        { id: selectedCandidate.id },
+        { headers: { Authorization: `Bearer ${accessToken}` } }
+      );
+
+      // Remove locally:
+      setCandidates((prev) =>
+        prev.filter((c) => c.id !== selectedCandidate.id)
+      );
+      // OR re-fetch from server:
+      // await fetchCandidates();
+    } catch (err) {
+      console.error("Remove candidate failed", err);
+    } finally {
+      closeRemoveDialog();
+    }
   };
 
   return (
@@ -70,30 +56,29 @@ const AdminPage = () => {
       {ongoingActiveElections?.ongoing ? (
         <div className="add-candidate-container">
           <div className="inside-add-candidate-container">
-            <h2 className="inside-add-candidate-container-header">
-              {ongoingActiveElections.title}
-            </h2>
+            <h2>{ongoingActiveElections.title}</h2>
+
             <div className="add-candidate-btn-wrapper">
               <h4>Candidates List</h4>
               <Button
                 text="Add Candidate"
                 variant="blue"
                 size="medium"
-                onClick={handleOpenDialogue}
+                onClick={() => setIsAddCandidateOpen(true)}
               />
             </div>
-            {/* table of candidates */}
+
             <table>
               <thead>
                 <tr>
-                  <th>Candidate Name</th>
-                  <th>Candidate Email</th>
+                  <th>Name</th>
+                  <th>Email</th>
                   <th>Action</th>
                 </tr>
               </thead>
               <tbody>
-                {candidates.map((candidate, index) => (
-                  <tr key={index}>
+                {candidates.map((candidate) => (
+                  <tr key={candidate.id}>
                     <td>
                       {candidate.first_name} {candidate.middle_name}{" "}
                       {candidate.last_name}
@@ -104,114 +89,119 @@ const AdminPage = () => {
                         href="#remove"
                         onClick={(e) => {
                           e.preventDefault();
-                          handleRemoveCandidateClick(candidate);
+                          openRemoveDialog(candidate);
                         }}
                       >
-                        Remove Candidate
+                        Remove
                       </a>
                     </td>
                   </tr>
                 ))}
               </tbody>
             </table>
+
             <div className="stop-elections-btn-wrapper">
               <Button
                 text="Stop Elections"
                 variant="red"
                 size="medium"
-                onClick={handleOpenStopElectionsDialogue}
+                onClick={() => setIsStopElectionsOpen(true)}
               />
             </div>
-            {/* Add candidate dialogue */}
+
+            {/* Add Candidate Dialog */}
             <Dialogue
-              isOpen={isDialogueOpen}
-              onClose={closeDialogue}
-              title={"Add Candidate"}
+              isOpen={isAddCandidateOpen}
+              onClose={() => setIsAddCandidateOpen(false)}
+              title="Add Candidate"
               footerContent={
                 <Button
-                  text="Add Candidate"
+                  text="Add"
                   variant="blue"
                   size="small"
-                  onClick={handleAddCandidate}
+                  onClick={() => {
+                    /* implement add candidate */
+                    setIsAddCandidateOpen(false);
+                  }}
                 />
               }
             >
               <Input
                 label="candidate_email"
-                labelText="Candidate Email"
-                type="text"
+                labelText="Email"
+                type="email"
                 name="candidate_email"
-                id="candidate_email"
                 placeholder="Enter candidate email"
                 classNames="input-vertical"
               />
-              <Input
-                label="candidate_name"
-                labelText="Candidate Full Name"
+              {/* <Input
+                label="candidate_fullname"
+                labelText="Full Name"
                 type="text"
                 name="candidate_fullname"
-                id="candidate_fullname"
-                placeholder="Enter candidate full name"
+                placeholder="Enter full name"
                 classNames="input-vertical"
-              />
+              /> */}
             </Dialogue>
-            {/* check for elections cancelation dialogue */}
+
+            {/* Stop Elections Dialog */}
             <Dialogue
-              isOpen={isStopElectionsDialogue}
-              onClose={closeDialogue}
-              title={"Are you sure you want to stop elections?"}
+              isOpen={isStopElectionsOpen}
+              onClose={() => setIsStopElectionsOpen(false)}
+              title="Stop Elections?"
             >
               <div className="yes-no-btn-wrapper">
                 <Button
                   text="Yes"
                   variant="blue"
                   size="small"
-                  onClick={handleStopElections}
+                  onClick={() => {
+                    /* implement stop elections */
+                    setIsStopElectionsOpen(false);
+                  }}
                 />
                 <Button
                   text="No"
                   variant="red"
                   size="small"
-                  onClick={closeDialogue}
+                  onClick={() => setIsStopElectionsOpen(false)}
                 />
               </div>
             </Dialogue>
-            {/* checko for candidate removal dialogue */}
+
+            {/* Remove Candidate Dialog */}
             <Dialogue
-              isOpen={isRemoveCandidateDialogueOpen}
-              onClose={closeRemoveCandidateDialogue}
-              title={"Confirm Remove Candidate"}
+              isOpen={isRemoveCandidateOpen}
+              onClose={closeRemoveDialog}
+              title="Confirm Remove Candidate"
               footerContent={
-                <>
-                  <div className="yes-no-btn-wrapper">
-                    <Button
-                      text="No"
-                      variant="blue"
-                      size="small"
-                      onClick={closeRemoveCandidateDialogue}
-                    />
-                    <Button
-                      text="Yes"
-                      variant="red"
-                      size="small"
-                      onClick={handleConfirmRemoveCandidate}
-                    />
-                  </div>
-                </>
+                <div className="yes-no-btn-wrapper">
+                  <Button
+                    text="No"
+                    variant="white"
+                    size="small"
+                    onClick={closeRemoveDialog}
+                  />
+                  <Button
+                    text="Yes"
+                    variant="red"
+                    size="small"
+                    onClick={handleConfirmRemoveCandidate}
+                  />
+                </div>
               }
             >
               {selectedCandidate && (
                 <>
-                  <p>Are you sure you want to remove this candidate?</p>
                   <p>
-                    <strong>Name:</strong> {selectedCandidate.first_name}{" "}
-                    {selectedCandidate.middle_name}{" "}
-                    {selectedCandidate.last_name}
+                    Remove{" "}
+                    <strong>
+                      {selectedCandidate.first_name}{" "}
+                      {selectedCandidate.last_name}
+                    </strong>{" "}
+                    from the election?
                   </p>
-                  <p>
-                    <strong>Email:</strong> {selectedCandidate.email}
-                  </p>
-                  <p>This action cannot be undone.</p>
+                  <p>This cannot be undone.</p>
                 </>
               )}
             </Dialogue>
@@ -223,50 +213,8 @@ const AdminPage = () => {
           <img
             src={addElections}
             alt="Create Elections"
-            onClick={handleViewDetails}
+            onClick={() => setIsAddCandidateOpen(true)}
           />
-          <Dialogue
-            isOpen={isDialogueOpen}
-            onClose={closeDialogue}
-            title={"Add Elections"}
-            footerContent={
-              <Button
-                text="Add Elections"
-                variant="blue"
-                size="small"
-                onClick={handleAddElections}
-              />
-            }
-          >
-            <Input
-              label="title"
-              labelText="Title"
-              type="text"
-              name="title"
-              id="title"
-              placeholder="Enter elections title"
-              classNames="input-vertical"
-            />
-            <div className="selection-container">
-              <label htmlFor="region">Select Region</label>
-              <select
-                name="region"
-                id="region"
-                className="dialogue-select-region"
-              >
-                <option value="beirut">Beirut</option>
-                <option value="beqaa">Beqaa</option>
-                <option value="mount_lebanon">Mount Lebanon</option>
-                <option value="north">North</option>
-                <option value="south">South</option>
-                <option value="whole_country">Whole Country</option>
-              </select>
-            </div>
-            <textarea
-              className="create-elections-textarea"
-              placeholder="Enter elections description here..."
-            ></textarea>
-          </Dialogue>
         </div>
       )}
     </div>

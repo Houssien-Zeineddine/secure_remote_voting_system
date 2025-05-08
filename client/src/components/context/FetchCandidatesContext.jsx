@@ -9,25 +9,27 @@ export const FetchCandidatesProvider = ({ children }) => {
 
   const access_token = localStorage.getItem("access_token");
 
+  const fetchCandidates = async () => {
+    try {
+      const response = await axiosBaseUrl.get("/user/candidates", {
+        headers: { Authorization: `Bearer ${access_token}` },
+      });
+
+      console.log("from fetchcandiates context ", response.data);
+      setCandidates(response.data);
+    } catch (error) {
+      return error;
+    }
+  };
+
   useEffect(() => {
-    const fetchCandidates = async () => {
-      try {
-        const response = await axiosBaseUrl.get("/user/candidates", {
-          headers: { Authorization: `Bearer ${access_token}` },
-        });
-
-        console.log("from fetchcandiates context ", response.data);
-        setCandidates(response.data);
-      } catch (error) {
-        return error;
-      }
-    };
-
     fetchCandidates();
   }, [access_token]);
 
   return (
-    <FetchCandidatesContext.Provider value={{ candidates }}>
+    <FetchCandidatesContext.Provider
+      value={{ candidates, setCandidates, fetchCandidates }}
+    >
       {children}
     </FetchCandidatesContext.Provider>
   );
