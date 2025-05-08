@@ -6,7 +6,7 @@ import "./style.css";
 import axiosBaseUrl from "../../Utils/axios";
 
 const Profile = () => {
-  const { user } = useContext(AuthContext);
+  const { user, setUser } = useContext(AuthContext);
 
   const [isEditing, setIsEditing] = useState(false);
   const [profileData, setProfileData] = useState(null);
@@ -43,9 +43,9 @@ const Profile = () => {
     setIsLoading(true);
     setError(null);
 
+    console.log("Access token:", access_token);
     try {
-      const response = await axiosBaseUrl.post("user/editprofile", {
-        tempData,
+      const response = await axiosBaseUrl.post("/user/editprofile", tempData, {
         headers: {
           Authorization: `Bearer ${access_token}`,
         },
@@ -55,8 +55,9 @@ const Profile = () => {
 
       setProfileData({ ...tempData });
       setIsEditing(false);
+      setUser(response.data);
     } catch (err) {
-      setError(err.response?.data?.message || "An error occurred");
+      // setError(err.response?.data?.message || "An error occurred");
     }
   };
 
@@ -107,6 +108,7 @@ const Profile = () => {
               name="birthday"
               id="birthday"
               classNames="input-vertical edit-profile-birthday-input"
+              value={tempData.birthday}
               placeholder="Enter your birthday"
               onChange={handleChange}
             />

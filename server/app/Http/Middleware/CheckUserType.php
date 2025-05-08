@@ -17,8 +17,7 @@ class CheckUserType
      * @param  mixed  ...$types  // <-- accept user types (IDs or names)
      * @return \Symfony\Component\HttpFoundation\Response
      */
-    public function handle(Request $request, Closure $next, ...$types): Response
-    {
+    public function handle(Request $request, Closure $next, ...$types): Response {
         $user = Auth::user();
 
         if (!$user) {
