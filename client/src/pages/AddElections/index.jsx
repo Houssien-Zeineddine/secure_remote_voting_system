@@ -84,8 +84,10 @@ const AdminPage = () => {
       );
 
       if (response.status === 200) {
+        console.log(response.data);
         await fetchElections();
-        setOngoingActiveElections(response.data.id);
+        setOngoingActiveElections(response.data);
+        console.log("ongoing active elections id", ongoingActiveElections.id);
       }
     } catch (err) {
       console.error("Add elections failed", err);
@@ -101,17 +103,16 @@ const AdminPage = () => {
   const handleConfirmStopElections = async () => {
     try {
       await axiosBaseUrl.delete("/user/admin/deleteelections", {
-        // Config object (2nd parameter)
-        data: { id: ongoingActiveElections.id }, // <-- data goes here
+        data: { id: ongoingActiveElections.id },
         headers: { Authorization: `Bearer ${access_token}` },
       });
 
       await fetchElections();
     } catch (error) {
-      console.log("Error deleting elections:", error); // Improved error logging
+      console.log("Error deleting elections:", error);
     } finally {
       closeStopElectionsDialogue();
-      setOngoingActiveElections(false);
+      setOngoingActiveElections(null);
     }
   };
 
@@ -162,7 +163,7 @@ const AdminPage = () => {
 
   return (
     <div className="along-sidebar-positioning">
-      {ongoingActiveElections !== null ? (
+      {ongoingActiveElections ? (
         <div className="add-candidate-container">
           <div className="inside-add-candidate-container">
             <h2>{ongoingActiveElections.title}</h2>
