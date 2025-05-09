@@ -1,13 +1,25 @@
-import React from "react";
-import { createContext, useState, useEffect } from "react";
+import React, { createContext, useState, useEffect } from "react";
+import axiosBaseUrl from "../../Utils/axios";
 
 export const CheckElectionsContext = createContext();
 
 export const CheckElectionsProvider = ({ children }) => {
   const [ongoingActiveElections, setOngoingActiveElections] = useState(null);
+  const access_token = localStorage.getItem("access_token");
 
-  useEffect(() => {
-    const fetchElections = () => {
+  const fetchElections = async () => {
+    try {
+      const response = await axiosBaseUrl.get("/user/getelections", {
+        headers: { Authorization: `Bearer ${access_token}` },
+      });
+
+      const elections = response.data;
+
+      if (elections && elections.id) {
+        setOngoingActiveElections(elections);
+      } else {
+        setOngoingActiveElections(null);
+      }
       //expecting calling API to get elections name if exist, or null if not
 
       // return {
@@ -17,20 +29,31 @@ export const CheckElectionsProvider = ({ children }) => {
       //   description: "description",
       //   ongoing: true,
       // };
-      return null;
-    };
-
-    const ongoingElections = fetchElections();
-
-    if (ongoingElections) {
-      setOngoingActiveElections(ongoingElections);
-    } else {
+      // return null;}
+    } catch (error) {
+      console.error("Error fetching elections:", error);
       setOngoingActiveElections(null);
     }
+  };
+
+  useEffect(() => {
+    fetchElections();
   }, []);
 
+  // if (ongoingActiveElections) {
+  //   setOngoingActiveElections(ongoingActiveElections);
+  // } else {
+  //   setOngoingActiveElections(null);
+  // }
+
   return (
-    <CheckElectionsContext.Provider value={{ ongoingActiveElections }}>
+    <CheckElectionsContext.Provider
+      value={{
+        ongoingActiveElections,
+        setOngoingActiveElections,
+        fetchElections,
+      }}
+    >
       {children}
     </CheckElectionsContext.Provider>
   );

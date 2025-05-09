@@ -9,7 +9,8 @@ import "./style.css";
 import axiosBaseUrl from "../../Utils/axios";
 
 const AdminPage = () => {
-  const { ongoingActiveElections } = useContext(CheckElectionsContext);
+  const { ongoingActiveElections, setOngoingActiveElections, fetchElections } =
+    useContext(CheckElectionsContext);
   const { candidates, setCandidates, fetchCandidates } = useContext(
     FetchCandidatesContext
   );
@@ -18,36 +19,104 @@ const AdminPage = () => {
   const [isStopElectionsOpen, setIsStopElectionsOpen] = useState(false);
   const [isRemoveCandidateOpen, setIsRemoveCandidateOpen] = useState(false);
   const [isAddElectionsOpen, setIsAddElectionsOpen] = useState(false);
+  const [selectedElections, setSelectedElections] = useState(null);
   const [selectedCandidate, setSelectedCandidate] = useState(null);
   const [candidateEmail, setCandidateEmail] = useState("");
+  const [electionsTitle, setElectionsTitle] = useState("");
+  const [electionsRegion, setElectionsRegion] = useState("Beirut");
+  const [electionsDescription, setElectionsDescription] = useState("");
   const [error, setError] = useState(null);
   const access_token = localStorage.getItem("access_token");
 
-  const openRemoveDialog = (candidate) => {
+  // Dialogues
+  const openRemoveAddCandidateDialog = (candidate) => {
     setSelectedCandidate(candidate);
     setIsRemoveCandidateOpen(true);
   };
 
-  const closeRemoveDialog = () => {
+  const closeRemoveCandidateDialog = () => {
     setSelectedCandidate(null);
     setIsRemoveCandidateOpen(false);
   };
 
-  const handleConfirmRemoveCandidate = async () => {
+  const openStopElectionsDialogue = (ongoingActiveElections) => {
+    setSelectedElections(ongoingActiveElections);
+    setIsStopElectionsOpen(true);
+  };
+
+  const closeStopElectionsDialogue = () => {
+    setSelectedElections(null);
+    setIsStopElectionsOpen(false);
+  };
+
+  const openAddElectionsDialog = () => {
+    setIsAddElectionsOpen(true);
+  };
+
+  const closeAddElectionsDialog = () => {
+    setIsAddElectionsOpen(false);
+  };
+
+  // Elections related logic
+
+  const handleElectionsTitleChange = (e) => {
+    setElectionsTitle(e.target.value);
+  };
+
+  const handleElectionsRegionChange = (e) => {
+    setElectionsRegion(e.target.value);
+  };
+
+  const handleElectionsDescriptionChange = (e) => {
+    setElectionsDescription(e.target.value);
+  };
+
+  const handleAddElections = async () => {
     try {
-      await axiosBaseUrl.put(
-        "/user/admin/candidates",
-        { id: selectedCandidate.id },
+      const response = await axiosBaseUrl.post(
+        "/user/admin/addelections",
+        {
+          title: electionsTitle,
+          region: electionsRegion,
+          description: electionsDescription,
+        },
         { headers: { Authorization: `Bearer ${access_token}` } }
       );
 
-      await fetchCandidates();
+      if (response.status === 200) {
+        console.log(response.data);
+        await fetchElections();
+        setOngoingActiveElections(response.data);
+        console.log("ongoing active elections id", ongoingActiveElections.id);
+      }
     } catch (err) {
-      console.error("Remove candidate failed", err);
+      console.error("Add elections failed", err);
+      setError("Failed to create elections. Please try again.");
     } finally {
-      closeRemoveDialog();
+      closeAddElectionsDialog();
+      setElectionsTitle("");
+      setElectionsRegion("");
+      setElectionsDescription("");
     }
   };
+
+  const handleConfirmStopElections = async () => {
+    try {
+      await axiosBaseUrl.delete("/user/admin/deleteelections", {
+        data: { id: ongoingActiveElections.id },
+        headers: { Authorization: `Bearer ${access_token}` },
+      });
+
+      await fetchElections();
+    } catch (error) {
+      console.log("Error deleting elections:", error);
+    } finally {
+      closeStopElectionsDialogue();
+      setOngoingActiveElections(null);
+    }
+  };
+
+  // Candidate related logic
 
   const handleEmailChange = (e) => {
     setCandidateEmail(e.target.value);
@@ -75,18 +144,21 @@ const AdminPage = () => {
     }
   };
 
-  const openAddElectionsDialog = () => {
-    setIsAddElectionsOpen(true);
-  };
+  const handleConfirmRemoveCandidate = async () => {
+    try {
+      await axiosBaseUrl.put(
+        "/user/admin/candidates",
+        { id: selectedCandidate.id },
+        { headers: { Authorization: `Bearer ${access_token}` } }
+      );
 
-  const closeAddElectionsDialog = () => {
-    setIsAddElectionsOpen(false);
-  };
-
-  const handleAddElections = () => {
-    // implement elections creation logic here
-    console.log("Elections created");
-    setIsAddElectionsOpen(false);
+      await fetchCandidates();
+    } catch (err) {
+      console.error("Remove candidate failed", err);
+    } finally {
+      closeRemoveCandidateDialog();
+      setSelectedCandidate(null);
+    }
   };
 
   return (
@@ -127,7 +199,7 @@ const AdminPage = () => {
                         href="#remove"
                         onClick={(e) => {
                           e.preventDefault();
-                          openRemoveDialog(candidate);
+                          openRemoveAddCandidateDialog(candidate);
                         }}
                       >
                         Remove
@@ -143,7 +215,9 @@ const AdminPage = () => {
                 text="Stop Elections"
                 variant="red"
                 size="medium"
-                onClick={() => setIsStopElectionsOpen(true)}
+                onClick={() => {
+                  openStopElectionsDialogue(ongoingActiveElections);
+                }}
               />
             </div>
 
@@ -197,16 +271,13 @@ const AdminPage = () => {
                   text="Yes"
                   variant="blue"
                   size="small"
-                  onClick={() => {
-                    /* implement stop elections */
-                    setIsStopElectionsOpen(false);
-                  }}
+                  onClick={handleConfirmStopElections}
                 />
                 <Button
                   text="No"
                   variant="red"
                   size="small"
-                  onClick={() => setIsStopElectionsOpen(false)}
+                  onClick={closeStopElectionsDialogue}
                 />
               </div>
             </Dialogue>
@@ -214,7 +285,7 @@ const AdminPage = () => {
             {/* Remove Candidate Dialog */}
             <Dialogue
               isOpen={isRemoveCandidateOpen}
-              onClose={closeRemoveDialog}
+              onClose={closeRemoveCandidateDialog}
               title="Confirm Remove Candidate"
               footerContent={
                 <div className="yes-no-btn-wrapper">
@@ -222,7 +293,7 @@ const AdminPage = () => {
                     text="No"
                     variant="white"
                     size="small"
-                    onClick={closeRemoveDialog}
+                    onClick={closeRemoveCandidateDialog}
                   />
                   <Button
                     text="Yes"
@@ -258,6 +329,7 @@ const AdminPage = () => {
             onClick={openAddElectionsDialog}
             style={{ cursor: "pointer" }}
           />
+          {/* add elections dialogue */}
           <Dialogue
             isOpen={isAddElectionsOpen}
             onClose={closeAddElectionsDialog}
@@ -279,6 +351,7 @@ const AdminPage = () => {
               id="title"
               placeholder="Enter elections title"
               classNames="input-vertical"
+              onChange={handleElectionsTitleChange}
             />
             <div className="selection-container">
               <label htmlFor="region">Select Region</label>
@@ -286,6 +359,8 @@ const AdminPage = () => {
                 name="region"
                 id="region"
                 className="dialogue-select-region"
+                value={electionsRegion}
+                onChange={handleElectionsRegionChange}
               >
                 <option value="beirut">Beirut</option>
                 <option value="beqaa">Beqaa</option>
@@ -298,6 +373,7 @@ const AdminPage = () => {
             <textarea
               className="create-elections-textarea"
               placeholder="Enter elections description here..."
+              onChange={handleElectionsDescriptionChange}
             ></textarea>
           </Dialogue>
         </div>
