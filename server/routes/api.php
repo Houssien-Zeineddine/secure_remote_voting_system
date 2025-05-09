@@ -36,6 +36,7 @@ Route::group(['prefix' => 'v0.1'], function () {
                 });
                 Route::middleware('CheckUserType:1')->group(function() {
                     Route::group(['prefix' => 'admin'], function() {
+                        Route::get('getelections', [ElectionsController::class, 'getElections']);
                         Route::post('/addelections', [ElectionsController::class, 'addEelections']);
                         Route::delete('/deleteelections', [ElectionsController::class, 'deleteElections']);
                         Route::put('/candidates', [UserController::class, 'updateCandidate']);
