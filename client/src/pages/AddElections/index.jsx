@@ -18,18 +18,32 @@ const AdminPage = () => {
   const [isStopElectionsOpen, setIsStopElectionsOpen] = useState(false);
   const [isRemoveCandidateOpen, setIsRemoveCandidateOpen] = useState(false);
   const [selectedCandidate, setSelectedCandidate] = useState(null);
+  const [selectedSlections, setSelectedElections] = useState(null);
   const [candidateEmail, setCandidateEmail] = useState("");
   const [error, setError] = useState(null);
   const access_token = localStorage.getItem("access_token");
 
-  const openRemoveDialog = (candidate) => {
+  const openRemoveAddCandidateDialog = (candidate) => {
     setSelectedCandidate(candidate);
     setIsRemoveCandidateOpen(true);
   };
 
-  const closeRemoveDialog = () => {
+  const closeRemoveCandidateDialog = () => {
     setSelectedCandidate(null);
     setIsRemoveCandidateOpen(false);
+  };
+
+  const openStopElectionsDialogue = (electionsId) => {
+    setIsStopElectionsOpen(true);
+    setSelectedElections(electionsId);
+  };
+
+  const handleConfirmStopElections = async () => {
+    try {
+      await axiosBaseUrl.delete("/user/admin/deleteelections", {
+        id: selected,
+      });
+    } catch {}
   };
 
   const handleConfirmRemoveCandidate = async () => {
@@ -44,7 +58,7 @@ const AdminPage = () => {
     } catch (err) {
       console.error("Remove candidate failed", err);
     } finally {
-      closeRemoveDialog();
+      closeRemoveCandidateDialog();
     }
   };
 
@@ -112,7 +126,7 @@ const AdminPage = () => {
                         href="#remove"
                         onClick={(e) => {
                           e.preventDefault();
-                          openRemoveDialog(candidate);
+                          openRemoveAddCandidateDialog(candidate);
                         }}
                       >
                         Remove
@@ -128,7 +142,9 @@ const AdminPage = () => {
                 text="Stop Elections"
                 variant="red"
                 size="medium"
-                onClick={() => setIsStopElectionsOpen(true)}
+                onClick={() => {
+                  openStopElectionsDialogue(ongoingActiveElections.id);
+                }}
               />
             </div>
 
@@ -199,7 +215,7 @@ const AdminPage = () => {
             {/* Remove Candidate Dialog */}
             <Dialogue
               isOpen={isRemoveCandidateOpen}
-              onClose={closeRemoveDialog}
+              onClose={closeRemoveCandidateDialog}
               title="Confirm Remove Candidate"
               footerContent={
                 <div className="yes-no-btn-wrapper">
@@ -207,7 +223,7 @@ const AdminPage = () => {
                     text="No"
                     variant="white"
                     size="small"
-                    onClick={closeRemoveDialog}
+                    onClick={closeRemoveCandidateDialog}
                   />
                   <Button
                     text="Yes"
