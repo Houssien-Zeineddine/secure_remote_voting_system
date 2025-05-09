@@ -15,7 +15,11 @@ export const CheckElectionsProvider = ({ children }) => {
 
       const elections = response.data;
 
-      setOngoingActiveElections(elections);
+      if (elections && elections.id) {
+        setOngoingActiveElections(elections);
+      } else {
+        setOngoingActiveElections(null);
+      }
       //expecting calling API to get elections name if exist, or null if not
 
       // return {
@@ -28,7 +32,7 @@ export const CheckElectionsProvider = ({ children }) => {
       // return null;}
     } catch (error) {
       console.error("Error fetching elections:", error);
-      setOngoingActiveElections(false);
+      setOngoingActiveElections(null);
     }
   };
 

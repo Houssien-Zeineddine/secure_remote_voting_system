@@ -80,17 +80,21 @@ const AdminPage = () => {
           region: electionsRegion,
           description: electionsDescription,
         },
-        { headers: { Authorization: `Beare ${access_token}` } }
+        { headers: { Authorization: `Bearer ${access_token}` } }
       );
 
       if (response.status === 200) {
         await fetchElections();
+        setOngoingActiveElections(response.data.id);
         setIsAddElectionsOpen(false);
         setElectionsTitle("");
         setElectionsRegion("");
         setElectionsDescription("");
       }
-    } catch {}
+    } catch (err) {
+      console.error("Add elections failed", err);
+      setError("Failed to create elections. Please try again.");
+    }
   };
 
   const handleConfirmStopElections = async () => {
@@ -151,12 +155,13 @@ const AdminPage = () => {
       console.error("Remove candidate failed", err);
     } finally {
       closeRemoveCandidateDialog();
+      setSelectedCandidate(null);
     }
   };
 
   return (
     <div className="along-sidebar-positioning">
-      {ongoingActiveElections ? (
+      {ongoingActiveElections !== null ? (
         <div className="add-candidate-container">
           <div className="inside-add-candidate-container">
             <h2>{ongoingActiveElections.title}</h2>
