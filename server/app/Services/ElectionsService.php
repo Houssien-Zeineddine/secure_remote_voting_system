@@ -57,11 +57,13 @@ class ElectionsService
         }
 
         $elections = Elections::Find($request->id);
-        if ($elections) {
-            $elections->delete();
-        } else {
+        if (!$elections) {
             return ["message" => "No elections found"];
+
         }
+
+        $elections->delete();
+        User::where('user_type', 2)->update(['user_type' => 3]);
 
         return $elections;
 
