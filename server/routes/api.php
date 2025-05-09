@@ -26,6 +26,7 @@ Route::group(['prefix' => 'v0.1'], function () {
                 Route::get('/dashboard', [DashboardController::class, 'index']);
                 Route::get('/candidates', [UserController::class, 'getCandidates']);
                 Route::post('/editprofile', [UserController::class, 'updateProfile']);
+                Route::get('getelections', [ElectionsController::class, 'getElections']);
                 // Route::get('/guidelines', [GuidelinesController::class, 'index']);
                 // Route::get('/settings', [SettingsController::class, 'index']);
                 
@@ -36,7 +37,7 @@ Route::group(['prefix' => 'v0.1'], function () {
                 });
                 Route::middleware('CheckUserType:1')->group(function() {
                     Route::group(['prefix' => 'admin'], function() {
-                        Route::post('/addelections', [ElectionsController::class, 'addEelections']);
+                        Route::post('/addelections', [ElectionsController::class, 'addElections']);
                         Route::delete('/deleteelections', [ElectionsController::class, 'deleteElections']);
                         Route::put('/candidates', [UserController::class, 'updateCandidate']);
                         Route::put('/addcandidate', [UserController::class, 'addCandidate']);

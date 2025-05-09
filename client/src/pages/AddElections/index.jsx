@@ -17,6 +17,7 @@ const AdminPage = () => {
   const [isAddCandidateOpen, setIsAddCandidateOpen] = useState(false);
   const [isStopElectionsOpen, setIsStopElectionsOpen] = useState(false);
   const [isRemoveCandidateOpen, setIsRemoveCandidateOpen] = useState(false);
+  const [isAddElectionsOpen, setIsAddElectionsOpen] = useState(false);
   const [selectedCandidate, setSelectedCandidate] = useState(null);
   const [selectedElections, setSelectedElections] = useState(null);
   const [candidateEmail, setCandidateEmail] = useState("");
@@ -96,9 +97,23 @@ const AdminPage = () => {
     }
   };
 
+  const openAddElectionsDialog = () => {
+    setIsAddElectionsOpen(true);
+  };
+
+  const closeAddElectionsDialog = () => {
+    setIsAddElectionsOpen(false);
+  };
+
+  const handleAddElections = () => {
+    // implement elections creation logic here
+    console.log("Elections created");
+    setIsAddElectionsOpen(false);
+  };
+
   return (
     <div className="along-sidebar-positioning">
-      {ongoingActiveElections?.ongoing ? (
+      {ongoingActiveElections ? (
         <div className="add-candidate-container">
           <div className="inside-add-candidate-container">
             <h2>{ongoingActiveElections.title}</h2>
@@ -264,8 +279,51 @@ const AdminPage = () => {
           <img
             src={addElections}
             alt="Create Elections"
-            onClick={() => setIsAddCandidateOpen(true)}
+            onClick={openAddElectionsDialog}
+            style={{ cursor: "pointer" }}
           />
+          <Dialogue
+            isOpen={isAddElectionsOpen}
+            onClose={closeAddElectionsDialog}
+            title="Add Elections"
+            footerContent={
+              <Button
+                text="Add Elections"
+                variant="blue"
+                size="small"
+                onClick={handleAddElections}
+              />
+            }
+          >
+            <Input
+              label="title"
+              labelText="Title"
+              type="text"
+              name="title"
+              id="title"
+              placeholder="Enter elections title"
+              classNames="input-vertical"
+            />
+            <div className="selection-container">
+              <label htmlFor="region">Select Region</label>
+              <select
+                name="region"
+                id="region"
+                className="dialogue-select-region"
+              >
+                <option value="beirut">Beirut</option>
+                <option value="beqaa">Beqaa</option>
+                <option value="mount_lebanon">Mount Lebanon</option>
+                <option value="north">North</option>
+                <option value="south">South</option>
+                <option value="whole_country">Whole Country</option>
+              </select>
+            </div>
+            <textarea
+              className="create-elections-textarea"
+              placeholder="Enter elections description here..."
+            ></textarea>
+          </Dialogue>
         </div>
       )}
     </div>

@@ -10,13 +10,14 @@ export const CheckElectionsProvider = ({ children }) => {
     const fetchElections = () => {
       //expecting calling API to get elections name if exist, or null if not
 
-      return {
-        id: 1,
-        region: "Beirut", //in elections table region_id, not to get it when calling the api
-        title: "Municipality Elections",
-        description: "description",
-        ongoing: true,
-      };
+      // return {
+      //   id: 1,
+      //   region: "Beirut", //in elections table region_id, not to get it when calling the api
+      //   title: "Municipality Elections",
+      //   description: "description",
+      //   ongoing: true,
+      // };
+      return null;
     };
 
     const ongoingElections = fetchElections();
