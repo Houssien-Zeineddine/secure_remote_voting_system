@@ -19,9 +19,12 @@ const AdminPage = () => {
   const [isStopElectionsOpen, setIsStopElectionsOpen] = useState(false);
   const [isRemoveCandidateOpen, setIsRemoveCandidateOpen] = useState(false);
   const [isAddElectionsOpen, setIsAddElectionsOpen] = useState(false);
-  const [selectedCandidate, setSelectedCandidate] = useState(null);
   const [selectedElections, setSelectedElections] = useState(null);
+  const [selectedCandidate, setSelectedCandidate] = useState(null);
   const [candidateEmail, setCandidateEmail] = useState("");
+  const [electionsTitle, setElectionsTitle] = useState("");
+  const [electionsRegion, setelEctionsRegion] = useState("");
+  const [electionsDescription, setElectionsDescription] = useState("");
   const [error, setError] = useState(null);
   const access_token = localStorage.getItem("access_token");
 
@@ -54,7 +57,19 @@ const AdminPage = () => {
     setIsAddElectionsOpen(false);
   };
 
-  // candidates related logic
+  // Elections related logic
+
+  const handleElectionsTitleChange = (e) => {
+    setElectionsTitle(e.target.value);
+  };
+
+  const handleElectionsRegionChange = (e) => {
+    setElectionsRegion(e.target.value);
+  };
+
+  const handleElectionsDescriptionChange = (e) => {
+    setElectionsDescription(e.target.value);
+  };
 
   const handleAddElections = () => {
     // implement elections creation logic here
@@ -291,6 +306,7 @@ const AdminPage = () => {
             onClick={openAddElectionsDialog}
             style={{ cursor: "pointer" }}
           />
+          {/* add elections dialogue */}
           <Dialogue
             isOpen={isAddElectionsOpen}
             onClose={closeAddElectionsDialog}
@@ -312,6 +328,7 @@ const AdminPage = () => {
               id="title"
               placeholder="Enter elections title"
               classNames="input-vertical"
+              onChange={handleElectionsTitleChange}
             />
             <div className="selection-container">
               <label htmlFor="region">Select Region</label>
@@ -319,6 +336,7 @@ const AdminPage = () => {
                 name="region"
                 id="region"
                 className="dialogue-select-region"
+                onChange={handleElectionsRegionChange}
               >
                 <option value="beirut">Beirut</option>
                 <option value="beqaa">Beqaa</option>
@@ -331,6 +349,7 @@ const AdminPage = () => {
             <textarea
               className="create-elections-textarea"
               placeholder="Enter elections description here..."
+              onChange={handleElectionsDescriptionChange}
             ></textarea>
           </Dialogue>
         </div>
