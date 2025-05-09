@@ -28,19 +28,19 @@ export const CheckElectionsProvider = ({ children }) => {
       // return null;}
     } catch (error) {
       console.error("Error fetching elections:", error);
-      setOngoingActiveElections(null);
-    }
-
-    useEffect(() => {
-      fetchElections();
-    }, []);
-
-    if (ongoingActiveElections) {
-      setOngoingActiveElections(ongoingActiveElections);
-    } else {
-      setOngoingActiveElections(null);
+      setOngoingActiveElections(false);
     }
   };
+
+  useEffect(() => {
+    fetchElections();
+  }, []);
+
+  // if (ongoingActiveElections) {
+  //   setOngoingActiveElections(ongoingActiveElections);
+  // } else {
+  //   setOngoingActiveElections(null);
+  // }
 
   return (
     <CheckElectionsContext.Provider

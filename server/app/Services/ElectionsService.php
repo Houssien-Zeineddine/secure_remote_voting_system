@@ -55,8 +55,12 @@ class ElectionsService
             abort(403, 'Cannot Stop elections');
         }
 
-        $elections = Elections::FindOrFail($request->id);
-        $elections->delete();
+        $elections = Elections::Find($request->id);
+        if ($elections) {
+            $elections->delete();
+        } else {
+            return ["message" => "No elections found"];
+        }
 
         return $elections;
 
