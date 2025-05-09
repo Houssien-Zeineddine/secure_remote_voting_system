@@ -108,6 +108,7 @@ const AdminPage = () => {
       });
 
       await fetchElections();
+      await fetchCandidates();
     } catch (error) {
       console.log("Error deleting elections:", error);
     } finally {
