@@ -7,7 +7,7 @@ use App\Services\ElectionsService;
 
 class ElectionsController extends Controller {
     public function getElections () {
-        $elections = new ElectionService;
+        $elections = new ElectionsService;
 
         $ongoingElections = $elections->getOngoingElections();
 
