@@ -13,7 +13,7 @@ class ElectionsService
      * Create a new class instance.
      */
 
-    public function getOngoingElectiuons () {
+    public function getOngoingElections () {
         $ongoingElections = Elections::latest()->get();
         
         return $ongoingElections;
