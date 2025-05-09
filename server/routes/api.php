@@ -9,6 +9,7 @@ use App\Http\Controllers\SettingsController;
 use App\Http\Controllers\AddCampaignController;
 use App\Http\Controllers\AddElectionsController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\ElectionsController;
 use App\Http\Middleware\CheckUserType;
 
 Route::group(['prefix' => 'v0.1'], function () {
@@ -35,7 +36,8 @@ Route::group(['prefix' => 'v0.1'], function () {
                 });
                 Route::middleware('CheckUserType:1')->group(function() {
                     Route::group(['prefix' => 'admin'], function() {
-                        Route::post('/addelections', [AddElectionsController::class, 'store']);
+                        Route::post('/addelections', [ElectionsController::class, 'addEelections']);
+                        Route::delete('/deleteelections', [ElectionsController::class, 'deleteElections']);
                         Route::put('/candidates', [UserController::class, 'updateCandidate']);
                         Route::put('/addcandidate', [UserController::class, 'addCandidate']);
                     });
