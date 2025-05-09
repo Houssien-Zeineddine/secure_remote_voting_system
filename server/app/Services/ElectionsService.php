@@ -38,6 +38,7 @@ class ElectionsService
         $addedElections->title = $request->title;
         $addedElections->description = $request->description;
         $addedElections->on_going = true;
+        $addedElections->save();
 
         return $addedElections;
     
