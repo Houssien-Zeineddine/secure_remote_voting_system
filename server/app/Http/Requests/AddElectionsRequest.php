@@ -24,7 +24,7 @@ class AddElectionsRequest extends FormRequest
         return[
             'title' => 'required|string|max:255',
             'description' => 'required|string',
-            'region_id' => 'required|integer|exists:regions,id'
+            'region' => 'required|string|in:Beirut,Bekaa,Mount Lebanon,North,South,Whole Country'
         ];
     
     }

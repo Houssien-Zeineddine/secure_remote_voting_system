@@ -3,10 +3,12 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+
 use App\Services\ElectionsService;
+use App\Http\Requests\AddElectionsRequest;
 
 class ElectionsController extends Controller {
-    public function addElections(Request $request) {
+    public function addElections(AddElectionsRequest $request) {
         $elections = new ElectionsService;
 
         $addedElections = $elections->addElections($request);
