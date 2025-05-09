@@ -11,7 +11,7 @@ class ElectionsController extends Controller {
 
         $ongoingElections = $elections->getOngoingElections();
 
-        return $this->successResponse($currentCandidates, 200);
+        return $this->successResponse($ongoingElections, 200);
     }
 
     public function deleteElections (Request $request) {

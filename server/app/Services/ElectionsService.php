@@ -12,6 +12,13 @@ class ElectionsService
     /**
      * Create a new class instance.
      */
+
+    public function getOngoingElectiuons () {
+        $ongoingElections = Elections::latest()->get();
+        
+        return $ongoingElections;
+    }
+
     public function deleteElections(Request $request) {
         $admin = Auth::user();
         if($admin->user_type !== 1) {
