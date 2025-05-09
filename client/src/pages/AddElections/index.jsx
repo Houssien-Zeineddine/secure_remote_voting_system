@@ -100,15 +100,15 @@ const AdminPage = () => {
 
   const handleConfirmStopElections = async () => {
     try {
-      await axiosBaseUrl.delete(
-        "/user/admin/deleteelections",
-        { id: ongoingActiveElections.id },
-        { headers: { Authorization: `Bearer ${access_token}` } }
-      );
+      await axiosBaseUrl.delete("/user/admin/deleteelections", {
+        // Config object (2nd parameter)
+        data: { id: ongoingActiveElections.id }, // <-- data goes here
+        headers: { Authorization: `Bearer ${access_token}` },
+      });
 
       await fetchElections();
     } catch (error) {
-      console.log("No elections found to delete");
+      console.log("Error deleting elections:", error); // Improved error logging
     } finally {
       closeStopElectionsDialogue();
       setOngoingActiveElections(false);
