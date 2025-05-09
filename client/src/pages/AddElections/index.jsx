@@ -18,7 +18,7 @@ const AdminPage = () => {
   const [isStopElectionsOpen, setIsStopElectionsOpen] = useState(false);
   const [isRemoveCandidateOpen, setIsRemoveCandidateOpen] = useState(false);
   const [selectedCandidate, setSelectedCandidate] = useState(null);
-  const [selectedSlections, setSelectedElections] = useState(null);
+  const [selectedElections, setSelectedElections] = useState(null);
   const [candidateEmail, setCandidateEmail] = useState("");
   const [error, setError] = useState(null);
   const access_token = localStorage.getItem("access_token");
@@ -33,18 +33,26 @@ const AdminPage = () => {
     setIsRemoveCandidateOpen(false);
   };
 
-  const openStopElectionsDialogue = (electionsId) => {
+  const openStopElectionsDialogue = (elections) => {
+    setSelectedElections(elections);
     setIsStopElectionsOpen(true);
-    setSelectedElections(electionsId);
   };
 
-  const handleConfirmStopElections = async () => {
-    try {
-      await axiosBaseUrl.delete("/user/admin/deleteelections", {
-        id: selected,
-      });
-    } catch {}
+  const closeStopElectionsDialogue = () => {
+    setSelectedElections(null);
+    setIsStopElectionsOpen(false);
   };
+
+  // const handleConfirmStopElections = async () => {
+  //   try {
+  //     await axiosBaseUrl.delete(
+  //       "/user/admin/deleteelections",
+  //       { id: selectedElections.id },
+  //       { headers: { Authorization: `Bearer ${access_token}` } }
+  //     );
+
+  //   } catch {}
+  // };
 
   const handleConfirmRemoveCandidate = async () => {
     try {
@@ -143,7 +151,7 @@ const AdminPage = () => {
                 variant="red"
                 size="medium"
                 onClick={() => {
-                  openStopElectionsDialogue(ongoingActiveElections.id);
+                  openStopElectionsDialogue(ongoingActiveElections);
                 }}
               />
             </div>
@@ -207,7 +215,7 @@ const AdminPage = () => {
                   text="No"
                   variant="red"
                   size="small"
-                  onClick={() => setIsStopElectionsOpen(false)}
+                  onClick={closeStopElectionsDialogue}
                 />
               </div>
             </Dialogue>

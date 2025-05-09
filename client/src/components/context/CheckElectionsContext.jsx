@@ -29,7 +29,9 @@ export const CheckElectionsProvider = ({ children }) => {
   }, []);
 
   return (
-    <CheckElectionsContext.Provider value={{ ongoingActiveElections }}>
+    <CheckElectionsContext.Provider
+      value={{ ongoingActiveElections, fetchElections }}
+    >
       {children}
     </CheckElectionsContext.Provider>
   );
