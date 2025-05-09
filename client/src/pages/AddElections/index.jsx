@@ -23,7 +23,7 @@ const AdminPage = () => {
   const [selectedCandidate, setSelectedCandidate] = useState(null);
   const [candidateEmail, setCandidateEmail] = useState("");
   const [electionsTitle, setElectionsTitle] = useState("");
-  const [electionsRegion, setelEctionsRegion] = useState("");
+  const [electionsRegion, setElectionsRegion] = useState("");
   const [electionsDescription, setElectionsDescription] = useState("");
   const [error, setError] = useState(null);
   const access_token = localStorage.getItem("access_token");
@@ -71,10 +71,26 @@ const AdminPage = () => {
     setElectionsDescription(e.target.value);
   };
 
-  const handleAddElections = () => {
-    // implement elections creation logic here
-    console.log("Elections created");
-    setIsAddElectionsOpen(false);
+  const handleAddElections = async () => {
+    try {
+      const response = await axiosBaseUrl.post(
+        "/user/admin/addelections",
+        {
+          title: electionsTitle,
+          region: electionsRegion,
+          description: electionsDescription,
+        },
+        { headers: { Authorization: `Beare ${access_token}` } }
+      );
+
+      if (response.status === 200) {
+        await fetchElections();
+        setIsAddElectionsOpen(false);
+        setElectionsTitle("");
+        setElectionsRegion("");
+        setElectionsDescription("");
+      }
+    } catch {}
   };
 
   const handleConfirmStopElections = async () => {
