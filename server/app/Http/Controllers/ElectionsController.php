@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Services\UserService;
+use App\Services\ElectionsService;
 
 class ElectionsController extends Controller {
     public function deleteElections (Request $request) {
@@ -12,6 +12,6 @@ class ElectionsController extends Controller {
 
         $deletedElections = $elections->deleteElections($request);
 
-        return $this->successResponse($currentCandidates, 200);
+        return $this->successResponse($deletedElections, 200);
     }
 }
