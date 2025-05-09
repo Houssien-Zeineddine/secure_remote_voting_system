@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Services\UserService;
 
 class ElectionsController extends Controller {
     public function deleteElections (Request $request) {
