@@ -3,6 +3,7 @@
 namespace App\Services;
 
 use App\Models\Elections;
+use App\Models\Region;
 use App\Http\Requests\AddElectionsRequest;
 
 use Illuminate\Http\Request;
@@ -22,7 +23,7 @@ class ElectionsService
             ], 403);
         }
 
-        $region = Region::where('name', $request->region)->firstOrFail();
+        $region = Region::where('region', $request->region)->firstOrFail();
         
         $addedElections = new Elections;
         $addedElections->region_id = $region->id;
