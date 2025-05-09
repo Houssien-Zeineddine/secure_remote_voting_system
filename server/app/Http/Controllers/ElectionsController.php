@@ -6,9 +6,17 @@ use Illuminate\Http\Request;
 use App\Services\ElectionsService;
 
 class ElectionsController extends Controller {
+    public function getElections () {
+        $elections = new ElectionService;
+
+        $ongoingElections = $elections->getOngoingElections();
+
+        return $this->successResponse($currentCandidates, 200);
+    }
+
     public function deleteElections (Request $request) {
 
-        $elections = new ElectionsService();
+        $elections = new ElectionsService;
 
         $deletedElections = $elections->deleteElections($request);
 
