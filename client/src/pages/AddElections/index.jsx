@@ -9,7 +9,8 @@ import "./style.css";
 import axiosBaseUrl from "../../Utils/axios";
 
 const AdminPage = () => {
-  const { ongoingActiveElections } = useContext(CheckElectionsContext);
+  const { ongoingActiveElections, setOngoingActiveElections, fetchElections } =
+    useContext(CheckElectionsContext);
   const { candidates, setCandidates, fetchCandidates } = useContext(
     FetchCandidatesContext
   );
@@ -24,6 +25,7 @@ const AdminPage = () => {
   const [error, setError] = useState(null);
   const access_token = localStorage.getItem("access_token");
 
+  // Dialogues
   const openRemoveAddCandidateDialog = (candidate) => {
     setSelectedCandidate(candidate);
     setIsRemoveCandidateOpen(true);
@@ -44,32 +46,40 @@ const AdminPage = () => {
     setIsStopElectionsOpen(false);
   };
 
-  // const handleConfirmStopElections = async () => {
-  //   try {
-  //     await axiosBaseUrl.delete(
-  //       "/user/admin/deleteelections",
-  //       { id: selectedElections.id },
-  //       { headers: { Authorization: `Bearer ${access_token}` } }
-  //     );
+  const openAddElectionsDialog = () => {
+    setIsAddElectionsOpen(true);
+  };
 
-  //   } catch {}
-  // };
+  const closeAddElectionsDialog = () => {
+    setIsAddElectionsOpen(false);
+  };
 
-  const handleConfirmRemoveCandidate = async () => {
+  // candidates related logic
+
+  const handleAddElections = () => {
+    // implement elections creation logic here
+    console.log("Elections created");
+    setIsAddElectionsOpen(false);
+  };
+
+  const handleConfirmStopElections = async () => {
     try {
-      await axiosBaseUrl.put(
-        "/user/admin/candidates",
-        { id: selectedCandidate.id },
+      await axiosBaseUrl.delete(
+        "/user/admin/deleteelections",
+        { id: selectedElections.id },
         { headers: { Authorization: `Bearer ${access_token}` } }
       );
 
-      await fetchCandidates();
-    } catch (err) {
-      console.error("Remove candidate failed", err);
+      await fetchElections();
+    } catch (error) {
+      console.log("No elections found to delete");
     } finally {
-      closeRemoveCandidateDialog();
+      closeStopElectionsDialogue();
+      setOngoingActiveElections(false);
     }
   };
+
+  // Candidate related logic
 
   const handleEmailChange = (e) => {
     setCandidateEmail(e.target.value);
@@ -97,18 +107,20 @@ const AdminPage = () => {
     }
   };
 
-  const openAddElectionsDialog = () => {
-    setIsAddElectionsOpen(true);
-  };
+  const handleConfirmRemoveCandidate = async () => {
+    try {
+      await axiosBaseUrl.put(
+        "/user/admin/candidates",
+        { id: selectedCandidate.id },
+        { headers: { Authorization: `Bearer ${access_token}` } }
+      );
 
-  const closeAddElectionsDialog = () => {
-    setIsAddElectionsOpen(false);
-  };
-
-  const handleAddElections = () => {
-    // implement elections creation logic here
-    console.log("Elections created");
-    setIsAddElectionsOpen(false);
+      await fetchCandidates();
+    } catch (err) {
+      console.error("Remove candidate failed", err);
+    } finally {
+      closeRemoveCandidateDialog();
+    }
   };
 
   return (
@@ -221,10 +233,7 @@ const AdminPage = () => {
                   text="Yes"
                   variant="blue"
                   size="small"
-                  onClick={() => {
-                    /* implement stop elections */
-                    setIsStopElectionsOpen(false);
-                  }}
+                  onClick={handleConfirmStopElections}
                 />
                 <Button
                   text="No"
