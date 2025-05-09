@@ -22,7 +22,7 @@ class UserController extends Controller {
     }
 
     public function getCandidates() {
-        $candidates = new UserService();
+        $candidates = new UserService;
 
         $currentCandidates = $candidates->getCandidates();
 
