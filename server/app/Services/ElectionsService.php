@@ -23,6 +23,14 @@ class ElectionsService
             ], 403);
         }
 
+        $existingElection = Elections::where('on_going', true)->exists();
+
+        if ($existingElection) {
+            return response()->json([
+                'message' => 'An active election already exists'
+            ], 422);
+        }
+
         $region = Region::where('region', $request->region)->firstOrFail();
         
         $addedElections = new Elections;
