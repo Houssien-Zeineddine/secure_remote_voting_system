@@ -23,7 +23,7 @@ const AdminPage = () => {
   const [selectedCandidate, setSelectedCandidate] = useState(null);
   const [candidateEmail, setCandidateEmail] = useState("");
   const [electionsTitle, setElectionsTitle] = useState("");
-  const [electionsRegion, setElectionsRegion] = useState("");
+  const [electionsRegion, setElectionsRegion] = useState("Beirut");
   const [electionsDescription, setElectionsDescription] = useState("");
   const [error, setError] = useState(null);
   const access_token = localStorage.getItem("access_token");
@@ -39,8 +39,8 @@ const AdminPage = () => {
     setIsRemoveCandidateOpen(false);
   };
 
-  const openStopElectionsDialogue = (elections) => {
-    setSelectedElections(elections);
+  const openStopElectionsDialogue = (ongoingActiveElections) => {
+    setSelectedElections(ongoingActiveElections);
     setIsStopElectionsOpen(true);
   };
 
@@ -86,14 +86,15 @@ const AdminPage = () => {
       if (response.status === 200) {
         await fetchElections();
         setOngoingActiveElections(response.data.id);
-        setIsAddElectionsOpen(false);
-        setElectionsTitle("");
-        setElectionsRegion("");
-        setElectionsDescription("");
       }
     } catch (err) {
       console.error("Add elections failed", err);
       setError("Failed to create elections. Please try again.");
+    } finally {
+      closeAddElectionsDialog();
+      setElectionsTitle("");
+      setElectionsRegion("");
+      setElectionsDescription("");
     }
   };
 
@@ -101,7 +102,7 @@ const AdminPage = () => {
     try {
       await axiosBaseUrl.delete(
         "/user/admin/deleteelections",
-        { id: selectedElections.id },
+        { id: ongoingActiveElections.id },
         { headers: { Authorization: `Bearer ${access_token}` } }
       );
 
@@ -357,6 +358,7 @@ const AdminPage = () => {
                 name="region"
                 id="region"
                 className="dialogue-select-region"
+                value={electionsRegion}
                 onChange={handleElectionsRegionChange}
               >
                 <option value="beirut">Beirut</option>
