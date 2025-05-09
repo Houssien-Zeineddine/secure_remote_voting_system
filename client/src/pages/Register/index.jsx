@@ -47,11 +47,9 @@ const Register = () => {
     } catch (err) {
       console.error(err);
 
-      // Extract detailed Laravel error message
       if (err.response && err.response.data) {
         const { message, errors } = err.response.data;
 
-        // If specific field errors exist, flatten them
         const allErrors = [];
         if (errors) {
           Object.values(errors).forEach((fieldErrors) => {
