@@ -6,6 +6,14 @@ use Illuminate\Http\Request;
 use App\Services\ElectionsService;
 
 class ElectionsController extends Controller {
+    public function addElections(Request $request) {
+        $elections = new ElectionsService;
+
+        $addedElections = $elections->addElections($request);
+
+        return $this->successResponse($addedElections, 200);
+    }
+
     public function getElections () {
         $elections = new ElectionsService;
 
