@@ -87,16 +87,16 @@ const AdminPage = () => {
         console.log(response.data);
         await fetchElections();
         setOngoingActiveElections(response.data);
-        console.log("ongoing active elections id", ongoingActiveElections.id);
+        console.log("ongoing active elections id", response.data.id);
       }
     } catch (err) {
       console.error("Add elections failed", err);
       setError("Failed to create elections. Please try again.");
     } finally {
-      closeAddElectionsDialog();
       setElectionsTitle("");
       setElectionsRegion("");
       setElectionsDescription("");
+      closeAddElectionsDialog();
     }
   };
 
@@ -108,6 +108,7 @@ const AdminPage = () => {
       });
 
       await fetchElections();
+      await fetchCandidates();
     } catch (error) {
       console.log("Error deleting elections:", error);
     } finally {
@@ -372,6 +373,7 @@ const AdminPage = () => {
             </div>
             <textarea
               className="create-elections-textarea"
+              value={electionsDescription}
               placeholder="Enter elections description here..."
               onChange={handleElectionsDescriptionChange}
             ></textarea>

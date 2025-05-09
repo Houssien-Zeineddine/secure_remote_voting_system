@@ -13,10 +13,11 @@ export const CheckElectionsProvider = ({ children }) => {
         headers: { Authorization: `Bearer ${access_token}` },
       });
 
-      const elections = response.data;
+      const elections = response.data[0];
 
       if (elections && elections.id) {
         setOngoingActiveElections(elections);
+        console.log("from fetch elections context", elections);
       } else {
         setOngoingActiveElections(null);
       }

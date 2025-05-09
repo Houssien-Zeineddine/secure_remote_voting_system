@@ -4,6 +4,7 @@ namespace App\Services;
 
 use App\Models\Elections;
 use App\Models\Region;
+use App\Models\User;
 use App\Http\Requests\AddElectionsRequest;
 
 use Illuminate\Http\Request;
@@ -57,11 +58,14 @@ class ElectionsService
         }
 
         $elections = Elections::Find($request->id);
-        if ($elections) {
-            $elections->delete();
-        } else {
+        if (!$elections) {
             return ["message" => "No elections found"];
+
         }
+
+        User::where('user_type', 2)->update(['user_type' => 3]);
+
+        $elections->delete();
 
         return $elections;
 
