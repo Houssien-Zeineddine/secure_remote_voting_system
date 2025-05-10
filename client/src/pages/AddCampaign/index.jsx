@@ -161,7 +161,7 @@ const AddCampaign = () => {
           >
             <textarea
               className="create-elections-textarea"
-              value={campaign}
+              // value={campaign}
               placeholder="Enter your campaign here..."
               onChange={handleCampaignChange}
             ></textarea>
