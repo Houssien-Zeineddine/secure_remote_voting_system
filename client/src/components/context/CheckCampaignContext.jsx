@@ -1,7 +1,7 @@
-import React, { useEffect } from "react";
+import React, { useEffect, createContext } from "react";
 import axiosBaseUrl from "../../Utils/axios";
 
-export const CheckCampaignContext = useContext();
+export const CheckCampaignContext = createContext();
 
 export const CheckCampaignProvider = ({ children }) => {
   const [campaigns, setCampaigns] = useState(null);
