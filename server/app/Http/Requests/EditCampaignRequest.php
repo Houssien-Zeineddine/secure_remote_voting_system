@@ -22,7 +22,8 @@ class EditCampaignRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'id' => 'required|integer|exists:campaigns,id',
+            'campaign_id' => 'required|integer|exists:campaigns,id',
+            'campaign' => 'required|string'
         ];
     }
 }
