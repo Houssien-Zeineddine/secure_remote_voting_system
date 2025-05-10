@@ -32,7 +32,8 @@ Route::group(['prefix' => 'v0.1'], function () {
                 
                 Route::middleware('CheckUserType:2')->group(function() {
                     Route::group(['prefix' => 'candidate'], function() {
-                        Route::post('/addcampaign', [AddCampaignController::class, 'store']);
+                        Route::post('/addcampaign', [CampaignController::class, 'addCampaign']);
+                        Route::put('/editcampaign', [CampaignController::class, 'editCampaign']);
                     });
                 });
                 Route::middleware('CheckUserType:1')->group(function() {
