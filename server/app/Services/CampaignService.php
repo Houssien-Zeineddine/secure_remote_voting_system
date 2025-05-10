@@ -33,4 +33,22 @@ class CampaignService {
 
         return $campaign;
     }
+
+    public function editCampaign(Request $request) {
+        $candidate = Auth::user();
+        if($candidate->user_type !== 2) {
+            abort(403, 'Cannot edit campaign');
+        }
+
+        $campaign = Campaign::where('id', $request->campaign_id)
+                    ->where('user_id', $candidate->id)
+                    ->firstOrFail();
+
+
+        $campaign->campaign = $request->campaign;
+
+        $campaign->save();
+
+        return $campaign;
+    }
 }
