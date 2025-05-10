@@ -26,7 +26,8 @@ Route::group(['prefix' => 'v0.1'], function () {
                 Route::get('/dashboard', [DashboardController::class, 'index']);
                 Route::get('/candidates', [UserController::class, 'getCandidates']);
                 Route::post('/editprofile', [UserController::class, 'updateProfile']);
-                Route::get('getelections', [ElectionsController::class, 'getElections']);
+                Route::get('/getelections', [ElectionsController::class, 'getElections']);                        
+                Route::get('/getcampaigns', [CampaignController::class, 'getCampaigns']);
                 // Route::get('/guidelines', [GuidelinesController::class, 'index']);
                 // Route::get('/settings', [SettingsController::class, 'index']);
                 

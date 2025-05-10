@@ -8,6 +8,14 @@ use App\Http\Requests\AddCampaignRequest;
 use App\Http\Requests\EditCampaignRequest;
 
 class CampaignController extends Controller {
+    public function getCampaigns() {
+        $campaigns = new CampaignService;
+
+        $currentCampaigns = $campaigns->getCampaigns();
+
+        return $this->successResponse($currentCampaigns,200);
+    }
+
     public function addCampaign(AddCampaignRequest $request) {
         $campaign = new CampaignService;
 

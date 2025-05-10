@@ -11,6 +11,10 @@ class CampaignService {
     /**
      * Create a new class instance.
      */
+    public function getCampaigns() {
+        return Campaign::all();
+    }
+
     public function addCampaign(Request $request) {
         $candidate = Auth::user();
         if($candidate->user_type !== 2) {
