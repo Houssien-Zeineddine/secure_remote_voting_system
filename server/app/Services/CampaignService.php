@@ -18,7 +18,7 @@ class CampaignService {
         }
 
         $existingCampaign = Campaign::where('user_id', $candidate->id)
-                                ->where('elections_id', $validated['elections_id'])
+                                ->where('elections_id', $candidate->elections_id)
                                 ->first();
                                 
         if ($existingCampaign) {
@@ -27,7 +27,8 @@ class CampaignService {
 
         $campaign = new Campaign;
         $campaign->user_id = $request->id;
-        $campaign->elections_id = $request_elections_id;
+        $campaign->elections_id = $request->elections_id;
+        $campaign->addCampaign = $request->campaign;
         $campaign->save();
 
         return $campaign;
