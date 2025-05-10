@@ -13,8 +13,7 @@ import axiosBaseUrl from "../../Utils/axios";
 const AddCampaign = () => {
   const { user } = useContext(AuthContext);
   // const { candidates } = useContext(FetchCandidatesContext);
-  const { campaigns, setCampaigns, fetchCampaigns } =
-    useContext(CheckCampaignContext);
+  const { campaigns, fetchCampaigns } = useContext(CheckCampaignContext);
   const { ongoingActiveElections } = useContext(CheckElectionsContext);
 
   const [isAddCampaignOpen, setIsAddCampaignOpen] = useState(false);
@@ -40,10 +39,6 @@ const AddCampaign = () => {
 
   const closeEditCampaignDialog = () => {
     setIsEditCampaignOpen(false);
-  };
-
-  const handleCampaignChange = (e) => {
-    setEditingCampaignText(e.target.value);
   };
 
   useEffect(() => {
