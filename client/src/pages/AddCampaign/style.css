@@ -16,6 +16,9 @@
     gap: 4rem;
 
 }
+.campaign-container > h1 {
+    font-size: var(--font-size-header-2);
+}
 
 .campaign-platform-container {
     display: flex;
@@ -23,5 +26,13 @@
     padding-left: 5rem;
     width: 100%;
     gap: 2rem;
+}
+
+.campaign-platform-container > h2 {
+    font-size: var(--font-size-header-4);
+}
+
+.campaign-platform-container > pre {
+    font-family: 'Inter', sans-serif;
 }
 
