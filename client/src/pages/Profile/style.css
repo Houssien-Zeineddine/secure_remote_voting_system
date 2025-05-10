@@ -42,6 +42,10 @@
     font-size: var(--font-size-header-2);
   }
 
+  .edit-profile-birthday-input {
+    width: 100%;
+  }
+
   .view-mode-label {
     display: flex;
     flex-direction: column;

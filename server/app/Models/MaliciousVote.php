@@ -3,10 +3,12 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
-class MaliciousVote extends Model
-{
-    protected $fillablle = [
+class MaliciousVote extends Model {
+    use HasFactory;
+    
+    protected $fillable = [
         'user_id',
         'elections_id',
         'candidate_id',

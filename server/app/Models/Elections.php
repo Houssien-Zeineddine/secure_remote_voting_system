@@ -4,12 +4,13 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
-class Elections extends Model
-{
-    use SoftDeletes;
+class Elections extends Model {
+    use SoftDeletes, HasFactory;
 
     protected $fillable = [
+        'region_id',
         'title',
         'description',
         'on_going',

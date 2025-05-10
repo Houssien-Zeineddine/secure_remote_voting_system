@@ -3,7 +3,7 @@ import defaultProfilePicture from "../../../assets/sidebar icons/default profile
 import Button from "../../../components/Button";
 import "./style.css";
 import Dialogue from "../../../components/Dialogue";
-import { FetchCandidatesContext } from "../../../components/Context/FetchCandidates";
+import { FetchCandidatesContext } from "../../../components/Context/FetchCandidatesContext";
 
 const VoteForCandidate = () => {
   const { candidates } = useContext(FetchCandidatesContext);
