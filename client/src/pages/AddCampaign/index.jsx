@@ -29,6 +29,8 @@ const AddCampaign = () => {
     setCampaign(e.target.value);
   };
 
+  const handleEditCampaign = () => {};
+
   useEffect(() => {
     if (user && campaigns?.length) {
       const userCampaign = campaigns.find((c) => c.user_id === user.id);
@@ -73,6 +75,14 @@ const AddCampaign = () => {
             <div className="campaign-platform-container">
               <h2>Campaign Platform</h2>
               <p>{campaign.campaign}</p>
+              <div className="edit-campaign-btn">
+                <Button
+                  text="Edit Campaign"
+                  variant="transparent"
+                  size="small"
+                  onClick={handleEditCampaign}
+                />
+              </div>
             </div>
           </div>
         </div>
