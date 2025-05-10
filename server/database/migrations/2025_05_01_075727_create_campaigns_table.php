@@ -17,6 +17,7 @@ return new class extends Migration
             $table->foreignId('elections_id');
             $table->text('campaign');
             $table->timestamps();
+            $table->timestamp('deleted_at')->nullable();
         });
     }
 
