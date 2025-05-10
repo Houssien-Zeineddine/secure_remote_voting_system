@@ -26,9 +26,9 @@ class CampaignService {
         }
 
         $campaign = new Campaign;
-        $campaign->user_id = $request->id;
+        $campaign->user_id = $candidate->id;
         $campaign->elections_id = $request->elections_id;
-        $campaign->addCampaign = $request->campaign;
+        $campaign->campaign = $request->campaign;
         $campaign->save();
 
         return $campaign;

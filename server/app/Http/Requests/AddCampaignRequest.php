@@ -22,7 +22,9 @@ class AddCampaignRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'elections_id' => 'required|integer|exists:elections,id'
+            'user_id' => 'required|integer|exists:users,id',
+            'elections_id' => 'required|integer|exists:elections,id',
+            'campaign' => 'required|string'
         ];
     }
 }
