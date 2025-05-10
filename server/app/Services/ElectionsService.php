@@ -3,6 +3,7 @@
 namespace App\Services;
 
 use App\Models\Elections;
+use App\Models\Campaign;
 use App\Models\Region;
 use App\Models\User;
 use App\Http\Requests\AddElectionsRequest;
@@ -60,10 +61,10 @@ class ElectionsService
         $elections = Elections::Find($request->id);
         if (!$elections) {
             return ["message" => "No elections found"];
-
         }
 
         User::where('user_type', 2)->update(['user_type' => 3]);
+        Campaign::all()->each->delete();
 
         $elections->delete();
 

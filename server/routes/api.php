@@ -6,7 +6,7 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\GuidelinesController;
 use App\Http\Controllers\SettingsController;
-use App\Http\Controllers\AddCampaignController;
+use App\Http\Controllers\CampaignController;
 use App\Http\Controllers\AddElectionsController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\ElectionsController;
@@ -32,7 +32,8 @@ Route::group(['prefix' => 'v0.1'], function () {
                 
                 Route::middleware('CheckUserType:2')->group(function() {
                     Route::group(['prefix' => 'candidate'], function() {
-                        Route::post('/addcampaign', [AddCampaignController::class, 'store']);
+                        Route::post('/addcampaign', [CampaignController::class, 'addCampaign']);
+                        Route::put('/editcampaign', [CampaignController::class, 'editCampaign']);
                     });
                 });
                 Route::middleware('CheckUserType:1')->group(function() {
