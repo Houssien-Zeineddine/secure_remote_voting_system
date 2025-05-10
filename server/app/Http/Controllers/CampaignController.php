@@ -14,4 +14,12 @@ class CampaignController extends Controller {
 
         return $this->successResponse($addedCampaign, 200);
     }
+
+    public function editCampaign(AddCampaign $request) {
+        $campaign = new CampaignService;
+
+        $updatedCampaign = $campaign->updateCampaign($request);
+
+        return $this->successResponse($updatedCampaign, 200);
+    }
 }
