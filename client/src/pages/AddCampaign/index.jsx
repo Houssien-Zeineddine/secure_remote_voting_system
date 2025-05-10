@@ -60,7 +60,7 @@ const AddCampaign = () => {
         { headers: { Authorization: `Bearer ${access_token}` } }
       );
       if (response.status === 200) {
-        await fetchCampaigns;
+        await fetchCampaigns();
         setCampaign(response.data);
       }
     } catch (error) {
