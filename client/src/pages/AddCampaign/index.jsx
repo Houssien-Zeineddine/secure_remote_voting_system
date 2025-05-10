@@ -56,13 +56,15 @@ const AddCampaign = () => {
     }
   }, [user, campaigns]);
 
+  console.log("editing campaign t4ext", editingCampaignText);
+
   const handleAddCampaign = async () => {
     try {
       const response = await axiosBaseUrl.post(
         "/user/candidate/addcampaign",
         {
           elections_id: ongoingActiveElections.id,
-          campaign: candidateCampaign,
+          campaign: editingCampaignText,
         },
         { headers: { Authorization: `Bearer ${access_token}` } }
       );
@@ -75,7 +77,22 @@ const AddCampaign = () => {
     }
   };
 
-  const handleEditCampaign = () => {};
+  const handleEditCampaign = async () => {
+    try {
+      const response = await axiosBaseUrl.put(
+        "/user/candidate/editcampaign",
+        { campaign_id: campaign.id, campaign: editingCampaignText },
+        { headers: { Authorization: `Bearer ${access_token}` } }
+      );
+      if (response.status === 200) {
+        await fetchCampaigns();
+      }
+    } catch (error) {
+      console.log(error);
+    } finally {
+      setIsEditCampaignOpen(false);
+    }
+  };
 
   // useEffect(() => {
   //   if (user && candidates) {
@@ -138,7 +155,7 @@ const AddCampaign = () => {
               className="create-elections-textarea"
               value={editingCampaignText}
               placeholder="Enter your campaign here..."
-              onChange={handleCampaignChange}
+              onChange={(e) => setEditingCampaignText(e.target.value)}
             ></textarea>
           </Dialogue>
         </div>
@@ -169,7 +186,7 @@ const AddCampaign = () => {
               className="create-elections-textarea"
               value={candidateCampaign}
               placeholder="Enter your campaign here..."
-              onChange={handleCampaignChange}
+              onChange={(e) => setCandidateCampaign(e.target.value)}
             ></textarea>
           </Dialogue>
         </div>
