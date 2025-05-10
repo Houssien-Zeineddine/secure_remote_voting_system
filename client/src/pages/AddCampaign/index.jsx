@@ -15,6 +15,7 @@ const AddCampaign = () => {
   const { campaigns } = useContext(CheckCampaignContext);
 
   const [isAddCampaignOpen, setIsAddCampaignOpen] = useState(false);
+  const [isEditCampaignOpen, setIsEditCampaignOpen] = useState(false);
   const [campaign, setCampaign] = useState(null);
 
   const openAddCampaignDialog = () => {
@@ -23,6 +24,10 @@ const AddCampaign = () => {
 
   const closeAddCampaignDialog = () => {
     setIsAddCampaignOpen(false);
+  };
+
+  const closeEditCampaignDialog = () => {
+    setIsEditCampaignOpen(false);
   };
 
   const handleCampaignChange = (e) => {
@@ -78,9 +83,9 @@ const AddCampaign = () => {
               <div className="edit-campaign-btn">
                 <Button
                   text="Edit Campaign"
-                  variant="transparent"
+                  variant="white"
                   size="small"
-                  onClick={handleEditCampaign}
+                  onClick={() => setIsEditCampaignOpen(true)}
                 />
               </div>
             </div>
