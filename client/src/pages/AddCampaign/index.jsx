@@ -36,7 +36,7 @@ const AddCampaign = () => {
   };
 
   const handleCampaignChange = (e) => {
-    setCampaign(e.target.value);
+    setCampaign((prev) => ({ ...prev, campaign: e.target.value }));
   };
 
   useEffect(() => {
