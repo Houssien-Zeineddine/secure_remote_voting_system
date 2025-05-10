@@ -6,7 +6,7 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\GuidelinesController;
 use App\Http\Controllers\SettingsController;
-use App\Http\Controllers\AddCampaignController;
+use App\Http\Controllers\CampaignController;
 use App\Http\Controllers\AddElectionsController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\ElectionsController;
