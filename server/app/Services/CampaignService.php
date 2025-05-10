@@ -8,7 +8,7 @@ class CampaignService {
      */
     public function addCampaign(Request $request) {
         $candidate = Auth::user();
-        if($candidate->user_type !== 1) {
+        if($candidate->user_type !== 2) {
             abort(403, 'Cannot add campaign');
         }
 
