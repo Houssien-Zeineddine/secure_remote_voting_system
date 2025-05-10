@@ -15,6 +15,7 @@ const AddCampaign = () => {
   const { campaigns } = useContext(CheckCampaignContext);
 
   const [isAddCampaignOpen, setIsAddCampaignOpen] = useState(false);
+  const [isEditCampaignOpen, setIsEditCampaignOpen] = useState(false);
   const [campaign, setCampaign] = useState(null);
 
   const openAddCampaignDialog = () => {
@@ -23,6 +24,10 @@ const AddCampaign = () => {
 
   const closeAddCampaignDialog = () => {
     setIsAddCampaignOpen(false);
+  };
+
+  const closeEditCampaignDialog = () => {
+    setIsEditCampaignOpen(false);
   };
 
   const handleCampaignChange = (e) => {
@@ -78,13 +83,35 @@ const AddCampaign = () => {
               <div className="edit-campaign-btn">
                 <Button
                   text="Edit Campaign"
-                  variant="transparent"
+                  variant="white"
                   size="small"
-                  onClick={handleEditCampaign}
+                  onClick={() => setIsEditCampaignOpen(true)}
                 />
               </div>
             </div>
           </div>
+
+          {/* edit campaign dialogue */}
+          <Dialogue
+            isOpen={isEditCampaignOpen}
+            onClose={closeEditCampaignDialog}
+            title="Add Campaign"
+            footerContent={
+              <Button
+                text="Save Changes"
+                variant="blue"
+                size="small"
+                onClick={handleEditCampaign}
+              />
+            }
+          >
+            <textarea
+              className="create-elections-textarea"
+              value={campaign.campaign}
+              placeholder="Enter your campaign here..."
+              onChange={handleCampaignChange}
+            ></textarea>
+          </Dialogue>
         </div>
       ) : (
         <div className="create-elections-container">
@@ -95,7 +122,7 @@ const AddCampaign = () => {
             onClick={openAddCampaignDialog}
             style={{ cursor: "pointer" }}
           />
-          {/* add elections dialogue */}
+          {/* add campaign dialogue */}
           <Dialogue
             isOpen={isAddCampaignOpen}
             onClose={closeAddCampaignDialog}
