@@ -8,11 +8,12 @@ import Button from "../../components/Button";
 import { CheckCampaignContext } from "../../components/Context/CheckCampaignContext";
 
 const AddCampaign = () => {
-  const { user } = useContext(AuthContext);
-  const { candidates } = useContext(FetchCandidatesContext);
+  // const { user } = useContext(AuthContext);
+  // const { candidates } = useContext(FetchCandidatesContext);
   const { campaigns } = useContext(CheckCampaignContext);
 
   const [isAddCampaignOpen, setIsAddCampaignOpen] = useState(false);
+  const [campaign, setCampaign] = useState(null);
 
   const openAddCampaignDialog = () => {
     setIsAddCampaignOpen(true);
@@ -28,19 +29,19 @@ const AddCampaign = () => {
 
   const handleAddCampaign = () => {};
 
-  useEffect(() => {
-    if (user && candidates) {
-      const foundCandidate = Object.values(candidates).find(
-        (candidate) => candidate.id === user.id
-      );
+  // useEffect(() => {
+  //   if (user && candidates) {
+  //     const foundCandidate = Object.values(candidates).find(
+  //       (candidate) => candidate.id === user.id
+  //     );
 
-      console.log(foundCandidate);
+  //     console.log(foundCandidate);
 
-      if (foundCandidate?.campaign) {
-        setCampaign(foundCandidate.campaign);
-      }
-    }
-  }, [user, candidates]);
+  //     if (foundCandidate?.campaign) {
+  //       setCampaign(foundCandidate.campaign);
+  //     }
+  //   }
+  // }, [user, candidates]);
 
   //use useEffect to log campaign
   // useEffect(() => {
@@ -49,7 +50,7 @@ const AddCampaign = () => {
 
   return (
     <div className="along-sidebar-positioning">
-      {campaigns ? (
+      {!campaigns ? (
         <div>there is a campaign</div>
       ) : (
         <div className="create-elections-container">

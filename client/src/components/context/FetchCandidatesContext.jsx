@@ -24,7 +24,7 @@ export const FetchCandidatesProvider = ({ children }) => {
 
   useEffect(() => {
     fetchCandidates();
-  }, [access_token]);
+  }, []);
 
   return (
     <FetchCandidatesContext.Provider
