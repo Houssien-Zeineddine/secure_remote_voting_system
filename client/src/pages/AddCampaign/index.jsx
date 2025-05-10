@@ -20,8 +20,9 @@ const AddCampaign = () => {
   const [isAddCampaignOpen, setIsAddCampaignOpen] = useState(false);
   const [isEditCampaignOpen, setIsEditCampaignOpen] = useState(false);
   const [campaign, setCampaign] = useState(null);
+  const [candidateCampaign, setCandidateCampaign] = useState("");
 
-  const access_token = localStorage.getItem("acces_token");
+  const access_token = localStorage.getItem("access_token");
 
   const openAddCampaignDialog = () => {
     setIsAddCampaignOpen(true);
@@ -36,7 +37,7 @@ const AddCampaign = () => {
   };
 
   const handleCampaignChange = (e) => {
-    setCampaign((prev) => ({ ...prev, campaign: e.target.value }));
+    setCandidateCampaign(e.target.value);
   };
 
   useEffect(() => {
@@ -55,7 +56,7 @@ const AddCampaign = () => {
         "/user/candidate/addcampaign",
         {
           elections_id: ongoingActiveElections.id,
-          campaign: campaign.campaign,
+          campaign: candidateCampaign,
         },
         { headers: { Authorization: `Bearer ${access_token}` } }
       );
@@ -65,7 +66,6 @@ const AddCampaign = () => {
       }
     } catch (error) {
       console.log(error);
-    } finally {
     }
   };
 
@@ -161,7 +161,7 @@ const AddCampaign = () => {
           >
             <textarea
               className="create-elections-textarea"
-              // value={campaign}
+              value={candidateCampaign}
               placeholder="Enter your campaign here..."
               onChange={handleCampaignChange}
             ></textarea>
