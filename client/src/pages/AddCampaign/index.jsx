@@ -5,12 +5,12 @@ import { CheckElectionsContext } from "../../components/Context/CheckElectionsCo
 import addCampaign from "../../assets/plus (1) 1.svg";
 import Dialogue from "../../components/Dialogue";
 import Button from "../../components/Button";
+import { CheckCampaignContext } from "../../components/Context/CheckCampaignContext";
 
 const AddCampaign = () => {
   const { user } = useContext(AuthContext);
   const { candidates } = useContext(FetchCandidatesContext);
-
-  const [campaign, setCampaign] = useState(null);
+  const { campaigns } = useContext(CheckCampaignContext);
 
   const [isAddCampaignOpen, setIsAddCampaignOpen] = useState(false);
 
@@ -49,7 +49,7 @@ const AddCampaign = () => {
 
   return (
     <div className="along-sidebar-positioning">
-      {campaign ? (
+      {campaigns ? (
         <div>there is a campaign</div>
       ) : (
         <div className="create-elections-container">
