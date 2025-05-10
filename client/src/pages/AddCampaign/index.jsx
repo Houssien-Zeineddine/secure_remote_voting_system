@@ -29,6 +29,15 @@ const AddCampaign = () => {
     setCampaign(e.target.value);
   };
 
+  useEffect(() => {
+    if (user && campaigns?.length) {
+      const userCampaign = campaigns.find((c) => c.user_id === user.id);
+      if (userCampaign) {
+        setCampaign(userCampaign);
+      }
+    }
+  }, [user, campaigns]);
+
   const handleAddCampaign = () => {};
 
   // useEffect(() => {
@@ -52,7 +61,7 @@ const AddCampaign = () => {
 
   return (
     <div className="along-sidebar-positioning">
-      {campaigns ? (
+      {campaign ? (
         <div className="campaign-page-container">
           <div className="campaign-container">
             <h1>
