@@ -21,6 +21,7 @@ const AddCampaign = () => {
   const [isEditCampaignOpen, setIsEditCampaignOpen] = useState(false);
   const [campaign, setCampaign] = useState(null);
   const [candidateCampaign, setCandidateCampaign] = useState("");
+  const [editingCampaignText, setEditingCampaignText] = useState("");
 
   const access_token = localStorage.getItem("access_token");
 
@@ -32,12 +33,17 @@ const AddCampaign = () => {
     setIsAddCampaignOpen(false);
   };
 
+  const openEditCampaignDialog = () => {
+    setEditingCampaignText(campaign.campaign);
+    setIsEditCampaignOpen(true);
+  };
+
   const closeEditCampaignDialog = () => {
     setIsEditCampaignOpen(false);
   };
 
   const handleCampaignChange = (e) => {
-    setCandidateCampaign(e.target.value);
+    setEditingCampaignText(e.target.value);
   };
 
   useEffect(() => {
@@ -108,7 +114,7 @@ const AddCampaign = () => {
                   text="Edit Campaign"
                   variant="white"
                   size="small"
-                  onClick={() => setIsEditCampaignOpen(true)}
+                  onClick={openEditCampaignDialog}
                 />
               </div>
             </div>
@@ -130,7 +136,7 @@ const AddCampaign = () => {
           >
             <textarea
               className="create-elections-textarea"
-              value={campaign.campaign}
+              value={editingCampaignText}
               placeholder="Enter your campaign here..."
               onChange={handleCampaignChange}
             ></textarea>
