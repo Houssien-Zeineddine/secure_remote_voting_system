@@ -26,13 +26,13 @@ Route::group(['prefix' => 'v0.1'], function () {
                 Route::get('/dashboard', [DashboardController::class, 'index']);
                 Route::get('/candidates', [UserController::class, 'getCandidates']);
                 Route::post('/editprofile', [UserController::class, 'updateProfile']);
-                Route::get('getelections', [ElectionsController::class, 'getElections']);
+                Route::get('getelections', [ElectionsController::class, 'getElections']);                        
+                Route::get('getCampaigns', [CampaignController::class, 'getCampaigns']);
                 // Route::get('/guidelines', [GuidelinesController::class, 'index']);
                 // Route::get('/settings', [SettingsController::class, 'index']);
                 
                 Route::middleware('CheckUserType:2')->group(function() {
                     Route::group(['prefix' => 'candidate'], function() {
-                        Route::get('getCampaigns', [CampaignController::class, 'getCampaigns']);
                         Route::post('/addcampaign', [CampaignController::class, 'addCampaign']);
                         Route::put('/editcampaign', [CampaignController::class, 'editCampaign']);
                     });
