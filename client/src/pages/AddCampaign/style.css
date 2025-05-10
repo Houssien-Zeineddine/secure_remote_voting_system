@@ -23,7 +23,7 @@
 .campaign-platform-container {
     display: flex;
     flex-direction: column;
-    width: 60%;
+    width: 75%;
     gap: 2rem;
 }
 
@@ -33,6 +33,9 @@
 
 .campaign-platform-container > pre {
     font-family: 'Inter', sans-serif;
+    white-space: pre-wrap; 
+    word-wrap: break-word;  
+    overflow-x: auto; 
 }
 
 .edit-campaign-btn {
