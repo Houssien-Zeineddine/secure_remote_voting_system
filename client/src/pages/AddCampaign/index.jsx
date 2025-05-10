@@ -29,7 +29,11 @@ const AddCampaign = () => {
   //   console.log("Campaign state updated:", campaign); // Logs AFTER state updates
   // }, [campaign]);
 
-  return <div className="along-sidebar-positioning"></div>;
+  return (
+    <div className="along-sidebar-positioning">
+      {campaign ? <div>there is a campaign</div> : <div></div>}
+    </div>
+  );
 };
 
 export default AddCampaign;
