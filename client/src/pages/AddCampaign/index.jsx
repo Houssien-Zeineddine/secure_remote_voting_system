@@ -2,9 +2,9 @@ import React, { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../../components/Context/AuthContext";
 import { FetchCandidatesContext } from "../../components/Context/FetchCandidatesContext";
 import { CheckElectionsContext } from "../../components/Context/CheckElectionsContext";
+import Dialogue from "../../components/Dialogue";
 
 const AddCampaign = () => {
-  const { ongoingActiveElections } = useContext(CheckElectionsContext);
   const { user } = useContext(AuthContext);
   const { candidates } = useContext(FetchCandidatesContext);
 
@@ -29,15 +29,7 @@ const AddCampaign = () => {
   //   console.log("Campaign state updated:", campaign); // Logs AFTER state updates
   // }, [campaign]);
 
-  return (
-    <div className="along-sidebar-positioning">
-      {ongoingActiveElections ? (
-        <div> active elections </div>
-      ) : (
-        <div>No elections</div>
-      )}
-    </div>
-  );
+  return <div className="along-sidebar-positioning"></div>;
 };
 
 export default AddCampaign;
