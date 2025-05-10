@@ -4,12 +4,29 @@ import { FetchCandidatesContext } from "../../components/Context/FetchCandidates
 import { CheckElectionsContext } from "../../components/Context/CheckElectionsContext";
 import addCampaign from "../../assets/plus (1) 1.svg";
 import Dialogue from "../../components/Dialogue";
+import Button from "../../components/Button";
 
 const AddCampaign = () => {
   const { user } = useContext(AuthContext);
   const { candidates } = useContext(FetchCandidatesContext);
 
   const [campaign, setCampaign] = useState(null);
+
+  const [isAddCampaignOpen, setIsAddCampaignOpen] = useState(false);
+
+  const openAddCampaignDialog = () => {
+    setIsAddCampaignOpen(true);
+  };
+
+  const closeAddCampaignDialog = () => {
+    setIsAddCampaignOpen(false);
+  };
+
+  const handleCampaignChange = (e) => {
+    setCampaign(e.target.value);
+  };
+
+  const handleAddCampaign = () => {};
 
   useEffect(() => {
     if (user && candidates) {
@@ -36,59 +53,32 @@ const AddCampaign = () => {
         <div>there is a campaign</div>
       ) : (
         <div className="create-elections-container">
-          <h1>Create Elections</h1>
+          <h1>Add Campaign</h1>
           <img
-            src={addElections}
-            alt="Create Elections"
-            onClick={openAddElectionsDialog}
+            src={addCampaign}
+            alt="Add Campaign"
+            onClick={openAddCampaignDialog}
             style={{ cursor: "pointer" }}
           />
           {/* add elections dialogue */}
           <Dialogue
-            isOpen={isAddElectionsOpen}
-            onClose={closeAddElectionsDialog}
-            title="Add Elections"
+            isOpen={isAddCampaignOpen}
+            onClose={closeAddCampaignDialog}
+            title="Add Campaign"
             footerContent={
               <Button
-                text="Add Elections"
+                text="Add Campaign"
                 variant="blue"
                 size="small"
-                onClick={handleAddElections}
+                onClick={handleAddCampaign}
               />
             }
           >
-            <Input
-              label="title"
-              labelText="Title"
-              type="text"
-              name="title"
-              id="title"
-              placeholder="Enter elections title"
-              classNames="input-vertical"
-              onChange={handleElectionsTitleChange}
-            />
-            <div className="selection-container">
-              <label htmlFor="region">Select Region</label>
-              <select
-                name="region"
-                id="region"
-                className="dialogue-select-region"
-                value={electionsRegion}
-                onChange={handleElectionsRegionChange}
-              >
-                <option value="beirut">Beirut</option>
-                <option value="beqaa">Beqaa</option>
-                <option value="mount_lebanon">Mount Lebanon</option>
-                <option value="north">North</option>
-                <option value="south">South</option>
-                <option value="whole_country">Whole Country</option>
-              </select>
-            </div>
             <textarea
               className="create-elections-textarea"
-              value={electionsDescription}
-              placeholder="Enter elections description here..."
-              onChange={handleElectionsDescriptionChange}
+              value={campaign}
+              placeholder="Enter your campaign here..."
+              onChange={handleCampaignChange}
             ></textarea>
           </Dialogue>
         </div>
