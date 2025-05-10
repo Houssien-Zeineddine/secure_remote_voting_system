@@ -1,0 +1,27 @@
+.campaign-page-container {
+    height: 100%;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    padding-top: 4rem;
+    color: var(--primary-color);
+}
+
+.campaign-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    width: 100%;
+    gap: 4rem;
+
+}
+
+.campaign-platform-container {
+    display: flex;
+    flex-direction: column;
+    padding-left: 5rem;
+    width: 100%;
+    gap: 2rem;
+}
+
