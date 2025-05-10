@@ -89,25 +89,6 @@ const AddCampaign = () => {
     }
   };
 
-  // useEffect(() => {
-  //   if (user && candidates) {
-  //     const foundCandidate = Object.values(candidates).find(
-  //       (candidate) => candidate.id === user.id
-  //     );
-
-  //     console.log(foundCandidate);
-
-  //     if (foundCandidate?.campaign) {
-  //       setCampaign(foundCandidate.campaign);
-  //     }
-  //   }
-  // }, [user, candidates]);
-
-  //use useEffect to log campaign
-  // useEffect(() => {
-  //   console.log("Campaign state updated:", campaign); // Logs AFTER state updates
-  // }, [campaign]);
-
   return (
     <div className="along-sidebar-positioning">
       {campaign ? (
