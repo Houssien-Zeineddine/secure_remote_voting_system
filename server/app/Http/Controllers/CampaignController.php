@@ -19,7 +19,7 @@ class CampaignController extends Controller {
     public function editCampaign(EditCampaignRequest $request) {
         $campaign = new CampaignService;
 
-        $updatedCampaign = $campaign->updateCampaign($request);
+        $updatedCampaign = $campaign->editCampaign($request);
 
         return $this->successResponse($updatedCampaign, 200);
     }
