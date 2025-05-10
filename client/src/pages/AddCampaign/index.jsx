@@ -1,8 +1,10 @@
 import React, { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../../components/Context/AuthContext";
 import { FetchCandidatesContext } from "../../components/Context/FetchCandidatesContext";
+import { CheckElectionsContext } from "../../components/Context/CheckElectionsContext";
 
 const AddCampaign = () => {
+  const { ongoingActiveElections } = useContext(CheckElectionsContext);
   const { user } = useContext(AuthContext);
   const { candidates } = useContext(FetchCandidatesContext);
 
@@ -29,7 +31,11 @@ const AddCampaign = () => {
 
   return (
     <div className="along-sidebar-positioning">
-      <p>Add Campaign</p>
+      {ongoingActiveElections ? (
+        <div> active elections </div>
+      ) : (
+        <div>No elections</div>
+      )}
     </div>
   );
 };
