@@ -31,7 +31,9 @@ export const CheckCampaignProvider = ({ children }) => {
   }, []);
 
   return (
-    <CheckCampaignContext.Provider value={{ campaigns }}>
+    <CheckCampaignContext.Provider
+      value={{ campaigns, setCampaigns, fetchCampaigns }}
+    >
       {children}
     </CheckCampaignContext.Provider>
   );

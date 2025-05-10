@@ -8,15 +8,21 @@ import addCampaign from "../../assets/plus (1) 1.svg";
 import Dialogue from "../../components/Dialogue";
 import Button from "../../components/Button";
 import "./style.css";
+import axiosBaseUrl from "../../Utils/axios";
 
 const AddCampaign = () => {
   const { user } = useContext(AuthContext);
   // const { candidates } = useContext(FetchCandidatesContext);
-  const { campaigns } = useContext(CheckCampaignContext);
+  const { campaigns, fetchCampaigns } = useContext(CheckCampaignContext);
+  const { ongoingActiveElections } = useContext(CheckElectionsContext);
 
   const [isAddCampaignOpen, setIsAddCampaignOpen] = useState(false);
   const [isEditCampaignOpen, setIsEditCampaignOpen] = useState(false);
   const [campaign, setCampaign] = useState(null);
+  const [candidateCampaign, setCandidateCampaign] = useState("");
+  const [editingCampaignText, setEditingCampaignText] = useState("");
+
+  const access_token = localStorage.getItem("access_token");
 
   const openAddCampaignDialog = () => {
     setIsAddCampaignOpen(true);
@@ -26,15 +32,14 @@ const AddCampaign = () => {
     setIsAddCampaignOpen(false);
   };
 
+  const openEditCampaignDialog = () => {
+    setEditingCampaignText(campaign.campaign);
+    setIsEditCampaignOpen(true);
+  };
+
   const closeEditCampaignDialog = () => {
     setIsEditCampaignOpen(false);
   };
-
-  const handleCampaignChange = (e) => {
-    setCampaign(e.target.value);
-  };
-
-  const handleEditCampaign = () => {};
 
   useEffect(() => {
     if (user && campaigns?.length) {
@@ -46,7 +51,43 @@ const AddCampaign = () => {
     }
   }, [user, campaigns]);
 
-  const handleAddCampaign = () => {};
+  console.log("editing campaign t4ext", editingCampaignText);
+
+  const handleAddCampaign = async () => {
+    try {
+      const response = await axiosBaseUrl.post(
+        "/user/candidate/addcampaign",
+        {
+          elections_id: ongoingActiveElections.id,
+          campaign: editingCampaignText,
+        },
+        { headers: { Authorization: `Bearer ${access_token}` } }
+      );
+      if (response.status === 200) {
+        await fetchCampaigns();
+        setCampaign(response.data);
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const handleEditCampaign = async () => {
+    try {
+      const response = await axiosBaseUrl.put(
+        "/user/candidate/editcampaign",
+        { campaign_id: campaign.id, campaign: editingCampaignText },
+        { headers: { Authorization: `Bearer ${access_token}` } }
+      );
+      if (response.status === 200) {
+        await fetchCampaigns();
+      }
+    } catch (error) {
+      console.log(error);
+    } finally {
+      setIsEditCampaignOpen(false);
+    }
+  };
 
   // useEffect(() => {
   //   if (user && candidates) {
@@ -79,13 +120,13 @@ const AddCampaign = () => {
             </h1>
             <div className="campaign-platform-container">
               <h2>Campaign Platform</h2>
-              <p>{campaign.campaign}</p>
+              <pre>{campaign.campaign}</pre>
               <div className="edit-campaign-btn">
                 <Button
                   text="Edit Campaign"
                   variant="white"
                   size="small"
-                  onClick={() => setIsEditCampaignOpen(true)}
+                  onClick={openEditCampaignDialog}
                 />
               </div>
             </div>
@@ -95,7 +136,7 @@ const AddCampaign = () => {
           <Dialogue
             isOpen={isEditCampaignOpen}
             onClose={closeEditCampaignDialog}
-            title="Add Campaign"
+            title="Edit Campaign"
             footerContent={
               <Button
                 text="Save Changes"
@@ -107,9 +148,9 @@ const AddCampaign = () => {
           >
             <textarea
               className="create-elections-textarea"
-              value={campaign.campaign}
+              value={editingCampaignText}
               placeholder="Enter your campaign here..."
-              onChange={handleCampaignChange}
+              onChange={(e) => setEditingCampaignText(e.target.value)}
             ></textarea>
           </Dialogue>
         </div>
@@ -138,9 +179,9 @@ const AddCampaign = () => {
           >
             <textarea
               className="create-elections-textarea"
-              value={campaign}
+              value={candidateCampaign}
               placeholder="Enter your campaign here..."
-              onChange={handleCampaignChange}
+              onChange={(e) => setCandidateCampaign(e.target.value)}
             ></textarea>
           </Dialogue>
         </div>
