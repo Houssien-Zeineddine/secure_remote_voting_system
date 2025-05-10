@@ -1,14 +1,16 @@
 import React, { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../../components/Context/AuthContext";
+import { CheckCampaignContext } from "../../components/Context/CheckCampaignContext";
 import { FetchCandidatesContext } from "../../components/Context/FetchCandidatesContext";
 import { CheckElectionsContext } from "../../components/Context/CheckElectionsContext";
+import capitalizeFirstLetter from "../../Utils/helpers";
 import addCampaign from "../../assets/plus (1) 1.svg";
 import Dialogue from "../../components/Dialogue";
 import Button from "../../components/Button";
-import { CheckCampaignContext } from "../../components/Context/CheckCampaignContext";
+import "./style.css";
 
 const AddCampaign = () => {
-  // const { user } = useContext(AuthContext);
+  const { user } = useContext(AuthContext);
   // const { candidates } = useContext(FetchCandidatesContext);
   const { campaigns } = useContext(CheckCampaignContext);
 
@@ -50,8 +52,20 @@ const AddCampaign = () => {
 
   return (
     <div className="along-sidebar-positioning">
-      {!campaigns ? (
-        <div>there is a campaign</div>
+      {campaigns ? (
+        <div className="campaign-page-container">
+          <div className="campaign-container">
+            <h1>
+              {capitalizeFirstLetter(user.first_name)}{" "}
+              {capitalizeFirstLetter(user.middle_name)}{" "}
+              {capitalizeFirstLetter(user.last_name)}
+            </h1>
+            <div className="campaign-platform-container">
+              <h2>Campaign Platform</h2>
+              <p>{campaign.campaign}</p>
+            </div>
+          </div>
+        </div>
       ) : (
         <div className="create-elections-container">
           <h1>Add Campaign</h1>
