@@ -8,15 +8,20 @@ import addCampaign from "../../assets/plus (1) 1.svg";
 import Dialogue from "../../components/Dialogue";
 import Button from "../../components/Button";
 import "./style.css";
+import axiosBaseUrl from "../../Utils/axios";
 
 const AddCampaign = () => {
   const { user } = useContext(AuthContext);
   // const { candidates } = useContext(FetchCandidatesContext);
-  const { campaigns } = useContext(CheckCampaignContext);
+  const { campaigns, setCampaigns, fetchCampaigns } =
+    useContext(CheckCampaignContext);
+  const { ongoingActiveElections } = useContext(CheckElectionsContext);
 
   const [isAddCampaignOpen, setIsAddCampaignOpen] = useState(false);
   const [isEditCampaignOpen, setIsEditCampaignOpen] = useState(false);
   const [campaign, setCampaign] = useState(null);
+
+  const access_token = localStorage.getItem("acces_token");
 
   const openAddCampaignDialog = () => {
     setIsAddCampaignOpen(true);
@@ -34,8 +39,6 @@ const AddCampaign = () => {
     setCampaign(e.target.value);
   };
 
-  const handleEditCampaign = () => {};
-
   useEffect(() => {
     if (user && campaigns?.length) {
       const userCampaign = campaigns.find((c) => c.user_id === user.id);
@@ -46,7 +49,27 @@ const AddCampaign = () => {
     }
   }, [user, campaigns]);
 
-  const handleAddCampaign = () => {};
+  const handleAddCampaign = async () => {
+    try {
+      const response = await axiosBaseUrl.post(
+        "/user/candidate/addcampaign",
+        {
+          elections_id: ongoingActiveElections.id,
+          campaign: campaign.campaign,
+        },
+        { headers: { Authorization: `Bearer ${access_token}` } }
+      );
+      if (response.status === 200) {
+        await fetchCampaigns;
+        setCampaign(response.data);
+      }
+    } catch (error) {
+      console.log(error);
+    } finally {
+    }
+  };
+
+  const handleEditCampaign = () => {};
 
   // useEffect(() => {
   //   if (user && candidates) {
@@ -79,7 +102,7 @@ const AddCampaign = () => {
             </h1>
             <div className="campaign-platform-container">
               <h2>Campaign Platform</h2>
-              <p>{campaign.campaign}</p>
+              <pre>{campaign.campaign}</pre>
               <div className="edit-campaign-btn">
                 <Button
                   text="Edit Campaign"
@@ -95,7 +118,7 @@ const AddCampaign = () => {
           <Dialogue
             isOpen={isEditCampaignOpen}
             onClose={closeEditCampaignDialog}
-            title="Add Campaign"
+            title="Edit Campaign"
             footerContent={
               <Button
                 text="Save Changes"
