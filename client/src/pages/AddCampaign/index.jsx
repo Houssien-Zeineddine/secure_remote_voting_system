@@ -32,6 +32,7 @@ const AddCampaign = () => {
   useEffect(() => {
     if (user && campaigns?.length) {
       const userCampaign = campaigns.find((c) => c.user_id === user.id);
+
       if (userCampaign) {
         setCampaign(userCampaign);
       }
