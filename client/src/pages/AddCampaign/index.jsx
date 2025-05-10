@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../../components/Context/AuthContext";
-import { FetchCandidatesContext } from "../../components/Context/FetchCandidates";
+import { FetchCandidatesContext } from "../../components/Context/FetchCandidatesContext";
 
 const AddCampaign = () => {
   const { user } = useContext(AuthContext);
