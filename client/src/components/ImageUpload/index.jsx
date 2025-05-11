@@ -11,6 +11,14 @@ const ImageUpload = () => {
   const [avatarURL, setAvatarURL] = useState(defaultImage);
   const fileUploadRef = useRef();
 
+  useEffect(() => {
+    if (user && user.profile_picture_path) {
+      setAvatarURL(user.profile_picture_path);
+    } else {
+      setAvatarURL(defaultImage);
+    }
+  }, [user]);
+
   const handleImageUpload = (e) => {
     e.preventDefault();
     fileUploadRef.current.click();
