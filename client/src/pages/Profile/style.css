@@ -76,10 +76,17 @@
 
   .add-remove-photo{
     display: flex;
-    justify-content: space-evenly;
-    width: 40%;
+    justify-content: space-between;
+    width: 100%;
     font-size: var(--font-size-header-4);
   }
+
+  .profile-header-wrapper{
+    display: flex;
+    align-items: center;
+    height: 100%;
+  }
+
 
   .profile-image {
   max-height: 12rem;

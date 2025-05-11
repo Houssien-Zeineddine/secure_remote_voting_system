@@ -67,84 +67,108 @@ const Profile = () => {
   return (
     <div className="along-sidebar-positioning">
       <div className="profile-container">
-        <h1>Profile</h1>
-        <div className="add-remove-photo">
-          {user.profile_picture_path ? (
-            <img
-              src="../../assets/developer 1.svg"
-              alt="Profile Image"
-              className="profile-image"
-            />
-          ) : (
-            <img
-              src={defaultImage}
-              alt="Default Profile Image"
-              className="profile-image"
-            />
-          )}
-        </div>
         {isEditing ? (
-          <form onSubmit={handleSubmit} className="profile-form-container">
-            <Input
-              label="first_name"
-              labelText="First Name"
-              type="text"
-              name="first_name"
-              id="first_name"
-              classNames="profile-form-container-input input-vertical"
-              value={tempData.first_name}
-              onChange={handleChange}
-            />
-            <Input
-              label="middle_name"
-              labelText="Middle Name"
-              type="text"
-              name="middle_name"
-              id="middle_name"
-              classNames="profile-form-container-input input-vertical"
-              value={tempData.middle_name}
-              onChange={handleChange}
-            />
-            <Input
-              label="last_name"
-              labelText="Last Name"
-              type="text"
-              name="last_name"
-              id="last_name"
-              classNames="profile-form-container-input input-vertical"
-              value={tempData.last_name}
-              onChange={handleChange}
-            />
-            <Input
-              label="birthday"
-              labelText="Birthday"
-              type="date"
-              name="birthday"
-              id="birthday"
-              classNames="input-vertical edit-profile-birthday-input"
-              value={tempData.birthday}
-              placeholder="Enter your birthday"
-              onChange={handleChange}
-            />
-            <Input
-              label="id_number"
-              labelText="ID Number"
-              type="text"
-              name="id_number"
-              id="id_number"
-              classNames="profile-form-container-input input-vertical"
-              value={tempData.id_number}
-              onChange={handleChange}
-            />
-            <Button
-              text={isLoading ? "Saving..." : "Save Changes"}
-              variant="blue"
-              size="small"
-              type="submit"
-            />
-          </form>
+          <>
+            (
+            <div className="add-remove-photo">
+              <h1>Profile</h1>
+              {user.profile_picture_path ? (
+                <img
+                  src="../../assets/developer 1.svg"
+                  alt="Profile Image"
+                  className="profile-image"
+                />
+              ) : (
+                <img
+                  src={defaultImage}
+                  alt="Default Profile Image"
+                  className="profile-image"
+                />
+              )}
+            </div>
+            <form onSubmit={handleSubmit} className="profile-form-container">
+              <ImageUpload />
+              <Input
+                label="first_name"
+                labelText="First Name"
+                type="text"
+                name="first_name"
+                id="first_name"
+                classNames="profile-form-container-input input-vertical"
+                value={tempData.first_name}
+                onChange={handleChange}
+              />
+              <Input
+                label="middle_name"
+                labelText="Middle Name"
+                type="text"
+                name="middle_name"
+                id="middle_name"
+                classNames="profile-form-container-input input-vertical"
+                value={tempData.middle_name}
+                onChange={handleChange}
+              />
+              <Input
+                label="last_name"
+                labelText="Last Name"
+                type="text"
+                name="last_name"
+                id="last_name"
+                classNames="profile-form-container-input input-vertical"
+                value={tempData.last_name}
+                onChange={handleChange}
+              />
+              <Input
+                label="birthday"
+                labelText="Birthday"
+                type="date"
+                name="birthday"
+                id="birthday"
+                classNames="input-vertical edit-profile-birthday-input"
+                value={tempData.birthday}
+                placeholder="Enter your birthday"
+                onChange={handleChange}
+              />
+              <Input
+                label="id_number"
+                labelText="ID Number"
+                type="text"
+                name="id_number"
+                id="id_number"
+                classNames="profile-form-container-input input-vertical"
+                value={tempData.id_number}
+                onChange={handleChange}
+              />
+              <Button
+                text={isLoading ? "Saving..." : "Save Changes"}
+                variant="blue"
+                size="small"
+                type="submit"
+              />
+            </form>
+            ){" "}
+          </>
         ) : (
           <div className="view-mode">
+            <div className="add-remove-photo">
+              <div className="profile-header-wrapper">
+                <h1>Profile</h1>
+              </div>
+
+              {user.profile_picture_path ? (
+                <img
+                  src="../../assets/developer 1.svg"
+                  alt="Profile Image"
+                  className="profile-image"
+                />
+              ) : (
+                <img
+                  src={defaultImage}
+                  alt="Default Profile Image"
+                  className="profile-image"
+                />
+              )}
+            </div>
             <div className="view-mode-label">
               <label htmlFor="first_name">First Name</label>
               <span>{profileData.first_name}</span>
