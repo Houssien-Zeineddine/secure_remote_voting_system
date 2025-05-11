@@ -1,11 +1,11 @@
 import React, { useRef, useState } from "react";
-import DefaultImage from "../../assets/sidebar icons/default profile picture.jpg";
-import EditIcon from "../../assets/image-edit.svg";
-import UploadingAnimation from "../../assets/Cloud uploading.gif";
+import defaultImage from "../../assets/sidebar icons/default profile picture.jpg";
+import editIcon from "../../assets/image-edit.svg";
+import uploadingAnimation from "../../assets/Cloud uploading.gif";
 import "./style.css";
 
 const ImageUpload = () => {
-  const [avatarURL, setAvatarURL] = useState(DefaultImage);
+  const [avatarURL, setAvatarURL] = useState(defaultImage);
   const fileUploadRef = useRef();
 
   const handleImageUpload = (e) => {
@@ -15,7 +15,7 @@ const ImageUpload = () => {
 
   const uploadImageDisplay = async () => {
     try {
-      setAvatarURL(UploadingAnimation);
+      setAvatarURL(uploadingAnimation);
       const uploadedFile = fileUploadRef.current.files[0];
       const formData = new FormData();
 
@@ -32,7 +32,7 @@ const ImageUpload = () => {
       }
     } catch (error) {
       console.log(error);
-      setAvatarURL(DefaultImage);
+      setAvatarURL(defaultImage);
     }
   };
 
@@ -46,7 +46,7 @@ const ImageUpload = () => {
             className="edit-button"
             onClick={{ handleImageUpload }}
           >
-            <img src={EditIcon} alt="Edit Image" className="edit-icon" />
+            <img src={editIcon} alt="Edit Image" className="edit-icon" />
           </button>
           <input
             type="file"

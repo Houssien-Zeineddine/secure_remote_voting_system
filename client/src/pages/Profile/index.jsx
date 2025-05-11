@@ -5,6 +5,7 @@ import { AuthContext } from "../../components/Context/AuthContext";
 import "./style.css";
 import axiosBaseUrl from "../../Utils/axios";
 import ImageUpload from "../../components/ImageUpload";
+import defaultImage from "../../assets/sidebar icons/default profile picture.jpg";
 
 const Profile = () => {
   const { user, setUser } = useContext(AuthContext);
@@ -72,6 +73,7 @@ const Profile = () => {
         </div>
         {isEditing ? (
           <form onSubmit={handleSubmit} className="profile-form-container">
+            <img src={defaultImage} alt="Defailt Profile Image" />
             <Input
               label="first_name"
               labelText="First Name"
