@@ -1,10 +1,13 @@
-import React, { useRef, useState } from "react";
+import React, { useContext, useRef, useState } from "react";
 import defaultImage from "../../assets/sidebar icons/default profile picture.jpg";
 import editIcon from "../../assets/image-edit.svg";
 import uploadingAnimation from "../../assets/Cloud uploading.gif";
 import "./style.css";
+import { AuthContext } from "../Context/AuthContext";
 
 const ImageUpload = () => {
+  const { user } = useContext(AuthContext);
+
   const [avatarURL, setAvatarURL] = useState(defaultImage);
   const fileUploadRef = useRef();
 

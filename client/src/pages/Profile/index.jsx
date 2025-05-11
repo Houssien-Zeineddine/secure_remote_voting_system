@@ -71,7 +71,9 @@ const Profile = () => {
           <>
             (
             <div className="add-remove-photo">
-              <h1>Profile</h1>
+              <div className="profile-header-wrapper">
+                <h1>Profile</h1>
+              </div>
               {user.profile_picture_path ? (
                 <img
                   src="../../assets/developer 1.svg"
