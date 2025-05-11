@@ -1,0 +1,36 @@
+.image-upload-container {
+  position: relative;
+  height: 24rem; 
+  width: 24rem;
+  margin: 2rem; 
+}
+
+.avatar-image {
+  height: 100%;
+  width: 100%;
+  border-radius: 50%;
+}
+
+.edit-button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  bottom: 3rem; 
+  right: 3.5rem; 
+  height: 2.25rem; 
+  width: 2.25rem;
+  border-radius: 50%;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+}
+
+.edit-icon {
+  object-fit: cover;
+}
+
+.file-input {
+  display: none;
+}
