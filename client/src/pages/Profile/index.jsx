@@ -23,6 +23,7 @@ const Profile = () => {
       setProfileData(user);
       setTempData(user);
     }
+    console.log(user);
   }, [user]);
 
   if (!profileData) {
@@ -68,12 +69,22 @@ const Profile = () => {
       <div className="profile-container">
         <h1>Profile</h1>
         <div className="add-remove-photo">
-          <a href="">Add Photo</a>
-          <a href="">Remove Photo</a>
+          {user.profile_picture_path ? (
+            <img
+              src="../../assets/developer 1.svg"
+              alt="Profile Image"
+              className="profile-image"
+            />
+          ) : (
+            <img
+              src={defaultImage}
+              alt="Default Profile Image"
+              className="profile-image"
+            />
+          )}
         </div>
         {isEditing ? (
           <form onSubmit={handleSubmit} className="profile-form-container">
-            <img src={defaultImage} alt="Defailt Profile Image" />
             <Input
               label="first_name"
               labelText="First Name"
