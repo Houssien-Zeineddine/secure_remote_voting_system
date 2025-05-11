@@ -4,6 +4,7 @@ import Button from "../../components/Button";
 import { AuthContext } from "../../components/Context/AuthContext";
 import "./style.css";
 import axiosBaseUrl from "../../Utils/axios";
+import ImageUpload from "../../components/ImageUpload";
 
 const Profile = () => {
   const { user, setUser } = useContext(AuthContext);
