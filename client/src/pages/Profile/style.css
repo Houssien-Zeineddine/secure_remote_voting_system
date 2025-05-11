@@ -76,9 +76,42 @@
 
   .add-remove-photo{
     display: flex;
-    justify-content: space-evenly;
-    width: 40%;
+    justify-content: space-between;
+    width: 100%;
     font-size: var(--font-size-header-4);
   }
 
-  
+  .profile-header-wrapper{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 100%;
+  }
+
+
+  .profile-image {
+  max-height: 12rem;
+  width: auto;
+  height: auto; 
+  border-radius: 100px;
+  object-fit: cover; 
+  max-width: 100%;
+  display: block;
+}
+
+.add-remove-photo-editing{
+  width: 40%;
+  display: flex;
+    justify-content: space-between;
+    font-size: var(--font-size-header-4);
+}
+
+.image-upload-wrapper{
+  max-height: 5rem;
+  width: auto;
+  height: auto; 
+  border-radius: 100px;
+  object-fit: cover; 
+  max-width: 5rem;
+  display: block;
+}
