@@ -1,6 +1,8 @@
 import React, { useRef, useState } from "react";
 import DefaultImage from "../../assets/sidebar icons/default profile picture.jpg";
 import EditIcon from "../../assets/image-edit.svg";
+import UploadingAnimation from "../../assets/Cloud uploading.gif";
+import "./style.css";
 
 const ImageUpload = () => {
   const [avatarURL, setAvatarURL] = useState(DefaultImage);
