@@ -1,14 +1,15 @@
 .image-upload-container {
   position: relative;
-  height: 24rem; 
-  width: 24rem;
-  margin: 2rem; 
 }
 
 .avatar-image {
-  height: 100%;
-  width: 100%;
-  border-radius: 50%;
+  max-height: 12rem;
+  width: auto;
+  height: auto; 
+  border-radius: 100px;
+  object-fit: cover; 
+  max-width: 100%;
+  display: block;
 }
 
 .edit-button {
@@ -16,10 +17,10 @@
   justify-content: center;
   align-items: center;
   position: absolute;
-  bottom: 3rem; 
-  right: 3.5rem; 
-  height: 2.25rem; 
-  width: 2.25rem;
+  bottom: 0rem; 
+  right: 0rem; 
+  height: 2.75rem; 
+  width: 2.75rem;
   border-radius: 50%;
   background: none;
   border: none;
@@ -29,6 +30,8 @@
 
 .edit-icon {
   object-fit: cover;
+  height: 1.5rem;
+  width: auto;
 }
 
 .file-input {

@@ -69,8 +69,7 @@ const Profile = () => {
       <div className="profile-container">
         {isEditing ? (
           <>
-            (
-            <div className="add-remove-photo">
+            <div className="add-remove-photo-editing">
               <div className="profile-header-wrapper">
                 <h1>Profile</h1>
               </div>
@@ -147,8 +146,7 @@ const Profile = () => {
                 size="small"
                 type="submit"
               />
-            </form>
-            ){" "}
+            </form>{" "}
           </>
         ) : (
           <div className="view-mode">
