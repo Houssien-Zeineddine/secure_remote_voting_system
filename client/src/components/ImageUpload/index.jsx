@@ -1,4 +1,4 @@
-import React, { useContext, useRef, useState } from "react";
+import React, { useContext, useRef, useState, useEffect } from "react";
 import defaultImage from "../../assets/sidebar icons/default profile picture.jpg";
 import editIcon from "../../assets/image-edit.svg";
 import uploadingAnimation from "../../assets/Cloud uploading.gif";

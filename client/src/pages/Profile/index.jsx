@@ -70,11 +70,12 @@ const Profile = () => {
         {isEditing ? (
           <>
             (
-            <div className="add-remove-photo">
-              <div className="profile-header-wrapper">
-                <h1>Profile</h1>
-              </div>
-              {user.profile_picture_path ? (
+            <form onSubmit={handleSubmit} className="profile-form-container">
+              <div className="add-remove-photo">
+                <div className="profile-header-wrapper">
+                  <h1>Profile</h1>
+                </div>
+                {/* {user.profile_picture_path ? (
                 <img
                   src="../../assets/developer 1.svg"
                   alt="Profile Image"
@@ -86,10 +87,9 @@ const Profile = () => {
                   alt="Default Profile Image"
                   className="profile-image"
                 />
-              )}
-            </div>
-            <form onSubmit={handleSubmit} className="profile-form-container">
-              <ImageUpload />
+                )} */}
+                <ImageUpload />
+              </div>
               <Input
                 label="first_name"
                 labelText="First Name"
