@@ -6,6 +6,34 @@ const ImageUpload = () => {
   const [avatarURL, setAvatarURL] = useState(DefaultImage);
   const fileUploadRef = useRef();
 
+  const handleImageUpload = (e) => {
+    e.preventDefault();
+    fileUploadRef.current.click();
+  };
+
+  const uploadImageDisplay = async () => {
+    try {
+      setAvatarURL(UploadingAnimation);
+      const uploadedFile = fileUploadRef.current.files[0];
+      const formData = new FormData();
+
+      formData.append("image", uploadedFile);
+
+      const response = await fetch("http://127.0.0.1:8000/api/upload", {
+        method: "post",
+        body: formData,
+      });
+
+      if (response.status === 200) {
+        const data = await response.json();
+        setAvatarURL(data?.url);
+      }
+    } catch (error) {
+      console.log(error);
+      setAvatarURL(DefaultImage);
+    }
+  };
+
   return (
     <div>
       <div className="image-upload-container">
