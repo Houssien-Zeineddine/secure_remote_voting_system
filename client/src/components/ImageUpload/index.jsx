@@ -34,7 +34,7 @@ const ImageUpload = () => {
 
       formData.append("image", uploadedFile);
 
-      const response = await axiosBaseUrl.post("/upload", {
+      const response = await axiosBaseUrl.post("/user/upload", {
         formData,
         headers: { Authorization: `Beaerer ${access_token}` },
       });
