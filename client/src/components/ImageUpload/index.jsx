@@ -4,6 +4,7 @@ import editIcon from "../../assets/image-edit.svg";
 import uploadingAnimation from "../../assets/Cloud uploading.gif";
 import "./style.css";
 import { AuthContext } from "../Context/AuthContext";
+import axiosBaseUrl from "../../Utils/axios";
 
 const ImageUpload = () => {
   const { user } = useContext(AuthContext);
@@ -33,8 +34,7 @@ const ImageUpload = () => {
 
       formData.append("image", uploadedFile);
 
-      const response = await fetch("http://127.0.0.1:8000/api/upload", {
-        method: "post",
+      const response = await axiosBaseUrl.post("/upload", {
         headers: { Authorization: `Beaerer ${access_token}` },
         body: formData,
       });
