@@ -41,7 +41,7 @@ const ImageUpload = () => {
       });
 
       if (response.status === 200) {
-        const data = await response.json();
+        const data = await response.data;
         setAvatarURL(data?.url);
       }
     } catch (error) {
