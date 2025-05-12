@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 
+use App\Models\User;
+
 class ImageService {
     /**
      * Create a new class instance.
@@ -24,7 +26,7 @@ class ImageService {
             $filename
         );
 
-        $post = new Post();
+        $post = new User;
         $post->image_path = $path;
         $post->save();
 
