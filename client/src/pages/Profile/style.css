@@ -60,18 +60,13 @@
   }
 
   .view-mode-label span {
-    height: 40px;
+    height: 3rem;
     border: 1px solid var(--border-color);
     border-radius: 50px;
     color: var(--primary-color);
     display: flex;
     align-items: center;
     padding-left: 1.25rem;
-  }
-
-  .edit-profile-btn {
-    width:fit-content;
-    margin: 0 auto;
   }
 
   .add-remove-photo{
@@ -114,4 +109,16 @@
   object-fit: cover; 
   max-width: 5rem;
   display: block;
+}
+
+.edit-profile-btn-cpontainer {
+  display: flex;
+  justify-content: flex-start;
+  width: 100%;
+}
+
+.save-changes-wrapper {
+  width: 100%;
+  display: flex;
+  justify-content: flex-starts;
 }

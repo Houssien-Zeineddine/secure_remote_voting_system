@@ -18,8 +18,12 @@
 }
 
 .landing-page-description img {
-    width: 50%;
+}
+
+.politician-img-container {
     height: auto;
+    width: 50%;
+    padding: 5rem;
 }
 
 .landing-page-text {
@@ -40,8 +44,10 @@
     font-size: var(--font-size-header-4);
 }
 
-.landing-page-btn {
-    width: 9rem;
+.landing-page-btn-container{
+    width: 100%;
+    display: flex;
+    justify-content: flex-start;
 }
 
 .landing-page-cards-container {

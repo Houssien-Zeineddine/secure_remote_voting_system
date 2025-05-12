@@ -37,6 +37,7 @@
     color: var(--primary-color);
     font-size: var(--font-size-header-4);
     font-weight: var(--font-weight-bold);
+    text-align: center;
 }
 
 .sidebar-link {

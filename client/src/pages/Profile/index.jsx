@@ -23,7 +23,11 @@ const Profile = () => {
     if (user) {
       setProfileData(user);
       setTempData(user);
-      setAvatarURL(user.profile_picture_path);
+      setAvatarURL(
+        user.profile_picture_path
+          ? `/storage/app/public/${user.profile_picture_path}`
+          : defaultImage
+      );
     }
     console.log(user);
   }, [user]);
@@ -129,12 +133,14 @@ const Profile = () => {
                 value={tempData.id_number}
                 onChange={handleChange}
               />
-              <Button
-                text={isLoading ? "Saving..." : "Save Changes"}
-                variant="blue"
-                size="small"
-                type="submit"
-              />
+              <div className="save-changes-wrapper">
+                <Button
+                  text={isLoading ? "Saving..." : "Save Changes"}
+                  variant="blue"
+                  size="small"
+                  type="submit"
+                />
+              </div>
             </form>{" "}
           </>
         ) : (
@@ -178,14 +184,15 @@ const Profile = () => {
               <label htmlFor="id_number">ID Number</label>
               <span>{profileData.id_number}</span>
             </div>
-            <Button
-              text="Edit Profile"
-              variant="white"
-              size="small"
-              type="submit"
-              className="edit-profile-btn"
-              onClick={handleEdit}
-            />
+            <div className="edit-profile-btn-cpontainer">
+              <Button
+                text="Edit Profile"
+                variant="white"
+                size="small"
+                type="submit"
+                onClick={handleEdit}
+              />
+            </div>
           </div>
         )}
       </div>
