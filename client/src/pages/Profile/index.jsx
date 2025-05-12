@@ -74,19 +74,6 @@ const Profile = () => {
                 <h1>Profile</h1>
               </div>
               <ImageUpload />
-              {/* {user.profile_picture_path ? (
-                <img
-                src="../../assets/developer 1.svg"
-                alt="Profile Image"
-                className="profile-image"
-                />
-                ) : (
-                  <img
-                  src={defaultImage}
-                  alt="Default Profile Image"
-                  className="profile-image"
-                  />
-                  )} */}
             </div>
             <form onSubmit={handleSubmit} className="profile-form-container">
               <Input
