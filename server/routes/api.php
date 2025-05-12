@@ -10,6 +10,7 @@ use App\Http\Controllers\CampaignController;
 use App\Http\Controllers\AddElectionsController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\ElectionsController;
+use App\Http\Controllers\ImageController;
 use App\Http\Middleware\CheckUserType;
 
 Route::group(['prefix' => 'v0.1'], function () {
@@ -26,6 +27,7 @@ Route::group(['prefix' => 'v0.1'], function () {
                 Route::get('/dashboard', [DashboardController::class, 'index']);
                 Route::get('/candidates', [UserController::class, 'getCandidates']);
                 Route::post('/editprofile', [UserController::class, 'updateProfile']);
+                Route::post('/upload', [ImageController::class, 'upload']);
                 Route::get('/getelections', [ElectionsController::class, 'getElections']);                        
                 Route::get('/getcampaigns', [CampaignController::class, 'getCampaigns']);
                 // Route::get('/guidelines', [GuidelinesController::class, 'index']);
