@@ -11,7 +11,7 @@ class ImageController extends Controller {
     public function upload (ImageUploadRequest $request) {
         $image = new ImageService;
         
-        $uploadedImage = $image->uploadImage();
+        $uploadedImage = $image->uploadImage($request);
 
         return $this->successResponse($uploadedImage, 200);
     }
