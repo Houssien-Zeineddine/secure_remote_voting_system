@@ -19,7 +19,7 @@ const ImageUpload = () => {
     } else {
       setAvatarURL(defaultImage);
     }
-  }, [user]);
+  }, [user.profile_picture_path]);
 
   const handleImageUpload = (e) => {
     e.preventDefault();

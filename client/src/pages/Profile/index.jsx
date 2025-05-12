@@ -15,6 +15,7 @@ const Profile = () => {
   const [tempData, setTempData] = useState({ ...profileData });
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
+  const [avatarURL, setAvatarURL] = useState(defaultImage);
 
   const access_token = localStorage.getItem("access_token");
 
@@ -22,6 +23,7 @@ const Profile = () => {
     if (user) {
       setProfileData(user);
       setTempData(user);
+      setAvatarURL(user.profile_picture_path);
     }
     console.log(user);
   }, [user]);
@@ -144,7 +146,7 @@ const Profile = () => {
 
               {user.profile_picture_path ? (
                 <img
-                  src="../../assets/developer 1.svg"
+                  src={avatarURL}
                   alt="Profile Image"
                   className="profile-image"
                 />
