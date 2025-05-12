@@ -9,6 +9,7 @@ const ImageUpload = () => {
   const { user } = useContext(AuthContext);
 
   const [avatarURL, setAvatarURL] = useState(defaultImage);
+  const access_token = localStorage.getItem("access_token");
   const fileUploadRef = useRef();
 
   useEffect(() => {
@@ -34,6 +35,7 @@ const ImageUpload = () => {
 
       const response = await fetch("http://127.0.0.1:8000/api/upload", {
         method: "post",
+        headers: { Authorization: `Beaerer ${access_token}` },
         body: formData,
       });
 
@@ -51,12 +53,13 @@ const ImageUpload = () => {
     <div>
       <div className="image-upload-container">
         <img src={avatarURL} alt="Avatar" className="avatar-image" />
-        <form id="form" encType="mutipart/form-data" className="upload-form">
-          <button
-            type="submit"
-            className="edit-button"
-            onClick={{ handleImageUpload }}
-          >
+        <form
+          id="form"
+          encType="mutipart/form-data"
+          className="upload-form"
+          onSubmit={handleImageUpload}
+        >
+          <button type="submit" className="edit-button">
             <img src={editIcon} alt="Edit Image" className="edit-icon" />
           </button>
           <input
