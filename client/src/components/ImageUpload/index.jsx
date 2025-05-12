@@ -34,9 +34,11 @@ const ImageUpload = () => {
 
       formData.append("image", uploadedFile);
 
+      console.log("Formdata:", formData);
+
       const response = await axiosBaseUrl.post("/user/upload", {
         formData,
-        headers: { Authorization: `Beaerer ${access_token}` },
+        headers: { Authorization: `Bearer ${access_token}` },
       });
 
       if (response.status === 200) {
@@ -55,7 +57,7 @@ const ImageUpload = () => {
         <img src={avatarURL} alt="Avatar" className="avatar-image" />
         <form
           id="form"
-          encType="mutipart/form-data"
+          encType="multipart/form-data"
           className="upload-form"
           onSubmit={handleImageUpload}
         >
