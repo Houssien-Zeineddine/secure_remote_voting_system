@@ -35,8 +35,8 @@ const ImageUpload = () => {
       formData.append("image", uploadedFile);
 
       const response = await axiosBaseUrl.post("/upload", {
+        formData,
         headers: { Authorization: `Beaerer ${access_token}` },
-        body: formData,
       });
 
       if (response.status === 200) {
