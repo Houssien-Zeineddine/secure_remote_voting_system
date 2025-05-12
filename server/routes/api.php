@@ -10,7 +10,7 @@ use App\Http\Controllers\CampaignController;
 use App\Http\Controllers\AddElectionsController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\ElectionsController;
-use App\Http\Controllers\ElectionsController;
+use App\Http\Controllers\ImageController;
 use App\Http\Middleware\CheckUserType;
 
 Route::group(['prefix' => 'v0.1'], function () {
