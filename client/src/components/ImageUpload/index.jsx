@@ -45,12 +45,11 @@ const ImageUpload = () => {
 
       if (response.status === 200) {
         const data = response.data;
-        setAvatarURL(
-          `http://127.0.0.1:8000/storage/${user.profile_picture_path}`
-        );
-        setUser((prevUser) => ({
-          ...prevUser,
-          profile_picture_path: data.path,
+        const imagePath = data.profile_picture_path || data.path;
+        setAvatarURL(`http://127.0.0.1:8000/storage/${imagePath}`);
+        setUser((user) => ({
+          ...user,
+          profile_picture_path: imagePath,
         }));
       }
     } catch (error) {
@@ -61,7 +60,9 @@ const ImageUpload = () => {
 
   return (
     <div className="image-upload-container">
-      <img src={avatarURL} alt="Avatar" className="avatar-image" />
+      <div className="profile-image-wrapper">
+        <img src={avatarURL} alt="Avatar" className="avatar-image" />
+      </div>
       <button
         type="button"
         onClick={handleImageUploadClick}

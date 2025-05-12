@@ -2,10 +2,16 @@
   position: relative;
 }
 
+.profile-image-wrapper{
+  border-radius: 100px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 12rem;
+  width: 12rem; 
+}
+
 .avatar-image {
-  max-height: 12rem;
-  width: auto;
-  height: auto; 
   border-radius: 100px;
   object-fit: cover; 
   max-width: 100%;
