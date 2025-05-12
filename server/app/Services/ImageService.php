@@ -3,6 +3,7 @@
 namespace App\Services;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 
@@ -26,9 +27,9 @@ class ImageService {
             $filename
         );
 
-        $post = new User;
-        $post->profile_picture_path = $path;
-        $post->save();
+        $user = Auth::user();
+        $user->profile_picture_path = $path;
+        $user->save();
 
         return response()->json([
             'success' => true,
