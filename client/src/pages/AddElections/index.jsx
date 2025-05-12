@@ -172,12 +172,22 @@ const AdminPage = () => {
 
             <div className="add-candidate-btn-wrapper">
               <h4>Candidates List</h4>
-              <Button
-                text="Add Candidate"
-                variant="blue"
-                size="medium"
-                onClick={() => setIsAddCandidateOpen(true)}
-              />
+              <div className="add-remove-candidate-wrapper">
+                <Button
+                  text="Add Candidate"
+                  variant="blue"
+                  size="small"
+                  onClick={() => setIsAddCandidateOpen(true)}
+                />
+                <Button
+                  text="Stop Elections"
+                  variant="red"
+                  size="small"
+                  onClick={() => {
+                    openStopElectionsDialogue(ongoingActiveElections);
+                  }}
+                />
+              </div>
             </div>
 
             <table>
@@ -211,17 +221,6 @@ const AdminPage = () => {
                 ))}
               </tbody>
             </table>
-
-            <div className="stop-elections-btn-wrapper">
-              <Button
-                text="Stop Elections"
-                variant="red"
-                size="medium"
-                onClick={() => {
-                  openStopElectionsDialogue(ongoingActiveElections);
-                }}
-              />
-            </div>
 
             {/* Add Candidate Dialog */}
             <Dialogue

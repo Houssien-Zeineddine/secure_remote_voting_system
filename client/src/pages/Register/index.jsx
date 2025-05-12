@@ -125,57 +125,62 @@ const Register = () => {
               onChange={handleChange}
             />
           </div>
-          <Input
-            label="id_number"
-            labelText="ID Number"
-            type="text"
-            name="id_number"
-            id="id_number"
-            placeholder="Enter your Id number"
-            classNames="input-vertical "
-            onChange={handleChange}
-          />
-          <Input
-            label="email"
-            labelText="Email"
-            type="text"
-            name="email"
-            id="email"
-            placeholder="Enter your email"
-            classNames="input-vertical"
-            onChange={handleChange}
-          />
-          <Input
-            label="password"
-            labelText="Password"
-            type="password"
-            name="password"
-            id="password"
-            placeholder="Enter your password"
-            classNames="input-vertical"
-            onChange={handleChange}
-          />
-          <Input
-            label="password_confirmation"
-            labelText="Password Confirmation"
-            type="password"
-            name="password_confirmation"
-            id="password_confirmation"
-            placeholder="Confirm youe entered password"
-            classNames="input-vertical"
-            onChange={handleChange}
-          />
-          <Button
-            text="Register"
-            variant="blue"
-            size="small"
-            type="submit"
-            className="login-page-btn register-btn"
-            // onChange={handleChange}
-          />
-          <p className="no-account">
-            Already have an account?<Link to="/login"> Login</Link>
-          </p>
+          <div className="two-inputs-container">
+            <Input
+              label="id_number"
+              labelText="ID Number"
+              type="text"
+              name="id_number"
+              id="id_number"
+              placeholder="Enter your Id number"
+              classNames="input-vertical "
+              onChange={handleChange}
+            />
+            <Input
+              label="email"
+              labelText="Email"
+              type="text"
+              name="email"
+              id="email"
+              placeholder="Enter your email"
+              classNames="input-vertical"
+              onChange={handleChange}
+            />
+          </div>
+          <div className="two-inputs-container">
+            <Input
+              label="password"
+              labelText="Password"
+              type="password"
+              name="password"
+              id="password"
+              placeholder="Enter your password"
+              classNames="input-vertical"
+              onChange={handleChange}
+            />
+            <Input
+              label="password_confirmation"
+              labelText="Password Confirmation"
+              type="password"
+              name="password_confirmation"
+              id="password_confirmation"
+              placeholder="Confirm youe entered password"
+              classNames="input-vertical"
+              onChange={handleChange}
+            />
+          </div>
+          <div className="register-login-container">
+            <Button
+              text="Register"
+              variant="blue"
+              size="small"
+              type="submit"
+              className="login-page-btn register-btn"
+            />
+            <p className="no-account">
+              Already have an account?<Link to="/login"> Login</Link>
+            </p>
+          </div>
         </form>
       </div>
 

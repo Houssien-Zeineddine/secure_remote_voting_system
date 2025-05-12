@@ -42,7 +42,9 @@ const Sidebar = () => {
             alt="No Profile Pictire"
             className="profilePicture"
           />
-          <h2 className="user-name">User Name</h2>
+          <h2 className="user-name">
+            {user.first_name} {user.middle_name} {user.last_name}
+          </h2>
         </div>
         <Link
           to="/dashboard"

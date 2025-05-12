@@ -98,12 +98,6 @@
     text-align: center;
   }
 
-  .stop-elections-btn-wrapper {
-    width: 100%;
-    display: flex;
-    justify-content: flex-end;
-  }
-
   .yes-no-btn-wrapper {
     display: flex;
     justify-content: center;
@@ -127,3 +121,7 @@
     width: 100%;
   }
   
+  .add-remove-candidate-wrapper {
+    display: flex;
+    gap: 2rem;
+  }

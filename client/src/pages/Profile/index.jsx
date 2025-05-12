@@ -15,6 +15,7 @@ const Profile = () => {
   const [tempData, setTempData] = useState({ ...profileData });
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
+  // const [avatarURL, setAvatarURL] = useState(defaultImage);
 
   const access_token = localStorage.getItem("access_token");
 
@@ -22,6 +23,11 @@ const Profile = () => {
     if (user) {
       setProfileData(user);
       setTempData(user);
+      // setAvatarURL(
+      //   user.profile_picture_path
+      //     ? `/storage/app/public/${user.profile_picture_path}`
+      //     : defaultImage
+      // );
     }
     console.log(user);
   }, [user]);
@@ -127,12 +133,14 @@ const Profile = () => {
                 value={tempData.id_number}
                 onChange={handleChange}
               />
-              <Button
-                text={isLoading ? "Saving..." : "Save Changes"}
-                variant="blue"
-                size="small"
-                type="submit"
-              />
+              <div className="save-changes-wrapper">
+                <Button
+                  text={isLoading ? "Saving..." : "Save Changes"}
+                  variant="blue"
+                  size="small"
+                  type="submit"
+                />
+              </div>
             </form>{" "}
           </>
         ) : (
@@ -144,7 +152,7 @@ const Profile = () => {
 
               {user.profile_picture_path ? (
                 <img
-                  src="../../assets/developer 1.svg"
+                  src={`http://127.0.0.1:8000/storage/${user.profile_picture_path}`}
                   alt="Profile Image"
                   className="profile-image"
                 />
@@ -176,14 +184,15 @@ const Profile = () => {
               <label htmlFor="id_number">ID Number</label>
               <span>{profileData.id_number}</span>
             </div>
-            <Button
-              text="Edit Profile"
-              variant="white"
-              size="small"
-              type="submit"
-              className="edit-profile-btn"
-              onClick={handleEdit}
-            />
+            <div className="edit-profile-btn-cpontainer">
+              <Button
+                text="Edit Profile"
+                variant="white"
+                size="small"
+                type="submit"
+                onClick={handleEdit}
+              />
+            </div>
           </div>
         )}
       </div>

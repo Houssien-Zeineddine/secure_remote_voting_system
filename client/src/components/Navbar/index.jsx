@@ -1,5 +1,5 @@
 import React, { useContext } from "react";
-import { Link, useLocation, useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { HashLink } from "react-router-hash-link";
 import { AuthContext } from "../Context/AuthContext";
 import "./style.css";
@@ -71,7 +71,7 @@ const Navbar = () => {
                   <Button
                     text="Logout"
                     variant="transparent"
-                    size="big"
+                    size="medium"
                     onClick={handleLogout}
                     className="btn-logout"
                   />
@@ -79,7 +79,7 @@ const Navbar = () => {
                   <Button
                     text="Register"
                     variant="white"
-                    size="big"
+                    size="medium"
                     onClick={() => navigate("/register")}
                     className="btn-register"
                   />
