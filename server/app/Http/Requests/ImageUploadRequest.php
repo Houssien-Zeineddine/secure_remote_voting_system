@@ -28,4 +28,14 @@ class ImageUploadRequest extends FormRequest {
             ]
         ];
     }
+
+     public function messages() {
+        return [
+            'image.required' => 'Please select an image to upload',
+            'image.image' => 'The file must be an image',
+            'image.mimes' => 'Only JPEG, PNG, JPG, GIF, and WEBP formats are allowed',
+            'image.max' => 'The image size cannot exceed 5MB',
+            'image.dimensions' => 'Image dimensions must be between 100x100 and 5000x5000 pixels',
+        ];
+    }
 }
