@@ -71,5 +71,5 @@
 
 .btn-logout {
     font-size: var(--font-size-header-4);
-    width: 10rem;
+    /* width: 10rem; */
 }
