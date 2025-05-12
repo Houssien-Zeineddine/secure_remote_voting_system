@@ -7,71 +7,76 @@ import { AuthContext } from "../Context/AuthContext";
 import axiosBaseUrl from "../../Utils/axios";
 
 const ImageUpload = () => {
-  const { user } = useContext(AuthContext);
-
+  const { user, setUser } = useContext(AuthContext);
   const [avatarURL, setAvatarURL] = useState(defaultImage);
   const access_token = localStorage.getItem("access_token");
   const fileUploadRef = useRef();
 
   useEffect(() => {
     if (user && user.profile_picture_path) {
-      setAvatarURL(user.profile_picture_path);
+      setAvatarURL(
+        `http://127.0.0.1:8000/storage/${user.profile_picture_path}`
+      );
     } else {
       setAvatarURL(defaultImage);
     }
-  }, [user.profile_picture_path]);
+  }, [user?.profile_picture_path]);
 
-  const handleImageUpload = (e) => {
-    e.preventDefault();
-    fileUploadRef.current.click();
+  const handleImageUploadClick = () => {
+    fileUploadRef.current.click(); // opens file dialog
   };
 
   const uploadImageDisplay = async () => {
     try {
-      setAvatarURL(uploadingAnimation);
       const uploadedFile = fileUploadRef.current.files[0];
-      const formData = new FormData();
+      if (!uploadedFile) return;
 
+      setAvatarURL(uploadingAnimation);
+
+      const formData = new FormData();
       formData.append("image", uploadedFile);
 
-      console.log("Formdata:", formData);
-
       const response = await axiosBaseUrl.post("/user/upload", formData, {
-        headers: { Authorization: `Bearer ${access_token}` },
+        headers: {
+          Authorization: `Bearer ${access_token}`,
+          "Content-Type": "multipart/form-data",
+        },
       });
 
       if (response.status === 200) {
-        const data = await response.data;
-        setAvatarURL(data?.url);
+        const data = response.data;
+        setAvatarURL(
+          `http://127.0.0.1:8000/storage/${user.profile_picture_path}`
+        );
+        setUser((prevUser) => ({
+          ...prevUser,
+          profile_picture_path: data.path,
+        }));
       }
     } catch (error) {
-      console.log(error);
+      console.log("Upload failed", error);
       setAvatarURL(defaultImage);
     }
   };
 
   return (
-    <div>
-      <div className="image-upload-container">
-        <img src={avatarURL} alt="Avatar" className="avatar-image" />
-        <form
-          id="form"
-          encType="multipart/form-data"
-          className="upload-form"
-          onSubmit={handleImageUpload}
-        >
-          <button type="submit" className="edit-button">
-            <img src={editIcon} alt="Edit Image" className="edit-icon" />
-          </button>
-          <input
-            type="file"
-            id="file"
-            ref={fileUploadRef}
-            onChange={uploadImageDisplay}
-            className="file-input"
-          />
-        </form>
-      </div>
+    <div className="image-upload-container">
+      <img src={avatarURL} alt="Avatar" className="avatar-image" />
+      <button
+        type="button"
+        onClick={handleImageUploadClick}
+        className="edit-button"
+      >
+        <img src={editIcon} alt="Edit" className="edit-icon" />
+      </button>
+      <input
+        type="file"
+        ref={fileUploadRef}
+        onChange={uploadImageDisplay}
+        className="file-input"
+        style={{ display: "none" }}
+        accept="image/*"
+      />
     </div>
   );
 };

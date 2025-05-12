@@ -15,7 +15,7 @@ const Profile = () => {
   const [tempData, setTempData] = useState({ ...profileData });
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
-  const [avatarURL, setAvatarURL] = useState(defaultImage);
+  // const [avatarURL, setAvatarURL] = useState(defaultImage);
 
   const access_token = localStorage.getItem("access_token");
 
@@ -23,11 +23,11 @@ const Profile = () => {
     if (user) {
       setProfileData(user);
       setTempData(user);
-      setAvatarURL(
-        user.profile_picture_path
-          ? `/storage/app/public/${user.profile_picture_path}`
-          : defaultImage
-      );
+      // setAvatarURL(
+      //   user.profile_picture_path
+      //     ? `/storage/app/public/${user.profile_picture_path}`
+      //     : defaultImage
+      // );
     }
     console.log(user);
   }, [user]);
@@ -152,7 +152,7 @@ const Profile = () => {
 
               {user.profile_picture_path ? (
                 <img
-                  src={avatarURL}
+                  src={`http://127.0.0.1:8000/storage/${user.profile_picture_path}`}
                   alt="Profile Image"
                   className="profile-image"
                 />
