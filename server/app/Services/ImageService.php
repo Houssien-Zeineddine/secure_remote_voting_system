@@ -27,7 +27,7 @@ class ImageService {
         );
 
         $post = new User;
-        $post->image_path = $path;
+        $post->profile_picture_path = $path;
         $post->save();
 
         return response()->json([
