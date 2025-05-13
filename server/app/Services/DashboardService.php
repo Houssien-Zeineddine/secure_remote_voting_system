@@ -26,18 +26,21 @@ class DashboardService {
         $result = [];
 
         foreach($candidates as $candidate) {
-            $voteCount = CountedVote::where('candidate_id', $candidate->id)->count();
+            $vote_count = CountedVote::where('candidate_id', $candidate->id)->count();
 
             Result::updateOrCreate(
                 ['candidate_id' => $candidate->id],
                 ['elections_id' => $elections_id],
-                ['counted_votes' => $voteCount]
+                ['counted_votes' => $vote_count]
             );
+
+            $percentage = (($vote_count * 100 ) / ($voter_count));
 
             $results[] = [
                 'candidate_id' => $candidate->id,
                 'name' => $candidate->first_name . ' ' . $candidate->middle_name . ' ' . $candidate->last_name,
-                'votes' => $voteCount
+                'votes' => $vote_count,
+                'percentage' => $percentage
             ];
         }
 
