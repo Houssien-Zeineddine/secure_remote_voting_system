@@ -26,7 +26,5 @@ class ElectionsSeeder extends Seeder {
             'on_going' => true,
             'region_id' => $region->id,
         ]);
-        
-        $this->command->info('Election created successfully.');
     }
 }
