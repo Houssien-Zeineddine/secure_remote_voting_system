@@ -5,6 +5,7 @@ namespace Database\Seeders;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use App\Models\Elections;
+use App\Models\Campaign;
 use App\Models\User;
 
 class CampaignSeeder extends Seeder {
