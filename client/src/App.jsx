@@ -13,7 +13,7 @@ import AddCampaign from "./pages/AddCampaign";
 import AddElections from "./pages/AddElections";
 import LayoutWithSidebarAndProvider from "./layouts/LayoutWithSidebarAndProvider";
 import PrivateRoute from "./components/PrivateRoute/index.jsx";
-import { AuthProvider } from "./components/Contex/AuthorizationContext.jsx";
+import { AuthProvider } from "./components/Context/AuthorizationContext.jsx";
 
 const App = () => {
   return (

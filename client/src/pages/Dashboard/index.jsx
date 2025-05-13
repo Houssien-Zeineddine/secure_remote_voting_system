@@ -1,7 +1,7 @@
 import React, { useContext } from "react";
 import Elections from "./Elections";
 import NoElections from "../../components/NoElections";
-import { CheckElectionsContext } from "../../components/Contex/CheckElectionsContext";
+import { CheckElectionsContext } from "../../components/Context/CheckElectionsContext";
 import "./style.css";
 
 const Dashboard = () => {

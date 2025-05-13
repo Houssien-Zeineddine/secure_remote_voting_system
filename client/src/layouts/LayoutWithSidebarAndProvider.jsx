@@ -1,9 +1,9 @@
 import React from "react";
 import Sidebar from "../components/Sidebar";
-import { CheckElectionsProvider } from "../components/Contex/CheckElectionsContext";
+import { CheckElectionsProvider } from "../components/Context/CheckElectionsContext";
 import { Outlet } from "react-router-dom";
-import { FetchCandidatesProvider } from "../components/Contex/FetchCandidatesContext";
-import { CheckCampaignProvider } from "../components/Contex/CheckCampaignContext";
+import { FetchCandidatesProvider } from "../components/Context/FetchCandidatesContext";
+import { CheckCampaignProvider } from "../components/Context/CheckCampaignContext";
 
 const LayoutWithSidebarAndProvider = () => {
   return (
