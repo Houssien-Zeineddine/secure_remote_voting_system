@@ -96,15 +96,15 @@ const Elections = () => {
       <div className="statistics-container">
         <h4>Voting Process</h4>
         <div className="round-div registered-voter">
-          <p>{stats.counted_votes}</p>
+          <p>{stats.total_voters}</p>
         </div>
         <p>Total Number of Registered Voters</p>
         <div className="round-div total-votes">
-          <p>{stats.voter_count}</p>
+          <p>{stats.total_counted_votes}</p>
         </div>
         <p>Total Number of Votes</p>
         <div className="round-div maliscious-votes">
-          <p>{stats.malicious_votes}</p>
+          <p>{stats.total_malicious_votes}</p>
         </div>
         <p>Total Number of Malicious votes</p>
       </div>
