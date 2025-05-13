@@ -4,24 +4,43 @@ import Button from "../../../components/Button";
 import "./style.css";
 import Dialogue from "../../../components/Dialogue";
 import { FetchCandidatesContext } from "../../../components/Context/FetchCandidatesContext";
+import { CheckCampaignContext } from "../../../components/Context/CheckCampaignContext";
 import { capitalizeFirstLetter } from "../../../Utils/helpers";
 
 const VoteForCandidate = () => {
   const { candidates } = useContext(FetchCandidatesContext);
+  const { campaigns } = useContext(CheckCampaignContext);
 
   const [selectedCandidate, setSelectedCandidate] = useState(null);
-  const [selectedCandidateCampaign, setSelectedCandidateCampaign] =
-    useState(null);
   const [isDialogueOpen, setIsDialogueOpen] = useState(false);
+
+  const getCandidateWithCampaign = (candidate) => {
+    const campaign = campaigns.find((c) => c.user_id === candidate.id);
+    return {
+      ...candidate,
+      campaign: campaign?.campaign || "No campaign information available",
+    };
+  };
 
   const handleVote = () => {
     //function to add vote to the corresponding candidate
   };
 
+  // const candidateWithCampaign = getCandidateWithCampaign(candidate);
+  // setSelectedCandidate(candidateWithCampaign);
+  // setIsDialogueOpen(true);
+
   const handleViewDetails = (candidate) => {
-    console.log("Selected Candidate:", candidate);
-    setSelectedCandidate(candidate);
+    console.log("Candidate:", candidate);
+    const candidateWithCampaign = getCandidateWithCampaign(candidate);
+
+    setSelectedCandidate(candidateWithCampaign);
+    console.log("selected candiate: ", selectedCandidate);
+
     setIsDialogueOpen(true);
+    // const candidateWithCampaign = getCandidateWithCampaign(candidate);
+    // setSelectedCandidate(candidateWithCampaign);
+    // setIsDialogueOpen(true);
   };
 
   const closeDialogue = () => {
