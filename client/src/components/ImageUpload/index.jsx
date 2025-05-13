@@ -3,7 +3,7 @@ import defaultImage from "../../assets/sidebar icons/default profile picture.jpg
 import editIcon from "../../assets/image-edit.svg";
 import uploadingAnimation from "../../assets/Cloud uploading.gif";
 import "./style.css";
-import { AuthContext } from "../Context/AuthContext";
+import { AuthContext } from "../Context/AuthorizationContext";
 import axiosBaseUrl from "../../Utils/axios";
 
 const ImageUpload = () => {

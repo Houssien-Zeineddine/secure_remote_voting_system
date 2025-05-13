@@ -13,7 +13,7 @@ import blueAddElections from "../../assets/sidebar icons/blue icons/plus icon.sv
 import blueVote from "../../assets/sidebar icons/blue icons/vote icon.svg";
 import blueGuidelines from "../../assets/sidebar icons/blue icons/guidelines icon.svg";
 import blueSettings from "../../assets/sidebar icons/blue icons/settings icon.svg";
-import { AuthContext } from "../Context/AuthContext";
+import { AuthContext } from "../Context/AuthorizationContext";
 import { CheckElectionsContext } from "../Context/CheckElectionsContext";
 import "./style.css";
 

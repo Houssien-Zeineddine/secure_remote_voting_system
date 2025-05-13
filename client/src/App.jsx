@@ -11,9 +11,13 @@ import Guidelines from "./pages/Guidelines";
 import Settings from "./pages/Settings";
 import AddCampaign from "./pages/AddCampaign";
 import AddElections from "./pages/AddElections";
+<<<<<<< Updated upstream
 import { AuthProvider } from "./components/Context/AuthContext.jsx";
+=======
+>>>>>>> Stashed changes
 import LayoutWithSidebarAndProvider from "./layouts/LayoutWithSidebarAndProvider";
 import PrivateRoute from "./components/PrivateRoute/index.jsx";
+import { AuthProvider } from "./components/Context/AuthorizationContext.jsx";
 
 const App = () => {
   return (

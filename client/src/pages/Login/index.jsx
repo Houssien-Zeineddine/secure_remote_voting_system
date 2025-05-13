@@ -6,7 +6,7 @@ import Button from "../../components/Button";
 import logo from "../../assets/logos/blue-web-logo-no-bg.svg";
 import secureIllustration from "../../assets/web-security login page.svg";
 import axiosBaseUrl from "../../Utils/axios";
-import { AuthContext } from "../../components/Context/AuthContext";
+import { AuthContext } from "../../components/Context/AuthorizationContext";
 import "./style.css";
 
 const Login = () => {

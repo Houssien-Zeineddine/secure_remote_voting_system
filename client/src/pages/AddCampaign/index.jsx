@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from "react";
-import { AuthContext } from "../../components/Context/AuthContext";
+import { AuthContext } from "../../components/Context/AuthorizationContext";
 import { CheckCampaignContext } from "../../components/Context/CheckCampaignContext";
 import { FetchCandidatesContext } from "../../components/Context/FetchCandidatesContext";
 import { CheckElectionsContext } from "../../components/Context/CheckElectionsContext";
