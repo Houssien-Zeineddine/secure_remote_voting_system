@@ -15,5 +15,11 @@ class CampaignSeeder extends Seeder {
         $election = Elections::where('on_going', true)->first();
         $candidates = User::where('user_type', 2)->get();
 
+        foreach ($candidates as $candidate) {
+            Campaign::factory()->create([
+                'user_id' => $candidate->id,
+                'elections_id' => $election->id,
+            ]);
+        }
     }
 }
