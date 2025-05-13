@@ -7,7 +7,7 @@ import Button from "../../components/Button";
 import Input from "../../components/Input";
 import "./style.css";
 import axiosBaseUrl from "../../Utils/axios";
-import capitalizeFirstLetter from "../../Utils/helpers";
+import { capitalizeFirstLetter } from "../../Utils/helpers";
 
 const AdminPage = () => {
   const { ongoingActiveElections, setOngoingActiveElections, fetchElections } =
