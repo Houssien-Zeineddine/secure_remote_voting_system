@@ -11,8 +11,19 @@ const VoteForCandidate = () => {
   const { candidates } = useContext(FetchCandidatesContext);
   const { campaigns } = useContext(CheckCampaignContext);
 
-  const [selectedCandidate, setSelectedCandidate] = useState(null);
+  const [selectedCandidate, setSelectedCandidate] = useState("");
   const [isDialogueOpen, setIsDialogueOpen] = useState(false);
+  const [isVoteToCandidateOpen, setIsVoteToCandidateOpen] = useState(false);
+
+  const openVoteToCandidateDialog = (candidate) => {
+    setSelectedCandidate(candidate);
+    setIsVoteToCandidateOpen(true);
+  };
+
+  const closeVoteToCandidateDialog = () => {
+    setSelectedCandidate("");
+    setIsVoteToCandidateOpen(false);
+  };
 
   const getCandidateWithCampaign = (candidate) => {
     const campaign = campaigns.find((c) => c.user_id === candidate.id);
@@ -60,7 +71,7 @@ const VoteForCandidate = () => {
                 text="Vote"
                 variant="blue"
                 size="small"
-                onClick={handleVote}
+                onClick={(candidate) => openVoteToCandidateDialog(candidate)}
               />
               <Button
                 text="View Details"
@@ -92,6 +103,46 @@ const VoteForCandidate = () => {
         }
       >
         <p>{selectedCandidate.campaign}</p>
+      </Dialogue>
+
+      {/* Dialogue to double check before voting */}
+      <Dialogue
+        isOpen={isVoteToCandidateOpen}
+        onClose={closeVoteToCandidateDialog}
+        title={`Confirm voting to ${capitalizeFirstLetter(
+          selectedCandidate?.first_name
+        )} ${capitalizeFirstLetter(
+          selectedCandidate?.middle_name
+        )} ${capitalizeFirstLetter(selectedCandidate?.last_name)}`}
+        footerContent={
+          <div className="yes-no-btn-wrapper">
+            <Button
+              text="No"
+              variant="white"
+              size="small"
+              onClick={closeVoteToCandidateDialog}
+            />
+            <Button
+              text="Yes"
+              variant="red"
+              size="small"
+              onClick={handleVote}
+            />
+          </div>
+        }
+      >
+        {selectedCandidate && (
+          <>
+            <p>
+              Remove{" "}
+              <strong>
+                {selectedCandidate.first_name} {selectedCandidate.last_name}
+              </strong>{" "}
+              from the election?
+            </p>
+            <p>This cannot be undone.</p>
+          </>
+        )}
       </Dialogue>
     </div>
   );
