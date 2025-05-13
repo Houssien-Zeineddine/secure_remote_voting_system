@@ -14,20 +14,18 @@ class CountedVoteSeeder extends Seeder {
      */
     public function run(): void {
         $election = Elections::where('on_going', true)->first();
-        $users = User::all();
-        $candidates = User::where('id', '=', 2)->get();
+        $voters = User::inRandomOrder()->take(220)->get();
+        $candidates = User::where('user_type', 2)->get();
 
         CountedVote::factory()
-            ->count(223)
-            ->sequence(function () use ($users, $election, $candidates) {
+            ->count($voters->count())
+            ->sequence(function ($sequence) use ($voters, $election, $candidates) {
                 return [
-                    'user_id' => $users->random()->id,
+                    'user_id' => $voters[$sequence->index]->id,
                     'elections_id' => $election->id,
                     'candidate_id' => $candidates->random()->id,
                 ];
             })
-            ->create();
-            
-        $this->command->info('223 counted votes created successfully.');
-    }
+            ->create();      
+        }
 }

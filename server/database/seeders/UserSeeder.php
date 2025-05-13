@@ -6,8 +6,7 @@ use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use App\Models\User;
 
-class UserSeeder extends Seeder
-{
+class UserSeeder extends Seeder {
     /**
      * Run the database seeds.
      */
@@ -15,7 +14,5 @@ class UserSeeder extends Seeder
         User::factory()->count(249)->create();
 
         User::factory()->count(6)->candidate()->create();
-        
-        $this->command->info('256 users created successfully.');
     }
 }

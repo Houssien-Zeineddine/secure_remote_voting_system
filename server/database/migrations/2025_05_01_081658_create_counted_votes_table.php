@@ -17,6 +17,7 @@ return new class extends Migration
             $table->foreignId('user_id');
             $table->integer('candidate_id');
             $table->timestamps();
+            $table->timestamp('deleted_at')->nullable();
         });
     }
 

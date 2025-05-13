@@ -18,6 +18,7 @@ return new class extends Migration
             $table->integer('candidate_id');
             $table->text('cancelation_reason');
             $table->timestamps();
+            $table->timestamp('deleted_at')->nullable();
         });
     }
 
