@@ -11,7 +11,7 @@ const VoteForCandidate = () => {
   const { candidates } = useContext(FetchCandidatesContext);
   const { campaigns } = useContext(CheckCampaignContext);
 
-  const [selectedCandidate, setSelectedCandidate] = useState(null);
+  const [selectedCandidate, setSelectedCandidate] = useState("");
   const [isDialogueOpen, setIsDialogueOpen] = useState(false);
 
   const getCandidateWithCampaign = (candidate) => {
@@ -29,6 +29,8 @@ const VoteForCandidate = () => {
   const handleViewDetails = (candidate) => {
     const candidateWithCampaign = getCandidateWithCampaign(candidate);
     setSelectedCandidate(candidateWithCampaign);
+    console.log(selectedCandidate);
+
     setIsDialogueOpen(true);
   };
 
@@ -93,6 +95,8 @@ const VoteForCandidate = () => {
       >
         <p>{selectedCandidate.campaign}</p>
       </Dialogue>
+
+      {/* Dialogue to double check before voting */}
     </div>
   );
 };
