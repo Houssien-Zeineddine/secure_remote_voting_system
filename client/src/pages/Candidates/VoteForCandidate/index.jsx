@@ -40,8 +40,6 @@ const VoteForCandidate = () => {
   const handleViewDetails = (candidate) => {
     const candidateWithCampaign = getCandidateWithCampaign(candidate);
     setSelectedCandidate(candidateWithCampaign);
-    console.log(selectedCandidate);
-
     setIsDialogueOpen(true);
   };
 
