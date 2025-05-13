@@ -38,7 +38,10 @@ const VoteForCandidate = () => {
               }
               alt=""
             />
-            <h2>{candidate_info.candidate_name}</h2>
+            <h2>
+              {candidates[index].first_name} {candidates[index].middle_name}{" "}
+              {candidates[index].last_name}
+            </h2>
             <div className="vote-view-details-btns">
               <Button
                 text="Vote"
