@@ -157,11 +157,3 @@ jobs:
             sleep 10
             docker exec $(docker ps -qf "name=backend") php artisan migrate
             docker image prune -a -f
-
-# docker-compose down
-#             docker rmi ${{ secrets.DOCKERHUB_USERNAME }}/final_project_laravel_image:latest
-#             docker rmi ${{ secrets.DOCKERHUB_USERNAME }}/final_project_react_image:latest
-#             docker image prune -a -f
-#             docker-compose up -d
-#             sleep 10  # Wait for containers to start
-#             docker exec $(docker ps -qf "name=backend") php artisan migrate
