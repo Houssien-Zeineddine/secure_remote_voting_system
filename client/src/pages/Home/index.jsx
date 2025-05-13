@@ -14,7 +14,7 @@ import Button from "../../components/Button";
 import { useNavigate } from "react-router-dom";
 import "./styles.css";
 import Questions from "../../components/Questions";
-import { AuthContext } from "../../components/Contex/AuthorizationContext";
+import { AuthContext } from "../../components/Context/AuthorizationContext";
 
 const Home = () => {
   const { user } = useContext(AuthContext);

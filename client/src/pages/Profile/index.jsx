@@ -1,7 +1,7 @@
 import React, { useEffect, useState, useContext } from "react";
 import Input from "../../components/Input";
 import Button from "../../components/Button";
-import { AuthContext } from "../../components/Contex/AuthorizationContext";
+import { AuthContext } from "../../components/Context/AuthorizationContext";
 import "./style.css";
 import axiosBaseUrl from "../../Utils/axios";
 import ImageUpload from "../../components/ImageUpload";
