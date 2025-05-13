@@ -29,9 +29,6 @@ const Elections = () => {
   useEffect(() => {
     getStats();
   }, []);
-  const registeredVoters = 200; //getting voters number from backend
-  const totalVotes = 220; //getting voters number from backend
-  const malisciousVotes = 20; //getting voters number from backend
 
   //hardcoded results object for testing
   const results = [
