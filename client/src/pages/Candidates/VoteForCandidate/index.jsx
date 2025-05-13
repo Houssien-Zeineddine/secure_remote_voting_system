@@ -26,21 +26,10 @@ const VoteForCandidate = () => {
     //function to add vote to the corresponding candidate
   };
 
-  // const candidateWithCampaign = getCandidateWithCampaign(candidate);
-  // setSelectedCandidate(candidateWithCampaign);
-  // setIsDialogueOpen(true);
-
   const handleViewDetails = (candidate) => {
-    console.log("Candidate:", candidate);
     const candidateWithCampaign = getCandidateWithCampaign(candidate);
-
     setSelectedCandidate(candidateWithCampaign);
-    console.log("selected candiate: ", selectedCandidate);
-
     setIsDialogueOpen(true);
-    // const candidateWithCampaign = getCandidateWithCampaign(candidate);
-    // setSelectedCandidate(candidateWithCampaign);
-    // setIsDialogueOpen(true);
   };
 
   const closeDialogue = () => {
