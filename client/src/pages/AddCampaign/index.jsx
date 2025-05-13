@@ -3,7 +3,7 @@ import { AuthContext } from "../../components/Context/AuthContext";
 import { CheckCampaignContext } from "../../components/Context/CheckCampaignContext";
 import { FetchCandidatesContext } from "../../components/Context/FetchCandidatesContext";
 import { CheckElectionsContext } from "../../components/Context/CheckElectionsContext";
-import capitalizeFirstLetter from "../../Utils/helpers";
+import { capitalizeFirstLetter } from "../../Utils/helpers";
 import addCampaign from "../../assets/plus (1) 1.svg";
 import Dialogue from "../../components/Dialogue";
 import Button from "../../components/Button";

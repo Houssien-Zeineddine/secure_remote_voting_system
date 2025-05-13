@@ -1,10 +1,14 @@
-import React from "react";
+import React, { useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import Button from "../../../components/Button";
 import politician from "../../../assets/Politician giving his speech to public.svg";
 import "./style.css";
+import { CheckElectionsContext } from "../../../components/Context/CheckElectionsContext";
+import { capitalizeTitle } from "../../../Utils/helpers";
 
 const Elections = () => {
+  const { ongoingActiveElections } = useContext(CheckElectionsContext);
+
   const navigate = useNavigate();
   const registeredVoters = 200; //getting voters number from backend
   const totalVotes = 220; //getting voters number from backend
@@ -37,7 +41,7 @@ const Elections = () => {
         <div className="dashboard-description-container">
           <div className="dashboard-description">
             <h4>Ongoing Elections</h4>
-            <h2>Elections Name</h2>
+            <h2>{capitalizeTitle(ongoingActiveElections.title)}</h2>
             <Button
               text="Vote Now"
               variant="blue"
