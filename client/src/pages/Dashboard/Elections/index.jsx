@@ -1,18 +1,34 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Button from "../../../components/Button";
 import politician from "../../../assets/Politician giving his speech to public.svg";
 import "./style.css";
 import { CheckElectionsContext } from "../../../components/Context/CheckElectionsContext";
 import { capitalizeTitle } from "../../../Utils/helpers";
+import axiosBaseUrl from "../../../Utils/axios";
 
 const Elections = () => {
   const { ongoingActiveElections } = useContext(CheckElectionsContext);
 
   const navigate = useNavigate();
-  const registeredVoters = 200; //getting voters number from backend
-  const totalVotes = 220; //getting voters number from backend
-  const malisciousVotes = 20; //getting voters number from backend
+
+  const [stats, setStats] = useState("");
+  const access_token = localStorage.getItem("access_token");
+
+  const getStats = async () => {
+    try {
+      const response = await axiosBaseUrl.get("/user/getstats", {
+        headers: { Authorization: `Bearer ${access_token}` },
+      });
+      setStats(response.data);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  useEffect(() => {
+    getStats();
+  }, []);
 
   //hardcoded results object for testing
   const results = [
@@ -76,15 +92,15 @@ const Elections = () => {
       <div className="statistics-container">
         <h4>Voting Process</h4>
         <div className="round-div registered-voter">
-          <p>{registeredVoters}</p>
+          <p>{stats.counted_votes}</p>
         </div>
         <p>Total Number of Registered Voters</p>
         <div className="round-div total-votes">
-          <p>{totalVotes}</p>
+          <p>{stats.voter_count}</p>
         </div>
         <p>Total Number of Votes</p>
         <div className="round-div maliscious-votes">
-          <p>{malisciousVotes}</p>
+          <p>{stats.malicious_votes}</p>
         </div>
         <p>Total Number of Malicious votes</p>
       </div>
