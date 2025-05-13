@@ -24,7 +24,7 @@ Route::group(['prefix' => 'v0.1'], function () {
     Route::middleware('auth:api')->group(function() {
         Route::middleware('CheckUserType')->group( function () {
             Route::group(['prefix' => 'user'], function() {
-                Route::get('/dashboard', [DashboardController::class, 'index']);
+                Route::get('/getvoters', [DashboardController::class, 'getVoters']);
                 Route::get('/candidates', [UserController::class, 'getCandidates']);
                 Route::post('/editprofile', [UserController::class, 'updateProfile']);
                 Route::post('/upload', [ImageController::class, 'upload']);
