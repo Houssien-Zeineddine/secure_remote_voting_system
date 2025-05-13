@@ -40,7 +40,7 @@ class DashboardService {
                 'candidate_id' => $candidate->id,
                 'name' => $candidate->first_name . ' ' . $candidate->middle_name . ' ' . $candidate->last_name,
                 'votes' => $vote_count,
-                'percentage' => $percentage
+                'percentage' => round($percentage, 2)
             ];
         }
 
