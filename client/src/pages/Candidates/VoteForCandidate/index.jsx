@@ -4,6 +4,7 @@ import Button from "../../../components/Button";
 import "./style.css";
 import Dialogue from "../../../components/Dialogue";
 import { FetchCandidatesContext } from "../../../components/Context/FetchCandidatesContext";
+import { capitalizeFirstLetter } from "../../../Utils/helpers";
 
 const VoteForCandidate = () => {
   const { candidates } = useContext(FetchCandidatesContext);
@@ -39,9 +40,9 @@ const VoteForCandidate = () => {
               alt=""
             />
             <h2>
-              {capitalizeTitle(candidates[index].first_name)}{" "}
-              {capitalizeTitle(candidates[index].middle_name)}{" "}
-              {capitalizeTitle(candidates[index].last_name)}
+              {capitalizeFirstLetter(candidates[index].first_name)}{" "}
+              {capitalizeFirstLetter(candidates[index].middle_name)}{" "}
+              {capitalizeFirstLetter(candidates[index].last_name)}
             </h2>
             <div className="vote-view-details-btns">
               <Button
