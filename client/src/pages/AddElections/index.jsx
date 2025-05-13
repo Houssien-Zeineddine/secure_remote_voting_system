@@ -1,6 +1,6 @@
 import React, { useContext, useState } from "react";
-import { CheckElectionsContext } from "../../components/Context/CheckElectionsContext";
-import { FetchCandidatesContext } from "../../components/Context/FetchCandidatesContext";
+import { CheckElectionsContext } from "../../components/Contex/CheckElectionsContext";
+import { FetchCandidatesContext } from "../../components/Contex/FetchCandidatesContext";
 import addElections from "../../assets/plus (1) 1.svg";
 import Dialogue from "../../components/Dialogue";
 import Button from "../../components/Button";

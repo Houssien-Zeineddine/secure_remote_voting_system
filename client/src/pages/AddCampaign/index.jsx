@@ -1,8 +1,8 @@
 import React, { useContext, useEffect, useState } from "react";
-import { AuthContext } from "../../components/Context/AuthorizationContext";
-import { CheckCampaignContext } from "../../components/Context/CheckCampaignContext";
-import { FetchCandidatesContext } from "../../components/Context/FetchCandidatesContext";
-import { CheckElectionsContext } from "../../components/Context/CheckElectionsContext";
+import { AuthContext } from "../../components/Contex/AuthorizationContext";
+import { CheckCampaignContext } from "../../components/Contex/CheckCampaignContext";
+import { FetchCandidatesContext } from "../../components/Contex/FetchCandidatesContext";
+import { CheckElectionsContext } from "../../components/Contex/CheckElectionsContext";
 import { capitalizeFirstLetter } from "../../Utils/helpers";
 import addCampaign from "../../assets/plus (1) 1.svg";
 import Dialogue from "../../components/Dialogue";

@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import Button from "../../../components/Button";
 import politician from "../../../assets/Politician giving his speech to public.svg";
 import "./style.css";
-import { CheckElectionsContext } from "../../../components/Context/CheckElectionsContext";
+import { CheckElectionsContext } from "../../../components/Contex/CheckElectionsContext";
 import { capitalizeTitle } from "../../../Utils/helpers";
 import axiosBaseUrl from "../../../Utils/axios";
 
