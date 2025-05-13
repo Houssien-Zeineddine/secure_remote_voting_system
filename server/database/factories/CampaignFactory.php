@@ -16,11 +16,12 @@ class CampaignFactory extends Factory {
      *
      * @return array<string, mixed>
      */
+
+    protected $model = Campaign::class;
+
     public function definition(): array {
         return [
-            'user_id' => User::factory(),
-            'elections_id' => Elections::factory(),
-            'campaign' => Campaign::factory()
+            'campaign' => $this->faker->paragraph(3),
         ];
     }
 }
