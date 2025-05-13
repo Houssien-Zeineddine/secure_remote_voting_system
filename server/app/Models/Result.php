@@ -15,4 +15,14 @@ class Result extends Model{
         'candidate_id',
         'counted_votes'
     ];
+
+    public function users() {
+        return $this->belongsTo(User::class);
+    }
+
+    public function elections() {
+        return $this->belongsTo(Elections::class);
+    } 
+
+    public $timestamps = true;
 }

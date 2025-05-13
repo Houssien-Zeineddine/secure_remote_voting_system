@@ -22,4 +22,6 @@ class CountedVote extends Model {
     public function elections() {
         return $this->belongsTo(Elections::class);
     }
+
+    public $timestamps = true;
 }

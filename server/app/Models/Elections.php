@@ -31,4 +31,10 @@ class Elections extends Model {
     public function regions() {
         return $this->belongsTo(Region::class);
     }
+
+    public function results() {
+        return $this->hasMany(Results::class);
+    }
+
+    public $timestamps = true;
 }
