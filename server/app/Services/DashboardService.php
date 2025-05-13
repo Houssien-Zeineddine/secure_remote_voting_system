@@ -5,6 +5,8 @@ namespace App\Services;
 use App\Models\User;
 use App\Models\CountedVote;
 use App\Models\MaliciousVote;
+use App\Models\Result;
+use App\Models\Elections;
 
 class DashboardService {
     /**
@@ -16,6 +18,9 @@ class DashboardService {
         $counted_votes = CountedVote::count();
         $malicious_votes = MaliciousVote::count();
         
+        $ongoingElections = Elections::latest()->get();
+        $elections_id = $ongoingElections[0]->id; 
+        
         $candidates = User::where('user_type', 2)->get(); //result is an array of candidates
         
         $result = [];
@@ -25,7 +30,7 @@ class DashboardService {
 
             Result::updateOrCreate(
                 ['candidate_id' => $candidate->id],
-                ['elections_id' => $electionsId],
+                ['elections_id' => $elections_id],
                 ['counted_votes' => $voteCount]
             );
 
@@ -37,9 +42,9 @@ class DashboardService {
         }
 
         return [
-            'total_voters' => $totalVoters,
-            'total_counted_votes' => $totalCountedVotes,
-            'total_malicious_votes' => $totalMaliciousVotes,
+            'total_voters' => $voter_count,
+            'total_counted_votes' => $counted_votes,
+            'total_malicious_votes' => $malicious_votes,
             'results' => $results
         ];
     }

@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->foreignId('candidate_id');
             $table->foreignId('elections_id');
-            $table->integer('counted_votes');
+            $table->integer('counted_votes')->default(0)->change();
             $table->timestamps();
             $table->timestamp('deleted_at')->nullable();
         });
