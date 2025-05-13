@@ -10,6 +10,8 @@ const VoteForCandidate = () => {
   const { candidates } = useContext(FetchCandidatesContext);
 
   const [selectedCandidate, setSelectedCandidate] = useState(null);
+  const [selectedCandidateCampaign, setSelectedCandidateCampaign] =
+    useState(null);
   const [isDialogueOpen, setIsDialogueOpen] = useState(false);
 
   const handleVote = () => {
@@ -81,7 +83,7 @@ const VoteForCandidate = () => {
           />
         }
       >
-        <p>{selectedCandidate?.campaign}</p>
+        <p>{selectedCandidate.campaign}</p>
       </Dialogue>
     </div>
   );
