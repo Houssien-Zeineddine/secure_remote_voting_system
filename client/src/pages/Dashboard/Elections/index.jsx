@@ -4,7 +4,7 @@ import Button from "../../../components/Button";
 import politician from "../../../assets/Politician giving his speech to public.svg";
 import "./style.css";
 import { CheckElectionsContext } from "../../../components/Context/CheckElectionsContext";
-import { capitalizeFirstLetter } from "../../../Utils/helpers";
+import { capitalizeTitle } from "../../../Utils/helpers";
 
 const Elections = () => {
   const { ongoingActiveElections } = useContext(CheckElectionsContext);
@@ -41,7 +41,7 @@ const Elections = () => {
         <div className="dashboard-description-container">
           <div className="dashboard-description">
             <h4>Ongoing Elections</h4>
-            <h2>{capitalizeFirstLetter(ongoingActiveElections.title)}</h2>
+            <h2>{capitalizeTitle(ongoingActiveElections.title)}</h2>
             <Button
               text="Vote Now"
               variant="blue"
