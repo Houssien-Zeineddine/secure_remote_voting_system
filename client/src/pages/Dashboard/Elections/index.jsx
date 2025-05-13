@@ -10,6 +10,8 @@ import axiosBaseUrl from "../../../Utils/axios";
 const Elections = () => {
   const { ongoingActiveElections } = useContext(CheckElectionsContext);
 
+  const [results, setResults] = useState([]);
+
   const navigate = useNavigate();
 
   const [stats, setStats] = useState("");
@@ -21,6 +23,7 @@ const Elections = () => {
         headers: { Authorization: `Bearer ${access_token}` },
       });
       setStats(response.data);
+      setResults(response.data.results);
     } catch (error) {
       console.log(error);
     }
@@ -31,17 +34,17 @@ const Elections = () => {
   }, []);
 
   //hardcoded results object for testing
-  const results = [
-    { candidate_name: "candidate 1", result: 12 },
-    { candidate_name: "candidate 2", result: 40 },
-    { candidate_name: "candidate 3", result: 4 },
-    { candidate_name: "candidate 4", result: 22 },
-    { candidate_name: "candidate 5", result: 2 },
-    { candidate_name: "candidate 6", result: 9 },
-    { candidate_name: "candidate 7", result: 100 },
-    { candidate_name: "candidate 8", result: 3 },
-    { candidate_name: "candidate 9", result: 7 },
-  ];
+  // const result = [
+  //   { candidate_name: "candidate 1", result: 12 },
+  //   { candidate_name: "candidate 2", result: 40 },
+  //   { candidate_name: "candidate 3", result: 4 },
+  //   { candidate_name: "candidate 4", result: 22 },
+  //   { candidate_name: "candidate 5", result: 2 },
+  //   { candidate_name: "candidate 6", result: 9 },
+  //   { candidate_name: "candidate 7", result: 100 },
+  //   { candidate_name: "candidate 8", result: 3 },
+  //   { candidate_name: "candidate 9", result: 7 },
+  // ];
 
   //calling the results API
   // const [results, setResults] = React.useState({});
@@ -70,20 +73,21 @@ const Elections = () => {
         </div>
         <div className="dashboard-live-results">
           <div className="candidates-names">
-            {results.map((candidate, index) => (
-              <div key={index}>
-                <p>{candidate.candidate_name}</p>
-              </div>
-            ))}
+            {Array.isArray(results) &&
+              results.map((candidate, index) => (
+                <div key={index}>
+                  <p>{candidate.name}</p>
+                </div>
+              ))}
           </div>
           <div className="bars-container">
             {results.map((candidate, index) => (
               <div key={index} className="bar-result-container">
                 <div
                   className="vote-bar"
-                  style={{ "--target-width": `${candidate.result}%` }}
+                  style={{ "--target-width": `${candidate.percentage}%` }}
                 ></div>
-                <p>{candidate.result}%</p>
+                <p>{candidate.percentage}%</p>
               </div>
             ))}
           </div>
