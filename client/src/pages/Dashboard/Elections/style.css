@@ -101,6 +101,8 @@
     display: flex;
     gap: 1rem;
     align-items: center;
+    background-color: var(--secondary-color);
+    border-radius: 0px 8px 8px 0px;
 }
 
 /* statistics container */
