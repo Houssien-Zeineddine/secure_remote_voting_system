@@ -23,4 +23,6 @@ class MaliciousVote extends Model {
     public function election() {
         return $this->belongsTo(Elections::class);
     }
+
+    public $timestamps = true;
 }

@@ -85,8 +85,12 @@ class User extends Authenticatable implements JWTSubject {
         return $this->hasOne(Campaign::class);
     }
 
-    public function user_type() {
+    public function user_types() {
         return $this->belongsTo(UserType::class);
+    }
+
+    public function results() {
+        return $this->hasMany(Result::class);
     }
 
     public $timestamps = true;

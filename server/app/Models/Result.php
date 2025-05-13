@@ -4,24 +4,24 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 
-class CountedVote extends Model {
-    use SoftDeletes, HasFactory;
+
+class Result extends Model{
+    use SoftDeletes;
     
     protected $fillable = [
+        'candidate_id',
         'elections_id',
-        'user_id',
-        'candidate_id'
+        'counted_votes'
     ];
 
-    public function user() {
+    public function users() {
         return $this->belongsTo(User::class);
     }
 
     public function elections() {
         return $this->belongsTo(Elections::class);
-    }
+    } 
 
     public $timestamps = true;
 }
