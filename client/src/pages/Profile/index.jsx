@@ -150,19 +150,21 @@ const Profile = () => {
                 <h1>Profile</h1>
               </div>
 
-              {user.profile_picture_path ? (
-                <img
-                  src={`http://127.0.0.1:8000/storage/${user.profile_picture_path}`}
-                  alt="Profile Image"
-                  className="profile-image"
-                />
-              ) : (
-                <img
-                  src={defaultImage}
-                  alt="Default Profile Image"
-                  className="profile-image"
-                />
-              )}
+              <div className="profile-image-wrapper">
+                {user.profile_picture_path ? (
+                  <img
+                    src={`http://127.0.0.1:8000/storage/${user.profile_picture_path}`}
+                    alt="Profile Image"
+                    className="profile-image"
+                  />
+                ) : (
+                  <img
+                    src={defaultImage}
+                    alt="Default Profile Image"
+                    className="profile-image"
+                  />
+                )}
+              </div>
             </div>
             <div className="view-mode-label">
               <label htmlFor="first_name">First Name</label>
