@@ -10,9 +10,8 @@ class Result extends Model{
     use SoftDeletes;
     
     protected $fillable = [
-        'user_id',
-        'elections_id',
         'candidate_id',
+        'elections_id',
         'counted_votes'
     ];
 
