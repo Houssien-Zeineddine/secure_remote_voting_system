@@ -2,8 +2,6 @@
 
 namespace Database\Factories;
 
-use App\Models\User;
-use App\Models\Elections;
 use App\Models\Campaign;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
