@@ -20,13 +20,15 @@
 }
 
  .candidate-card img{
-    height: 53%;
+    height: 50%;
+    aspect-ratio: 1 / 1;
+    object-fit: contain;
     border-radius: 100px;
 } 
 
 .candidate-card {
-    height: 19rem;
-    width: 17.5rem;
+    height: 28rem;
+    width: 22rem;
     display: flex;
     flex-direction: column;
     justify-content: center;
