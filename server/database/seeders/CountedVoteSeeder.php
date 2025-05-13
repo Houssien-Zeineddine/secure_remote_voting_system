@@ -15,7 +15,7 @@ class CountedVoteSeeder extends Seeder {
     public function run(): void {
         $election = Elections::where('on_going', true)->first();
         $users = User::all();
-        $candidates = User::where('id', '=', 2)->get();
+        $candidates = User::where('id', 2)->get();
 
         CountedVote::factory()
             ->count(223)
