@@ -17,6 +17,7 @@ const VoteForCandidate = () => {
   };
 
   const handleViewDetails = (candidate) => {
+    console.log("Selected Candidate:", candidate);
     setSelectedCandidate(candidate);
     setIsDialogueOpen(true);
   };
@@ -29,20 +30,20 @@ const VoteForCandidate = () => {
     <div className="candidates-container">
       <h1>Vote for your Preferred Candidate</h1>
       <div className="candidates-cards-container">
-        {candidates.map((candidate_info, index) => (
+        {candidates.map((candidate, index) => (
           <div key={index} className="candidate-card">
             <img
               src={
-                candidate_info.profile_picture
-                  ? candidate_info.profile_picture
+                candidate.profile_picture
+                  ? candidate.profile_picture
                   : defaultProfilePicture
               }
               alt=""
             />
             <h2>
-              {capitalizeFirstLetter(candidates[index].first_name)}{" "}
-              {capitalizeFirstLetter(candidates[index].middle_name)}{" "}
-              {capitalizeFirstLetter(candidates[index].last_name)}
+              {capitalizeFirstLetter(candidate.first_name)}{" "}
+              {capitalizeFirstLetter(candidate.middle_name)}{" "}
+              {capitalizeFirstLetter(candidate.last_name)}
             </h2>
             <div className="vote-view-details-btns">
               <Button
@@ -55,7 +56,7 @@ const VoteForCandidate = () => {
                 text="View Details"
                 variant="white"
                 size="small"
-                onClick={handleViewDetails}
+                onClick={() => handleViewDetails(candidate)}
               />
             </div>
           </div>
@@ -66,7 +67,11 @@ const VoteForCandidate = () => {
       <Dialogue
         isOpen={isDialogueOpen}
         onClose={closeDialogue}
-        title={`${selectedCandidate?.candidate_name}'s Campaign`}
+        title={`${capitalizeFirstLetter(
+          selectedCandidate?.first_name
+        )} ${capitalizeFirstLetter(
+          selectedCandidate?.middle_name
+        )} ${capitalizeFirstLetter(selectedCandidate?.last_name)}'s Campaign`}
         footerContent={
           <Button
             text="Close"
