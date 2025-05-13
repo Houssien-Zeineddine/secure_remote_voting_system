@@ -21,7 +21,8 @@ class DatabaseSeeder extends Seeder {
         ElectionsSeeder::class,
         UserSeeder::class,
         CountedVoteSeeder::class,
-        MaliciousVoteSeeder::class   
+        MaliciousVoteSeeder::class,
+        CampaignSeeder::class
       ]); 
         
       DB::statement('SET FOREIGN_KEY_CHECKS=1;');
