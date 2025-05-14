@@ -2,13 +2,9 @@
 
 namespace App\Services;
 
-class VoteService
-{
+class VoteService {
     /**
      * Create a new class instance.
      */
-    public function __construct()
-    {
-        //
-    }
+    
 }

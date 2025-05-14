@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 
 class VoteController extends Controller {
-    public function voteToCandidate (Request $rewuest) {
+    public function voteToCandidate (Request $request) {
         $vote = new VoteService();
 
         $filteredVote = $vote->filterVote($request);
