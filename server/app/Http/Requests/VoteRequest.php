@@ -21,8 +21,8 @@ class VoteRequest extends FormRequest {
         return [
             'user_id' => 'required|exists:users,id',
             'candidate_id' => 'required|exists:users,id',
-            'election_id' => 'required|exists:elections,id',
-            'election_region_id' => 'required|exists:regions,id',
+            'elections_id' => 'required|exists:elections,id',
+            'elections_region_id' => 'required|exists:regions,id',
             'latitude' => 'required|numeric|between:33.05,34.70',
             'longitude' => 'required|numeric|between:35.10,36.60',
             'accuracy' => 'required|numeric',
