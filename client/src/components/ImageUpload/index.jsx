@@ -5,6 +5,7 @@ import uploadingAnimation from "../../assets/Cloud uploading.gif";
 import "./style.css";
 import { AuthContext } from "../Context/AuthorizationContext";
 import axiosBaseUrl from "../../Utils/axios";
+import getProfilePictureUrl from "../../Utils/helpers";
 
 const ImageUpload = () => {
   const { user, setUser } = useContext(AuthContext);
@@ -13,13 +14,11 @@ const ImageUpload = () => {
   const fileUploadRef = useRef();
 
   useEffect(() => {
-    if (user && user.profile_picture_path) {
-      setAvatarURL(
-        `http://127.0.0.1:8000/storage/${user.profile_picture_path}`
-      );
-    } else {
-      setAvatarURL(defaultImage);
-    }
+    setAvatarURL(
+      user.profile_picture_path
+        ? getProfilePictureUrl(user.profile_picture_path)
+        : { defaultImage }
+    );
   }, [user?.profile_picture_path]);
 
   const handleImageUploadClick = () => {
@@ -46,7 +45,12 @@ const ImageUpload = () => {
       if (response.status === 200) {
         const data = response.data;
         const imagePath = data.profile_picture_path || data.path;
-        setAvatarURL(`http://127.0.0.1:8000/storage/${imagePath}`);
+        setAvatarURL(
+          user.profile_picture_path
+            ? getProfilePictureUrl(imagePath)
+            : { defaultImage }
+        );
+
         setUser((user) => ({
           ...user,
           profile_picture_path: imagePath,
