@@ -62,6 +62,7 @@ const VoteForCandidate = () => {
       const location = await getCurrentLocation();
 
       const voteData = {
+        user_id: user.id,
         candidate_id: selectedCandidate.id,
         elections_id: ongoingActiveElections.id,
         elections_region_id: ongoingActiveElections.region_id,
