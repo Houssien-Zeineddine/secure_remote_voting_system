@@ -4,14 +4,12 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class VoteRequest extends FormRequest
-{
+class VoteRequest extends FormRequest {
     /**
      * Determine if the user is authorized to make this request.
      */
-    public function authorize(): bool
-    {
-        return false;
+    public function authorize(): bool {
+        return true;
     }
 
     /**
@@ -19,10 +17,15 @@ class VoteRequest extends FormRequest
      *
      * @return array<string, \Illuminate\Contracts\Validation\ValidationRule|array<mixed>|string>
      */
-    public function rules(): array
-    {
+    public function rules(): array {
         return [
-            //
+            'candidate_id' => 'required|exists:users,id',
+            'election_id' => 'required|exists:elections,id',
+            'election_region_id' => 'required|exists:regions,id',
+            'latitude' => 'required|numeric|between:33.05,34.70',
+            'longitude' => 'required|numeric|between:35.10,36.60',
+            'accuracy' => 'required|numeric',
+            'timestamp' => 'required|date'
         ];
     }
 }
