@@ -4,6 +4,9 @@ namespace App\Services;
 
 use Illuminate\Http\Request;
 
+use App\Models\CountedVote;
+use App\Models\MaliciousVote;
+
 class VoteService {
     /**
      * Create a new class instance.
