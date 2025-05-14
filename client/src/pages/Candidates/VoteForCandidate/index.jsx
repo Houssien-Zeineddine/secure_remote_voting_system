@@ -7,14 +7,84 @@ import { FetchCandidatesContext } from "../../../components/Context/FetchCandida
 import { CheckCampaignContext } from "../../../components/Context/CheckCampaignContext";
 import { capitalizeFirstLetter } from "../../../Utils/helpers";
 import getProfilePictureUrl from "../../../Utils/helpers";
+import { CheckElectionsContext } from "../../../components/Context/CheckElectionsContext";
+import axiosBaseUrl from "../../../Utils/axios";
 
 const VoteForCandidate = () => {
   const { candidates } = useContext(FetchCandidatesContext);
   const { campaigns } = useContext(CheckCampaignContext);
+  const { ongoingActiveElections } = useContext(CheckElectionsContext);
 
   const [selectedCandidate, setSelectedCandidate] = useState("");
   const [isDialogueOpen, setIsDialogueOpen] = useState(false);
   const [isVoteToCandidateOpen, setIsVoteToCandidateOpen] = useState(false);
+  const [locationError, setLocationError] = useState(null);
+  const [isGettingLocation, setIsGettingLocation] = useState(false);
+
+  const access_token = localStorage.getItem("access_token");
+
+  const getCurrentLocation = async () => {
+    if (!navigator.geolocation) {
+      setLocationError("Geolocation is not supported by your browser");
+      throw new Error("Geolocation is not supported by your browser");
+    }
+
+    setIsGettingLocation(true);
+    setLocationError(null);
+
+    try {
+      const position = await new Promise((resolve, reject) => {
+        navigator.geolocation.getCurrentPosition(resolve, reject, {
+          enableHighAccuracy: true,
+          timeout: 10000,
+          maximumAge: 0,
+        });
+      });
+
+      setIsGettingLocation(false);
+
+      return {
+        latitude: position.coords.latitude,
+        longitude: position.coords.longitude,
+        accuracy: position.coords.accuracy,
+      };
+    } catch (error) {
+      setIsGettingLocation(false);
+      setLocationError(error.message);
+      throw error;
+    }
+  };
+
+  const handleVote = async () => {
+    try {
+      const location = await getCurrentLocation();
+
+      const voteData = {
+        candidate_id: selectedCandidate.id,
+        elections_id: ongoingActiveElections.id,
+        elections_region_id: ongoingActiveElections.region_id,
+        latitude: location.latitude,
+        longitude: location.longitude,
+        accuracy: location.accuracy,
+        timestamp: new Date().toISOString(),
+      };
+
+      const response = await axiosBaseUrl.post(
+        "/api/v0.1/user/vote",
+        voteData,
+        { headers: { Authorization: `Beare ${access_token}` } }
+      );
+
+      if (!response.ok) {
+        throw new Error(await response.text());
+      }
+
+      const filteredVote = response.data;
+      closeVoteToCandidateDialog();
+    } catch (error) {
+      setLocationError(error.message || "Failed to verify your location");
+    }
+  };
 
   const openVoteToCandidateDialog = (candidate) => {
     setSelectedCandidate(candidate);
@@ -32,10 +102,6 @@ const VoteForCandidate = () => {
       ...candidate,
       campaign: campaign?.campaign || "No campaign information available",
     };
-  };
-
-  const handleVote = () => {
-    //function to add vote to the corresponding candidate
   };
 
   const handleViewDetails = (candidate) => {
@@ -85,7 +151,7 @@ const VoteForCandidate = () => {
         ))}
       </div>
 
-      {/* dialogue/Dialog for candidate details */}
+      {/* Dialogue for candidate details */}
       <Dialogue
         isOpen={isDialogueOpen}
         onClose={closeDialogue}
@@ -128,6 +194,7 @@ const VoteForCandidate = () => {
               variant="red"
               size="small"
               onClick={handleVote}
+              disabled={isGettingLocation}
             />
           </div>
         }
@@ -146,6 +213,16 @@ const VoteForCandidate = () => {
               ?
             </p>
             <p>This cannot be undone.</p>
+            {isGettingLocation && (
+              <p className="location-loading">Verifying your location...</p>
+            )}
+
+            {locationError && (
+              <p className="location-error">
+                Error: {locationError}. Your vote cannot be submitted without
+                location verification.
+              </p>
+            )}
           </>
         )}
       </Dialogue>
