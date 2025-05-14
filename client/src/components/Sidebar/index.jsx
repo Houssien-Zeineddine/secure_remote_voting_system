@@ -1,6 +1,6 @@
 import React, { useContext, useState } from "react";
 import { Link, useLocation } from "react-router-dom";
-import profilePicture from "../../assets/sidebar icons/default profile picture.jpg";
+import defaultImage from "../../assets/sidebar icons/default profile picture.jpg";
 import dashboardIcon from "../../assets/sidebar icons/white icons/dashboard icon.svg";
 import viewProfile from "../../assets/sidebar icons/white icons/profile icon.svg";
 import addElections from "../../assets/sidebar icons/white icons/plus icon.svg";
@@ -15,6 +15,7 @@ import blueGuidelines from "../../assets/sidebar icons/blue icons/guidelines ico
 import blueSettings from "../../assets/sidebar icons/blue icons/settings icon.svg";
 import { AuthContext } from "../Context/AuthorizationContext";
 import { CheckElectionsContext } from "../Context/CheckElectionsContext";
+import getProfilePictureUrl from "../../Utils/helpers";
 import "./style.css";
 
 const Sidebar = () => {
@@ -38,7 +39,11 @@ const Sidebar = () => {
       <div className="sidebar-content">
         <div className="picture-name-container">
           <img
-            src={`http://127.0.0.1:8000/storage/${user.profile_picture_path}`}
+            src={
+              user.profile_picture_path
+                ? getProfilePictureUrl(user.profile_picture_path)
+                : { defaultImage }
+            }
             alt="No Profile Pictire"
             className="profilePicture"
           />
