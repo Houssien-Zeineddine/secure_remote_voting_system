@@ -6,12 +6,7 @@ import Dialogue from "../../../components/Dialogue";
 import { FetchCandidatesContext } from "../../../components/Context/FetchCandidatesContext";
 import { CheckCampaignContext } from "../../../components/Context/CheckCampaignContext";
 import { capitalizeFirstLetter } from "../../../Utils/helpers";
-// import candidate1 from "../../../assets/candidates default images/candidate 1 profile image.avif";
-// import candidate2 from "../../../assets/candidates default images/candidate 2 profile image.avif";
-// import candidate3 from "../../../assets/candidates default images/candidate 3 profile image.avif";
-// import candidate4 from "../../../assets/candidates default images/candidate 4 profile image.avif";
-// import candidate5 from "../../../assets/candidates default images/candidate 5 profile image.avif";
-// import candidate6 from "../../../assets/candidates default images/candidate 6 profile image.avif";
+import getProfilePictureUrl from "../../../Utils/helpers";
 
 const VoteForCandidate = () => {
   const { candidates } = useContext(FetchCandidatesContext);
@@ -62,7 +57,7 @@ const VoteForCandidate = () => {
             <img
               src={
                 candidate.profile_picture_path
-                  ? candidate.profile_picture_path
+                  ? getProfilePictureUrl(candidate.profile_picture_path)
                   : defaultProfilePicture
               }
               alt=""
