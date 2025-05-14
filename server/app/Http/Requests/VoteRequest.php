@@ -19,6 +19,7 @@ class VoteRequest extends FormRequest {
      */
     public function rules(): array {
         return [
+            'user_id' => 'required|exists:users,id',
             'candidate_id' => 'required|exists:users,id',
             'election_id' => 'required|exists:elections,id',
             'election_region_id' => 'required|exists:regions,id',
