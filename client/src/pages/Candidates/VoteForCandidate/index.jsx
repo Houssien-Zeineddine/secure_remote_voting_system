@@ -7,10 +7,12 @@ import { FetchCandidatesContext } from "../../../components/Context/FetchCandida
 import { CheckCampaignContext } from "../../../components/Context/CheckCampaignContext";
 import { capitalizeFirstLetter } from "../../../Utils/helpers";
 import getProfilePictureUrl from "../../../Utils/helpers";
+import { AuthContext } from "../../../components/Context/AuthorizationContext";
 import { CheckElectionsContext } from "../../../components/Context/CheckElectionsContext";
 import axiosBaseUrl from "../../../Utils/axios";
 
 const VoteForCandidate = () => {
+  const { user } = useContext(AuthContext);
   const { candidates } = useContext(FetchCandidatesContext);
   const { campaigns } = useContext(CheckCampaignContext);
   const { ongoingActiveElections } = useContext(CheckElectionsContext);
