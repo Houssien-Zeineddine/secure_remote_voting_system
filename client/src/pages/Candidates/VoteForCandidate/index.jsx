@@ -71,7 +71,7 @@ const VoteForCandidate = () => {
                 text="Vote"
                 variant="blue"
                 size="small"
-                onClick={(candidate) => openVoteToCandidateDialog(candidate)}
+                onClick={() => openVoteToCandidateDialog(candidate)}
               />
               <Button
                 text="View Details"
@@ -134,11 +134,15 @@ const VoteForCandidate = () => {
         {selectedCandidate && (
           <>
             <p>
-              Remove{" "}
+              Are you sure you want to vote to{" "}
               <strong>
-                {selectedCandidate.first_name} {selectedCandidate.last_name}
+                {`${capitalizeFirstLetter(
+                  selectedCandidate?.first_name
+                )} ${capitalizeFirstLetter(
+                  selectedCandidate?.middle_name
+                )} ${capitalizeFirstLetter(selectedCandidate?.last_name)}`}
               </strong>{" "}
-              from the election?
+              ?
             </p>
             <p>This cannot be undone.</p>
           </>
