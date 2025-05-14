@@ -1,6 +1,6 @@
 services:
   backend:
-    image: houssienzed/final-project-laravel-image:latest
+    image: houssienzed/final_project_laravel_image:latest
     environment:
       - LARAVEL_DATABASE_HOST=db
       - LARAVEL_DATABASE_NAME=secure_voting_system
@@ -14,7 +14,7 @@ services:
       - db
 
   frontend:
-    image: houssienzed/final-project-react-image:latest
+    image: houssienzed/final_project_react_image:latest
     ports:
       - "80:80"
     depends_on:
