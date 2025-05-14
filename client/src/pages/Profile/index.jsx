@@ -6,6 +6,7 @@ import "./style.css";
 import axiosBaseUrl from "../../Utils/axios";
 import ImageUpload from "../../components/ImageUpload";
 import defaultImage from "../../assets/sidebar icons/default profile picture.jpg";
+import getProfilePictureUrl from "../../Utils/helpers";
 
 const Profile = () => {
   const { user, setUser } = useContext(AuthContext);
@@ -153,7 +154,11 @@ const Profile = () => {
               <div className="profile-image-wrapper">
                 {user.profile_picture_path ? (
                   <img
-                    src={`http://127.0.0.1:8000/storage/${user.profile_picture_path}`}
+                    src={
+                      user.profile_picture_path
+                        ? getProfilePictureUrl(user.profile_picture_path)
+                        : { defaultImage }
+                    }
                     alt="Profile Image"
                     className="profile-image"
                   />
