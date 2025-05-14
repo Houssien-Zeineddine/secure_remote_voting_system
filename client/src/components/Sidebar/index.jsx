@@ -38,7 +38,7 @@ const Sidebar = () => {
       <div className="sidebar-content">
         <div className="picture-name-container">
           <img
-            src={profilePicture}
+            src={`http://127.0.0.1:8000/storage/${user.profile_picture_path}`}
             alt="No Profile Pictire"
             className="profilePicture"
           />
