@@ -20,6 +20,38 @@ const VoteForCandidate = () => {
   const [locationError, setLocationError] = useState(null);
   const [isGettingLocation, setIsGettingLocation] = useState(false);
 
+  const getCurrentLocation = async () => {
+    if (!navigator.geolocation) {
+      setLocationError("Geolocation is not supported by your browser");
+      throw new Error("Geolocation is not supported by your browser");
+    }
+
+    setIsGettingLocation(true);
+    setLocationError(null);
+
+    try {
+      const position = await new Promise((resolve, reject) => {
+        navigator.geolocation.getCurrentPosition(resolve, reject, {
+          enableHighAccuracy: true,
+          timeout: 10000,
+          maximumAge: 0,
+        });
+      });
+
+      setIsGettingLocation(false);
+
+      return {
+        latitude: position.coords.latitude,
+        longitude: position.coords.longitude,
+        accuracy: position.coords.accuracy,
+      };
+    } catch (error) {
+      setIsGettingLocation(false);
+      setLocationError(error.message);
+      throw error;
+    }
+  };
+
   const handleVote = () => {
     //function to add vote to the corresponding candidate
   };
