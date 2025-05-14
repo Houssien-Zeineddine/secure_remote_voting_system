@@ -194,6 +194,7 @@ const VoteForCandidate = () => {
               variant="red"
               size="small"
               onClick={handleVote}
+              disabled={isGettingLocation}
             />
           </div>
         }
@@ -212,6 +213,16 @@ const VoteForCandidate = () => {
               ?
             </p>
             <p>This cannot be undone.</p>
+            {isGettingLocation && (
+              <p className="location-loading">Verifying your location...</p>
+            )}
+
+            {locationError && (
+              <p className="location-error">
+                Error: {locationError}. Your vote cannot be submitted without
+                location verification.
+              </p>
+            )}
           </>
         )}
       </Dialogue>
