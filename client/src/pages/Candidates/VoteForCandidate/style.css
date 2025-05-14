@@ -33,7 +33,7 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    gap: 1rem;
+    gap: 2rem;
     border: 1px solid var(--border-color);
     border-radius: 20px;
     background-image: linear-gradient(var(--secondary-color), var(--white-color));;
