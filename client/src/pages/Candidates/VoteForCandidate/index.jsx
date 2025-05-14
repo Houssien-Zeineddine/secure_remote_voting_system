@@ -52,8 +52,20 @@ const VoteForCandidate = () => {
     }
   };
 
-  const handleVote = () => {
-    //function to add vote to the corresponding candidate
+  const handleVote = async () => {
+    try {
+      const location = await getCurrentLocation();
+
+      const voteData = {
+        candidate_id: selectedCandidate.id,
+        elections_id: ongoingActiveElections.id,
+        elections_region_id: ongoingActiveElections.region_id,
+        latitude: location.latitude,
+        longitude: location.longitude,
+        accuracy: location.accuracy,
+        timestamp: new Date().toISOString(),
+      };
+    } catch {}
   };
 
   const openVoteToCandidateDialog = (candidate) => {
