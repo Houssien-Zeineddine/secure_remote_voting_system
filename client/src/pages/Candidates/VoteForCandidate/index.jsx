@@ -7,14 +7,22 @@ import { FetchCandidatesContext } from "../../../components/Context/FetchCandida
 import { CheckCampaignContext } from "../../../components/Context/CheckCampaignContext";
 import { capitalizeFirstLetter } from "../../../Utils/helpers";
 import getProfilePictureUrl from "../../../Utils/helpers";
+import { CheckElectionsContext } from "../../../components/Context/CheckElectionsContext";
 
 const VoteForCandidate = () => {
   const { candidates } = useContext(FetchCandidatesContext);
   const { campaigns } = useContext(CheckCampaignContext);
+  const { ongoingActiveElections } = useContext(CheckElectionsContext);
 
   const [selectedCandidate, setSelectedCandidate] = useState("");
   const [isDialogueOpen, setIsDialogueOpen] = useState(false);
   const [isVoteToCandidateOpen, setIsVoteToCandidateOpen] = useState(false);
+  const [locationError, setLocationError] = useState(null);
+  const [isGettingLocation, setIsGettingLocation] = useState(false);
+
+  const handleVote = () => {
+    //function to add vote to the corresponding candidate
+  };
 
   const openVoteToCandidateDialog = (candidate) => {
     setSelectedCandidate(candidate);
@@ -32,10 +40,6 @@ const VoteForCandidate = () => {
       ...candidate,
       campaign: campaign?.campaign || "No campaign information available",
     };
-  };
-
-  const handleVote = () => {
-    //function to add vote to the corresponding candidate
   };
 
   const handleViewDetails = (candidate) => {
