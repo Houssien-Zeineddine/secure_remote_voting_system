@@ -8,6 +8,7 @@ import { CheckCampaignContext } from "../../../components/Context/CheckCampaignC
 import { capitalizeFirstLetter } from "../../../Utils/helpers";
 import getProfilePictureUrl from "../../../Utils/helpers";
 import { CheckElectionsContext } from "../../../components/Context/CheckElectionsContext";
+import axiosBaseUrl from "../../../Utils/axios";
 
 const VoteForCandidate = () => {
   const { candidates } = useContext(FetchCandidatesContext);
@@ -19,6 +20,8 @@ const VoteForCandidate = () => {
   const [isVoteToCandidateOpen, setIsVoteToCandidateOpen] = useState(false);
   const [locationError, setLocationError] = useState(null);
   const [isGettingLocation, setIsGettingLocation] = useState(false);
+
+  const access_token = localStorage.getItem("access_token");
 
   const getCurrentLocation = async () => {
     if (!navigator.geolocation) {
@@ -65,7 +68,22 @@ const VoteForCandidate = () => {
         accuracy: location.accuracy,
         timestamp: new Date().toISOString(),
       };
-    } catch {}
+
+      const response = await axiosBaseUrl.post(
+        "/api/v0.1/user/vote",
+        voteData,
+        { headers: { Authorization: `Beare ${access_token}` } }
+      );
+
+      if (!response.ok) {
+        throw new Error(await response.text());
+      }
+
+      const filteredVote = response.data;
+      closeVoteToCandidateDialog();
+    } catch (error) {
+      setLocationError(error.message || "Failed to verify your location");
+    }
   };
 
   const openVoteToCandidateDialog = (candidate) => {
@@ -133,7 +151,7 @@ const VoteForCandidate = () => {
         ))}
       </div>
 
-      {/* dialogue/Dialog for candidate details */}
+      {/* Dialogue for candidate details */}
       <Dialogue
         isOpen={isDialogueOpen}
         onClose={closeDialogue}
