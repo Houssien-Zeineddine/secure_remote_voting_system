@@ -22,7 +22,7 @@ class ImageUploadRequest extends FormRequest {
             'image' => [
                 'required',
                 'image',
-                'mimes:jpeg,png,jpg,gif,webp',
+                'mimes:jpeg,png,jpg,gif,webp,avif',
                 'max:5120',
                 'dimensions:min_width=100,min_height=100,max_width=5000,max_height=5000'
             ]
