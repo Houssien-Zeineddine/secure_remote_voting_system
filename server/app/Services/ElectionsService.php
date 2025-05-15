@@ -2,17 +2,18 @@
 
 namespace App\Services;
 
-use App\Models\Elections;
-use App\Models\Campaign;
-use App\Models\Region;
 use App\Models\User;
+use App\Models\Region;
+use App\Models\Campaign;
+use App\Models\Elections;
+use App\Models\CountedVote;
+use App\Models\MaliciousVote;
 use App\Http\Requests\AddElectionsRequest;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
-class ElectionsService
-{
+class ElectionsService {
     /**
      * Create a new class instance.
      */
@@ -62,6 +63,9 @@ class ElectionsService
         if (!$elections) {
             return ["message" => "No elections found"];
         }
+
+        $countedVotes = CountedVote::all()->each->delete();
+        $maliciousVotes = MaliciousVote::all()->each->delete();
 
         User::where('user_type', 2)->update(['user_type' => 3]);
         Campaign::all()->each->delete();
