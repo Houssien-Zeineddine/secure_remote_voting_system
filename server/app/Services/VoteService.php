@@ -4,6 +4,11 @@ namespace App\Services;
 
 use Illuminate\Http\Request;
 
+use Prism\Prism\Prism;
+use Prism\Prism\Enums\Provider;
+use Prism\Prism\Schema\ObjectSchema;
+use Prism\Prism\Schema\StringSchema;
+
 use App\Models\CountedVote;
 use App\Models\MaliciousVote;
 
@@ -39,12 +44,25 @@ class VoteService {
         );
 
         if ($distance <= $region['radius']) {
-            $vote = CountedVote::create([
-                'elections_id' => $request->elections_id,
-                'user_id' => $request->user_id,
-                'candidate_id' => $request->candidate_id,
-            ]);
-            return $vote;
+
+            $analysisResult = $this->analyzeVoteBehavior($request);
+
+            if ($analysisResult['validated']) {
+                $malicious = MaliciousVote::create([
+                    'user_id' => $request->user_id,
+                    'elections_id' => $request->elections_id,
+                    'candidate_id' => $request->candidate_id,
+                    'cancelation_reason' => $analysisResult['result'],
+                ]);
+                return $malicious;
+            } else {
+                $vote = CountedVote::create([
+                    'elections_id' => $request->elections_id,
+                    'user_id' => $request->user_id,
+                    'candidate_id' => $request->candidate_id,
+                ]);
+                return $vote;
+            }
         } else {
             $malicious = MaliciousVote::create([
                 'user_id' => $request->user_id,
@@ -68,5 +86,64 @@ class VoteService {
         $c = 2 * atan2(sqrt($a), sqrt(1 - $a));
 
         return $earthRadius * $c;
+    }
+
+    private function analyzeVoteBehavior(Request $request) {
+        
+        $recentVotes = CountedVote::where('user_id', $request->user_id)
+            ->where('created_at', '>=', now()->subMinutes(10))
+            ->count();
+
+        $voteTime = now()->format('H:i');
+
+        $prompt = "A user with ID {$request->user_id} has submitted {$recentVotes} votes in the last 10 minutes at {$voteTime}. Determine if this behavior is malicious or indicative of bot-like activity. Respond with JSON: {\"is_malicious\": true/false, \"reason\": \"...\"}.";
+
+        $schema = new ObjectSchema (
+            name: 'vote_validation_check', 
+            description: 'Vote validation check', 
+            properties: [ 
+                new StringSchema('validated', 'true if validated, false if not'), 
+                new StringSchema('result', 'Validated if vote is counted, cancelation reason if vote is canceled')],
+            requiredFields: ['validated', 'result']
+            );
+
+        $response = Prism::structured()
+            ->using(Provider::OpenAI, 'gpt-4o')
+            ->withSchema($schema)
+            ->withPrompt($prompt)
+            ->asStructured();
+
+        $analysisResult = $response->structured;
+
+        // dd($analysisResult);
+
+        return $analysisResult;
+        // try {
+        //     $response = Prism::provider('openai')
+        //         ->chat()
+        //         ->messages([
+        //             ['role' => 'system', 'content' => 'You are an AI that detects malicious voting behavior.'],
+        //             ['role' => 'user', 'content' => $prompt],
+        //         ])
+        //         ->send();
+
+        //     $content = $response->choices[0]->message['content'] ?? null;
+
+        //     if ($content) {
+        //         $analysis = json_decode($content, true);
+        //         if (json_last_error() === JSON_ERROR_NONE) {
+        //             return $analysis;
+        //         } else {
+        //             Log::error('JSON decoding error: ' . json_last_error_msg());
+        //         }
+        //     } else {
+        //         Log::error('Empty response from OpenAI.');
+        //     }
+        // } catch (\Exception $e) {
+        //     Log::error('Error analyzing vote behavior: ' . $e->getMessage());
+        // }
+
+        // // Default to non-malicious if analysis fails
+        // return ['is_malicious' => false, 'reason' => 'Analysis failed or inconclusive.'];
     }
 }
