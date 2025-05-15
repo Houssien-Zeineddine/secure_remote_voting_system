@@ -39,12 +39,25 @@ class VoteService {
         );
 
         if ($distance <= $region['radius']) {
-            $vote = CountedVote::create([
-                'elections_id' => $request->elections_id,
-                'user_id' => $request->user_id,
-                'candidate_id' => $request->candidate_id,
-            ]);
-            return $vote;
+
+            $analysisResult = $this->analyzeVoteBehavior($request);
+
+            if ($analysisResult['is_malicious']) {
+                $malicious = MaliciousVote::create([
+                    'user_id' => $request->user_id,
+                    'elections_id' => $request->elections_id,
+                    'candidate_id' => $request->candidate_id,
+                    'cancelation_reason' => $analysisResult['reason'],
+                ]);
+                return $malicious;
+            } else {
+                $vote = CountedVote::create([
+                    'elections_id' => $request->elections_id,
+                    'user_id' => $request->user_id,
+                    'candidate_id' => $request->candidate_id,
+                ]);
+                return $vote;
+            }
         } else {
             $malicious = MaliciousVote::create([
                 'user_id' => $request->user_id,
