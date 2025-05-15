@@ -123,8 +123,6 @@
     flex-shrink: 0;
     position: sticky;
     top: 8rem;
-    /* right: 0rem; */
-    /* font-size: var(--font-size-header-4); */
 }
 
 .statistics-container > h4 {
