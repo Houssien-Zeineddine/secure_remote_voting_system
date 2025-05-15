@@ -19,7 +19,7 @@ import getProfilePictureUrl from "../../Utils/helpers";
 import "./style.css";
 
 const Sidebar = () => {
-  const { user, authLoading } = useContext(AuthContext);
+  const { user } = useContext(AuthContext);
   const { ongoingActiveElections } = useContext(CheckElectionsContext);
   const location = useLocation().pathname;
 
@@ -30,24 +30,6 @@ const Sidebar = () => {
       ? "candidate"
       : "user"
     : "user";
-
-  console.log("user from side bar", user);
-
-  if (authLoading || !user) {
-    return (
-      <div className="sidebar-container">
-        <div className="sidebar-content">
-          <div className="picture-name-container">
-            <div className="profile-picture-skeleton" />
-            <div className="user-name-skeleton" />
-          </div>
-          {[...Array(6)].map((_, index) => (
-            <div key={index} className="sidebar-link-skeleton" />
-          ))}
-        </div>
-      </div>
-    );
-  }
 
   return (
     <div className="sidebar-container">
