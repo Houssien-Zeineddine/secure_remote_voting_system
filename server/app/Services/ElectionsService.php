@@ -2,10 +2,10 @@
 
 namespace App\Services;
 
-use App\Models\Elections;
-use App\Models\Campaign;
-use App\Models\Region;
 use App\Models\User;
+use App\Models\Region;
+use App\Models\Campaign;
+use App\Models\Elections;
 use App\Models\CountedVote;
 use App\Models\MaliciousVote;
 use App\Http\Requests\AddElectionsRequest;
