@@ -98,6 +98,12 @@ class VoteService {
 
         $prompt = "A user with ID {$request->user_id} has submitted {$recentVotes} votes in the last 10 minutes at {$voteTime}. Determine if this behavior is malicious or indicative of bot-like activity. Respond with JSON: {\"is_malicious\": true/false, \"reason\": \"...\"}.";
 
+        $schema = new ObjectSchema (
+            name: 'vote_validation_check', 
+            description: 'Vote validation check', 
+            properties: [ 
+                new StringSchema('validated', 'true if validated, false if not'), 
+                new StringSchema('result', 'Validated if vote is counted, cancelation reason if vote is canceled')]);
         try {
             $response = Prism::provider('openai')
                 ->chat()
