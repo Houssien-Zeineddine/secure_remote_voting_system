@@ -1,20 +1,20 @@
 import React, { useContext, useState } from "react";
 import { Link, useLocation } from "react-router-dom";
-import defaultImage from "../../assets/sidebar icons/default profile picture.jpg";
-import dashboardIcon from "../../assets/sidebar icons/white icons/dashboard icon.svg";
-import viewProfile from "../../assets/sidebar icons/white icons/profile icon.svg";
-import addElections from "../../assets/sidebar icons/white icons/plus icon.svg";
-import vote from "../../assets/sidebar icons/white icons/vote icon.svg";
-import guidelines from "../../assets/sidebar icons/white icons/guidelines icon.svg";
-import settings from "../../assets/sidebar icons/white icons/settings icon.svg";
-import blueDashboardIcon from "../../assets/sidebar icons/blue icons/dashboard icon.svg";
-import blueViewProfile from "../../assets/sidebar icons/blue icons/profile icon.svg";
-import blueAddElections from "../../assets/sidebar icons/blue icons/plus icon.svg";
-import blueVote from "../../assets/sidebar icons/blue icons/vote icon.svg";
-import blueGuidelines from "../../assets/sidebar icons/blue icons/guidelines icon.svg";
-import blueSettings from "../../assets/sidebar icons/blue icons/settings icon.svg";
 import { AuthContext } from "../Context/AuthorizationContext";
 import { CheckElectionsContext } from "../Context/CheckElectionsContext";
+import vote from "../../assets/sidebar icons/white icons/vote icon.svg";
+import blueVote from "../../assets/sidebar icons/blue icons/vote icon.svg";
+import settings from "../../assets/sidebar icons/white icons/settings icon.svg";
+import guidelines from "../../assets/sidebar icons/white icons/guidelines icon.svg";
+import viewProfile from "../../assets/sidebar icons/white icons/profile icon.svg";
+import addElections from "../../assets/sidebar icons/white icons/plus icon.svg";
+import blueSettings from "../../assets/sidebar icons/blue icons/settings icon.svg";
+import defaultImage from "../../assets/sidebar icons/default profile picture.jpg";
+import dashboardIcon from "../../assets/sidebar icons/white icons/dashboard icon.svg";
+import blueGuidelines from "../../assets/sidebar icons/blue icons/guidelines icon.svg";
+import blueViewProfile from "../../assets/sidebar icons/blue icons/profile icon.svg";
+import blueAddElections from "../../assets/sidebar icons/blue icons/plus icon.svg";
+import blueDashboardIcon from "../../assets/sidebar icons/blue icons/dashboard icon.svg";
 import getProfilePictureUrl from "../../Utils/helpers";
 import "./style.css";
 
@@ -23,16 +23,13 @@ const Sidebar = () => {
   const { ongoingActiveElections } = useContext(CheckElectionsContext);
   const location = useLocation().pathname;
 
-  // const [userType, setUserType] = useState(null);
-
-  const userType =
-    user?.user_type === 1
+  const userType = user
+    ? user.user_type === 1
       ? "admin"
-      : user?.user_type === 2
+      : user.user_type === 2
       ? "candidate"
-      : "user";
-
-  // const user = "admin";
+      : "user"
+    : "user";
 
   return (
     <div className="sidebar-container">
@@ -42,7 +39,7 @@ const Sidebar = () => {
             src={
               user.profile_picture_path
                 ? getProfilePictureUrl(user.profile_picture_path)
-                : { defaultImage }
+                : defaultImage
             }
             alt="No Profile Pictire"
             className="profilePicture"

@@ -1,12 +1,12 @@
 import React, { useEffect, useState, useContext } from "react";
+import { AuthContext } from "../../components/Context/AuthorizationContext";
 import Input from "../../components/Input";
 import Button from "../../components/Button";
-import { AuthContext } from "../../components/Context/AuthorizationContext";
-import "./style.css";
-import axiosBaseUrl from "../../Utils/axios";
 import ImageUpload from "../../components/ImageUpload";
+import axiosBaseUrl from "../../Utils/axios";
 import defaultImage from "../../assets/sidebar icons/default profile picture.jpg";
 import getProfilePictureUrl from "../../Utils/helpers";
+import "./style.css";
 
 const Profile = () => {
   const { user, setUser } = useContext(AuthContext);
@@ -16,19 +16,12 @@ const Profile = () => {
   const [tempData, setTempData] = useState({ ...profileData });
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
-  // const [avatarURL, setAvatarURL] = useState(defaultImage);
-
   const access_token = localStorage.getItem("access_token");
 
   useEffect(() => {
     if (user) {
       setProfileData(user);
       setTempData(user);
-      // setAvatarURL(
-      //   user.profile_picture_path
-      //     ? `/storage/app/public/${user.profile_picture_path}`
-      //     : defaultImage
-      // );
     }
     console.log(user);
   }, [user]);
