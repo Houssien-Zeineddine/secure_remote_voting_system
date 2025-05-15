@@ -13,8 +13,7 @@ use App\Http\Requests\AddElectionsRequest;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
-class ElectionsService
-{
+class ElectionsService {
     /**
      * Create a new class instance.
      */
