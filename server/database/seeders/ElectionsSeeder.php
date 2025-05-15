@@ -21,7 +21,7 @@ class ElectionsSeeder extends Seeder {
         $region = Region::inRandomOrder()->first();
 
         Elections::factory()->create([
-            'title' => '2025 Minicipality Elections',
+            'title' => '2025 Municipality Elections',
             'description' => 'Lebanese Minicipality Elections ',
             'on_going' => true,
             'region_id' => $region->id,
