@@ -33,27 +33,6 @@ const Elections = () => {
     getStats();
   }, []);
 
-  //hardcoded results object for testing
-  // const result = [
-  //   { candidate_name: "candidate 1", result: 12 },
-  //   { candidate_name: "candidate 2", result: 40 },
-  //   { candidate_name: "candidate 3", result: 4 },
-  //   { candidate_name: "candidate 4", result: 22 },
-  //   { candidate_name: "candidate 5", result: 2 },
-  //   { candidate_name: "candidate 6", result: 9 },
-  //   { candidate_name: "candidate 7", result: 100 },
-  //   { candidate_name: "candidate 8", result: 3 },
-  //   { candidate_name: "candidate 9", result: 7 },
-  // ];
-
-  //calling the results API
-  // const [results, setResults] = React.useState({});
-
-  // React.useEffect(() => {
-  //   fetch("/api/results")
-  //     .then((res) => res.json())
-  //     .then((data) => setResults(data));
-  // }, []);
   return (
     <div className="elections-dashboard-container">
       <div className="description-live-results-container">
