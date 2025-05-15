@@ -73,7 +73,7 @@ const VoteForCandidate = () => {
       };
 
       const response = await axiosBaseUrl.post("/user/vote", voteData, {
-        headers: { Authorization: `Beare ${access_token}` },
+        headers: { Authorization: `Bearer ${access_token}` },
       });
 
       if (!response.ok) {
