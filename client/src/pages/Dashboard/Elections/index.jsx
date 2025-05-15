@@ -1,11 +1,11 @@
 import React, { useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { capitalizeTitle } from "../../../Utils/helpers";
+import { CheckElectionsContext } from "../../../components/Context/CheckElectionsContext";
 import Button from "../../../components/Button";
 import politician from "../../../assets/Politician giving his speech to public.svg";
-import "./style.css";
-import { CheckElectionsContext } from "../../../components/Context/CheckElectionsContext";
-import { capitalizeTitle } from "../../../Utils/helpers";
 import axiosBaseUrl from "../../../Utils/axios";
+import "./style.css";
 
 const Elections = () => {
   const { ongoingActiveElections } = useContext(CheckElectionsContext);
