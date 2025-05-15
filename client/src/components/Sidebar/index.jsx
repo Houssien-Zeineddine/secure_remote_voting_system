@@ -23,8 +23,6 @@ const Sidebar = () => {
   const { ongoingActiveElections } = useContext(CheckElectionsContext);
   const location = useLocation().pathname;
 
-  // const [userType, setUserType] = useState(null);
-
   const userType = user
     ? user.user_type === 1
       ? "admin"
@@ -33,7 +31,6 @@ const Sidebar = () => {
       : "user"
     : "user";
 
-  // const user = "admin";
   console.log("user from side bar", user);
 
   if (authLoading || !user) {
