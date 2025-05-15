@@ -29,8 +29,6 @@ export const AuthProvider = ({ children }) => {
     verifyToken();
   }, []);
 
-  console.log(user);
-
   return (
     <AuthContext.Provider value={{ user, setUser, authLoading }}>
       {children}
