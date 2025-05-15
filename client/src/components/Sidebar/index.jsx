@@ -19,18 +19,19 @@ import getProfilePictureUrl from "../../Utils/helpers";
 import "./style.css";
 
 const Sidebar = () => {
-  const { user } = useContext(AuthContext);
+  const { user, authLoading } = useContext(AuthContext);
   const { ongoingActiveElections } = useContext(CheckElectionsContext);
   const location = useLocation().pathname;
 
   // const [userType, setUserType] = useState(null);
 
-  const userType =
-    user?.user_type === 1
+  const userType = user
+    ? user.user_type === 1
       ? "admin"
-      : user?.user_type === 2
+      : user.user_type === 2
       ? "candidate"
-      : "user";
+      : "user"
+    : "user";
 
   // const user = "admin";
   console.log("user from side bar", user);
