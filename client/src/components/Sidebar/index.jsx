@@ -33,6 +33,7 @@ const Sidebar = () => {
       : "user";
 
   // const user = "admin";
+  console.log("user from side bar", user);
 
   return (
     <div className="sidebar-container">
@@ -42,7 +43,7 @@ const Sidebar = () => {
             src={
               user.profile_picture_path
                 ? getProfilePictureUrl(user.profile_picture_path)
-                : { defaultImage }
+                : defaultImage
             }
             alt="No Profile Pictire"
             className="profilePicture"
