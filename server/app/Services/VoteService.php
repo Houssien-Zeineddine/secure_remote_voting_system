@@ -47,12 +47,12 @@ class VoteService {
 
             $analysisResult = $this->analyzeVoteBehavior($request);
 
-            if ($analysisResult['is_malicious']) {
+            if ($analysisResult['validated']) {
                 $malicious = MaliciousVote::create([
                     'user_id' => $request->user_id,
                     'elections_id' => $request->elections_id,
                     'candidate_id' => $request->candidate_id,
-                    'cancelation_reason' => $analysisResult['reason'],
+                    'cancelation_reason' => $analysisResult['result'],
                 ]);
                 return $malicious;
             } else {
@@ -103,33 +103,47 @@ class VoteService {
             description: 'Vote validation check', 
             properties: [ 
                 new StringSchema('validated', 'true if validated, false if not'), 
-                new StringSchema('result', 'Validated if vote is counted, cancelation reason if vote is canceled')]);
-        try {
-            $response = Prism::provider('openai')
-                ->chat()
-                ->messages([
-                    ['role' => 'system', 'content' => 'You are an AI that detects malicious voting behavior.'],
-                    ['role' => 'user', 'content' => $prompt],
-                ])
-                ->send();
+                new StringSchema('result', 'Validated if vote is counted, cancelation reason if vote is canceled')],
+            requiredFields: ['validated', 'result']
+            );
 
-            $content = $response->choices[0]->message['content'] ?? null;
+        $response = Prism::structured()
+            ->using(Provider::OpenAI, 'gpt-4o')
+            ->withSchema($schema)
+            ->withPrompt($prompt)
+            ->asStructured();
 
-            if ($content) {
-                $analysis = json_decode($content, true);
-                if (json_last_error() === JSON_ERROR_NONE) {
-                    return $analysis;
-                } else {
-                    Log::error('JSON decoding error: ' . json_last_error_msg());
-                }
-            } else {
-                Log::error('Empty response from OpenAI.');
-            }
-        } catch (\Exception $e) {
-            Log::error('Error analyzing vote behavior: ' . $e->getMessage());
-        }
+        $analysisResult = $response->structured;
 
-        // Default to non-malicious if analysis fails
-        return ['is_malicious' => false, 'reason' => 'Analysis failed or inconclusive.'];
+        // dd($analysisResult);
+
+        return $analysisResult;
+        // try {
+        //     $response = Prism::provider('openai')
+        //         ->chat()
+        //         ->messages([
+        //             ['role' => 'system', 'content' => 'You are an AI that detects malicious voting behavior.'],
+        //             ['role' => 'user', 'content' => $prompt],
+        //         ])
+        //         ->send();
+
+        //     $content = $response->choices[0]->message['content'] ?? null;
+
+        //     if ($content) {
+        //         $analysis = json_decode($content, true);
+        //         if (json_last_error() === JSON_ERROR_NONE) {
+        //             return $analysis;
+        //         } else {
+        //             Log::error('JSON decoding error: ' . json_last_error_msg());
+        //         }
+        //     } else {
+        //         Log::error('Empty response from OpenAI.');
+        //     }
+        // } catch (\Exception $e) {
+        //     Log::error('Error analyzing vote behavior: ' . $e->getMessage());
+        // }
+
+        // // Default to non-malicious if analysis fails
+        // return ['is_malicious' => false, 'reason' => 'Analysis failed or inconclusive.'];
     }
 }
