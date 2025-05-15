@@ -64,8 +64,8 @@ class ElectionsService {
             return ["message" => "No elections found"];
         }
 
-        $countedVotes = CountedVote::all()->delete();
-        $maliciousVotes = MaliciousVote::all()->delete();
+        $countedVotes = CountedVote::all()->each->delete();
+        $maliciousVotes = MaliciousVote::all()->each->delete();
 
         User::where('user_type', 2)->update(['user_type' => 3]);
         Campaign::all()->each->delete();
