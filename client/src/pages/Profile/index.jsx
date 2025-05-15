@@ -16,19 +16,12 @@ const Profile = () => {
   const [tempData, setTempData] = useState({ ...profileData });
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
-  // const [avatarURL, setAvatarURL] = useState(defaultImage);
-
   const access_token = localStorage.getItem("access_token");
 
   useEffect(() => {
     if (user) {
       setProfileData(user);
       setTempData(user);
-      // setAvatarURL(
-      //   user.profile_picture_path
-      //     ? `/storage/app/public/${user.profile_picture_path}`
-      //     : defaultImage
-      // );
     }
     console.log(user);
   }, [user]);
