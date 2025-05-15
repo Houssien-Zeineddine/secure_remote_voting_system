@@ -24,7 +24,7 @@ class EditProfileRequest extends FormRequest {
             'middle_name' => 'required|string|max:255',
             'last_name' => 'required|string|max:255',
             'birthday' => 'required|date|before:18 years ago',
-            'id_number' => 'required|string|max:255|unique:users',
+            'id_number' => 'required|string|max:255',
         ];
     }
 
