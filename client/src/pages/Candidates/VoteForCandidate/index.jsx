@@ -43,6 +43,8 @@ const VoteForCandidate = () => {
         });
       });
 
+      console.log("Position from getcurrentposition", position);
+
       setIsGettingLocation(false);
 
       return {
@@ -72,15 +74,13 @@ const VoteForCandidate = () => {
         timestamp: new Date().toISOString(),
       };
 
-      const response = await axiosBaseUrl.post(
-        "/api/v0.1/user/vote",
-        voteData,
-        { headers: { Authorization: `Beare ${access_token}` } }
-      );
+      const response = await axiosBaseUrl.post("/user/vote", voteData, {
+        headers: { Authorization: `Bearer ${access_token}` },
+      });
 
-      if (!response.ok) {
-        throw new Error(await response.text());
-      }
+      // if (!response.ok) {
+      //   throw new Error(await response.text());
+      // }
 
       const filteredVote = response.data;
       closeVoteToCandidateDialog();
