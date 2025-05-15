@@ -43,6 +43,8 @@ const VoteForCandidate = () => {
         });
       });
 
+      console.log("Position from getcurrentposition", position);
+
       setIsGettingLocation(false);
 
       return {
@@ -76,9 +78,9 @@ const VoteForCandidate = () => {
         headers: { Authorization: `Bearer ${access_token}` },
       });
 
-      if (!response.ok) {
-        throw new Error(await response.text());
-      }
+      // if (!response.ok) {
+      //   throw new Error(await response.text());
+      // }
 
       const filteredVote = response.data;
       closeVoteToCandidateDialog();
