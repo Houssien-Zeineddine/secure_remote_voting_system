@@ -299,7 +299,7 @@ div>h4 {
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    gap: 1rem;
+    gap: 5rem;
 }
 
 .faqs-title {
