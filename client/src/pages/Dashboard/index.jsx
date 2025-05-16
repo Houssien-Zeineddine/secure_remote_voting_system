@@ -1,11 +1,26 @@
-import React, { useContext } from "react";
+import React, { useContext, useState, useEffect } from "react";
 import Elections from "./Elections";
 import NoElections from "../../components/NoElections";
+import Loading from "../../components/Loading";
 import { CheckElectionsContext } from "../../components/Context/CheckElectionsContext";
 import "./style.css";
 
 const Dashboard = () => {
   const { ongoingActiveElections } = useContext(CheckElectionsContext);
+  const [isLoading, setIsLoading] = useState(true);
+
+  useEffect(() => {
+    if (ongoingActiveElections !== null) {
+      const timer = setTimeout(() => {
+        setIsLoading(false);
+      }, 1000);
+      return () => clearTimeout(timer);
+    }
+  }, [ongoingActiveElections]);
+
+  if (isLoading) {
+    return <Loading />;
+  }
 
   return (
     <div className="along-sidebar-positioning">
