@@ -217,12 +217,6 @@
     animation-delay: calc(var(--card-index) * 0.2s);
 }
 
-.our-features-card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-    background-color: var(--secondary-color);
-}
-
 .our-features-card h4 {
     font-size: var(--font-size-header-4);
     font-weight: var(--font-weight-semibold);
@@ -336,84 +330,6 @@ div>h4 {
 #about-us,
 #faqs {
     scroll-margin-top: 6rem;
-}
-
-/* Responsive Design */
-@media screen and (max-width: 1200px) {
-    .landing-page-description {
-        flex-direction: column;
-        text-align: center;
-        gap: 2rem;
-    }
-
-    .landing-page-text {
-        width: 80%;
-        align-items: center;
-    }
-
-    .landing-page-text h2 {
-        width: 100%;
-        text-align: center;
-    }
-
-    .landing-page-btn-container {
-        justify-content: center;
-    }
-
-    .landing-page-cards {
-        flex-direction: column;
-        height: auto;
-        gap: 2rem;
-        padding: 2rem;
-    }
-
-    .card {
-        width: 100%;
-        max-width: 25rem;
-    }
-
-    .our-features-cards {
-        flex-direction: column;
-        width: 90%;
-    }
-
-    .our-features-card {
-        width: 100%;
-        max-width: 20rem;
-    }
-}
-
-@media screen and (max-width: 768px) {
-    .landing-page-container {
-        gap: 4rem;
-    }
-
-    .politician-img-container {
-        width: 90%;
-        padding: 2rem;
-    }
-
-    .landing-page-text h2 {
-        font-size: var(--font-size-header-3);
-    }
-
-    .landing-page-text p {
-        font-size: var(--font-size-body);
-    }
-
-    .card {
-        flex-direction: column;
-        text-align: center;
-        padding: 1rem;
-    }
-
-    .card-text {
-        align-items: center;
-    }
-
-    .our-features-header>p {
-        width: 90%;
-    }
 }
 
 /* Intersection Observer Animations */
