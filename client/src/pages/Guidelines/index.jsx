@@ -5,7 +5,7 @@ const Guidelines = () => {
   return (
     <div className="along-sidebar-positioning">
       <div className="guidelines-container">
-        <div className="title-cont">
+        <div className="title-container">
           <h2>Secure Voting Guidelines</h2>
           <p>
             To ensure a fair and secure election, our system automatically
