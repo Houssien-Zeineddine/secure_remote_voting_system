@@ -18,6 +18,14 @@
 
 <img src="./readme/ER Diagram.png">
 
+### User System Architecture
+
+<img src="./readme/System Architecture Diagram.png">
+
+### User Flow Diagram
+
+<img src="./readme/User Flow Diagram.png">
+
 <br><br>
 
 <!-- Project Highlights -->
