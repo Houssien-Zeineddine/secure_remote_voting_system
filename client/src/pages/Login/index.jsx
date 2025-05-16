@@ -1,12 +1,12 @@
 import React from "react";
-import { useState, useContext } from "react";
+import { AuthContext } from "../../components/Context/AuthorizationContext";
 import { Link, useNavigate } from "react-router-dom";
+import { useState, useContext } from "react";
+import logo from "../../assets/logos/blue-web-logo-no-bg.svg";
 import Input from "../../components/Input";
 import Button from "../../components/Button";
-import logo from "../../assets/logos/blue-web-logo-no-bg.svg";
-import secureIllustration from "../../assets/web-security login page.svg";
 import axiosBaseUrl from "../../Utils/axios";
-import { AuthContext } from "../../components/Context/AuthorizationContext";
+import secureIllustration from "../../assets/web-security login page.svg";
 import "./style.css";
 
 const Login = () => {
