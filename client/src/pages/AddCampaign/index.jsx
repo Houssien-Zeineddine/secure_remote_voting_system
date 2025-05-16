@@ -1,18 +1,17 @@
 import React, { useContext, useEffect, useState } from "react";
+import Button from "../../components/Button";
+import Dialogue from "../../components/Dialogue";
+import addCampaign from "../../assets/plus (1) 1.svg";
 import { AuthContext } from "../../components/Context/AuthorizationContext";
 import { CheckCampaignContext } from "../../components/Context/CheckCampaignContext";
 import { FetchCandidatesContext } from "../../components/Context/FetchCandidatesContext";
 import { CheckElectionsContext } from "../../components/Context/CheckElectionsContext";
 import { capitalizeFirstLetter } from "../../Utils/helpers";
-import addCampaign from "../../assets/plus (1) 1.svg";
-import Dialogue from "../../components/Dialogue";
-import Button from "../../components/Button";
 import "./style.css";
 import axiosBaseUrl from "../../Utils/axios";
 
 const AddCampaign = () => {
   const { user } = useContext(AuthContext);
-  // const { candidates } = useContext(FetchCandidatesContext);
   const { campaigns, fetchCampaigns } = useContext(CheckCampaignContext);
   const { ongoingActiveElections } = useContext(CheckElectionsContext);
 
