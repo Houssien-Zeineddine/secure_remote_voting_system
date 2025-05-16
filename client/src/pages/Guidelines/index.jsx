@@ -20,7 +20,7 @@ const Guidelines = () => {
                 <p>1</p>
               </div>
               <div className="guideline-title-text">
-                <p>Multiple Votes from Same IP Address</p>
+                <h4>Multiple Votes from Same IP Address</h4>
                 <p>
                   To prevent tampering, votes from the same IP address submitted
                   too quickly may be flagged. Please avoid voting from shared or
@@ -33,7 +33,7 @@ const Guidelines = () => {
                 <p>2</p>
               </div>
               <div className="guideline-title-text">
-                <p>Voting from Outside the Allowed Region</p>
+                <h4>Voting from Outside the Allowed Region</h4>
                 <p>
                   Voting is limited to residents of approved regions. If your
                   location appears outside of the allowed country or city, your
@@ -47,7 +47,7 @@ const Guidelines = () => {
                 <p>3</p>
               </div>
               <div className="guideline-title-text">
-                <p>Unusually Fast Voting</p>
+                <h4>Unusually Fast Voting</h4>
                 <p>
                   If your vote is submitted seconds after logging in or
                   registering, our system may detect this as automated behavior.
@@ -61,7 +61,7 @@ const Guidelines = () => {
                 <p>4</p>
               </div>
               <div className="guideline-title-text">
-                <p>Suspicious Device or Browser</p>
+                <h4>Suspicious Device or Browser</h4>
                 <p>
                   Using command-line tools or bots (like cURL or scripts) to
                   access the voting system is not allowed. Please vote using a
@@ -74,7 +74,7 @@ const Guidelines = () => {
                 <p>5</p>
               </div>
               <div className="guideline-title-text">
-                <p>Duplicate Voting Attempts</p>
+                <h4>Duplicate Voting Attempts</h4>
                 <p>
                   Each person is allowed only one vote. If a second attempt is
                   detected, even if it’s blocked, the action will be logged and
