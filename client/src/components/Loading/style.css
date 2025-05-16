@@ -1,11 +1,12 @@
 .loading-container {
     display: flex;
     flex-direction: column;
-    justify-content: center;
     align-items: center;
-    min-height: 100vh;
-    gap: 2rem;
+    gap: 2rem; 
+    height: 100%;
+    justify-content: center;
     background-color: var(--white-color);
+    padding-top: 20rem;
 }
 
 .loading-container h2 {
