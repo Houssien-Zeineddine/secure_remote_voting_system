@@ -1,20 +1,18 @@
 import React, { useContext } from "react";
-import politician from "../../assets/Politician giving his speech to public.svg";
-import login from "../../assets/Login.svg";
+import { useNavigate } from "react-router-dom";
 import vote from "../../assets/online vote.svg";
-import viewResults from "../../assets/card view result.svg";
+import faqs from "../../assets/question (1) 1.svg";
+import login from "../../assets/Login.svg";
+import Button from "../../components/Button";
+import aboutUs from "../../assets/about us.svg";
+import Questions from "../../components/Questions";
+import politician from "../../assets/Politician giving his speech to public.svg";
 import voteOnline from "../../assets/developer 1.svg";
+import viewResults from "../../assets/card view result.svg";
 import securedPlatform from "../../assets/web-security 2.svg";
 import realTimeResults from "../../assets/pie-chart 1.svg";
-import aboutUs from "../../assets/about us.svg";
-import faqs from "../../assets/question (1) 1.svg";
-// import collapse from "../../assets/Shape.svg";
-// import expand from "../../assets/expand.svg";
-import Button from "../../components/Button";
-import { useNavigate } from "react-router-dom";
-import "./styles.css";
-import Questions from "../../components/Questions";
 import { AuthContext } from "../../components/Context/AuthorizationContext";
+import "./styles.css";
 
 const Home = () => {
   const { user } = useContext(AuthContext);
