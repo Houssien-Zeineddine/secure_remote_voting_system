@@ -1,3 +1,40 @@
+/* Animations */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes scaleIn {
+    from {
+        opacity: 0;
+        transform: scale(0.9);
+    }
+
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+@keyframes slideInRight {
+    from {
+        opacity: 0;
+        transform: translateX(30px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
 .landing-page-container {
     display: flex;
     flex-direction: column;
@@ -5,6 +42,7 @@
     gap: 6rem;
     width: 100%;
     font-size: var(--font-size-body);
+    overflow-x: hidden;
 }
 
 .landing-page-description {
@@ -15,12 +53,14 @@
     width: 90%;
     margin-top: -1rem;
     position: relative;
+    animation: scaleIn 0.8s ease-out;
 }
 
 .politician-img-container {
     height: auto;
     width: 50%;
     padding: 5rem;
+    animation: slideInRight 1s ease-out;
 }
 
 .landing-page-text {
@@ -29,6 +69,7 @@
     gap: 1.5rem;
     color: var(--primary-color);
     width: 50%;
+    animation: fadeInUp 0.8s ease-out;
 }
 
 .landing-page-text h2 {
@@ -39,12 +80,16 @@
 
 .landing-page-text p {
     font-size: var(--font-size-header-4);
+    opacity: 0;
+    animation: fadeInUp 0.8s ease-out 0.3s forwards;
 }
 
-.landing-page-btn-container{
+.landing-page-btn-container {
     width: 100%;
     display: flex;
     justify-content: flex-start;
+    opacity: 0;
+    animation: fadeInUp 0.8s ease-out 0.6s forwards;
 }
 
 .landing-page-cards-container {
@@ -71,6 +116,13 @@
     height: 14rem;
     width: 25rem;
     color: var(--primary-color);
+    transition: transform 0.3s ease;
+    cursor: pointer;
+}
+
+.card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
 }
 
 .card-text {
@@ -85,6 +137,11 @@
 
 .card-text h4 {
     font-size: var(--font-size-header-4);
+    transition: color 0.3s ease;
+}
+
+.card:hover .card-text h4 {
+    color: var(--primary-color);
 }
 
 .card-text p {
@@ -121,6 +178,8 @@
     background-color: var(--tertiary-color);
     padding: 2rem;
     width: 100%;
+    opacity: 0;
+    animation: fadeInUp 0.8s ease-out forwards;
 }
 
 .our-features-header h2 {
@@ -128,11 +187,12 @@
     font-weight: var(--font-weight-bold);
 }
 
-.our-features-header > p {
+.our-features-header>p {
     font-size: var(--font-size-header-4);
     text-align: center;
     width: 70%;
 }
+
 .our-features-cards {
     display: flex;
     justify-content: space-evenly;
@@ -149,6 +209,18 @@
     gap: 1rem;
     height: 18rem;
     width: 13.5rem;
+    padding: 1.5rem;
+    border-radius: 10px;
+    transition: all 0.3s ease;
+    opacity: 0;
+    animation: fadeInUp 0.8s ease-out forwards;
+    animation-delay: calc(var(--card-index) * 0.2s);
+}
+
+.our-features-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    background-color: var(--secondary-color);
 }
 
 .our-features-card h4 {
@@ -166,8 +238,8 @@
     align-items: center;
     gap: 5rem;
     width: 100%;
-    margin: 0 auto; 
-    padding: 2rem 1rem; 
+    margin: 0 auto;
+    padding: 2rem 1rem;
 }
 
 .about-us-text {
@@ -179,15 +251,15 @@
     color: var(--primary-color);
     background-color: var(--tertiary-color);
     width: 100%;
-    min-height: 15rem; 
-    padding: 2rem; 
-    text-align: center; 
+    min-height: 15rem;
+    padding: 2rem;
+    text-align: center;
 }
 
 .about-us-text h2 {
     font-size: var(--font-size-header-2);
     font-weight: var(--font-weight-bold);
-    margin-bottom: 0.5rem; 
+    margin-bottom: 0.5rem;
 }
 
 .about-us-text p {
@@ -197,36 +269,36 @@
 .about-us-body {
     display: flex;
     justify-content: space-between;
-    align-items: center; 
+    align-items: center;
     gap: 3rem;
     width: 90%;
     color: var(--primary-color);
 }
 
-.about-us-body > div {
+.about-us-body>div {
     width: 50%;
-    min-width: 300px; 
+    min-width: 300px;
 }
 
 .about-us-body img {
     width: 50%;
     height: auto;
-    object-fit: contain; 
+    object-fit: contain;
 }
 
 .about-us-list {
     display: flex;
-    gap: 1.5rem; 
+    gap: 1.5rem;
     width: 100%;
-    margin-bottom: 2.5rem; 
+    margin-bottom: 2.5rem;
 }
 
-div > h4 {
+div>h4 {
     font-size: var(--font-size-header-4);
 }
 
 .faqs-container {
-    
+
     color: var(--primary-color);
     width: 100%;
     display: flex;
@@ -254,14 +326,104 @@ div > h4 {
     width: 90%;
 }
 
-.faqs-body > img {
+.faqs-body>img {
     max-width: 30%;
     max-height: 100vh;
 }
 
 /* when scrolling to these sections tha navbar dont cover them */
 #home,
-#about-us, 
+#about-us,
 #faqs {
-  scroll-margin-top: 6rem;
+    scroll-margin-top: 6rem;
+}
+
+/* Responsive Design */
+@media screen and (max-width: 1200px) {
+    .landing-page-description {
+        flex-direction: column;
+        text-align: center;
+        gap: 2rem;
+    }
+
+    .landing-page-text {
+        width: 80%;
+        align-items: center;
+    }
+
+    .landing-page-text h2 {
+        width: 100%;
+        text-align: center;
+    }
+
+    .landing-page-btn-container {
+        justify-content: center;
+    }
+
+    .landing-page-cards {
+        flex-direction: column;
+        height: auto;
+        gap: 2rem;
+        padding: 2rem;
+    }
+
+    .card {
+        width: 100%;
+        max-width: 25rem;
+    }
+
+    .our-features-cards {
+        flex-direction: column;
+        width: 90%;
+    }
+
+    .our-features-card {
+        width: 100%;
+        max-width: 20rem;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .landing-page-container {
+        gap: 4rem;
+    }
+
+    .politician-img-container {
+        width: 90%;
+        padding: 2rem;
+    }
+
+    .landing-page-text h2 {
+        font-size: var(--font-size-header-3);
+    }
+
+    .landing-page-text p {
+        font-size: var(--font-size-body);
+    }
+
+    .card {
+        flex-direction: column;
+        text-align: center;
+        padding: 1rem;
+    }
+
+    .card-text {
+        align-items: center;
+    }
+
+    .our-features-header>p {
+        width: 90%;
+    }
+}
+
+/* Intersection Observer Animations */
+.scroll-animate {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: all 0.6s ease-out;
+}
+
+.scroll-animate.visible {
+    opacity: 1;
+    transform: translateY(0);
 }

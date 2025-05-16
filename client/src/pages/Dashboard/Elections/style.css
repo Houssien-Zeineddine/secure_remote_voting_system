@@ -1,108 +1,100 @@
 /* description container */
 
-.elections-dashboard-container{
-    display: flex;
-    justify-content: space-evenly;
+.elections-dashboard-container {
+    display: grid;
+    grid-template-columns: 1fr 350px;
     gap: 2rem;
-    margin: 2rem;
+    padding: 2rem;
+    animation: fadeIn 0.5s ease-out;
     height: 100%;
 }
 
 .dashboard-description {
     display: flex;
     flex-direction: column;
-    justify-content: center;
-    align-items: flex-start;
-    gap: 2rem;
+    gap: 1rem;
     color: var(--primary-color);
 }
 
-.dashboard-description > h2 {
+.dashboard-description h4 {
+    font-size: var(--font-size-header-4);
+}
+
+.dashboard-description h2 {
     font-size: var(--font-size-header-2);
 }
 
 .dashboard-description-container {
     display: flex;
-    justify-content: center;
+    justify-content: space-between;
     align-items: center;
-    gap: 8rem;
-    border: 1px solid var(--border-color);
-    border-radius: 20px;
+    background-color: white;
+    box-shadow: -8px -8px 15px rgba(255, 255, 255, 0.1), 5px 5px 15px rgba(0, 0, 0, 0.2);   
     padding: 2rem;
+    border-radius: 10px;
+    animation: slideIn 0.6s ease-out;
+    height: calc(50% - 1rem);
 }
 
-.dashboard-description-container > img {
-    width: 40%;
+.dashboard-description-container img {
     height: auto;
+    width: 40%;
 }
 
 .description-live-results-container {
     display: flex;
     flex-direction: column;
-    width: 70%; 
     gap: 2rem;
-    color: var(--primary-color);
-    font-weight: var(--font-weight-bold);
+    height: 100%;
 }
 
 /* live results container */
 
 .dashboard-live-results {
-    border: 1px solid var(--border-color);
-    border-radius: 20px;
-    padding: 2rem;
     display: flex;
-    justify-content: center;
-    align-items: center;
-    /* width: 100%; */
+    justify-content: space-between;
+    align-items: flex-start;
     gap: 2rem;
+    background-color: white;
+    box-shadow: -8px -8px 15px rgba(255, 255, 255, 0.1), 5px 5px 15px rgba(0, 0, 0, 0.2);
+    padding: 2rem;
+    border-radius: 10px;
+    animation: slideIn 0.6s ease-out 0.2s both;
+    height: calc(50% - 1rem);
+    overflow-y: auto;
 }
 
 .candidates-names {
     display: flex;
     flex-direction: column;
-    align-items: flex-end;
-    justify-content: flex-start;
-    width: 25%;
-    height: 100%;
-    gap: 2rem;
+    gap: 2.5rem;
+    color: var(--primary-color);
+    font-weight: var(--font-weight-medium);
+    font-size: var(--font-size-header-4);
 }
-
-.candidates-names div {
-    height: 2rem;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-@keyframes expandBar {
-    from { width: 0%; }
-    to { width: var(--target-width); }
-  }
-
-  .vote-bar {
-    height: 2rem;
-    background-color: var(--primary-color);
-    border-radius: 0 8px 8px 0;
-    animation: expandBar 2s ease-out forwards;
-    transform-origin: left center;
-    will-change: width;
-  }
 
 .bars-container {
     display: flex;
     flex-direction: column;
-    justify-content: flex-start;
-    gap: 2rem;
-    width: 100%;
+    gap: 2.5rem;
+    width: 70%;
 }
 
 .bar-result-container {
     display: flex;
-    gap: 1rem;
     align-items: center;
-    background-color: var(--secondary-color);
-    border-radius: 0px 8px 8px 0px;
+    gap: 1rem;
+    color: var(--primary-color);
+    font-weight: var(--font-weight-medium);
+    font-size: var(--font-size-header-4);
+}
+
+.vote-bar {
+    height: 2rem;
+    background-color: var(--primary-color);
+    border-radius: 100px;
+    width: var(--target-width);
+    animation: growBar 1s ease-out forwards;
 }
 
 /* statistics container */
@@ -112,52 +104,160 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    gap: 3rem;
+    gap: 1rem;
+    background-color: white;
+    box-shadow: -8px -8px 15px rgba(255, 255, 255, 0.1), 5px 5px 15px rgba(0, 0, 0, 0.2);
+    padding: 2rem;
+    border-radius: 10px;
     color: var(--primary-color);
-    border: 1px solid var(--border-color);
-    border-radius: 20px;
-    padding: 1rem;
-    text-align: center;
-    height: calc(100vh - 10rem);
-    width: 25%;
-    flex-shrink: 0;
-    position: sticky;
-    top: 8rem;
+    animation: slideIn 0.6s ease-out 0.4s both;
+    height: 100%;
 }
 
-.statistics-container > h4 {
-    font-size: var(--font-size-header-2);
-}
-
-.statistics-container p:nth-child(5) {
-    color: var(--navbar-gradient-color);
-}
-
-.statistics-container p:nth-child(7) {
-    color: red;
+.statistics-container h4 {
+    font-size: var(--font-size-header-4);
 }
 
 .round-div {
-    width: 5rem;
-    height: 5rem;
-    border-radius: 100px;
+    height: 8rem;
+    width: 8rem;
+    border-radius: 50%;
     display: flex;
     justify-content: center;
     align-items: center;
-    font-weight: var(--font-weight-bold);
+    color: var(--white-color);
+    font-size: var(--font-size-header-2);
+    animation: countUp 0.8s ease-out forwards;
 }
 
 .registered-voter {
-    border: 8px solid var(--primary-color);
-    color: var(--primary-color);
+    background-color: var(--primary-color);
+    animation-delay: 0.6s;
 }
 
-.total-votes{
-    border: 8px solid var(--navbar-gradient-color);
-    color: var(--navbar-gradient-color);
+.total-votes {
+    background-color: #4CAF50;
+    animation-delay: 0.8s;
 }
 
-.maliscious-votes{
-    border: 8px solid red;
-    color: red;
+.maliscious-votes {
+    background-color: #f44336;
+    animation-delay: 1s;
+}
+
+/* Loading Spinner */
+.dashboard-loading {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: calc(100vh - 6rem);
+    background-color: var(--white-color);
+}
+
+.dashboard-spinner {
+    width: 60px;
+    height: 60px;
+    border: 5px solid var(--secondary-color);
+    border-top: 5px solid var(--primary-color);
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+/* Responsive Design */
+@media screen and (max-width: 1024px) {
+    .elections-dashboard-container {
+        grid-template-columns: 1fr;
+    }
+
+    .dashboard-description-container {
+        flex-direction: column;
+        text-align: center;
+        gap: 2rem;
+        height: auto;
+    }
+
+    .dashboard-live-results {
+        flex-direction: column;
+        align-items: center;
+        height: auto;
+    }
+
+    .dashboard-description-container img {
+        width: 60%;
+    }
+
+    .bars-container {
+        width: 100%;
+    }
+
+    .candidates-names {
+        width: 100%;
+        text-align: center;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .elections-dashboard-container {
+        padding: 1rem;
+    }
+
+    .round-div {
+        height: 6rem;
+        width: 6rem;
+        font-size: var(--font-size-header-3);
+    }
+}
+
+@keyframes slideIn {
+    from {
+        opacity: 0;
+        transform: translateX(-20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes growBar {
+    from {
+        width: 0;
+    }
+
+    to {
+        width: var(--target-width);
+    }
+}
+
+@keyframes countUp {
+    from {
+        transform: scale(0.8);
+        opacity: 0;
+    }
+
+    to {
+        transform: scale(1);
+        opacity: 1;
+    }
 }

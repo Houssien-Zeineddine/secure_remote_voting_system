@@ -10,19 +10,21 @@ import getProfilePictureUrl from "../../Utils/helpers";
 const ImageUpload = () => {
   const { user, setUser } = useContext(AuthContext);
   const [avatarURL, setAvatarURL] = useState(defaultImage);
+  const [isUploading, setIsUploading] = useState(false);
   const access_token = localStorage.getItem("access_token");
   const fileUploadRef = useRef();
 
   useEffect(() => {
-    setAvatarURL(
-      user.profile_picture_path
-        ? getProfilePictureUrl(user.profile_picture_path)
-        : { defaultImage }
-    );
+    if (user && user.profile_picture_path) {
+      const profilePicUrl = getProfilePictureUrl(user.profile_picture_path);
+      setAvatarURL(profilePicUrl || defaultImage);
+    } else {
+      setAvatarURL(defaultImage);
+    }
   }, [user?.profile_picture_path]);
 
   const handleImageUploadClick = () => {
-    fileUploadRef.current.click(); // opens file dialog
+    fileUploadRef.current.click();
   };
 
   const uploadImageDisplay = async () => {
@@ -30,7 +32,10 @@ const ImageUpload = () => {
       const uploadedFile = fileUploadRef.current.files[0];
       if (!uploadedFile) return;
 
-      setAvatarURL(uploadingAnimation);
+      const tempImageUrl = URL.createObjectURL(uploadedFile);
+      setAvatarURL(tempImageUrl);
+
+      setIsUploading(true);
 
       const formData = new FormData();
       formData.append("image", uploadedFile);
@@ -45,32 +50,46 @@ const ImageUpload = () => {
       if (response.status === 200) {
         const data = response.data;
         const imagePath = data.profile_picture_path || data.path;
-        setAvatarURL(
-          user.profile_picture_path
-            ? getProfilePictureUrl(imagePath)
-            : { defaultImage }
-        );
-
-        setUser((user) => ({
-          ...user,
-          profile_picture_path: imagePath,
-        }));
+        const newImageUrl = getProfilePictureUrl(imagePath);
+        
+        if (newImageUrl) {
+          setUser((prevUser) => ({
+            ...prevUser,
+            profile_picture_path: imagePath,
+          }));
+        } else {
+          throw new Error("Failed to get image URL");
+        }
       }
     } catch (error) {
-      console.log("Upload failed", error);
-      setAvatarURL(defaultImage);
+      console.error("Upload failed:", error);
+      const currentProfilePic = user?.profile_picture_path ? 
+        getProfilePictureUrl(user.profile_picture_path) : 
+        defaultImage;
+      setAvatarURL(currentProfilePic);
+    } finally {
+      setIsUploading(false);
     }
   };
 
   return (
     <div className="image-upload-container">
       <div className="profile-image-wrapper">
-        <img src={avatarURL} alt="Avatar" className="avatar-image" />
+        <img 
+          src={avatarURL} 
+          alt="Avatar" 
+          className={`avatar-image ${isUploading ? 'uploading' : ''}`}
+          onError={(e) => {
+            e.target.onerror = null;
+            e.target.src = defaultImage;
+          }}
+        />
       </div>
       <button
         type="button"
         onClick={handleImageUploadClick}
         className="edit-button"
+        disabled={isUploading}
       >
         <img src={editIcon} alt="Edit" className="edit-icon" />
       </button>
