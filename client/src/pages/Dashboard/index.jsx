@@ -1,7 +1,7 @@
 import React, { useContext, useState, useEffect } from "react";
+import Loading from "../../components/Loading";
 import Elections from "./Elections";
 import NoElections from "../../components/NoElections";
-import Loading from "../../components/Loading";
 import { CheckElectionsContext } from "../../components/Context/CheckElectionsContext";
 import "./style.css";
 
