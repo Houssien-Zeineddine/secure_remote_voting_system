@@ -25,7 +25,9 @@
 
 ### Add Title Here
 
-- List the sexy features.
+- ✅ Secure Remote Voting: Enables users to cast their votes safely from anywhere, with strong protections against tampering.
+- 🤖 AI-Powered Fraud Detection: Leverages artificial intelligence to identify and flag suspicious or abnormal voting behavior in real time.
+- 🌍 Geolocation-Based Validation: Ensures each vote originates from an authorized location, enhancing legitimacy and trust in the process.
 
 <br><br>
 
