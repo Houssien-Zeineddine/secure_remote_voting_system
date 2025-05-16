@@ -14,7 +14,7 @@ const Guidelines = () => {
           </p>
         </div>
         <div className="guidelines-and-image">
-          <div>
+          <div className="guidelines-list-text">
             <div className="guidelines-box">
               <div className="rounded-number">
                 <p>1</p>

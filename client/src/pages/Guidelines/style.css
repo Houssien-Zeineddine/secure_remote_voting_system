@@ -25,3 +25,9 @@
     display: flex;
     gap: 1rem;
 }
+
+.guidelines-list-text {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
