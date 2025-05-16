@@ -16,12 +16,12 @@
 
 ### Add Title Here
 
-- To be decided on later on.
+- ER Diagram
 
 <br><br>
 
 <!-- Project Highlights -->
-<img src="./readme/title4.svg"/>
+<img src="./readme/ER Diagram.png"/>
 
 ### Add Title Here
 
