@@ -78,10 +78,6 @@ const VoteForCandidate = () => {
         headers: { Authorization: `Bearer ${access_token}` },
       });
 
-      // if (!response.ok) {
-      //   throw new Error(await response.text());
-      // }
-
       const filteredVote = response.data;
       closeVoteToCandidateDialog();
     } catch (error) {
