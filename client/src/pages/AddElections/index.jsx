@@ -38,6 +38,7 @@ const AdminPage = () => {
   const closeRemoveCandidateDialog = () => {
     setSelectedCandidate(null);
     setIsRemoveCandidateOpen(false);
+    setError(null);
   };
 
   const openStopElectionsDialogue = (ongoingActiveElections) => {
@@ -136,6 +137,7 @@ const AdminPage = () => {
         await fetchCandidates();
         setIsAddCandidateOpen(false);
         setCandidateEmail("");
+        setError(null);
       }
     } catch (err) {
       const errorMessage =
