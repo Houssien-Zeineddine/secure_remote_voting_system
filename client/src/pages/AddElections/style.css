@@ -165,6 +165,7 @@ td a:hover {
   border-radius: 8px;
   margin-bottom: 1rem;
   font-size: 0.9rem;
+  width: 100%;
 }
 
 .yes-no-btn-wrapper {
