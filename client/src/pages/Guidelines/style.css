@@ -13,3 +13,10 @@
     flex-direction: column;
     justify-content: center;
 }
+
+.guidelines-and-image {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 2rem;
+}
