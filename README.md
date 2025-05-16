@@ -5,9 +5,9 @@
 <!-- project overview -->
 <img src="./readme/title2.svg"/>
 
-> This system allows users to vote remotely in a secure, transparent, and intelligent manner. It leverages AI to detect suspicious activity, ensures that votes are geographically legitimate, and provides a smooth and reliable user experience.
+> This innovative project simulates a real-world election platform while tackling some of the most pressing challenges of our time—security, accessibility, and trust. With this system, users can cast their votes remotely in a manner that is not only secure but also transparent and efficient.
 >
-> The goal is to simulate a real-world voting system with additional layers of AI and geolocation validation.
+> What sets this system apart is its integration of cutting-edge AI technology to detect suspicious voting behavior and the use of geolocation to ensure that votes are cast from verified locations. Furthermore, we prioritize a seamless user experience, guiding individuals smoothly from the start to the finish of the voting process.
 
 <br><br>
 
