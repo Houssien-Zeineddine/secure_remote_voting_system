@@ -1,13 +1,13 @@
 import React, { useContext, useState } from "react";
-import { CheckElectionsContext } from "../../components/Context/CheckElectionsContext";
-import { FetchCandidatesContext } from "../../components/Context/FetchCandidatesContext";
-import addElections from "../../assets/plus (1) 1.svg";
-import Dialogue from "../../components/Dialogue";
-import Button from "../../components/Button";
 import Input from "../../components/Input";
-import "./style.css";
+import Button from "../../components/Button";
+import Dialogue from "../../components/Dialogue";
+import addElections from "../../assets/plus (1) 1.svg";
 import axiosBaseUrl from "../../Utils/axios";
 import { capitalizeFirstLetter } from "../../Utils/helpers";
+import { CheckElectionsContext } from "../../components/Context/CheckElectionsContext";
+import { FetchCandidatesContext } from "../../components/Context/FetchCandidatesContext";
+import "./style.css";
 
 const AdminPage = () => {
   const { ongoingActiveElections, setOngoingActiveElections, fetchElections } =
@@ -253,14 +253,6 @@ const AdminPage = () => {
                 classNames="input-vertical"
                 onChange={handleEmailChange}
               />
-              {/* <Input
-                label="candidate_fullname"
-                labelText="Full Name"
-                type="text"
-                name="candidate_fullname"
-                placeholder="Enter full name"
-                classNames="input-vertical"
-              /> */}
             </Dialogue>
 
             {/* Stop Elections Dialog */}
