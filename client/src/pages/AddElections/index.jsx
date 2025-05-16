@@ -253,14 +253,6 @@ const AdminPage = () => {
                 classNames="input-vertical"
                 onChange={handleEmailChange}
               />
-              {/* <Input
-                label="candidate_fullname"
-                labelText="Full Name"
-                type="text"
-                name="candidate_fullname"
-                placeholder="Enter full name"
-                classNames="input-vertical"
-              /> */}
             </Dialogue>
 
             {/* Stop Elections Dialog */}
