@@ -28,7 +28,7 @@ const Guidelines = () => {
           </div>
           <div className="guidelines-box">
             <div className="rounded-number">
-              <p>1</p>
+              <p>2</p>
             </div>
             <div className="guideline-title-text">
               <p>Multiple Votes from Same IP Address</p>
@@ -41,7 +41,7 @@ const Guidelines = () => {
           </div>
           <div className="guidelines-box">
             <div className="rounded-number">
-              <p>1</p>
+              <p>3</p>
             </div>
             <div className="guideline-title-text">
               <p>Multiple Votes from Same IP Address</p>
@@ -54,7 +54,7 @@ const Guidelines = () => {
           </div>
           <div className="guidelines-box">
             <div className="rounded-number">
-              <p>1</p>
+              <p>4</p>
             </div>
             <div className="guideline-title-text">
               <p>Multiple Votes from Same IP Address</p>
@@ -67,7 +67,7 @@ const Guidelines = () => {
           </div>
           <div className="guidelines-box">
             <div className="rounded-number">
-              <p>1</p>
+              <p>5</p>
             </div>
             <div className="guideline-title-text">
               <p>Multiple Votes from Same IP Address</p>
