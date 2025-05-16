@@ -31,11 +31,12 @@ const Guidelines = () => {
               <p>2</p>
             </div>
             <div className="guideline-title-text">
-              <p>Multiple Votes from Same IP Address</p>
+              <p>Voting from Outside the Allowed Region</p>
               <p>
-                To prevent tampering, votes from the same IP address submitted
-                too quickly may be flagged. Please avoid voting from shared or
-                public networks when possible.
+                Voting is limited to residents of approved regions. If your
+                location appears outside of the allowed country or city, your
+                vote may be flagged. Make sure your device’s location settings
+                are accurate.
               </p>
             </div>
           </div>
@@ -44,11 +45,12 @@ const Guidelines = () => {
               <p>3</p>
             </div>
             <div className="guideline-title-text">
-              <p>Multiple Votes from Same IP Address</p>
+              <p>Unusually Fast Voting</p>
               <p>
-                To prevent tampering, votes from the same IP address submitted
-                too quickly may be flagged. Please avoid voting from shared or
-                public networks when possible.
+                If your vote is submitted seconds after logging in or
+                registering, our system may detect this as automated behavior.
+                Take your time to review your choices carefully before
+                submitting.
               </p>
             </div>
           </div>
@@ -57,11 +59,11 @@ const Guidelines = () => {
               <p>4</p>
             </div>
             <div className="guideline-title-text">
-              <p>Multiple Votes from Same IP Address</p>
+              <p>Suspicious Device or Browser</p>
               <p>
-                To prevent tampering, votes from the same IP address submitted
-                too quickly may be flagged. Please avoid voting from shared or
-                public networks when possible.
+                Using command-line tools or bots (like cURL or scripts) to
+                access the voting system is not allowed. Please vote using a
+                secure and supported browser or device.
               </p>
             </div>
           </div>
@@ -70,11 +72,11 @@ const Guidelines = () => {
               <p>5</p>
             </div>
             <div className="guideline-title-text">
-              <p>Multiple Votes from Same IP Address</p>
+              <p>Duplicate Voting Attempts</p>
               <p>
-                To prevent tampering, votes from the same IP address submitted
-                too quickly may be flagged. Please avoid voting from shared or
-                public networks when possible.
+                Each person is allowed only one vote. If a second attempt is
+                detected, even if it’s blocked, the action will be logged and
+                flagged for review.
               </p>
             </div>
           </div>
