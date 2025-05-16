@@ -14,14 +14,14 @@
 <!-- System Design -->
 <img src="./readme/title3.svg"/>
 
-### Add Title Here
+### ER Diagram
 
-- ER Diagram
+<img src="./readme/ER Diagram.png">
 
 <br><br>
 
 <!-- Project Highlights -->
-<img src="./readme/ER Diagram.png"/>
+<img src="./readme/title4.svg"/>
 
 ### Add Title Here
 
