@@ -1,15 +1,15 @@
 import React, { useContext, useState } from "react";
-import defaultProfilePicture from "../../../assets/sidebar icons/default profile picture.jpg";
 import Button from "../../../components/Button";
-import "./style.css";
 import Dialogue from "../../../components/Dialogue";
-import { FetchCandidatesContext } from "../../../components/Context/FetchCandidatesContext";
+import axiosBaseUrl from "../../../Utils/axios";
+import getProfilePictureUrl from "../../../Utils/helpers";
+import defaultProfilePicture from "../../../assets/sidebar icons/default profile picture.jpg";
+import { AuthContext } from "../../../components/Context/AuthorizationContext";
 import { CheckCampaignContext } from "../../../components/Context/CheckCampaignContext";
 import { capitalizeFirstLetter } from "../../../Utils/helpers";
-import getProfilePictureUrl from "../../../Utils/helpers";
-import { AuthContext } from "../../../components/Context/AuthorizationContext";
 import { CheckElectionsContext } from "../../../components/Context/CheckElectionsContext";
-import axiosBaseUrl from "../../../Utils/axios";
+import { FetchCandidatesContext } from "../../../components/Context/FetchCandidatesContext";
+import "./style.css";
 
 const VoteForCandidate = () => {
   const { user } = useContext(AuthContext);
@@ -77,10 +77,6 @@ const VoteForCandidate = () => {
       const response = await axiosBaseUrl.post("/user/vote", voteData, {
         headers: { Authorization: `Bearer ${access_token}` },
       });
-
-      // if (!response.ok) {
-      //   throw new Error(await response.text());
-      // }
 
       const filteredVote = response.data;
       closeVoteToCandidateDialog();
