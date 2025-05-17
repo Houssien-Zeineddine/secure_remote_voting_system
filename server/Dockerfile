@@ -7,9 +7,6 @@ WORKDIR /app
 # Copy Laravel app source code into container
 COPY server/ ./
 
-# Copy environment file
-COPY server/.env .env
-
 # Install PHP dependencies (excluding dev)
 RUN composer install --optimize-autoloader --no-dev
 
