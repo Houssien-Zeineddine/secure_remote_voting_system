@@ -141,7 +141,7 @@ jobs:
 
             sleep 10
 
-            sudo docker exec ubuntu-backend-1 bash -c "cat > /app/.env <<EOL
+            sudo docker exec  remote_voting_system-backend-1 bash -c "cat > /app/.env <<EOL
               APP_NAME=Laravel
               APP_ENV=production
               APP_KEY=
