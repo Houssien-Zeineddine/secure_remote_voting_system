@@ -23,8 +23,8 @@ class VoteRequest extends FormRequest {
             'candidate_id' => 'required|exists:users,id',
             'elections_id' => 'required|exists:elections,id',
             'elections_region_id' => 'required|exists:regions,id',
-            'latitude' => 'required|numeric|between:33.05,34.70',
-            'longitude' => 'required|numeric|between:35.10,36.60',
+            'latitude' => 'required|numeric',
+            'longitude' => 'required|numeric',
             'accuracy' => 'required|numeric',
             'timestamp' => 'required|date'
         ];
