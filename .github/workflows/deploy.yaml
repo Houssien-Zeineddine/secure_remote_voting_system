@@ -49,7 +49,7 @@ jobs:
           docker run --rm \
             -v $(pwd)/server:/app \
             laravel-test \
-            bash -c "php artisan config:clear && php artisan migrate --env=testing && php artisan test --env=testing"
+            bash -c "composer install --optimize-autoloader --no-dev && php artisan config:clear && php artisan migrate --env=testing && php artisan test --env=testing"
 
       - name: Build and Push Laravel image
         run: |
