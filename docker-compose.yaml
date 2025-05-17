@@ -3,9 +3,9 @@ services:
     image: houssienzed/final_project_laravel_image:latest
     environment:
       - LARAVEL_DATABASE_HOST=db
-      - LARAVEL_DATABASE_NAME=${{ secrets.DB_NAME }}
-      - LARAVEL_DATABASE_USER=${{ secrets.DB_USER }}
-      - LARAVEL_DATABASE_PASSWORD=${{ secrets.DB_PASS }}
+      - LARAVEL_DATABASE_NAME=secure_voting_system
+      - LARAVEL_DATABASE_USER=root
+      - LARAVEL_DATABASE_PASSWORD=1234
       - LARAVEL_DATABASE_PORT_NUMBER=3306
     restart: always
     ports:
