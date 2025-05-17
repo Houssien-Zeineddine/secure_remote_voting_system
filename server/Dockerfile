@@ -5,7 +5,7 @@ FROM bitnami/laravel:latest
 WORKDIR /app
 
 # Copy Laravel app source code into container
-COPY server/ ./
+COPY . .
 
 # Install PHP dependencies (excluding dev)
 RUN composer install --optimize-autoloader --no-dev
