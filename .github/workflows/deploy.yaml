@@ -40,7 +40,7 @@ jobs:
           echo "APP_KEY=${{ secrets.APP_KEY }}" > ./server/.env.testing
           echo "APP_ENV=testing" >> ./server/.env.testing
           echo "DB_CONNECTION=mysql" >> ./server/.env.testing
-          echo "DB_HOST=host.docker.internal" >> ./server/.env.testing
+          echo "DB_HOST=db" >> ./server/.env.testing
           echo "DB_PORT=3306" >> ./server/.env.testing
           echo "DB_DATABASE=${{ secrets.DB_NAME }}_testing" >> ./server/.env.testing
           echo "DB_USERNAME=${{ secrets.DB_USER }}" >> ./server/.env.testing
@@ -51,7 +51,7 @@ jobs:
             -v ~/.composer:/composer \
             -e APP_ENV=testing \
             -e DB_CONNECTION=mysql \
-            -e DB_HOST=host.docker.internal \
+            -e DB_HOST=db \
             -e DB_PORT=3306 \
             -e DB_DATABASE=${{ secrets.DB_NAME }}_testing \
             -e DB_USERNAME=${{ secrets.DB_USER }} \
