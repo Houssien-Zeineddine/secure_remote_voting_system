@@ -57,8 +57,8 @@ class VoteService {
                 return $malicious;
             } else {
                 $vote = CountedVote::create([
-                    'elections_id' => $request->elections_id,
                     'user_id' => $request->user_id,
+                    'elections_id' => $request->elections_id,
                     'candidate_id' => $request->candidate_id,
                 ]);
                 return $vote;
