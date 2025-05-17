@@ -32,16 +32,24 @@ jobs:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
 
+      - name: Build Laravel test image
+        run: docker build -t laravel-test ./server
+
       - name: Run Laravel tests
         run: |
-          docker build -t laravel-test ./server
+          # Create .env.testing dynamically
+          echo "APP_KEY=${{ secrets.APP_KEY }}" > ./server/.env.testing
+          echo "DB_CONNECTION=mysql" >> ./server/.env.testing
+          echo "DB_HOST=host.docker.internal" >> ./server/.env.testing
+          echo "DB_PORT=3306" >> ./server/.env.testing
+          echo "DB_DATABASE=${{ secrets.DB_NAME }}_testing" >> ./server/.env.testing
+          echo "DB_USERNAME=${{ secrets.DB_USER }}" >> ./server/.env.testing
+          echo "DB_PASSWORD=${{ secrets.DB_PASS }}" >> ./server/.env.testing
+
           docker run --rm \
-            -e DB_CONNECTION=mysql \
-            -e DB_DATABASE=secure_voting_system_testing \
-            -e DB_USERNAME=root \
-            -e DB_PASSWORD=1234 \
             -v $(pwd)/server:/app \
-            laravel-test php artisan test
+            laravel-test \
+            bash -c "php artisan config:clear && php artisan migrate --env=testing && php artisan test --env=testing"
 
       - name: Build and Push Laravel image
         run: |
