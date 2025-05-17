@@ -137,20 +137,33 @@ jobs:
             sudo docker pull ${{ secrets.DOCKERHUB_USERNAME }}/final_project_laravel_image:latest
             sudo docker pull ${{ secrets.DOCKERHUB_USERNAME }}/final_project_react_image:latest
 
-            sudo docker compose up -d
+            sudo docker compose up -d build
 
             sleep 10
 
-            sudo docker exec ubuntu-backend-1 bash -c "php -r \"file_put_contents('.env', 'OPENAI_API_KEY=${{ secrets.OPENAI_API_KEY }}\n', FILE_APPEND);\""
+            sudo docker exec ubuntu-backend-1 bash -c "cat > /app/.env <<EOL
+              APP_NAME=Laravel
+              APP_ENV=production
+              APP_KEY=
+              APP_DEBUG=false
+              APP_URL=http://yourdomain.com
 
-            sudo docker exec -i ubuntu-backend-1 php artisan config:clear
-            sudo docker exec -i ubuntu-backend-1 php artisan config:cache
+              LOG_CHANNEL=stack
 
-            sudo docker exec -i ubuntu-backend-1 bash -c "sed -i 's/DB_CONNECTION=sqlite/DB_CONNECTION=mysql/g' .env"
-            sudo docker exec -i ubuntu-backend-1 bash -c "sed -i 's/DB_HOST=127.0.0.1/DB_HOST=db/g' .env"
-            sudo docker exec -i ubuntu-backend-1 bash -c "sed -i 's/DB_DATABASE=laravel/DB_DATABASE=secure_voting_system/g' .env"
-            sudo docker exec -i ubuntu-backend-1 bash -c "sed -i 's/DB_USERNAME=root/DB_USERNAME=root/g' .env"
-            sudo docker exec -i ubuntu-backend-1 bash -c "sed -i 's/DB_PASSWORD=/DB_PASSWORD=1234/g' .env"
+              DB_CONNECTION=mysql
+              DB_HOST=db
+              DB_PORT=3306
+              DB_DATABASE=${{ secrets.DB_NAME }}
+              DB_USERNAME=${{ secrets.DB_USER }}
+              DB_PASSWORD=${{ secrets.DB_PASS }}
+
+              OPENAI_API_KEY=${{ secrets.OPENAI_API_KEY }}
+
+              CACHE_DRIVER=file
+              QUEUE_CONNECTION=sync
+              SESSION_DRIVER=file
+              SESSION_LIFETIME=120
+            EOL"  
 
             sudo docker exec -i ubuntu-backend-1 php artisan config:clear
             sudo docker exec -i ubuntu-backend-1 php artisan config:cache
