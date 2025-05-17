@@ -50,7 +50,22 @@ jobs:
             -v $(pwd)/server:/app \
             --user $(id -u):$(id -g) \
             laravel-test \
-            bash -c "composer install --optimize-autoloader --no-dev && php artisan config:clear && php artisan migrate --env=testing && php artisan test --env=testing"
+            bash -c "
+              chmod -R 775 /app/bootstrap/cache || true
+              chmod -R 775 /app/storage || true
+
+              echo '🔧 Installing dependencies...';
+              composer install --optimize-autoloader --no-dev || exit 1;
+
+              echo '🧹 Clearing config...';
+              php artisan config:clear || exit 1;
+
+              echo '🧱 Running migrations...';
+              php artisan migrate --env=testing || exit 1;
+
+              echo '🧪 Running tests...';
+              php artisan test --env=testing
+            "
 
       - name: Build and Push Laravel image
         run: |
