@@ -131,18 +131,34 @@ jobs:
           key: ${{ secrets.EC2_KEY }}
           script: |
             sudo docker compose down
-            sudo docker rmi ${{ secrets.DOCKERHUB_USERNAME }}/final_project_laravel_image:latest
-            sudo docker rmi ${{ secrets.DOCKERHUB_USERNAME }}/final_project_react_image:latest
+
+            echo "${{ secrets.DOCKERHUB_TOKEN }}" | sudo docker login -u "${{ secrets.DOCKERHUB_USERNAME }}" --password-stdin
+
+            sudo docker pull ${{ secrets.DOCKERHUB_USERNAME }}/final_project_laravel_image:latest
+            sudo docker pull ${{ secrets.DOCKERHUB_USERNAME }}/final_project_react_image:latest
+
             sudo docker compose up -d
-            sleep 10
+
             sudo docker exec -i backend bash -c "touch .env && chmod 644 .env"
-            sudo docker exec -i ubuntu-backend-1 bash -c "echo 'OPENAI_API_KEY=${{ secrets.OPENAI_API_KEY }}' >> .env"
+            sudo docker exec -i backend bash -c "echo 'OPENAI_API_KEY=${{ secrets.OPENAI_API_KEY }}' >> .env"
+            sudo docker exec -i backend php artisan config:clear
+            sudo docker exec -i backend php artisan config:cache
+            sudo docker exec -i backend php artisan migrate --force
 
-            sudo docker exec -i ubuntu-backend-1 php artisan config:clear
-            sudo docker exec -i ubuntu-backend-1 php artisan config:cache
-
-            sudo docker exec -it ubuntu-backend-1 php artisan migrate --force
             sudo docker image prune -a -f
+
+# sudo docker rmi ${{ secrets.DOCKERHUB_USERNAME }}/final_project_laravel_image:latest
+# sudo docker rmi ${{ secrets.DOCKERHUB_USERNAME }}/final_project_react_image:latest
+# sudo docker compose up -d
+# sleep 10
+# sudo docker exec -i backend bash -c "touch .env && chmod 644 .env"
+# sudo docker exec -i ubuntu-backend-1 bash -c "echo 'OPENAI_API_KEY=${{ secrets.OPENAI_API_KEY }}' >> .env"
+
+# sudo docker exec -i ubuntu-backend-1 php artisan config:clear
+# sudo docker exec -i ubuntu-backend-1 php artisan config:cache
+
+# sudo docker exec -it ubuntu-backend-1 php artisan migrate --force
+# sudo docker image prune -a -f
 
 # docker-compose down
 #             docker rmi ${{ secrets.DOCKERHUB_USERNAME }}/final_project_laravel_image:latest
