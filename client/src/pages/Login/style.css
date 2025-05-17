@@ -54,7 +54,6 @@
 .no-account {
     color: var(--primary-color);
     font-size: 0.95rem;
-    margin-top: 1rem;
     align-self: center;
 }
 
