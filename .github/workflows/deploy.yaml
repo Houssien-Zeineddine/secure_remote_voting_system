@@ -37,8 +37,8 @@ jobs:
 
       - name: Run Laravel tests
         run: |
-          # Create .env.testing dynamically
           echo "APP_KEY=${{ secrets.APP_KEY }}" > ./server/.env.testing
+          echo "APP_ENV=testing" >> ./server/.env.testing
           echo "DB_CONNECTION=mysql" >> ./server/.env.testing
           echo "DB_HOST=host.docker.internal" >> ./server/.env.testing
           echo "DB_PORT=3306" >> ./server/.env.testing
@@ -48,11 +48,19 @@ jobs:
 
           docker run --rm \
             -v $(pwd)/server:/app \
+            -v ~/.composer:/composer \
+            -e APP_ENV=testing \
+            -e DB_CONNECTION=mysql \
+            -e DB_HOST=host.docker.internal \
+            -e DB_PORT=3306 \
+            -e DB_DATABASE=${{ secrets.DB_NAME }}_testing \
+            -e DB_USERNAME=${{ secrets.DB_USER }} \
+            -e DB_PASSWORD=${{ secrets.DB_PASS }} \
             --user $(id -u):$(id -g) \
             laravel-test \
             bash -c "
-              chmod -R 775 /app/bootstrap/cache || true
-              chmod -R 775 /app/storage || true
+              cp .env.testing .env
+              chmod -R 775 bootstrap/cache storage || true
 
               echo '🔧 Installing dependencies...';
               composer install --optimize-autoloader --no-dev || exit 1;
@@ -61,10 +69,10 @@ jobs:
               php artisan config:clear || exit 1;
 
               echo '🧱 Running migrations...';
-              php artisan migrate --env=testing || exit 1;
+              php artisan migrate || exit 1;
 
               echo '🧪 Running tests...';
-              php artisan test --env=testing
+              php artisan test
             "
 
       - name: Build and Push Laravel image
