@@ -2,41 +2,21 @@ name: CI/CD Pipeline
 
 on:
   push:
-    branches:
-      - main
-
+    branches: [main]
   pull_request:
-    branches:
-      - main
+    branches: [main]
 
 env:
   EC2_SSH_KEY: ${{ secrets.EC2_KEY }}
   EC2_HOST: ${{ secrets.EC2_HOST }}
-  EC2_USER: ${{ secrests.EC2_USER }}
+  EC2_USER: ${{ secrets.EC2_USER }}
   APP_KEY: ${{ secrets.APP_KEY }}
   DB_NAME: ${{ secrets.DB_NAME }}
   DB_USER: ${{ secrets.DB_USER }}
   DB_PASS: ${{ secrets.DB_PASS }}
 
 jobs:
-  Copy-docker-compose-to-EC2:
-    needs: test
-    runs-on: ubuntu-latest
-
-    steps:
-      - name: Checkout repository
-        uses: actions/checkout@v3
-
-      - name: Copy docker-compose to EC2
-        uses: appleboy/scp-action@v1
-        with:
-          host: ${{ secrets.EC2_HOST }}
-          username: ${{ secrets.EC2_USER }}
-          key: ${{ secrets.EC2_KEY }}
-          source: "docker-compose.yaml"
-          target: "/home/${{ secrets.EC2_USER }}/"
-
-  test-and-deploy:
+  build-and-deploy:
     runs-on: ubuntu-latest
 
     steps:
@@ -54,14 +34,14 @@ jobs:
 
       - name: Run Laravel tests
         run: |
-          docker build -t laravel-test ./server 
+          docker build -t laravel-test ./server
           docker run --rm \
             -e DB_CONNECTION=mysql \
             -e DB_DATABASE=secure_voting_system_testing \
             -e DB_USERNAME=root \
             -e DB_PASSWORD=1234 \
             -v $(pwd)/server:/app \
-            laravel-test php artisan test  # Run Laravel tests inside container
+            laravel-test php artisan test
 
       - name: Build and Push Laravel image
         run: |
@@ -76,23 +56,45 @@ jobs:
       - name: Upload React build to S3 (static hosting)
         run: |
           cd client
-          npm ci  # Clean install dependencies
-          npm run build  # Build static site in /dist
-          aws s3 sync dist/ s3://fse-final-zeineddine --delete --region eu-west-3  # Sync build with S3 bucket
+          npm ci
+          npm run build
+          aws s3 sync dist/ s3://fse-final-zeineddine --delete --region eu-west-3
         env:
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
 
-      - name: Deploy to EC2 via SSH
+      - name: Generate .env file
         run: |
-          echo "$EC2_SSH_KEY" > private_key.pem  # Save SSH private key to a file
+          echo "APP_ENV=production" > .env
+          echo "APP_DEBUG=false" >> .env
+          echo "APP_KEY=${{ secrets.APP_KEY }}" >> .env
+          echo "DB_CONNECTION=mysql" >> .env
+          echo "DB_HOST=db" >> .env
+          echo "DB_PORT=3306" >> .env
+          echo "DB_DATABASE=${{ secrets.DB_NAME }}" >> .env
+          echo "DB_USERNAME=${{ secrets.DB_USER }}" >> .env
+          echo "DB_PASSWORD=${{ secrets.DB_PASS }}" >> .env
+
+      - name: Copy files to EC2
+        uses: appleboy/scp-action@v1
+        with:
+          host: ${{ secrets.EC2_HOST }}
+          username: ${{ secrets.EC2_USER }}
+          key: ${{ secrets.EC2_KEY }}
+          source: |
+            docker-compose.yml
+            .env
+          target: /home/${{ secrets.EC2_USER }}
+
+      - name: Deploy on EC2 via SSH
+        run: |
+          echo "$EC2_SSH_KEY" > private_key.pem
           chmod 600 private_key.pem
 
-          scp -o StrictHostKeyChecking=no -i private_key.pem docker-compose.yml $EC2_USER@$EC2_HOST:/home/$EC2_USER/
-
-          ssh -o StrictHostKeyChecking=no -i private_key.pem $EC2_USER@$EC2_HOST << 'EOF'
+          ssh -o StrictHostKeyChecking=no -i private_key.pem $EC2_USER@$EC2_HOST << EOF
+            cd /home/$EC2_USER
             docker pull ${{ secrets.DOCKERHUB_USERNAME }}/final_project_laravel_image:latest
             docker pull ${{ secrets.DOCKERHUB_USERNAME }}/final_project_react_image:latest
-            docker-compose down  # Stop running containers
-            docker-compose up -d  # Start containers in detached mode
+            docker-compose --env-file .env down
+            docker-compose --env-file .env up -d --remove-orphans
           EOF
