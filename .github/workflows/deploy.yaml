@@ -141,9 +141,17 @@ jobs:
 
             sleep 10
 
-            sudo docker exec -u root ubuntu-backend-1 bash -c "touch /app/.env && chmod 644 /app/.env"
+            sudo docker exec ubuntu-backend-1 bash -c "php -r \"file_put_contents('.env', 'OPENAI_API_KEY=${{ secrets.OPENAI_API_KEY }}\n', FILE_APPEND);\""
 
-            sudo docker exec -i ubuntu-backend-1 bash -c "echo 'OPENAI_API_KEY=${{ secrets.OPENAI_API_KEY }}' >> /app/.env"
+            sudo docker exec -i ubuntu-backend-1 php artisan config:clear
+            sudo docker exec -i ubuntu-backend-1 php artisan config:cache
+
+            sudo docker exec -i ubuntu-backend-1 bash -c "sed -i 's/DB_CONNECTION=sqlite/DB_CONNECTION=mysql/g' .env"
+            sudo docker exec -i ubuntu-backend-1 bash -c "sed -i 's/DB_HOST=127.0.0.1/DB_HOST=db/g' .env"
+            sudo docker exec -i ubuntu-backend-1 bash -c "sed -i 's/DB_DATABASE=laravel/DB_DATABASE=secure_voting_system/g' .env"
+            sudo docker exec -i ubuntu-backend-1 bash -c "sed -i 's/DB_USERNAME=root/DB_USERNAME=root/g' .env"
+            sudo docker exec -i ubuntu-backend-1 bash -c "sed -i 's/DB_PASSWORD=/DB_PASSWORD=1234/g' .env"
+
             sudo docker exec -i ubuntu-backend-1 php artisan config:clear
             sudo docker exec -i ubuntu-backend-1 php artisan config:cache
             sudo docker exec -i ubuntu-backend-1 php artisan migrate --force
