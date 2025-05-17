@@ -19,6 +19,20 @@ jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
 
+    services:
+      mysql:
+        image: mysql:8.0
+        env:
+          MYSQL_ROOT_PASSWORD: ${{ secrets.DB_PASS }}
+          MYSQL_DATABASE: ${{ secrets.DB_NAME }}_testing
+          MYSQL_USER: ${{ secrets.DB_USER }}
+          MYSQL_PASSWORD: ${{ secrets.DB_PASS }}
+        ports:
+          - 3306:3306
+        options: --health-cmd="mysqladmin ping" --health-interval=10s --health-timeout=5s --health-retries=3
+        volumes:
+          - mysql_data:/var/lib/mysql
+
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
@@ -37,30 +51,26 @@ jobs:
 
       - name: Run Laravel tests
         run: |
+          # Create .env.testing dynamically
           echo "APP_KEY=${{ secrets.APP_KEY }}" > ./server/.env.testing
-          echo "APP_ENV=testing" >> ./server/.env.testing
           echo "DB_CONNECTION=mysql" >> ./server/.env.testing
-          echo "DB_HOST=db" >> ./server/.env.testing
+          echo "DB_HOST=127.0.0.1" >> ./server/.env.testing
           echo "DB_PORT=3306" >> ./server/.env.testing
           echo "DB_DATABASE=${{ secrets.DB_NAME }}_testing" >> ./server/.env.testing
           echo "DB_USERNAME=${{ secrets.DB_USER }}" >> ./server/.env.testing
           echo "DB_PASSWORD=${{ secrets.DB_PASS }}" >> ./server/.env.testing
 
+          # Wait for MySQL to be ready
+          sleep 15
+
           docker run --rm \
+            --network host \
             -v $(pwd)/server:/app \
-            -v ~/.composer:/composer \
-            -e APP_ENV=testing \
-            -e DB_CONNECTION=mysql \
-            -e DB_HOST=db \
-            -e DB_PORT=3306 \
-            -e DB_DATABASE=${{ secrets.DB_NAME }}_testing \
-            -e DB_USERNAME=${{ secrets.DB_USER }} \
-            -e DB_PASSWORD=${{ secrets.DB_PASS }} \
             --user $(id -u):$(id -g) \
             laravel-test \
             bash -c "
-              cp .env.testing .env
-              chmod -R 775 bootstrap/cache storage || true
+              chmod -R 775 /app/bootstrap/cache || true
+              chmod -R 775 /app/storage || true
 
               echo '🔧 Installing dependencies...';
               composer install --optimize-autoloader --no-dev || exit 1;
@@ -69,10 +79,10 @@ jobs:
               php artisan config:clear || exit 1;
 
               echo '🧱 Running migrations...';
-              php artisan migrate || exit 1;
+              php artisan migrate --env=testing || exit 1;
 
               echo '🧪 Running tests...';
-              php artisan test
+              php artisan test --env=testing
             "
 
       - name: Build and Push Laravel image
