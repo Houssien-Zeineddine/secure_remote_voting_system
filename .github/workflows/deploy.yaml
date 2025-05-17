@@ -18,7 +18,7 @@ jobs:
         image: mysql:8.0
         env:
           MYSQL_ROOT_PASSWORD: 1234
-          MYSQL_DATABASE: secure_voting_system
+          MYSQL_DATABASE: secure_voting_system_testing
         ports:
           - 3306:3306
         options: --health-cmd="mysqladmin ping" --health-interval=10s --health-timeout=5s --health-retries=3
@@ -64,7 +64,9 @@ jobs:
 
       - name: Build laravel image
         working-directory: server
-        run: docker build -t ${{ secrets.DOCKERHUB_USERNAME }}/final_project_laravel_image:latest .
+        run:
+          - docker build -t ${{ secrets.DOCKERHUB_USERNAME }}/final_project_laravel_image:latest .
+          - cp .env.example .env
 
       - name: Push laravel image
         run: docker push ${{ secrets.DOCKERHUB_USERNAME }}/final_project_laravel_image:latest
@@ -142,6 +144,7 @@ jobs:
             sleep 10
 
             sudo docker exec ubuntu-backend-1 bash -c "php -r \"file_put_contents('.env', 'OPENAI_API_KEY=${{ secrets.OPENAI_API_KEY }}\n', FILE_APPEND);\""
+            sudo docker exec ubuntu-backend-1 chmod 644 .env
 
             sudo docker exec -i ubuntu-backend-1 php artisan config:clear
             sudo docker exec -i ubuntu-backend-1 php artisan config:cache
@@ -155,8 +158,6 @@ jobs:
             sudo docker exec -i ubuntu-backend-1 php artisan config:clear
             sudo docker exec -i ubuntu-backend-1 php artisan config:cache
             sudo docker exec -i ubuntu-backend-1 php artisan migrate --force
-
-            sudo docker image prune -a -f
 
 # sudo docker rmi ${{ secrets.DOCKERHUB_USERNAME }}/final_project_laravel_image:latest
 # sudo docker rmi ${{ secrets.DOCKERHUB_USERNAME }}/final_project_react_image:latest
