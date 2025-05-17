@@ -1,30 +1,17 @@
-# Build Stage
+# Build stage
 FROM node:20-alpine AS build
 
-# Set working directory
-WORKDIR /app
-
-# Copy and install dependencies
-COPY client/package*.json ./
+WORKDIR /app/client
+COPY package*.json ./
 RUN npm ci
-
-# Copy source code
-COPY client/ ./
-
-# Build static site
+COPY . .
 RUN npm run build
 
-# Production Stage
+# Production stage
 FROM nginx:alpine
 
-# Copy built site to Nginx public folder
-COPY --from=build /app/dist /usr/share/nginx/html
+COPY --from=build /app/client/dist /usr/share/nginx/html
+COPY nginx.conf /etc/nginx/conf.d/default.conf
 
-# Copy custom Nginx config
-COPY client/nginx.conf /etc/nginx/conf.d/default.conf
-
-# Expose default HTTP port
 EXPOSE 80
-
-# Start Nginx
 CMD ["nginx", "-g", "daemon off;"]
