@@ -141,6 +141,8 @@ jobs:
 
             sleep 10
 
+            docker exec backend-1 bash -c 'touch /app/.env && chmod 644 /app/.env'
+
             docker exec ubuntu-backend-1 bash -c 'cat > /app/.env <<EOL
             APP_NAME=Laravel
             APP_ENV=production
@@ -169,6 +171,9 @@ jobs:
 
             docker exec -i ubuntu-backend-1 php artisan config:clear
             docker exec -i ubuntu-backend-1 php artisan config:cache
+
+            docker exec ubuntu-backend-1 bash -c 'while ! mysqladmin ping -hdb -u$DB_USERNAME -p$DB_PASSWORD --silent; do sleep 1; done'
+
             docker exec -i ubuntu-backend-1 php artisan migrate --force
 
-            docker image prune -a -f
+  # docker image prune -a -f
