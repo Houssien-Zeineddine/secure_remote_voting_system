@@ -139,12 +139,14 @@ jobs:
 
             sudo docker compose up -d
 
-            sudo docker exec -u root backend bash -c "touch .env && chmod 644 .env"
+            sleep 10
 
-            sudo docker exec -i backend bash -c "echo 'OPENAI_API_KEY=${{ secrets.OPENAI_API_KEY }}' >> .env"
-            sudo docker exec -i backend php artisan config:clear
-            sudo docker exec -i backend php artisan config:cache
-            sudo docker exec -i backend php artisan migrate --force
+            sudo docker exec -u root ubuntu-backend-1 bash -c "touch /app/.env && chmod 644 /app/.env"
+
+            sudo docker exec -i ubuntu-backend-1 bash -c "echo 'OPENAI_API_KEY=${{ secrets.OPENAI_API_KEY }}' >> /app/.env"
+            sudo docker exec -i ubuntu-backend-1 php artisan config:clear
+            sudo docker exec -i ubuntu-backend-1 php artisan config:cache
+            sudo docker exec -i ubuntu-backend-1 php artisan migrate --force
 
             sudo docker image prune -a -f
 
