@@ -47,7 +47,7 @@ class VoteService {
 
             $analysisResult = $this->analyzeVoteBehavior($request);
 
-            if ($analysisResult['validated']) {
+            if ($analysisResult['status'] === 'malicious') {
                 $malicious = MaliciousVote::create([
                     'user_id' => $request->user_id,
                     'elections_id' => $request->elections_id,
@@ -96,13 +96,13 @@ class VoteService {
 
         $voteTime = now()->format('H:i');
 
-        $prompt = "A user with ID {$request->user_id} has submitted {$recentVotes} votes in the last 10 minutes at {$voteTime}. Determine if this behavior is malicious or indicative of bot-like activity. Respond with JSON: {\"is_malicious\": true/false, \"reason\": \"...\"}.";
+        $prompt = "A user with ID {$request->user_id} has submitted {$recentVotes} votes in the last 10 minutes at {$voteTime}. Analyze this behavior for signs of malicious or bot-like activity. Consider whether the number of votes is unusually high compared to typical user behavior, if vote is coming from the same IP address in a short period after login less than 5 seconds, if the activity is happening at unusual hours (e.g., between 12 AM and 5 AM local time), and if the voting pattern shows signs of automation such as rapid clicking or bulk submissions in a few seconds. Based on your analysis, respond with a JSON object";
 
         $schema = new ObjectSchema (
             name: 'vote_validation_check', 
             description: 'Vote validation check', 
             properties: [ 
-                new StringSchema('validated', 'true if validated, false if not'), 
+                new StringSchema('status', 'counted if validated, malicious if not'), 
                 new StringSchema('result', 'Validated if vote is counted, cancelation reason if vote is canceled')],
             requiredFields: ['validated', 'result']
             );
