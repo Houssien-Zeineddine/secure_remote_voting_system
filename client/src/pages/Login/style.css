@@ -59,7 +59,7 @@
 }
 
 .no-account a {
-    color: var(--secondary-color);
+    color: var(--navbar-gradient-color);
     text-decoration: none;
     font-weight: 600;
     transition: color 0.3s ease;
@@ -180,6 +180,13 @@
 
 /* Responsive Design */
 @media screen and (max-width: 1200px) {
+    .form-conatiner,
+    .description-container {
+        width: 100%;
+        height: 100vh;
+    }
+
+
     .inside-form-container {
         width: 80%;
     }
@@ -197,18 +204,19 @@
     .form-conatiner,
     .description-container {
         width: 100%;
+        height: 100vh;
     }
 
     .form-conatiner {
         order: 2;
         padding: 3rem 1.5rem;
-        height: 100vh;
+        /* height: 100vh; */
     }
 
     .description-container {
         order: 1;
         min-height: 400px;
-        height: 100vh;
+        /* height: 100vh; */
     }
 
     .inside-form-container {
