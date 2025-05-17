@@ -139,20 +139,24 @@ jobs:
 
             docker compose up -d --build
 
-            sleep 10
+            # Wait for containers to initialize
+            sleep 15
 
-            docker exec -backend-1 bash -c 'mkdir -p /app && touch /app/.env && chown www-data:www-data /app/.env && chmod 644 /app/.env'
-            docker exec ubuntu-backend-1 bash -c 'cat > /app/.env <<EOL
+            # Create .env with proper permissions (using correct container name)
+            docker exec ***-backend-1 bash -c 'mkdir -p /app && touch /app/.env && chown -R www-data:www-data /app && chmod -R 755 /app'
+
+            # Write .env file
+            docker exec ***-backend-1 bash -c 'cat > /app/.env <<EOL
             APP_NAME=Laravel
             APP_ENV=production
             APP_KEY=
             APP_DEBUG=false
-            APP_URL=http://13.36.171.143
+            APP_URL=http://${{ secrets.APP_URL }}
 
             LOG_CHANNEL=stack
 
             DB_CONNECTION=mysql
-            DB_HOST=ubuntu-db-1
+            DB_HOST=db
             DB_PORT=3306
             DB_DATABASE=${{ secrets.DB_NAME }}
             DB_USERNAME=${{ secrets.DB_USER }}
@@ -164,16 +168,17 @@ jobs:
             QUEUE_CONNECTION=sync
             SESSION_DRIVER=file
             SESSION_LIFETIME=120
-            EOL'  
+            EOL'
 
-            docker exec ubuntu-backend-1 php artisan key:generate
+            # Generate application key
+            docker exec ***-backend-1 php artisan key:generate
 
-            docker exec -i ubuntu-backend-1 php artisan config:clear
-            docker exec -i ubuntu-backend-1 php artisan config:cache
+            # Clear config
+            docker exec ***-backend-1 php artisan config:clear
+            docker exec ***-backend-1 php artisan config:cache
 
-            docker exec ubuntu-backend-1 bash -c 'until php -r "try { new PDO(\"mysql:host=db;dbname=$DB_DATABASE\", \"$DB_USERNAME\", \"$DB_PASSWORD\"); exit(0); } catch (PDOException \$e) { exit(1); }"; do sleep 2; done'
+            # Wait for MySQL (using service name 'db' from docker-compose network)
+            docker exec ***-backend-1 bash -c 'until php -r "try { new PDO(\"mysql:host=db;dbname=$DB_DATABASE\", \"$DB_USERNAME\", \"$DB_PASSWORD\"); exit(0); } catch (PDOException \$e) { exit(1); }"; do sleep 2; done'
 
-            docker exec -i ubuntu-backend-1 php artisan migrate --force
-
-# docker exec ubuntu-backend-1 bash -c 'while ! mysqladmin ping -hdb -u$DB_USERNAME -p$DB_PASSWORD --silent; do sleep 1; done'
-# docker image prune -a -f
+            # Run migrations
+            docker exec ***-backend-1 php artisan migrate --force
