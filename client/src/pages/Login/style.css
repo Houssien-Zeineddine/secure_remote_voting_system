@@ -202,11 +202,13 @@
     .form-conatiner {
         order: 2;
         padding: 3rem 1.5rem;
+        height: 100vh;
     }
 
     .description-container {
         order: 1;
         min-height: 400px;
+        height: 100vh;
     }
 
     .inside-form-container {
