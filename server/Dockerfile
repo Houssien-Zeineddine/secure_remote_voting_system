@@ -5,7 +5,7 @@ FROM bitnami/laravel:latest
 WORKDIR /app
 
 # Copy application files
-COPY . .
+COPY server ./
 
 # Install dependencies
 RUN composer install --optimize-autoloader --no-dev
