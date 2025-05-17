@@ -48,6 +48,7 @@ jobs:
 
           docker run --rm \
             -v $(pwd)/server:/app \
+            --user $(id -u):$(id -g) \
             laravel-test \
             bash -c "composer install --optimize-autoloader --no-dev && php artisan config:clear && php artisan migrate --env=testing && php artisan test --env=testing"
 
