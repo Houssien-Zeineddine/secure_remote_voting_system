@@ -141,7 +141,7 @@ jobs:
 
             sleep 10
 
-            docker exec ubuntu-backend-1 bash -c 'cat > /var/www/html/.env <<EOL
+            docker exec ubuntu-backend-1 bash -c 'cat > /app/.env <<EOL
             APP_NAME=Laravel
             APP_ENV=production
             APP_KEY=
