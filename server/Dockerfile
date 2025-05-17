@@ -1,23 +1,24 @@
-# Use the Bitnami Laravel image
+# Use Bitnami Laravel image
 FROM bitnami/laravel:latest
 
 # Set working directory
 WORKDIR /app
 
-# Copy Laravel app source code into container
+# Copy application files
 COPY . .
 
-# Install PHP dependencies (excluding dev)
+# Install dependencies
 RUN composer install --optimize-autoloader --no-dev
 
-# Set permissions for cache and storage
+# Set permissions
 RUN chown -R daemon:daemon /app/storage /app/bootstrap/cache
 
-# Switch to non-root user for security
+# Switch to non-root user
 USER daemon
 
-# Expose Laravel development port
+# Expose port
 EXPOSE 8000
 
-# Start Laravel server
+# Start command
 CMD ["php", "artisan", "serve", "--host=0.0.0.0", "--port=8000"]
+

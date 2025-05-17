@@ -1,10 +1,12 @@
-version: '3.8'
-
 services:
   backend:
     image: houssienzed/final_project_laravel_image:latest
-    env_file:
-      - .env
+    environment:
+      - LARAVEL_DATABASE_HOST=db
+      - LARAVEL_DATABASE_NAME=${{ secrets.DB_NAME }}
+      - LARAVEL_DATABASE_USER=${{ secrets.DB_USER }}
+      - LARAVEL_DATABASE_PASSWORD=${{ secrets.DB_PASS }}
+      - LARAVEL_DATABASE_PORT_NUMBER=3306
     restart: always
     ports:
       - "8000:8000"
@@ -21,8 +23,8 @@ services:
   db:
     image: mysql:8.0
     environment:
-      - MYSQL_ROOT_PASSWORD=${DB_PASS}
-      - MYSQL_DATABASE=${DB_NAME}
+      - MYSQL_ROOT_PASSWORD=1234 
+      - MYSQL_DATABASE=secure_voting_system
     ports:
       - "3306:3306"
     volumes:
