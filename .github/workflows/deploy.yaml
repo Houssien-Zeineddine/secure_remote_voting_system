@@ -130,18 +130,18 @@ jobs:
           username: ${{ secrets.EC2_USER }}
           key: ${{ secrets.EC2_KEY }}
           script: |
-            sudo docker compose down
+            docker compose down
 
-            echo "${{ secrets.DOCKERHUB_TOKEN }}" | sudo docker login -u "${{ secrets.DOCKERHUB_USERNAME }}" --password-stdin
+            echo "${{ secrets.DOCKERHUB_TOKEN }}" | docker login -u "${{ secrets.DOCKERHUB_USERNAME }}" --password-stdin
 
-            sudo docker pull ${{ secrets.DOCKERHUB_USERNAME }}/final_project_laravel_image:latest
-            sudo docker pull ${{ secrets.DOCKERHUB_USERNAME }}/final_project_react_image:latest
+            docker pull ${{ secrets.DOCKERHUB_USERNAME }}/final_project_laravel_image:latest
+            docker pull ${{ secrets.DOCKERHUB_USERNAME }}/final_project_react_image:latest
 
-            sudo docker compose up -d build
+            docker compose up -d build
 
             sleep 10
 
-            sudo docker exec  remote_voting_system-backend-1 bash -c "cat > /app/.env <<EOL
+            docker exec ubuntu-backend-1 bash -c "cat > /app/.env <<EOL
               APP_NAME=Laravel
               APP_ENV=production
               APP_KEY=
@@ -165,8 +165,8 @@ jobs:
               SESSION_LIFETIME=120
             EOL"  
 
-            sudo docker exec ubuntu-backend-1 php artisan key:generate
+            docker exec ubuntu-backend-1 php artisan key:generate
 
-            sudo docker exec -i ubuntu-backend-1 php artisan config:clear
-            sudo docker exec -i ubuntu-backend-1 php artisan config:cache
-            sudo docker exec -i ubuntu-backend-1 php artisan migrate --force
+            docker exec -i ubuntu-backend-1 php artisan config:clear
+            docker exec -i ubuntu-backend-1 php artisan config:cache
+            docker exec -i ubuntu-backend-1 php artisan migrate --force
