@@ -143,10 +143,10 @@ jobs:
             sleep 15
 
             # Create .env with proper permissions (using correct container name)
-            docker exec ***-backend-1 bash -c 'mkdir -p /app && touch /app/.env && chown -R www-data:www-data /app && chmod -R 755 /app'
+            docker exec backend bash -c 'mkdir -p /app && touch /app/.env && chown -R www-data:www-data /app && chmod -R 755 /app'
 
             # Write .env file
-            docker exec ***-backend-1 bash -c 'cat > /app/.env <<EOL
+            docker exec backend bash -c 'cat > /app/.env <<EOL
             APP_NAME=Laravel
             APP_ENV=production
             APP_KEY=
@@ -171,14 +171,14 @@ jobs:
             EOL'
 
             # Generate application key
-            docker exec ***-backend-1 php artisan key:generate
+            docker exec backend php artisan key:generate
 
             # Clear config
-            docker exec ***-backend-1 php artisan config:clear
-            docker exec ***-backend-1 php artisan config:cache
+            docker exec backend php artisan config:clear
+            docker exec backend php artisan config:cache
 
             # Wait for MySQL (using service name 'db' from docker-compose network)
-            docker exec ***-backend-1 bash -c 'until php -r "try { new PDO(\"mysql:host=db;dbname=$DB_DATABASE\", \"$DB_USERNAME\", \"$DB_PASSWORD\"); exit(0); } catch (PDOException \$e) { exit(1); }"; do sleep 2; done'
+            docker exec backend bash -c 'until php -r "try { new PDO(\"mysql:host=db;dbname=$DB_DATABASE\", \"$DB_USERNAME\", \"$DB_PASSWORD\"); exit(0); } catch (PDOException \$e) { exit(1); }"; do sleep 2; done'
 
             # Run migrations
-            docker exec ***-backend-1 php artisan migrate --force
+            docker exec backend php artisan migrate --force
