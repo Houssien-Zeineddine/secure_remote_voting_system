@@ -1,114 +1,226 @@
-- name: Deploy on EC2
-  uses: appleboy/ssh-action@v0.1.10
-  with:
-    host: ${{ secrets.EC2_HOST }}
-    username: ${{ secrets.EC2_USER }}
-    key: ${{ secrets.EC2_KEY }}
-    command_timeout: 20m
-    script: |
-      # Create an env file with Docker credentials for compose
-      cat > .env << EOL
-      DOCKERHUB_USERNAME=${{ secrets.DOCKERHUB_USERNAME }}
-      DB_DATABASE=${{ secrets.DB_NAME }}
-      DB_USERNAME=${{ secrets.DB_USER }}
-      DB_PASSWORD=${{ secrets.DB_PASS }}
-      EOL
+name: CI/CD Pipeline
 
-      # Login to Docker Hub
-      echo "${{ secrets.DOCKERHUB_TOKEN }}" | docker login -u "${{ secrets.DOCKERHUB_USERNAME }}" --password-stdin
+on:
+  push:
+    branches:
+      - main
 
-      # Pull the latest images
-      docker pull ${{ secrets.DOCKERHUB_USERNAME }}/final_project_laravel_image:latest
-      docker pull ${{ secrets.DOCKERHUB_USERNAME }}/final_project_react_image:latest
+  pull_request:
+    branches:
+      - main
 
-      # Stop and remove any existing containers
-      echo "Stopping and removing any existing containers..."
-      docker compose down -v --remove-orphans
+jobs:
+  test:
+    runs-on: ubuntu-latest
 
-      # Start the containers with the new images
-      echo "Starting containers with docker-compose..."
-      docker compose up -d
+    services:
+      mysql:
+        image: mysql:8.0
+        env:
+          MYSQL_ROOT_PASSWORD: 1234
+          MYSQL_DATABASE: secure_voting_system
+        ports:
+          - 3306:3306
+        options: --health-cmd="mysqladmin ping" --health-interval=10s --health-timeout=5s --health-retries=3
 
-      # Verify containers are running
-      echo "Checking containers status:"
-      docker ps
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
 
-      # Wait longer for containers to initialize
-      echo "Waiting for containers to initialize..."
-      sleep 45
+      - name: Set up PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: "8.2"
+          extensions: mbstring, ctype, fileinfo, openssl, pdo, mysql, tokenizer, xml, gd
+          coverage: none
 
-      # Get backend container ID using the service name
-      BACKEND_CONTAINER=$(docker ps -q --filter "name=backend")
-      echo "Backend container ID: $BACKEND_CONTAINER"
+      - name: Install Composer dependencies
+        working-directory: server
+        run: composer install --no-progress --prefer-dist --optimize-autoloader
 
-      if [ -z "$BACKEND_CONTAINER" ]; then
-        echo "Backend container not found! Here are the running containers:"
-        docker ps -a
-        exit 1
-      fi
+      - name: Configure and test Laravel
+        working-directory: server
+        run: |
+          cp .env.testing .env
+          php artisan config:clear
+          php artisan key:generate --env=testing
+          php artisan config:cache
+          php artisan migrate --env=testing
+          php artisan test
 
-      # Wait for backend to be fully ready
-      echo "Waiting for backend container to be ready..."
-      docker exec $BACKEND_CONTAINER bash -c 'while [ ! -f /app/artisan ]; do sleep 2; done'
+  build-and-push-laravel-image:
+    needs: test
+    runs-on: ubuntu-latest
 
-      # Create Laravel .env file
-      echo "Creating .env file in backend container..."
-      docker exec $BACKEND_CONTAINER bash -c 'cat > /app/.env << EOL
-      APP_NAME=Laravel
-      APP_ENV=production
-      APP_KEY=
-      APP_DEBUG=false
-      APP_URL=http://${{ secrets.APP_URL }}
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
 
-      LOG_CHANNEL=stack
+      - name: Login to Docker Hub
+        uses: docker/login-action@v3
+        with:
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
 
-      DB_CONNECTION=mysql
-      DB_HOST=db
-      DB_PORT=3306
-      DB_DATABASE=${{ secrets.DB_NAME }}
-      DB_USERNAME=${{ secrets.DB_USER }}
-      DB_PASSWORD=${{ secrets.DB_PASS }}
+      - name: Build laravel image
+        working-directory: server
+        run: docker build -t ${{ secrets.DOCKERHUB_USERNAME }}/final_project_laravel_image:latest .
 
-      OPENAI_API_KEY=${{ secrets.OPENAI_API_KEY }}
+      - name: Push laravel image
+        run: docker push ${{ secrets.DOCKERHUB_USERNAME }}/final_project_laravel_image:latest
 
-      CACHE_DRIVER=file
-      QUEUE_CONNECTION=sync
-      SESSION_DRIVER=file
-      SESSION_LIFETIME=120
-      EOL'
+  build-and-push-react-image:
+    runs-on: ubuntu-latest
+    needs: test
 
-      # Set proper permissions
-      echo "Setting permissions on .env file..."
-      docker exec $BACKEND_CONTAINER bash -c 'chmod 644 /app/.env && chown bitnami:daemon /app/.env'
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
 
-      # Check if .env was created successfully
-      echo "Verifying .env file:"
-      docker exec $BACKEND_CONTAINER bash -c 'ls -la /app/.env'
+      - name: Login to Docker Hub
+        uses: docker/login-action@v3
+        with:
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
 
-      # Generate application key
-      echo "Generating application key..."
-      docker exec $BACKEND_CONTAINER php /app/artisan key:generate
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v2
 
-      # Cache configuration
-      echo "Caching configuration..."
-      docker exec $BACKEND_CONTAINER php /app/artisan config:clear
-      docker exec $BACKEND_CONTAINER php /app/artisan config:cache
+      - name: Build react image
+        working-directory: client
+        run: docker build -t ${{ secrets.DOCKERHUB_USERNAME }}/final_project_react_image:latest .
 
-      # Wait for MySQL to be ready
-      echo "Waiting for MySQL to be ready..."
-      docker exec $BACKEND_CONTAINER bash -c 'until php -r "try { \
-        new PDO(\"mysql:host=db;dbname=${{ secrets.DB_NAME }}\", \"${{ secrets.DB_USER }}\", \"${{ secrets.DB_PASS }}\"); \
-        echo \"Connected successfully\n\"; exit(0); \
-      } catch (PDOException \$e) { \
-        echo \$e->getMessage() . \"\n\"; sleep(2); \
-      }"; do echo "Waiting for DB connection..."; sleep 2; done'
+      - name: Push react image
+        run: docker push ${{ secrets.DOCKERHUB_USERNAME }}/final_project_react_image:latest
 
-      # Run migrations
-      echo "Running migrations..."
-      docker exec $BACKEND_CONTAINER php /app/artisan migrate --force
+  Copy-docker-compose-to-EC2:
+    needs: test
+    runs-on: ubuntu-latest
 
-      # Clean up unused images
-      echo "Cleaning up unused images..."
-      docker image prune -a -f
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
 
-      echo "Deployment completed successfully!"
+      - name: Copy docker-compose to EC2
+        uses: appleboy/scp-action@v1
+        with:
+          host: ${{ secrets.EC2_HOST }}
+          username: ${{ secrets.EC2_USER }}
+          key: ${{ secrets.EC2_KEY }}
+          source: "docker-compose.yaml"
+          target: "/home/${{ secrets.EC2_USER }}/"
+
+      - name: Deploy on EC2
+        uses: appleboy/ssh-action@v0.1.10
+        with:
+          host: ${{ secrets.EC2_HOST }}
+          username: ${{ secrets.EC2_USER }}
+          key: ${{ secrets.EC2_KEY }}
+          command_timeout: 20m
+          script: |
+            # Create an env file with Docker credentials for compose
+            cat > .env << EOL
+            DOCKERHUB_USERNAME=${{ secrets.DOCKERHUB_USERNAME }}
+            DB_DATABASE=${{ secrets.DB_NAME }}
+            DB_USERNAME=${{ secrets.DB_USER }}
+            DB_PASSWORD=${{ secrets.DB_PASS }}
+            EOL
+
+            # Login to Docker Hub
+            echo "${{ secrets.DOCKERHUB_TOKEN }}" | docker login -u "${{ secrets.DOCKERHUB_USERNAME }}" --password-stdin
+
+            # Pull the latest images
+            docker pull ${{ secrets.DOCKERHUB_USERNAME }}/final_project_laravel_image:latest
+            docker pull ${{ secrets.DOCKERHUB_USERNAME }}/final_project_react_image:latest
+
+            # Stop and remove any existing containers
+            echo "Stopping and removing any existing containers..."
+            docker compose down -v --remove-orphans
+
+            # Start the containers with the new images
+            echo "Starting containers with docker-compose..."
+            docker compose up -d
+
+            # Verify containers are running
+            echo "Checking containers status:"
+            docker ps
+
+            # Wait longer for containers to initialize
+            echo "Waiting for containers to initialize..."
+            sleep 45
+
+            # Get backend container ID using the service name
+            BACKEND_CONTAINER=$(docker ps -q --filter "name=backend")
+            echo "Backend container ID: $BACKEND_CONTAINER"
+
+            if [ -z "$BACKEND_CONTAINER" ]; then
+              echo "Backend container not found! Here are the running containers:"
+              docker ps -a
+              exit 1
+            fi
+
+            # Wait for backend to be fully ready
+            echo "Waiting for backend container to be ready..."
+            docker exec $BACKEND_CONTAINER bash -c 'while [ ! -f /app/artisan ]; do sleep 2; done'
+
+            # Create Laravel .env file
+            echo "Creating .env file in backend container..."
+            docker exec $BACKEND_CONTAINER bash -c 'cat > /app/.env << EOL
+            APP_NAME=Laravel
+            APP_ENV=production
+            APP_KEY=
+            APP_DEBUG=false
+            APP_URL=http://${{ secrets.APP_URL }}
+
+            LOG_CHANNEL=stack
+
+            DB_CONNECTION=mysql
+            DB_HOST=db
+            DB_PORT=3306
+            DB_DATABASE=${{ secrets.DB_NAME }}
+            DB_USERNAME=${{ secrets.DB_USER }}
+            DB_PASSWORD=${{ secrets.DB_PASS }}
+
+            OPENAI_API_KEY=${{ secrets.OPENAI_API_KEY }}
+
+            CACHE_DRIVER=file
+            QUEUE_CONNECTION=sync
+            SESSION_DRIVER=file
+            SESSION_LIFETIME=120
+            EOL'
+
+            # Set proper permissions
+            echo "Setting permissions on .env file..."
+            docker exec $BACKEND_CONTAINER bash -c 'chmod 644 /app/.env && chown bitnami:daemon /app/.env'
+
+            # Check if .env was created successfully
+            echo "Verifying .env file:"
+            docker exec $BACKEND_CONTAINER bash -c 'ls -la /app/.env'
+
+            # Generate application key
+            echo "Generating application key..."
+            docker exec $BACKEND_CONTAINER php /app/artisan key:generate
+
+            # Cache configuration
+            echo "Caching configuration..."
+            docker exec $BACKEND_CONTAINER php /app/artisan config:clear
+            docker exec $BACKEND_CONTAINER php /app/artisan config:cache
+
+            # Wait for MySQL to be ready
+            echo "Waiting for MySQL to be ready..."
+            docker exec $BACKEND_CONTAINER bash -c 'until php -r "try { \
+              new PDO(\"mysql:host=db;dbname=${{ secrets.DB_NAME }}\", \"${{ secrets.DB_USER }}\", \"${{ secrets.DB_PASS }}\"); \
+              echo \"Connected successfully\n\"; exit(0); \
+            } catch (PDOException \$e) { \
+              echo \$e->getMessage() . \"\n\"; sleep(2); \
+            }"; do echo "Waiting for DB connection..."; sleep 2; done'
+
+            # Run migrations
+            echo "Running migrations..."
+            docker exec $BACKEND_CONTAINER php /app/artisan migrate --force
+
+            # Clean up unused images
+            echo "Cleaning up unused images..."
+            docker image prune -a -f
+
+            echo "Deployment completed successfully!"
