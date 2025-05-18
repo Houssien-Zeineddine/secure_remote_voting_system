@@ -3,7 +3,7 @@ import { Link, useNavigate } from "react-router-dom";
 import logo from "../../assets/logos/blue-web-logo-no-bg.svg";
 import Input from "../../components/Input";
 import Button from "../../components/Button";
-import axiosBaseUrl from "../../Utils/axios";
+import axiosInstance from "../../Utils/axios";
 import welcomeIllustration from "../../assets/register illautration.svg";
 import "./style.css";
 
@@ -40,7 +40,7 @@ const Register = () => {
     console.log(userData);
 
     try {
-      const response = await axiosBaseUrl.post("guest/register", userData);
+      const response = await axiosInstance.post("guest/register", userData);
       navigate("/login");
       console.log(response.data);
     } catch (err) {

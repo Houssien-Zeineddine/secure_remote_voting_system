@@ -5,7 +5,7 @@ import { useState, useContext } from "react";
 import logo from "../../assets/logos/blue-web-logo-no-bg.svg";
 import Input from "../../components/Input";
 import Button from "../../components/Button";
-import axiosBaseUrl from "../../Utils/axios";
+import axiosInstance from "../../Utils/axios";
 import secureIllustration from "../../assets/web-security login page.svg";
 import "./style.css";
 
@@ -38,7 +38,7 @@ const Login = () => {
     }
 
     try {
-      const response = await axiosBaseUrl.post("/guest/login", credentials);
+      const response = await axiosInstance.post("/guest/login", credentials);
       const token = response.data.access_token;
 
       if (response.data.status === "error") {

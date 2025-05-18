@@ -1,11 +1,11 @@
 import React, { useContext, useState } from "react";
-import { useLocation, useNavigate } from "react-router-dom";
 import { HashLink } from "react-router-hash-link";
 import { AuthContext } from "../Context/AuthorizationContext";
+import { useLocation, useNavigate } from "react-router-dom";
+import logo from "../../assets/logos/AI-powered-secure-remote-voting-system-logo-white-bg 2.svg";
+import Button from "../Button";
 import "./style.css";
 import "../Button/style.css";
-import Button from "../Button";
-import logo from "../../assets/logos/AI-powered-secure-remote-voting-system-logo-white-bg 2.svg";
 
 const Navbar = () => {
   const { user, setUser } = useContext(AuthContext);
@@ -43,8 +43,8 @@ const Navbar = () => {
             </li>
           </div>
 
-          <button 
-            className={`hamburger ${isMenuOpen ? 'active' : ''}`}
+          <button
+            className={`hamburger ${isMenuOpen ? "active" : ""}`}
             onClick={toggleMenu}
             aria-label="Toggle menu"
           >
@@ -53,7 +53,7 @@ const Navbar = () => {
             <span></span>
           </button>
 
-          <div className={`nav-items ${isMenuOpen ? 'active' : ''}`}>
+          <div className={`nav-items ${isMenuOpen ? "active" : ""}`}>
             <div className="nav-links">
               <li
                 className={`nav-link ${
