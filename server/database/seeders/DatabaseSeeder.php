@@ -27,6 +27,8 @@ class DatabaseSeeder extends Seeder {
         CampaignSeeder::class
       ]); 
         
-      DB::statement('SET FOREIGN_KEY_CHECKS=1;');
+      if (DB::getDriverName() !== 'sqlite') {
+          DB::statement('SET FOREIGN_KEY_CHECKS=1;');
+      }
     }
 }
