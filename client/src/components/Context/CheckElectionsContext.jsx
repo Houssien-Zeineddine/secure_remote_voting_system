@@ -1,5 +1,5 @@
 import React, { createContext, useState, useEffect } from "react";
-import axiosBaseUrl from "../../Utils/axios";
+import axiosInstance from "../../Utils/axios";
 
 export const CheckElectionsContext = createContext();
 
@@ -9,7 +9,7 @@ export const CheckElectionsProvider = ({ children }) => {
 
   const fetchElections = async () => {
     try {
-      const response = await axiosBaseUrl.get("/user/getelections", {
+      const response = await axiosInstance.get("/user/getelections", {
         headers: { Authorization: `Bearer ${access_token}` },
       });
 

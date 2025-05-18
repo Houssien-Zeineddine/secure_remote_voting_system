@@ -4,7 +4,7 @@ import editIcon from "../../assets/image-edit.svg";
 import uploadingAnimation from "../../assets/Cloud uploading.gif";
 import "./style.css";
 import { AuthContext } from "../Context/AuthorizationContext";
-import axiosBaseUrl from "../../Utils/axios";
+import axiosInstance from "../../Utils/axios";
 import getProfilePictureUrl from "../../Utils/helpers";
 
 const ImageUpload = () => {
@@ -40,7 +40,7 @@ const ImageUpload = () => {
       const formData = new FormData();
       formData.append("image", uploadedFile);
 
-      const response = await axiosBaseUrl.post("/user/upload", formData, {
+      const response = await axiosInstance.post("/user/upload", formData, {
         headers: {
           Authorization: `Bearer ${access_token}`,
           "Content-Type": "multipart/form-data",
@@ -51,7 +51,7 @@ const ImageUpload = () => {
         const data = response.data;
         const imagePath = data.profile_picture_path || data.path;
         const newImageUrl = getProfilePictureUrl(imagePath);
-        
+
         if (newImageUrl) {
           setUser((prevUser) => ({
             ...prevUser,
@@ -63,9 +63,9 @@ const ImageUpload = () => {
       }
     } catch (error) {
       console.error("Upload failed:", error);
-      const currentProfilePic = user?.profile_picture_path ? 
-        getProfilePictureUrl(user.profile_picture_path) : 
-        defaultImage;
+      const currentProfilePic = user?.profile_picture_path
+        ? getProfilePictureUrl(user.profile_picture_path)
+        : defaultImage;
       setAvatarURL(currentProfilePic);
     } finally {
       setIsUploading(false);
@@ -75,10 +75,10 @@ const ImageUpload = () => {
   return (
     <div className="image-upload-container">
       <div className="profile-image-wrapper">
-        <img 
-          src={avatarURL} 
-          alt="Avatar" 
-          className={`avatar-image ${isUploading ? 'uploading' : ''}`}
+        <img
+          src={avatarURL}
+          alt="Avatar"
+          className={`avatar-image ${isUploading ? "uploading" : ""}`}
           onError={(e) => {
             e.target.onerror = null;
             e.target.src = defaultImage;

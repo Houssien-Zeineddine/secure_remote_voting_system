@@ -1,7 +1,7 @@
 import React, { useContext, useState } from "react";
 import Button from "../../../components/Button";
 import Dialogue from "../../../components/Dialogue";
-import axiosBaseUrl from "../../../Utils/axios";
+import axiosInstance from "../../../Utils/axios";
 import getProfilePictureUrl from "../../../Utils/helpers";
 import defaultProfilePicture from "../../../assets/sidebar icons/default profile picture.jpg";
 import { AuthContext } from "../../../components/Context/AuthorizationContext";
@@ -75,21 +75,21 @@ const VoteForCandidate = () => {
         timestamp: new Date().toISOString(),
       };
 
-      const response = await axiosBaseUrl.post("/user/vote", voteData, {
+      const response = await axiosInstance.post("/user/vote", voteData, {
         headers: { Authorization: `Bearer ${access_token}` },
       });
 
       if (response.data.cancelation_reason) {
         // Vote was cancelled
         setVoteStatus({
-          message: response.data.cancelation_reason.replace(/_/g, ' '),
-          type: "error"
+          message: response.data.cancelation_reason.replace(/_/g, " "),
+          type: "error",
         });
       } else {
         // Vote was successful
         setVoteStatus({
           message: "Your vote has been successfully counted!",
-          type: "success"
+          type: "success",
         });
         setTimeout(() => {
           closeVoteToCandidateDialog();

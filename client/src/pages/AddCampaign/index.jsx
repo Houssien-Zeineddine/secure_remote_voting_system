@@ -8,7 +8,7 @@ import { FetchCandidatesContext } from "../../components/Context/FetchCandidates
 import { CheckElectionsContext } from "../../components/Context/CheckElectionsContext";
 import { capitalizeFirstLetter } from "../../Utils/helpers";
 import "./style.css";
-import axiosBaseUrl from "../../Utils/axios";
+import axiosInstance from "../../Utils/axios";
 
 const AddCampaign = () => {
   const { user } = useContext(AuthContext);
@@ -54,7 +54,7 @@ const AddCampaign = () => {
 
   const handleAddCampaign = async () => {
     try {
-      const response = await axiosBaseUrl.post(
+      const response = await axiosInstance.post(
         "/user/candidate/addcampaign",
         {
           elections_id: ongoingActiveElections.id,
@@ -73,7 +73,7 @@ const AddCampaign = () => {
 
   const handleEditCampaign = async () => {
     try {
-      const response = await axiosBaseUrl.put(
+      const response = await axiosInstance.put(
         "/user/candidate/editcampaign",
         { campaign_id: campaign.id, campaign: editingCampaignText },
         { headers: { Authorization: `Bearer ${access_token}` } }
