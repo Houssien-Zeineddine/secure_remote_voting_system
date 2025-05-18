@@ -3,7 +3,7 @@ import Input from "../../components/Input";
 import Button from "../../components/Button";
 import Dialogue from "../../components/Dialogue";
 import addElections from "../../assets/plus (1) 1.svg";
-import axiosBaseUrl from "../../Utils/axios";
+import axiosInstance from "../../Utils/axios";
 import { capitalizeFirstLetter } from "../../Utils/helpers";
 import { CheckElectionsContext } from "../../components/Context/CheckElectionsContext";
 import { FetchCandidatesContext } from "../../components/Context/FetchCandidatesContext";
@@ -75,7 +75,7 @@ const AdminPage = () => {
 
   const handleAddElections = async () => {
     try {
-      const response = await axiosBaseUrl.post(
+      const response = await axiosInstance.post(
         "/user/admin/addelections",
         {
           title: electionsTitle,
@@ -104,7 +104,7 @@ const AdminPage = () => {
 
   const handleConfirmStopElections = async () => {
     try {
-      await axiosBaseUrl.delete("/user/admin/deleteelections", {
+      await axiosInstance.delete("/user/admin/deleteelections", {
         data: { id: ongoingActiveElections.id },
         headers: { Authorization: `Bearer ${access_token}` },
       });
@@ -127,7 +127,7 @@ const AdminPage = () => {
 
   const handleAddCandidate = async () => {
     try {
-      const response = await axiosBaseUrl.put(
+      const response = await axiosInstance.put(
         "/user/admin/addcandidate",
         { email: candidateEmail },
         { headers: { Authorization: `Bearer ${access_token}` } }
@@ -150,7 +150,7 @@ const AdminPage = () => {
 
   const handleConfirmRemoveCandidate = async () => {
     try {
-      await axiosBaseUrl.put(
+      await axiosInstance.put(
         "/user/admin/candidates",
         { id: selectedCandidate.id },
         { headers: { Authorization: `Bearer ${access_token}` } }
