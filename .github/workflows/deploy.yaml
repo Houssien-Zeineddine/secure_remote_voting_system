@@ -182,3 +182,5 @@ jobs:
 
             # Run migrations
             docker exec backend php artisan migrate --force
+
+            docker image prune -a -f
