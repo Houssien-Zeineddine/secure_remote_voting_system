@@ -9,16 +9,14 @@ use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
 
-class SeederTest extends TestCase
-{
+class SeederTest extends TestCase {
     use RefreshDatabase; 
 
     /**
      * A basic feature test example.
      */
 
-    public function test_all_seeders_run_successfully () 
-    {
+    public function test_all_seeders_run_successfully (){
         $this->seed(\DatabaseSeeder::class);
 
         $this->assertDatabaseCount('regions', 6);
@@ -28,8 +26,7 @@ class SeederTest extends TestCase
         ]);
     }
 
-    public function test_regions_seeder_populates_correct_data(): void
-    {
+    public function test_regions_seeder_populates_correct_data(): void {
         $this->seed(\RegionsSeeder::class);
 
         $regions = Region::all();
@@ -67,8 +64,7 @@ class SeederTest extends TestCase
         ]);
     }
 
-    public function test_user_types_seeder_populates_correct_data() 
-    {
+    public function test_user_types_seeder_populates_correct_data() {
         $this->seed(\UsersTypesSeeder::class);
 
         $userTypes = UserType::all();
@@ -89,8 +85,7 @@ class SeederTest extends TestCase
         ]);
     }
 
-    public function test_admin_user_seeder_creates_admin_account() 
-    {
+    public function test_admin_user_seeder_creates_admin_account() {
         $this->seed([
             \UsersTypesSeeder::class,
             \AdminSeeder::class,
