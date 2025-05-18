@@ -22,6 +22,7 @@ const VoteForCandidate = () => {
   const [isVoteToCandidateOpen, setIsVoteToCandidateOpen] = useState(false);
   const [locationError, setLocationError] = useState(null);
   const [isGettingLocation, setIsGettingLocation] = useState(false);
+  const [voteStatus, setVoteStatus] = useState({ message: "", type: "" });
 
   const access_token = localStorage.getItem("access_token");
 
@@ -78,8 +79,23 @@ const VoteForCandidate = () => {
         headers: { Authorization: `Bearer ${access_token}` },
       });
 
-      const filteredVote = response.data;
-      closeVoteToCandidateDialog();
+      if (response.data.cancelation_reason) {
+        // Vote was cancelled
+        setVoteStatus({
+          message: response.data.cancelation_reason.replace(/_/g, ' '),
+          type: "error"
+        });
+      } else {
+        // Vote was successful
+        setVoteStatus({
+          message: "Your vote has been successfully counted!",
+          type: "success"
+        });
+        setTimeout(() => {
+          closeVoteToCandidateDialog();
+          setVoteStatus({ message: "", type: "" });
+        }, 2000);
+      }
     } catch (error) {
       setLocationError(error.message || "Failed to verify your location");
     }
@@ -93,6 +109,8 @@ const VoteForCandidate = () => {
   const closeVoteToCandidateDialog = () => {
     setSelectedCandidate("");
     setIsVoteToCandidateOpen(false);
+    setVoteStatus({ message: "", type: "" });
+    setLocationError(null);
   };
 
   const getCandidateWithCampaign = (candidate) => {
@@ -115,6 +133,11 @@ const VoteForCandidate = () => {
 
   return (
     <div className="candidates-container">
+      {voteStatus.type === "success" && !isVoteToCandidateOpen && (
+        <div className="vote-success-message">
+          <p>{voteStatus.message}</p>
+        </div>
+      )}
       <h1>Vote for your Preferred Candidate</h1>
       <div className="candidates-cards-container">
         {candidates.map((candidate, index) => (
@@ -193,7 +216,7 @@ const VoteForCandidate = () => {
               variant="red"
               size="small"
               onClick={handleVote}
-              disabled={isGettingLocation}
+              disabled={isGettingLocation || voteStatus.type === "success"}
             />
           </div>
         }
@@ -220,6 +243,12 @@ const VoteForCandidate = () => {
               <p className="location-error">
                 Error: {locationError}. Your vote cannot be submitted without
                 location verification.
+              </p>
+            )}
+
+            {voteStatus.message && (
+              <p className={`vote-status ${voteStatus.type}`}>
+                {voteStatus.message}
               </p>
             )}
           </>
