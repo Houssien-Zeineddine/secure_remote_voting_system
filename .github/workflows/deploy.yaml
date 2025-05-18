@@ -46,7 +46,7 @@ jobs:
           php artisan key:generate --env=testing
           php artisan config:cache
           php artisan migrate --env=testing
-          php artisan test
+          php artisan test --env=testing
 
   build-and-push-laravel-image:
     needs: test
