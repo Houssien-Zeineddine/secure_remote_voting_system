@@ -169,7 +169,6 @@
 /* Description section */
 .description-container {
   width: 50%;
-  
   height: 100vh;
   background-image: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
   display: flex;
@@ -199,6 +198,24 @@
   width: 80%;
   gap: 4rem;
   padding: 2rem;
+}
+
+/* Add styles for the Home button */
+.description-wrapper button {
+  cursor: pointer;
+  z-index: 10;
+  position: relative;
+  opacity: 0.9;
+  transition: all 0.3s ease;
+}
+
+.description-wrapper button:hover {
+  opacity: 1;
+  transform: translateY(-2px);
+}
+
+.description-wrapper button:active {
+  transform: translateY(0);
 }
 
 .inside-description-container {
@@ -240,6 +257,30 @@
 
 .inside-description-container>img:hover {
   transform: translateY(-10px);
+}
+
+/* Home button styling */
+.home-nav-btn {
+  cursor: pointer !important;
+  z-index: 10;
+  position: relative;
+  padding: 0.75rem 1.5rem !important;
+  border: 1px solid var(--white-color) !important;
+  border-radius: 25px !important;
+  color: var(--white-color) !important;
+  font-weight: 500 !important;
+  transition: all 0.3s ease !important;
+  background-color: transparent !important;
+  margin-bottom: 1rem !important;
+}
+
+.home-nav-btn:hover {
+  background-color: rgba(255, 255, 255, 0.1) !important;
+  transform: translateY(-2px);
+}
+
+.home-nav-btn:active {
+  transform: translateY(0);
 }
 
 /* Animations */
@@ -334,7 +375,7 @@
 }
 
 @media screen and (max-width: 480px) {
-  .description-container{
+  .description-container {
     height: 100vh;
   }
 
