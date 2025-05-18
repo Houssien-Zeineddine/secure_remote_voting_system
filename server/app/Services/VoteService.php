@@ -3,14 +3,17 @@
 namespace App\Services;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 
 use Prism\Prism\Prism;
 use Prism\Prism\Enums\Provider;
 use Prism\Prism\Schema\ObjectSchema;
 use Prism\Prism\Schema\StringSchema;
+use Prism\Prism\Exceptions\PrismRateLimitedException;
 
 use App\Models\CountedVote;
 use App\Models\MaliciousVote;
+use App\Prompts\VoteAnalysisPrompt;
 
 class VoteService {
     /**
@@ -95,55 +98,83 @@ class VoteService {
             ->count();
 
         $voteTime = now()->format('H:i');
-
-        $prompt = "A user with ID {$request->user_id} has submitted {$recentVotes} votes in the last 10 minutes at {$voteTime}. Analyze this behavior for signs of malicious or bot-like activity. Consider whether the number of votes is unusually high compared to typical user behavior, if vote is coming from the same IP address in a short period after login less than 5 seconds, if the activity is happening at unusual hours (e.g., between 12 AM and 5 AM local time), and if the voting pattern shows signs of automation such as rapid clicking or bulk submissions in a few seconds. Based on your analysis, respond with a JSON object";
-
-        $schema = new ObjectSchema (
-            name: 'vote_validation_check', 
-            description: 'Vote validation check', 
-            properties: [ 
-                new StringSchema('status', 'counted if validated, malicious if not'), 
-                new StringSchema('result', 'Validated if vote is counted, cancelation reason if vote is canceled')],
-            requiredFields: ['validated', 'result']
+        
+        try {
+            $prompt = VoteAnalysisPrompt::getPrompt(
+                $request->user_id,
+                $recentVotes,
+                $voteTime
             );
 
-        $response = Prism::structured()
-            ->using(Provider::OpenAI, 'gpt-4o')
-            ->withSchema($schema)
-            ->withPrompt($prompt)
-            ->asStructured();
+            $schema = new ObjectSchema (
+                name: 'vote_validation_check', 
+                description: 'Vote validation check', 
+                properties: [ 
+                    new StringSchema('status', 'counted if validated, malicious if not'), 
+                    new StringSchema('result', 'Validated if vote is counted, cancelation reason if vote is canceled')],
+                requiredFields: ['validated', 'result']
+                );
 
-        $analysisResult = $response->structured;
+            $response = Prism::structured()
+                ->using(Provider::OpenAI, 'gpt-4o')
+                ->withSchema($schema)
+                ->withPrompt($prompt)
+                ->asStructured();
 
-        // dd($analysisResult);
-
-        return $analysisResult;
-        // try {
-        //     $response = Prism::provider('openai')
-        //         ->chat()
-        //         ->messages([
-        //             ['role' => 'system', 'content' => 'You are an AI that detects malicious voting behavior.'],
-        //             ['role' => 'user', 'content' => $prompt],
-        //         ])
-        //         ->send();
-
-        //     $content = $response->choices[0]->message['content'] ?? null;
-
-        //     if ($content) {
-        //         $analysis = json_decode($content, true);
-        //         if (json_last_error() === JSON_ERROR_NONE) {
-        //             return $analysis;
-        //         } else {
-        //             Log::error('JSON decoding error: ' . json_last_error_msg());
-        //         }
-        //     } else {
-        //         Log::error('Empty response from OpenAI.');
-        //     }
-        // } catch (\Exception $e) {
-        //     Log::error('Error analyzing vote behavior: ' . $e->getMessage());
-        // }
-
-        // // Default to non-malicious if analysis fails
-        // return ['is_malicious' => false, 'reason' => 'Analysis failed or inconclusive.'];
+            $analysisResult = $response->structured;
+            
+            return $analysisResult;
+            
+        } catch (PrismRateLimitedException $e) {
+            Log::warning('OpenAI rate limit exceeded, using fallback vote analysis', [
+                'user_id' => $request->user_id,
+                'error' => $e->getMessage()
+            ]);
+            
+            return $this->fallbackVoteAnalysis($recentVotes, $voteTime);
+        } catch (\Exception $e) {
+            Log::error('Error analyzing vote behavior with AI', [
+                'error' => $e->getMessage(),
+                'trace' => $e->getTraceAsString()
+            ]);
+            
+            return $this->fallbackVoteAnalysis($recentVotes, $voteTime);
+        }
+    }
+    
+    /**
+     * Fallback vote analysis method when AI service is unavailable
+     * Uses basic rules to determine if a vote might be malicious
+     */
+    private function fallbackVoteAnalysis($recentVotes, $voteTime) {
+        // Convert time to hours for comparison
+        $hourMinute = explode(':', $voteTime);
+        $hour = (int) $hourMinute[0];
+        
+        // Check for suspicious voting patterns
+        $suspiciousFlags = [];
+        
+        // Rule 1: Check for high number of recent votes (potential spam)
+        if ($recentVotes > 5) {
+            $suspiciousFlags[] = "High voting frequency detected ({$recentVotes} votes in 10 minutes)";
+        }
+        
+        // Rule 2: Check for odd hours voting (12AM - 5AM)
+        if ($hour >= 0 && $hour < 5) {
+            $suspiciousFlags[] = "Voting activity during unusual hours ({$voteTime})";
+        }
+        
+        // Determine result based on flags
+        if (count($suspiciousFlags) > 0) {
+            return [
+                'status' => 'malicious',
+                'result' => implode('. ', $suspiciousFlags)
+            ];
+        }
+        
+        return [
+            'status' => 'counted',
+            'result' => 'Vote validated'
+        ];
     }
 }
