@@ -3,10 +3,13 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
-class MaliciousVote extends Model
-{
-    protected $fillablle = [
+class MaliciousVote extends Model {
+    use SoftDeletes, HasFactory;
+    
+    protected $fillable = [
         'user_id',
         'elections_id',
         'candidate_id',
@@ -20,4 +23,6 @@ class MaliciousVote extends Model
     public function election() {
         return $this->belongsTo(Elections::class);
     }
+
+    public $timestamps = true;
 }

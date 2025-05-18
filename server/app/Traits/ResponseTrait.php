@@ -7,11 +7,8 @@ use Illuminate\Http\Exceptions\HttpResponseException;
 
 trait ResponseTrait
 {
-    public function successResponse($data, $code = 200) {
-        return response()->json([
-            'status' => 'success',
-            'payload' => $data,
-        ], $code);
+    public function successResponse($data) {
+        return response()->json($data);
     }
 
     public function errorResponse($data, $code = 200) {

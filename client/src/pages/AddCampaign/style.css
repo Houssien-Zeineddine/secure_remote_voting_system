@@ -1,0 +1,45 @@
+.campaign-page-container {
+    height: 100%;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    padding-top: 4rem;
+    color: var(--primary-color);
+}
+
+.campaign-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    width: 100%;
+    gap: 4rem;
+
+}
+.campaign-container > h1 {
+    font-size: var(--font-size-header-2);
+}
+
+.campaign-platform-container {
+    display: flex;
+    flex-direction: column;
+    width: 75%;
+    gap: 2rem;
+}
+
+.campaign-platform-container > h2 {
+    font-size: var(--font-size-header-4);
+}
+
+.campaign-platform-container > pre {
+    font-family: 'Inter', sans-serif;
+    white-space: pre-wrap; 
+    word-wrap: break-word;  
+    overflow-x: auto; 
+}
+
+.edit-campaign-btn {
+    display: flex;
+    justify-content: flex-end;
+}
+

@@ -1,22 +1,76 @@
 import React from "react";
+import { AuthContext } from "../../components/Context/AuthorizationContext";
 import { Link, useNavigate } from "react-router-dom";
+import { useState, useContext } from "react";
+import logo from "../../assets/logos/blue-web-logo-no-bg.svg";
 import Input from "../../components/Input";
 import Button from "../../components/Button";
-import logo from "../../assets/logos/blue-web-logo-no-bg.svg";
+import axiosBaseUrl from "../../Utils/axios";
 import secureIllustration from "../../assets/web-security login page.svg";
 import "./style.css";
 
 const Login = () => {
   const navigate = useNavigate();
-  const handleSubmit = () => {
-    //calling login API
+  const [credentials, setCredentials] = useState({
+    email: "",
+    password: "",
+  });
+  const { setUser } = useContext(AuthContext);
+  const [error, setError] = useState(null);
+
+  const handleChange = (e) => {
+    setCredentials({
+      ...credentials,
+      [e.target.name]: e.target.value,
+    });
   };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    if (!credentials.email.trim()) {
+      setError("Email is required");
+      return false;
+    }
+    if (!credentials.password.trim()) {
+      setError("Password is required");
+      return false;
+    }
+
+    try {
+      const response = await axiosBaseUrl.post("/guest/login", credentials);
+      const token = response.data.access_token;
+
+      if (response.data.status === "error") {
+        setError(response.data.message);
+      } else {
+        localStorage.setItem("access_token", token);
+        setUser(response.data.user);
+        setError(null);
+        navigate("/dashboard");
+      }
+    } catch (err) {
+      if (err.response?.status === 422) {
+        setError(err.response.data.message || "Invalid email format");
+      } else {
+        setError(
+          err.response?.data?.message || "An error occurred during login"
+        );
+      }
+    }
+  };
+
   return (
     <div className="login-page-container">
       <div className="form-conatiner">
         <div className="inside-form-container">
           <img src={logo} alt="Blue Logo" />
-          <form action={handleSubmit} className="form-box">
+          {error && (
+            <div className="error-box">
+              <p>{error}</p>
+            </div>
+          )}
+          <form onSubmit={handleSubmit} className="form-box">
             <Input
               label="email"
               labelText="Email"
@@ -25,6 +79,7 @@ const Login = () => {
               id="email"
               placeholder="Enter your email"
               classNames="input-vertical input-width"
+              onChange={handleChange}
             />
             <Input
               label="password"
@@ -34,6 +89,7 @@ const Login = () => {
               id="password"
               placeholder="Enter your password"
               classNames="input-vertical input-width"
+              onChange={handleChange}
             />
             <Button
               text="Login"

@@ -11,8 +11,9 @@ import Guidelines from "./pages/Guidelines";
 import Settings from "./pages/Settings";
 import AddCampaign from "./pages/AddCampaign";
 import AddElections from "./pages/AddElections";
-import { AuthProvider } from "./components/context/AuthContext";
 import LayoutWithSidebarAndProvider from "./layouts/LayoutWithSidebarAndProvider";
+import PrivateRoute from "./components/PrivateRoute/index.jsx";
+import { AuthProvider } from "./components/Context/AuthorizationContext.jsx";
 
 const App = () => {
   return (
@@ -20,8 +21,8 @@ const App = () => {
       <BrowserRouter>
         <AuthProvider>
           <Routes>
-            <Route path="/login" element={<Login />} />
             <Route path="/register" element={<Register />} />
+            <Route path="/login" element={<Login />} />
             <Route
               element={
                 <>
@@ -31,7 +32,13 @@ const App = () => {
               }
             >
               <Route path="/" element={<Home />} />
-              <Route element={<LayoutWithSidebarAndProvider />}>
+              <Route
+                element={
+                  <PrivateRoute>
+                    <LayoutWithSidebarAndProvider />
+                  </PrivateRoute>
+                }
+              >
                 <Route path="/dashboard" element={<Dashboard />} />
                 <Route path="/profile" element={<Profile />} />
                 <Route path="/candidates" element={<Candidates />} />

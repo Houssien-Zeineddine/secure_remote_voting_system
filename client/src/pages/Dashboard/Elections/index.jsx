@@ -1,43 +1,45 @@
-import React from "react";
-import { useNavigate } from "react-router-dom";
+import React, { useContext, useEffect, useState } from "react";
 import Button from "../../../components/Button";
 import politician from "../../../assets/Politician giving his speech to public.svg";
+import axiosBaseUrl from "../../../Utils/axios";
+import { useNavigate } from "react-router-dom";
+import { capitalizeTitle } from "../../../Utils/helpers";
+import { CheckElectionsContext } from "../../../components/Context/CheckElectionsContext";
 import "./style.css";
 
 const Elections = () => {
+  const { ongoingActiveElections } = useContext(CheckElectionsContext);
+
+  const [results, setResults] = useState([]);
+
   const navigate = useNavigate();
-  const registeredVoters = 200; //getting voters number from backend
-  const totalVotes = 220; //getting voters number from backend
-  const malisciousVotes = 20; //getting voters number from backend
 
-  //hardcoded results object for testing
-  const results = [
-    { candidate_name: "candidate 1", result: 12 },
-    { candidate_name: "candidate 2", result: 40 },
-    { candidate_name: "candidate 3", result: 4 },
-    { candidate_name: "candidate 4", result: 22 },
-    { candidate_name: "candidate 5", result: 2 },
-    { candidate_name: "candidate 6", result: 9 },
-    { candidate_name: "candidate 7", result: 100 },
-    { candidate_name: "candidate 8", result: 3 },
-    { candidate_name: "candidate 9", result: 7 },
-  ];
+  const [stats, setStats] = useState("");
+  const access_token = localStorage.getItem("access_token");
 
-  //calling the results API
-  // const [results, setResults] = React.useState({});
+  const getStats = async () => {
+    try {
+      const response = await axiosBaseUrl.get("/user/getstats", {
+        headers: { Authorization: `Bearer ${access_token}` },
+      });
+      setStats(response.data);
+      setResults(response.data.results);
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
-  // React.useEffect(() => {
-  //   fetch("/api/results")
-  //     .then((res) => res.json())
-  //     .then((data) => setResults(data));
-  // }, []);
+  useEffect(() => {
+    getStats();
+  }, []);
+
   return (
     <div className="elections-dashboard-container">
       <div className="description-live-results-container">
         <div className="dashboard-description-container">
           <div className="dashboard-description">
             <h4>Ongoing Elections</h4>
-            <h2>Elections Name</h2>
+            <h2>{capitalizeTitle(ongoingActiveElections.title)}</h2>
             <Button
               text="Vote Now"
               variant="blue"
@@ -50,20 +52,21 @@ const Elections = () => {
         </div>
         <div className="dashboard-live-results">
           <div className="candidates-names">
-            {results.map((candidate, index) => (
-              <div key={index}>
-                <p>{candidate.candidate_name}</p>
-              </div>
-            ))}
+            {Array.isArray(results) &&
+              results.map((candidate, index) => (
+                <div key={index}>
+                  <p>{candidate.name}</p>
+                </div>
+              ))}
           </div>
           <div className="bars-container">
             {results.map((candidate, index) => (
               <div key={index} className="bar-result-container">
                 <div
                   className="vote-bar"
-                  style={{ "--target-width": `${candidate.result}%` }}
+                  style={{ "--target-width": `${candidate.percentage}%` }}
                 ></div>
-                <p>{candidate.result}%</p>
+                <p>{candidate.percentage}%</p>
               </div>
             ))}
           </div>
@@ -72,15 +75,15 @@ const Elections = () => {
       <div className="statistics-container">
         <h4>Voting Process</h4>
         <div className="round-div registered-voter">
-          <p>{registeredVoters}</p>
+          <p>{stats.total_voters}</p>
         </div>
         <p>Total Number of Registered Voters</p>
         <div className="round-div total-votes">
-          <p>{totalVotes}</p>
+          <p>{stats.total_counted_votes}</p>
         </div>
         <p>Total Number of Votes</p>
         <div className="round-div maliscious-votes">
-          <p>{malisciousVotes}</p>
+          <p>{stats.total_malicious_votes}</p>
         </div>
         <p>Total Number of Malicious votes</p>
       </div>

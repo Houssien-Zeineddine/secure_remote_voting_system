@@ -1,26 +1,29 @@
-import React from "react";
-import politician from "../../assets/Politician giving his speech to public.svg";
-import login from "../../assets/Login.svg";
+import React, { useContext } from "react";
+import { useNavigate } from "react-router-dom";
 import vote from "../../assets/online vote.svg";
-import viewResults from "../../assets/card view result.svg";
+import faqs from "../../assets/question (1) 1.svg";
+import login from "../../assets/Login.svg";
+import Button from "../../components/Button";
+import aboutUs from "../../assets/about us.svg";
+import Questions from "../../components/Questions";
+import politician from "../../assets/Politician giving his speech to public.svg";
 import voteOnline from "../../assets/developer 1.svg";
+import viewResults from "../../assets/card view result.svg";
 import securedPlatform from "../../assets/web-security 2.svg";
 import realTimeResults from "../../assets/pie-chart 1.svg";
-import aboutUs from "../../assets/about us.svg";
-import faqs from "../../assets/question (1) 1.svg";
-// import collapse from "../../assets/Shape.svg";
-// import expand from "../../assets/expand.svg";
-import Button from "../../components/Button";
-import { useNavigate } from "react-router-dom";
+import { AuthContext } from "../../components/Context/AuthorizationContext";
 import "./styles.css";
-import Questions from "../../components/Questions";
 
 const Home = () => {
+  const { user } = useContext(AuthContext);
+
   const navigate = useNavigate();
   return (
     <div className="landing-page-container" id="home">
       <div className="landing-page-description">
-        <img src={politician} alt="Politician giving his speech to public" />
+        <div className="politician-img-container">
+          <img src={politician} alt="Politician giving his speech to public" />
+        </div>
         <div className="landing-page-text">
           <h2>Secure AI-Powered Voting Made Simple</h2>
           <p>
@@ -29,15 +32,27 @@ const Home = () => {
             ensure every vote is authentic, secure, and tamper-proof — from
             anywhere, anytime.
           </p>
-          <Button
-            text="Login"
-            variant="blue"
-            size="big"
-            onClick={() => {
-              navigate("/login");
-            }}
-            className="landing-page-btn"
-          />
+          <div className="landing-page-btn-container">
+            {user ? (
+              <Button
+                text="Dashboard"
+                variant="blue"
+                size="medium"
+                onClick={() => {
+                  navigate("/dashboard");
+                }}
+              />
+            ) : (
+              <Button
+                text="Login"
+                variant="blue"
+                size="medium"
+                onClick={() => {
+                  navigate("/login");
+                }}
+              />
+            )}
+          </div>
         </div>
       </div>
       <div className="landing-page-cards-container">

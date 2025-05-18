@@ -24,18 +24,18 @@
 }
 
 .btn--small {
-    height: 2.5rem;
-    font-size: var(--font-size-body);
-}
-
-.btn--medium {
     height: 3rem;
     font-size: var(--font-size-body);
 }
 
+.btn--medium {
+    height: 3.5rem;
+    font-size: var(--font-size-header-4);
+}
+
 .btn--big{
     height: 4rem;
-    font-size: var(--font-size-header-4);
+    font-size: var(--font-size-header-2);
 }
 
 .btn--white {
@@ -71,5 +71,5 @@
 
 .btn-logout {
     font-size: var(--font-size-header-4);
-    width: 10rem;
+    /* width: 10rem; */
 }
