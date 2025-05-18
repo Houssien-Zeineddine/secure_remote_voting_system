@@ -129,6 +129,7 @@ jobs:
           host: ${{ secrets.EC2_HOST }}
           username: ${{ secrets.EC2_USER }}
           key: ${{ secrets.EC2_KEY }}
+          command_timeout: 20m
           script: |
             # Get the directory name (project name) to use as prefix for container names
             PROJECT_NAME=$(basename $(pwd))
@@ -149,14 +150,26 @@ jobs:
             docker pull ${{ secrets.DOCKERHUB_USERNAME }}/final_project_laravel_image:latest
             docker pull ${{ secrets.DOCKERHUB_USERNAME }}/final_project_react_image:latest
             
-            # Stop existing containers
-            docker compose down
+            # Force stop and remove any existing containers with these names
+            echo "Stopping and removing any existing containers..."
+            docker ps -a | grep "${PROJECT_NAME}" | awk '{print $1}' | xargs -r docker rm -f
+            
+            # Remove associated volumes and networks to ensure a clean state
+            echo "Removing any related volumes and networks..."
+            docker volume ls | grep "${PROJECT_NAME}" | awk '{print $2}' | xargs -r docker volume rm
+            docker network ls | grep "${PROJECT_NAME}" | awk '{print $2}' | xargs -r docker network rm
             
             # Start the containers with the new images
+            echo "Starting containers with docker-compose..."
             docker compose up -d
             
+            # Verify containers are running
+            echo "Checking containers status:"
+            docker ps
+            
             # Wait for containers to initialize
-            sleep 15
+            echo "Waiting for containers to initialize..."
+            sleep 30
             
             # Find backend container
             BACKEND_CONTAINER=$(docker ps --format '{{.Names}}' | grep backend)
@@ -165,10 +178,12 @@ jobs:
             if [ -z "$BACKEND_CONTAINER" ]; then
               echo "Backend container not found! Here are the running containers:"
               docker ps
+              docker logs $(docker ps -q --filter "name=backend" --all)
               exit 1
             fi
             
             # Create Laravel .env file using docker exec - for Bitnami path is /app
+            echo "Creating .env file in backend container..."
             docker exec $BACKEND_CONTAINER bash -c 'cat > /app/.env << EOL
             APP_NAME=Laravel
             APP_ENV=production
@@ -194,15 +209,19 @@ jobs:
             EOL'
             
             # Set proper permissions - Bitnami uses bitnami:daemon
+            echo "Setting permissions on .env file..."
             docker exec $BACKEND_CONTAINER bash -c 'chmod 644 /app/.env && chown bitnami:daemon /app/.env'
             
             # Check if .env was created successfully
+            echo "Verifying .env file:"
             docker exec $BACKEND_CONTAINER bash -c 'ls -la /app/.env'
             
             # Generate application key - standard path for Bitnami
+            echo "Generating application key..."
             docker exec $BACKEND_CONTAINER php /app/artisan key:generate
             
             # Cache configuration
+            echo "Caching configuration..."
             docker exec $BACKEND_CONTAINER php /app/artisan config:clear
             docker exec $BACKEND_CONTAINER php /app/artisan config:cache
             
@@ -211,7 +230,11 @@ jobs:
             docker exec $BACKEND_CONTAINER bash -c 'until php -r "try { new PDO(\"mysql:host=db;dbname=${{ secrets.DB_NAME }}\", \"${{ secrets.DB_USER }}\", \"${{ secrets.DB_PASS }}\"); echo \"Connected successfully\n\"; exit(0); } catch (PDOException \$e) { echo \$e->getMessage() . \"\n\"; sleep(2); }"; do echo "Waiting for DB connection..."; sleep 2; done'
             
             # Run migrations
+            echo "Running migrations..."
             docker exec $BACKEND_CONTAINER php /app/artisan migrate --force
             
             # Clean up unused images
+            echo "Cleaning up unused images..."
             docker image prune -a -f
+            
+            echo "Deployment completed successfully!"
