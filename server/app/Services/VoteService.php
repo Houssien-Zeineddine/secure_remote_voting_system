@@ -22,11 +22,11 @@ class VoteService {
         $regionId = $request->elections_region_id;
 
         $regionCoordinates = [
-            1 => ['lat' => 33.8547, 'lng' => 35.8623, 'radius' => 50], 
-            2 => ['lat' => 33.2721, 'lng' => 35.2033, 'radius' => 50], 
-            3 => ['lat' => 34.4381, 'lng' => 35.8308, 'radius' => 50], 
-            4 => ['lat' => 33.8333, 'lng' => 35.5975, 'radius' => 30], 
-            5 => ['lat' => 33.8938, 'lng' => 35.5018, 'radius' => 10], 
+            1 => ['lat' => 33.8547, 'lng' => 35.8623, 'radius' => 500], 
+            2 => ['lat' => 33.2721, 'lng' => 35.2033, 'radius' => 500], 
+            3 => ['lat' => 34.4381, 'lng' => 35.8308, 'radius' => 500], 
+            4 => ['lat' => 33.8333, 'lng' => 35.5975, 'radius' => 300], 
+            5 => ['lat' => 33.8938, 'lng' => 35.5018, 'radius' => 100], 
             6 => ['lat' => 33.8547, 'lng' => 35.8623, 'radius' => 200], 
         ];
 

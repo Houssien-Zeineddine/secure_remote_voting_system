@@ -189,9 +189,8 @@ const Register = () => {
             text="Home"
             variant="transparent"
             size="small"
-            onClick={() => {
-              navigate("/");
-            }}
+            onClick={() => navigate("/")}
+            className="home-nav-btn"
           />
           <div className="inside-description-container">
             <h1>Welcome!</h1>

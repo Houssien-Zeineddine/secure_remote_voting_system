@@ -110,6 +110,7 @@ const Login = () => {
             text="Home"
             variant="transparent"
             size="small"
+            type="button"
             onClick={() => {
               navigate("/");
             }}
