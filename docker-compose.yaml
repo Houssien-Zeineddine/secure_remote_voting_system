@@ -1,34 +1,51 @@
+version: '3'
+
 services:
-  backend:
-    image: houssienzed/final_project_laravel_image:latest
-    environment:
-      - LARAVEL_DATABASE_HOST=db
-      - LARAVEL_DATABASE_NAME=secure_voting_system
-      - LARAVEL_DATABASE_USER=root
-      - LARAVEL_DATABASE_PASSWORD=1234
-      - LARAVEL_DATABASE_PORT_NUMBER=3306
-    restart: always
-    ports:
-      - "8000:8000"
-    depends_on:
-      - db
-
-  frontend:
-    image: houssienzed/final_project_react_image:latest
-    ports:
-      - "80:80"
-    depends_on:
-      - backend
-
   db:
     image: mysql:8.0
+    restart: always
     environment:
-      - MYSQL_ROOT_PASSWORD=1234 
-      - MYSQL_DATABASE=secure_voting_system
-    ports:
-      - "3306:3306"
+      MYSQL_DATABASE: ${DB_DATABASE:-laravel}
+      MYSQL_ROOT_PASSWORD: ${DB_PASSWORD:-1234}
+      MYSQL_PASSWORD: ${DB_PASSWORD:-1234}
+      MYSQL_USER: ${DB_USERNAME:-laravel}
     volumes:
-      - mysql_data:/var/lib/mysql
+      - mysql-data:/var/lib/mysql
+    networks:
+      - app-network
+
+  backend:
+    image: ${DOCKERHUB_USERNAME:-username}/final_project_laravel_image:latest
+    restart: always
+    depends_on:
+      - db
+    environment:
+      - DB_HOST=db
+      - DB_PORT=3306
+      - DB_DATABASE=${DB_DATABASE:-laravel}
+      - DB_USERNAME=${DB_USERNAME:-laravel}
+      - DB_PASSWORD=${DB_PASSWORD:-1234}
+    volumes:
+      - ./server:/app
+      - /app/vendor
+      - /app/node_modules
+    ports:
+      - "8000:8000"
+    networks:
+      - app-network
+
+  frontend:
+    image: ${DOCKERHUB_USERNAME:-username}/final_project_react_image:latest
+    restart: always
+    ports:
+      - "80:80"
+    networks:
+      - app-network
+
+networks:
+  app-network:
+    driver: bridge
 
 volumes:
-  mysql_data:
+  mysql-data:
+    driver: local

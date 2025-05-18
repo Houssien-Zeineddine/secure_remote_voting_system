@@ -134,68 +134,84 @@ jobs:
             PROJECT_NAME=$(basename $(pwd))
             echo "Project name: $PROJECT_NAME"
             
-            docker compose down
-
+            # Create an env file with Docker credentials for compose
+            cat > .env << EOL
+            DOCKERHUB_USERNAME=${{ secrets.DOCKERHUB_USERNAME }}
+            DB_DATABASE=${{ secrets.DB_NAME }}
+            DB_USERNAME=${{ secrets.DB_USER }}
+            DB_PASSWORD=${{ secrets.DB_PASS }}
+            EOL
+            
+            # Login to Docker Hub
             echo "${{ secrets.DOCKERHUB_TOKEN }}" | docker login -u "${{ secrets.DOCKERHUB_USERNAME }}" --password-stdin
-
+            
+            # Pull the latest images
             docker pull ${{ secrets.DOCKERHUB_USERNAME }}/final_project_laravel_image:latest
             docker pull ${{ secrets.DOCKERHUB_USERNAME }}/final_project_react_image:latest
-
-            docker compose up -d --build
-
+            
+            # Stop existing containers
+            docker compose down
+            
+            # Start the containers with the new images
+            docker compose up -d
+            
             # Wait for containers to initialize
             sleep 15
-
-            # Get the correct container name for backend
+            
+            # Find backend container
             BACKEND_CONTAINER=$(docker ps --format '{{.Names}}' | grep backend)
-            echo "Backend container: $BACKEND_CONTAINER"
-
+            echo "Backend container name: $BACKEND_CONTAINER"
+            
             if [ -z "$BACKEND_CONTAINER" ]; then
-              echo "Backend container not found. Here are the running containers:"
+              echo "Backend container not found! Here are the running containers:"
               docker ps
               exit 1
             fi
-
-            # Create .env with proper permissions (using detected container name)
-            docker exec $BACKEND_CONTAINER bash -c 'mkdir -p /app && touch /app/.env && chown -R www-data:www-data /app && chmod -R 755 /app'
-
-            # Write .env file
-            docker exec $BACKEND_CONTAINER bash -c 'cat > /app/.env <<EOL
+            
+            # Create Laravel .env file using docker exec - for Bitnami path is /app
+            docker exec $BACKEND_CONTAINER bash -c 'cat > /app/.env << EOL
             APP_NAME=Laravel
             APP_ENV=production
             APP_KEY=
             APP_DEBUG=false
             APP_URL=http://${{ secrets.APP_URL }}
-
+            
             LOG_CHANNEL=stack
-
+            
             DB_CONNECTION=mysql
             DB_HOST=db
             DB_PORT=3306
             DB_DATABASE=${{ secrets.DB_NAME }}
             DB_USERNAME=${{ secrets.DB_USER }}
             DB_PASSWORD=${{ secrets.DB_PASS }}
-
+            
             OPENAI_API_KEY=${{ secrets.OPENAI_API_KEY }}
-
+            
             CACHE_DRIVER=file
             QUEUE_CONNECTION=sync
             SESSION_DRIVER=file
             SESSION_LIFETIME=120
             EOL'
-
-            # Generate application key
-            docker exec $BACKEND_CONTAINER php artisan key:generate
-
-            # Clear config
-            docker exec $BACKEND_CONTAINER php artisan config:clear
-            docker exec $BACKEND_CONTAINER php artisan config:cache
-
-            # Wait for MySQL (using service name 'db' from docker-compose network)
-            docker exec $BACKEND_CONTAINER bash -c 'until php -r "try { new PDO(\"mysql:host=db;dbname=$DB_DATABASE\", \"$DB_USERNAME\", \"$DB_PASSWORD\"); exit(0); } catch (PDOException \$e) { exit(1); }"; do sleep 2; done'
-
+            
+            # Set proper permissions - Bitnami uses bitnami:daemon
+            docker exec $BACKEND_CONTAINER bash -c 'chmod 644 /app/.env && chown bitnami:daemon /app/.env'
+            
+            # Check if .env was created successfully
+            docker exec $BACKEND_CONTAINER bash -c 'ls -la /app/.env'
+            
+            # Generate application key - standard path for Bitnami
+            docker exec $BACKEND_CONTAINER php /app/artisan key:generate
+            
+            # Cache configuration
+            docker exec $BACKEND_CONTAINER php /app/artisan config:clear
+            docker exec $BACKEND_CONTAINER php /app/artisan config:cache
+            
+            # Wait for MySQL to be ready
+            echo "Waiting for MySQL to be ready..."
+            docker exec $BACKEND_CONTAINER bash -c 'until php -r "try { new PDO(\"mysql:host=db;dbname=${{ secrets.DB_NAME }}\", \"${{ secrets.DB_USER }}\", \"${{ secrets.DB_PASS }}\"); echo \"Connected successfully\n\"; exit(0); } catch (PDOException \$e) { echo \$e->getMessage() . \"\n\"; sleep(2); }"; do echo "Waiting for DB connection..."; sleep 2; done'
+            
             # Run migrations
-            docker exec $BACKEND_CONTAINER php artisan migrate --force
+            docker exec $BACKEND_CONTAINER php /app/artisan migrate --force
             
             # Clean up unused images
             docker image prune -a -f
