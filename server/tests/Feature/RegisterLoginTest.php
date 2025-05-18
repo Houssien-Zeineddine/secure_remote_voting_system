@@ -12,6 +12,7 @@ class RegisterLoginTest extends TestCase {
     use RefreshDatabase;
 
     public function test_user_can_register_successfully() {
+        dd(config('database.default'));
         $email = 'user_' . Str::random(5) . '@example.com';
 
         $registerPayload = [
