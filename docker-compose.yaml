@@ -11,18 +11,26 @@ services:
       - mysql-data:/var/lib/mysql
     networks:
       - app-network
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-u", "root", "-p${DB_PASSWORD:-1234}"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
 
   backend:
     image: ${DOCKERHUB_USERNAME:-username}/final_project_laravel_image:latest
     restart: always
     depends_on:
-      - db
+      db:
+        condition: service_healthy
     environment:
       - DB_HOST=db
       - DB_PORT=3306
       - DB_DATABASE=${DB_DATABASE:-laravel}
       - DB_USERNAME=${DB_USERNAME:-laravel}
       - DB_PASSWORD=${DB_PASSWORD:-1234}
+      - APP_ENV=production
+      - APP_DEBUG=false
     volumes:
       - ./server:/app
       - /app/vendor
@@ -31,10 +39,17 @@ services:
       - "8000:8000"
     networks:
       - app-network
+    healthcheck:
+      test: ["CMD", "php", "artisan", "about"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
 
   frontend:
     image: ${DOCKERHUB_USERNAME:-username}/final_project_react_image:latest
     restart: always
+    depends_on:
+      - backend
     ports:
       - "80:80"
     networks:
