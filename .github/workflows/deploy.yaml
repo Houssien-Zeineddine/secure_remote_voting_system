@@ -4,6 +4,7 @@ on:
   push:
     branches:
       - main
+
   pull_request:
     branches:
       - main
@@ -11,6 +12,7 @@ on:
 jobs:
   test:
     runs-on: ubuntu-latest
+
     services:
       mysql:
         image: mysql:8.0
@@ -70,6 +72,7 @@ jobs:
   build-and-push-react-image:
     needs: test
     runs-on: ubuntu-latest
+
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
@@ -93,6 +96,7 @@ jobs:
   Copy-docker-compose-to-EC2:
     needs: [build-and-push-react-image, build-and-push-laravel-image]
     runs-on: ubuntu-latest
+
     steps:
       - name: Install Docker Compose on EC2
         uses: appleboy/ssh-action@v0.1.10
@@ -119,6 +123,7 @@ jobs:
   Deploy-Laravel-Docker:
     runs-on: ubuntu-latest
     needs: Copy-docker-compose-to-EC2
+
     steps:
       - name: Checkout repository
         uses: actions/checkout@v3
@@ -130,18 +135,13 @@ jobs:
           username: ${{ secrets.EC2_USER }}
           key: ${{ secrets.EC2_KEY }}
           script: |
-            # Create .env file with all required configurations
             cat > .env << EOL
             DOCKERHUB_USERNAME=${{ secrets.DOCKERHUB_USERNAME }}
             APP_NAME=Laravel
             APP_ENV=production
-            APP_KEY=base64:ql0FVsSE4p7sS6kjA8PjJYRRZaq/RWPfFInBybCtnwo=
+            APP_KEY=base64:ql0FVsSE4p7sS6kjA8PjJYRRZaq/RWPfFInBybCtnwo= 
             APP_DEBUG=true
             APP_URL=http://13.36.171.143
-            PSYSH_CONFIG_DIR=/app/storage/psysh
-            JWT_SECRET=eQRlE1aUEl1aLci6HZv8WAZhLwIdqd3OHgYWnctIukVxBGDa85WnKTMAukEoSzkd
-            JWT_TTL=60
-            JWT_ALGO=HS256
 
             LOG_CHANNEL=stack
             LOG_LEVEL=debug
@@ -149,28 +149,37 @@ jobs:
             DB_CONNECTION=mysql
             DB_HOST=db
             DB_PORT=3306
-            DB_DATABASE=secure_voting_system
-            DB_USERNAME=root
-            DB_PASSWORD=1234
+            DB_DATABASE=${{ secrets.DB_NAME }}
+            DB_USERNAME=${{ secrets.DB_USER }}
+            DB_PASSWORD=${{ secrets.DB_PASS }}
 
             CACHE_DRIVER=file
             QUEUE_CONNECTION=sync
             SESSION_DRIVER=file
             SESSION_LIFETIME=120
 
-            OPENAI_API_KEY=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
+            JWT_SECRET=${{ secrets.JWT_SECRET }}
+            JWT_TTL=60     
+
+            JWT_ALGO=HS256
+
+            OPENAI_API_KEY=${{ secrets.OPENAI_API_KEY }}
+
             EOL
 
-            # Docker operations
             echo "${{ secrets.DOCKERHUB_TOKEN }}" | docker login -u "${{ secrets.DOCKERHUB_USERNAME }}" --password-stdin
+
             docker compose pull
+
             docker compose down
+
+            docker rmi ${{ secrets.DOCKERHUB_USERNAME }}/final_project_laravel_image:latest || true
+            docker rmi ${{ secrets.DOCKERHUB_USERNAME }}/final_project_react_image:latest || true
+
             docker compose up -d
 
-            # Wait for services to initialize
             sleep 30
 
-            # Get backend container
             BACKEND_CONTAINER=$(docker ps -qf "name=backend")
             if [ -z "$BACKEND_CONTAINER" ]; then
               echo "Backend container not found!"
@@ -178,49 +187,41 @@ jobs:
               exit 1
             fi
 
-            # Finalize setup inside container
-            docker exec $BACKEND_CONTAINER sh -c '
-              mkdir -p /app/storage/psysh
-              chmod -R 775 /app/storage/psysh
-              chown -R www-data:www-data /app/storage
-              chmod -R 775 /app/storage
-              chmod -R 775 /app/bootstrap/cache
-              php artisan config:clear
-              php artisan config:cache
-              php artisan jwt:secret --force
-              php artisan optimize:clear
-              php artisan migrate --force
-            '
+            docker exec $BACKEND_CONTAINER mkdir -p /app/storage/psysh
+            docker exec $BACKEND_CONTAINER chmod -R 775 /app/storage/psysh
+            docker exec $BACKEND_CONTAINER /bin/sh -c "echo 'PSYSH_CONFIG_DIR=/app/storage/psysh' >> /app/.env"
 
-            # Verify setup
-            docker exec $BACKEND_CONTAINER php artisan tinker --execute='echo config("jwt.secret");'
-            docker exec $BACKEND_CONTAINER ls -la /app/storage/psysh
+            docker exec $BACKEND_CONTAINER php artisan jwt:secret --force
 
-            # Database seeding if needed
-            SEED_NEEDED=$(docker exec $BACKEND_CONTAINER php artisan tinker --execute='
-              echo (
-                DB::table("users")->count() === 0 &&
-                DB::table("elections")->count() === 0 &&
-                DB::table("counted_votes")->count() === 0 &&
-                DB::table("malicious_votes")->count() === 0
-              ) ? "true" : "false";
+            docker exec $BACKEND_CONTAINER chown -R www-data:www-data /app/storage
+            docker exec $BACKEND_CONTAINER chmod -R 775 /app/storage
+            docker exec $BACKEND_CONTAINER chmod -R 775 /app/bootstrap/cache
+
+            docker exec $BACKEND_CONTAINER php artisan optimize:clear
+            docker exec $BACKEND_CONTAINER php artisan config:cache
+
+            docker exec $BACKEND_CONTAINER php artisan migrate --force
+
+            SEED_NEEDED=$(docker exec $BACKEND_CONTAINER php artisan tinker --execute '
+                echo (
+                    DB::table("users")->count() === 0 &&
+                    DB::table("elections")->count() === 0 &&
+                    DB::table("counted_votes")->count() === 0
+                    DB::table("malicious_votes")->count() === 0
+                ) ? "true" : "false";
             ')
 
             if [ "$SEED_NEEDED" = "true" ]; then
-              echo "Seeding fresh data..."
-              docker exec $BACKEND_CONTAINER php artisan db:seed --force
+                echo "Seeding fresh data..."
+                docker exec $BACKEND_CONTAINER php artisan db:seed --force
             else
-              echo "Database has data. Skipping seeding."
+                echo "Database already has data. Skipping seeding."
             fi
 
-            # Cleanup
+            if [ $? -ne 0 ]; then
+              echo "Migration failed! Showing logs:"
+              docker logs $BACKEND_CONTAINER | grep -i error
+              exit 1
+            fi
+
             docker image prune -a -f
-
-# docker-compose down
-#             docker rmi ${{ secrets.DOCKERHUB_USERNAME }}/final_project_laravel_image:latest
-#             docker rmi ${{ secrets.DOCKERHUB_USERNAME }}/final_project_react_image:latest
-#             docker image prune -a -f
-#             docker-compose up -d
-#             sleep 10  # Wait for containers to start
-#             docker exec $(docker ps -qf "name=backend") php artisan migrate
-
