@@ -173,6 +173,7 @@ jobs:
             APP_URL=http://${{ secrets.APP_URL }}
 
             LOG_CHANNEL=stack
+            LOG_LEVEL=debug
 
             DB_CONNECTION=mysql
             DB_HOST=db
@@ -187,6 +188,10 @@ jobs:
             QUEUE_CONNECTION=sync
             SESSION_DRIVER=file
             SESSION_LIFETIME=120
+
+            # Add these for better debugging
+            LOG_DEPRECATIONS_CHANNEL=null
+            LOG_LEVEL=debug
             EOL'
 
             # Set proper permissions
@@ -201,23 +206,53 @@ jobs:
             echo "Generating application key..."
             docker exec $BACKEND_CONTAINER php /app/artisan key:generate
 
-            # Cache configuration
-            echo "Caching configuration..."
+            # Clear all caches and optimize
+            echo "Optimizing Laravel..."
             docker exec $BACKEND_CONTAINER php /app/artisan config:clear
+            docker exec $BACKEND_CONTAINER php /app/artisan cache:clear
+            docker exec $BACKEND_CONTAINER php /app/artisan view:clear
+            docker exec $BACKEND_CONTAINER php /app/artisan route:clear
+            docker exec $BACKEND_CONTAINER php /app/artisan optimize:clear
             docker exec $BACKEND_CONTAINER php /app/artisan config:cache
+            docker exec $BACKEND_CONTAINER php /app/artisan route:cache
+            docker exec $BACKEND_CONTAINER php /app/artisan view:cache
 
-            # Wait for MySQL to be ready
+            # Wait for MySQL to be ready with better error handling
             echo "Waiting for MySQL to be ready..."
-            docker exec $BACKEND_CONTAINER bash -c 'until php -r "try { \
-              new PDO(\"mysql:host=db;dbname=${{ secrets.DB_NAME }}\", \"${{ secrets.DB_USER }}\", \"${{ secrets.DB_PASS }}\"); \
-              echo \"Connected successfully\n\"; exit(0); \
-            } catch (PDOException \$e) { \
-              echo \$e->getMessage() . \"\n\"; sleep(2); \
-            }"; do echo "Waiting for DB connection..."; sleep 2; done'
+            MAX_RETRIES=30
+            RETRY_COUNT=0
+            while [ $RETRY_COUNT -lt $MAX_RETRIES ]; do
+              if docker exec $BACKEND_CONTAINER php -r "try { \
+                new PDO(\"mysql:host=db;dbname=${{ secrets.DB_NAME }}\", \"${{ secrets.DB_USER }}\", \"${{ secrets.DB_PASS }}\"); \
+                echo \"Connected successfully\n\"; exit(0); \
+              } catch (PDOException \$e) { \
+                echo \$e->getMessage() . \"\n\"; exit(1); \
+              }"; then
+                echo "Database connection successful!"
+                break
+              fi
+              RETRY_COUNT=$((RETRY_COUNT + 1))
+              echo "Attempt $RETRY_COUNT of $MAX_RETRIES - Waiting for database connection..."
+              sleep 5
+            done
 
-            # Run migrations
+            if [ $RETRY_COUNT -eq $MAX_RETRIES ]; then
+              echo "Failed to connect to database after $MAX_RETRIES attempts"
+              docker logs $BACKEND_CONTAINER
+              exit 1
+            fi
+
+            # Run migrations with force flag
             echo "Running migrations..."
             docker exec $BACKEND_CONTAINER php /app/artisan migrate --force
+
+            # Check migration status
+            echo "Checking migration status..."
+            docker exec $BACKEND_CONTAINER php /app/artisan migrate:status
+
+            # Verify Laravel is running
+            echo "Verifying Laravel is running..."
+            docker exec $BACKEND_CONTAINER php /app/artisan about
 
             # Clean up unused images
             echo "Cleaning up unused images..."
