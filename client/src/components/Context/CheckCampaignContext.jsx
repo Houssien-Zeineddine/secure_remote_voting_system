@@ -1,5 +1,5 @@
 import React, { useEffect, createContext, useState } from "react";
-import axiosBaseUrl from "../../Utils/axios";
+import axiosInstance from "../../Utils/axios";
 
 export const CheckCampaignContext = createContext();
 
@@ -9,7 +9,7 @@ export const CheckCampaignProvider = ({ children }) => {
 
   const fetchCampaigns = async () => {
     try {
-      const response = await axiosBaseUrl.get("user/getcampaigns", {
+      const response = await axiosInstance.get("user/getcampaigns", {
         headers: { Authorization: `Bearer ${access_token}` },
       });
 

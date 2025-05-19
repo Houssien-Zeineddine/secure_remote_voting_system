@@ -12,7 +12,9 @@ class DatabaseSeeder extends Seeder {
      * Seed the application's database.
      */
     public function run(): void {
-      DB::statement('SET FOREIGN_KEY_CHECKS=0;');
+      if (DB::getDriverName() !== 'sqlite') {
+          DB::statement('SET FOREIGN_KEY_CHECKS=0;');
+      }
         
       $this->call([
         UsersTypesSeeder::class,
@@ -25,6 +27,8 @@ class DatabaseSeeder extends Seeder {
         CampaignSeeder::class
       ]); 
         
-      DB::statement('SET FOREIGN_KEY_CHECKS=1;');
+      if (DB::getDriverName() !== 'sqlite') {
+          DB::statement('SET FOREIGN_KEY_CHECKS=1;');
+      }
     }
 }

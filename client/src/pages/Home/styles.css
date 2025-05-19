@@ -1,3 +1,40 @@
+/* Animations */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes scaleIn {
+    from {
+        opacity: 0;
+        transform: scale(0.9);
+    }
+
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+@keyframes slideInRight {
+    from {
+        opacity: 0;
+        transform: translateX(30px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
 .landing-page-container {
     display: flex;
     flex-direction: column;
@@ -5,6 +42,7 @@
     gap: 6rem;
     width: 100%;
     font-size: var(--font-size-body);
+    overflow-x: hidden;
 }
 
 .landing-page-description {
@@ -15,12 +53,14 @@
     width: 90%;
     margin-top: -1rem;
     position: relative;
+    animation: scaleIn 0.8s ease-out;
 }
 
 .politician-img-container {
     height: auto;
     width: 50%;
     padding: 5rem;
+    animation: slideInRight 1s ease-out;
 }
 
 .landing-page-text {
@@ -29,6 +69,7 @@
     gap: 1.5rem;
     color: var(--primary-color);
     width: 50%;
+    animation: fadeInUp 0.8s ease-out;
 }
 
 .landing-page-text h2 {
@@ -39,12 +80,16 @@
 
 .landing-page-text p {
     font-size: var(--font-size-header-4);
+    opacity: 0;
+    animation: fadeInUp 0.8s ease-out 0.3s forwards;
 }
 
-.landing-page-btn-container{
+.landing-page-btn-container {
     width: 100%;
     display: flex;
     justify-content: flex-start;
+    opacity: 0;
+    animation: fadeInUp 0.8s ease-out 0.6s forwards;
 }
 
 .landing-page-cards-container {
@@ -71,6 +116,13 @@
     height: 14rem;
     width: 25rem;
     color: var(--primary-color);
+    transition: transform 0.3s ease;
+    cursor: pointer;
+}
+
+.card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
 }
 
 .card-text {
@@ -85,6 +137,11 @@
 
 .card-text h4 {
     font-size: var(--font-size-header-4);
+    transition: color 0.3s ease;
+}
+
+.card:hover .card-text h4 {
+    color: var(--primary-color);
 }
 
 .card-text p {
@@ -121,6 +178,8 @@
     background-color: var(--tertiary-color);
     padding: 2rem;
     width: 100%;
+    opacity: 0;
+    animation: fadeInUp 0.8s ease-out forwards;
 }
 
 .our-features-header h2 {
@@ -128,11 +187,12 @@
     font-weight: var(--font-weight-bold);
 }
 
-.our-features-header > p {
+.our-features-header>p {
     font-size: var(--font-size-header-4);
     text-align: center;
     width: 70%;
 }
+
 .our-features-cards {
     display: flex;
     justify-content: space-evenly;
@@ -149,6 +209,12 @@
     gap: 1rem;
     height: 18rem;
     width: 13.5rem;
+    padding: 1.5rem;
+    border-radius: 10px;
+    transition: all 0.3s ease;
+    opacity: 0;
+    animation: fadeInUp 0.8s ease-out forwards;
+    animation-delay: calc(var(--card-index) * 0.2s);
 }
 
 .our-features-card h4 {
@@ -166,8 +232,8 @@
     align-items: center;
     gap: 5rem;
     width: 100%;
-    margin: 0 auto; 
-    padding: 2rem 1rem; 
+    margin: 0 auto;
+    padding: 2rem 1rem;
 }
 
 .about-us-text {
@@ -179,15 +245,15 @@
     color: var(--primary-color);
     background-color: var(--tertiary-color);
     width: 100%;
-    min-height: 15rem; 
-    padding: 2rem; 
-    text-align: center; 
+    min-height: 15rem;
+    padding: 2rem;
+    text-align: center;
 }
 
 .about-us-text h2 {
     font-size: var(--font-size-header-2);
     font-weight: var(--font-weight-bold);
-    margin-bottom: 0.5rem; 
+    margin-bottom: 0.5rem;
 }
 
 .about-us-text p {
@@ -197,43 +263,43 @@
 .about-us-body {
     display: flex;
     justify-content: space-between;
-    align-items: center; 
+    align-items: center;
     gap: 3rem;
     width: 90%;
     color: var(--primary-color);
 }
 
-.about-us-body > div {
+.about-us-body>div {
     width: 50%;
-    min-width: 300px; 
+    min-width: 300px;
 }
 
 .about-us-body img {
     width: 50%;
     height: auto;
-    object-fit: contain; 
+    object-fit: contain;
 }
 
 .about-us-list {
     display: flex;
-    gap: 1.5rem; 
+    gap: 1.5rem;
     width: 100%;
-    margin-bottom: 2.5rem; 
+    margin-bottom: 2.5rem;
 }
 
-div > h4 {
+div>h4 {
     font-size: var(--font-size-header-4);
 }
 
 .faqs-container {
-    
+
     color: var(--primary-color);
     width: 100%;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    gap: 1rem;
+    gap: 5rem;
 }
 
 .faqs-title {
@@ -254,14 +320,181 @@ div > h4 {
     width: 90%;
 }
 
-.faqs-body > img {
+.faqs-body>img {
     max-width: 30%;
     max-height: 100vh;
 }
 
 /* when scrolling to these sections tha navbar dont cover them */
 #home,
-#about-us, 
+#about-us,
 #faqs {
-  scroll-margin-top: 6rem;
+    scroll-margin-top: 6rem;
+}
+
+/* Intersection Observer Animations */
+.scroll-animate {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: all 0.6s ease-out;
+}
+
+.scroll-animate.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Footer Styles */
+.landing-footer {
+    width: 100%;
+    background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+    color: var(--white-color);
+    padding: 4rem 2rem 2rem 2rem;
+    margin-top: 4rem;
+    position: relative;
+    overflow: hidden;
+}
+
+.landing-footer::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: radial-gradient(circle at center, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0) 70%);
+    pointer-events: none;
+}
+
+.footer-content {
+    display: flex;
+    justify-content: space-between;
+    max-width: 1200px;
+    margin: 0 auto;
+    gap: 4rem;
+}
+
+.footer-section {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.footer-section h3 {
+    font-size: var(--font-size-header-4);
+    font-weight: var(--font-weight-bold);
+    margin-bottom: 0.5rem;
+    position: relative;
+}
+
+.footer-section h3::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: -8px;
+    width: 40px;
+    height: 2px;
+    background-color: var(--white-color);
+    transition: width 0.3s ease;
+}
+
+.footer-section:hover h3::after {
+    width: 60px;
+}
+
+.footer-section p {
+    font-size: 0.95rem;
+    line-height: 1.6;
+    opacity: 0.9;
+}
+
+.footer-links {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.footer-links li {
+    margin-bottom: 0.75rem;
+}
+
+.footer-links a {
+    color: var(--white-color);
+    text-decoration: none;
+    transition: all 0.3s ease;
+    opacity: 0.9;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.footer-links a:hover {
+    opacity: 1;
+    transform: translateX(5px);
+}
+
+.footer-contact {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.contact-item {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    opacity: 0.9;
+    transition: all 0.3s ease;
+}
+
+.contact-item:hover {
+    opacity: 1;
+    transform: translateX(5px);
+}
+
+.footer-bottom {
+    margin-top: 3rem;
+    padding-top: 2rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    text-align: center;
+    font-size: 0.9rem;
+    opacity: 0.8;
+}
+
+.footer-bottom p {
+    margin: 0;
+}
+
+/* Footer Responsive Design */
+@media screen and (max-width: 968px) {
+    .footer-content {
+        flex-wrap: wrap;
+        gap: 3rem;
+    }
+
+    .footer-section {
+        flex: 1 1 calc(50% - 2rem);
+        min-width: 250px;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .landing-footer {
+        padding: 3rem 1.5rem 1.5rem 1.5rem;
+    }
+
+    .footer-content {
+        flex-direction: column;
+        gap: 2.5rem;
+    }
+
+    .footer-section {
+        flex: 1 1 100%;
+    }
+
+    .footer-bottom {
+        margin-top: 2rem;
+        padding-top: 1.5rem;
+    }
 }

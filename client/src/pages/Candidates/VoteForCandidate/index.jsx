@@ -1,15 +1,15 @@
 import React, { useContext, useState } from "react";
-import defaultProfilePicture from "../../../assets/sidebar icons/default profile picture.jpg";
 import Button from "../../../components/Button";
-import "./style.css";
 import Dialogue from "../../../components/Dialogue";
-import { FetchCandidatesContext } from "../../../components/Context/FetchCandidatesContext";
+import axiosInstance from "../../../Utils/axios";
+import getProfilePictureUrl from "../../../Utils/helpers";
+import defaultProfilePicture from "../../../assets/sidebar icons/default profile picture.jpg";
+import { AuthContext } from "../../../components/Context/AuthorizationContext";
 import { CheckCampaignContext } from "../../../components/Context/CheckCampaignContext";
 import { capitalizeFirstLetter } from "../../../Utils/helpers";
-import getProfilePictureUrl from "../../../Utils/helpers";
-import { AuthContext } from "../../../components/Context/AuthorizationContext";
 import { CheckElectionsContext } from "../../../components/Context/CheckElectionsContext";
-import axiosBaseUrl from "../../../Utils/axios";
+import { FetchCandidatesContext } from "../../../components/Context/FetchCandidatesContext";
+import "./style.css";
 
 const VoteForCandidate = () => {
   const { user } = useContext(AuthContext);
@@ -22,6 +22,7 @@ const VoteForCandidate = () => {
   const [isVoteToCandidateOpen, setIsVoteToCandidateOpen] = useState(false);
   const [locationError, setLocationError] = useState(null);
   const [isGettingLocation, setIsGettingLocation] = useState(false);
+  const [voteStatus, setVoteStatus] = useState({ message: "", type: "" });
 
   const access_token = localStorage.getItem("access_token");
 
@@ -74,16 +75,27 @@ const VoteForCandidate = () => {
         timestamp: new Date().toISOString(),
       };
 
-      const response = await axiosBaseUrl.post("/user/vote", voteData, {
+      const response = await axiosInstance.post("/user/vote", voteData, {
         headers: { Authorization: `Bearer ${access_token}` },
       });
 
-      // if (!response.ok) {
-      //   throw new Error(await response.text());
-      // }
-
-      const filteredVote = response.data;
-      closeVoteToCandidateDialog();
+      if (response.data.cancelation_reason) {
+        // Vote was cancelled
+        setVoteStatus({
+          message: response.data.cancelation_reason.replace(/_/g, " "),
+          type: "error",
+        });
+      } else {
+        // Vote was successful
+        setVoteStatus({
+          message: "Your vote has been successfully counted!",
+          type: "success",
+        });
+        setTimeout(() => {
+          closeVoteToCandidateDialog();
+          setVoteStatus({ message: "", type: "" });
+        }, 2000);
+      }
     } catch (error) {
       setLocationError(error.message || "Failed to verify your location");
     }
@@ -97,6 +109,8 @@ const VoteForCandidate = () => {
   const closeVoteToCandidateDialog = () => {
     setSelectedCandidate("");
     setIsVoteToCandidateOpen(false);
+    setVoteStatus({ message: "", type: "" });
+    setLocationError(null);
   };
 
   const getCandidateWithCampaign = (candidate) => {
@@ -119,6 +133,11 @@ const VoteForCandidate = () => {
 
   return (
     <div className="candidates-container">
+      {voteStatus.type === "success" && !isVoteToCandidateOpen && (
+        <div className="vote-success-message">
+          <p>{voteStatus.message}</p>
+        </div>
+      )}
       <h1>Vote for your Preferred Candidate</h1>
       <div className="candidates-cards-container">
         {candidates.map((candidate, index) => (
@@ -197,7 +216,7 @@ const VoteForCandidate = () => {
               variant="red"
               size="small"
               onClick={handleVote}
-              disabled={isGettingLocation}
+              disabled={isGettingLocation || voteStatus.type === "success"}
             />
           </div>
         }
@@ -224,6 +243,12 @@ const VoteForCandidate = () => {
               <p className="location-error">
                 Error: {locationError}. Your vote cannot be submitted without
                 location verification.
+              </p>
+            )}
+
+            {voteStatus.message && (
+              <p className={`vote-status ${voteStatus.type}`}>
+                {voteStatus.message}
               </p>
             )}
           </>

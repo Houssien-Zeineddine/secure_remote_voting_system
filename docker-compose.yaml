@@ -1,20 +1,26 @@
 services:
   backend:
-    image: houssienzed/final_project_laravel_image:latest
+    image: ${DOCKERHUB_USERNAME:-username}/final_project_laravel_image:latest
     environment:
-      - LARAVEL_DATABASE_HOST=db
-      - LARAVEL_DATABASE_NAME=secure_voting_system
-      - LARAVEL_DATABASE_USER=root
-      - LARAVEL_DATABASE_PASSWORD=1234
-      - LARAVEL_DATABASE_PORT_NUMBER=3306
+      - DB_HOST=db
+      - DB_PORT=3306
+      - DB_DATABASE=secure_voting_system
+      - DB_USERNAME=root
+      - DB_PASSWORD=1234
+      - APP_ENV=production
+      - APP_DEBUG=tru
     restart: always
-    ports:
-      - "8000:8000"
     depends_on:
       - db
+    ports:
+      - "8000:8000"
 
   frontend:
-    image: houssienzed/final_project_react_image:latest
+    image: ${DOCKERHUB_USERNAME:-username}/final_project_react_image:latest
+    build:
+      context: ./client
+      args:
+        - VITE_API_URL=http://13.36.171.143:8000/api/v0.1
     ports:
       - "80:80"
     depends_on:

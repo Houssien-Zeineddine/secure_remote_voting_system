@@ -1,5 +1,5 @@
 import React, { createContext, useState, useEffect } from "react";
-import axiosBaseUrl from "../../Utils/axios";
+import axiosInstance from "../../Utils/axios";
 
 export const AuthContext = createContext();
 
@@ -12,7 +12,7 @@ export const AuthProvider = ({ children }) => {
       const token = localStorage.getItem("access_token");
       if (token) {
         try {
-          const response = await axiosBaseUrl.get("/me", {
+          const response = await axiosInstance.get("/me", {
             headers: {
               Authorization: `Bearer ${token}`,
             },

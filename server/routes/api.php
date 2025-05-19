@@ -29,11 +29,9 @@ Route::group(['prefix' => 'v0.1'], function () {
                 Route::get('/candidates', [UserController::class, 'getCandidates']);
                 Route::get('/getelections', [ElectionsController::class, 'getElections']);                        
                 Route::get('/getcampaigns', [CampaignController::class, 'getCampaigns']);
-                Route::post('/upload', [ImageController::class, 'upload']);
                 Route::post('/vote', [VoteController::class, 'voteToCandidate']);
+                Route::post('/upload', [ImageController::class, 'upload']);
                 Route::post('/editprofile', [UserController::class, 'updateProfile']);
-                // Route::get('/guidelines', [GuidelinesController::class, 'index']);
-                // Route::get('/settings', [SettingsController::class, 'index']);
                 
                 Route::middleware('CheckUserType:2')->group(function() {
                     Route::group(['prefix' => 'candidate'], function() {

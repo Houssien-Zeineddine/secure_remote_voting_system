@@ -3,7 +3,7 @@ import { AuthContext } from "../../components/Context/AuthorizationContext";
 import Input from "../../components/Input";
 import Button from "../../components/Button";
 import ImageUpload from "../../components/ImageUpload";
-import axiosBaseUrl from "../../Utils/axios";
+import axiosInstance from "../../Utils/axios";
 import defaultImage from "../../assets/sidebar icons/default profile picture.jpg";
 import getProfilePictureUrl from "../../Utils/helpers";
 import "./style.css";
@@ -48,7 +48,7 @@ const Profile = () => {
 
     console.log("Access token:", access_token);
     try {
-      const response = await axiosBaseUrl.post("/user/editprofile", tempData, {
+      const response = await axiosInstance.post("/user/editprofile", tempData, {
         headers: {
           Authorization: `Bearer ${access_token}`,
         },

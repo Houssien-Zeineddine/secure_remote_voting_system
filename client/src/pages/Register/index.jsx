@@ -1,11 +1,10 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import Button from "../../components/Button";
-import Input from "../../components/Input";
 import logo from "../../assets/logos/blue-web-logo-no-bg.svg";
+import Input from "../../components/Input";
+import Button from "../../components/Button";
+import axiosInstance from "../../Utils/axios";
 import welcomeIllustration from "../../assets/register illautration.svg";
-import Calendar from "../../assets/calendar 1.svg";
-import axiosBaseUrl from "../../Utils/axios";
 import "./style.css";
 
 const Register = () => {
@@ -41,7 +40,7 @@ const Register = () => {
     console.log(userData);
 
     try {
-      const response = await axiosBaseUrl.post("guest/register", userData);
+      const response = await axiosInstance.post("guest/register", userData);
       navigate("/login");
       console.log(response.data);
     } catch (err) {
@@ -190,9 +189,8 @@ const Register = () => {
             text="Home"
             variant="transparent"
             size="small"
-            onClick={() => {
-              navigate("/");
-            }}
+            onClick={() => navigate("/")}
+            className="home-nav-btn"
           />
           <div className="inside-description-container">
             <h1>Welcome!</h1>

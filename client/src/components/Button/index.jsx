@@ -4,7 +4,7 @@ const Button = ({
   text = "Button",
   variant = "primary",
   size = "medium",
-  type = "",
+  type = "button",
   onClick,
   className = "",
 }) => {
