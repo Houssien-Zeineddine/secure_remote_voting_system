@@ -39,7 +39,6 @@ const AppRoutes = () => {
           <Route path="/profile" element={<Profile />} />
           <Route path="/candidates" element={<Candidates />} />
           <Route path="/guidelines" element={<Guidelines />} />
-          <Route path="/settings" element={<Settings />} />
           <Route path="/addelections" element={<AddElections />} />
           <Route path="/addcampaign" element={<AddCampaign />} />
         </Route>
@@ -48,4 +47,4 @@ const AppRoutes = () => {
   );
 };
 
-export default AppRoutes; 
+export default AppRoutes;
