@@ -178,7 +178,7 @@ jobs:
             # Run migrations
             docker exec $BACKEND_CONTAINER php artisan migrate --force
 
-            # If fails, show error logs
+             # If fails, show error logs
             if [ $? -ne 0 ]; then
               echo "Migration failed! Showing logs:"
               docker logs $BACKEND_CONTAINER | grep -i error
