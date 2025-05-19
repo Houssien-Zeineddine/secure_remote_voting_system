@@ -1,8 +1,7 @@
-import React from "react";
-import { useState } from "react";
+import React, { useState } from "react";
 import collapse from "../../assets/Shape.svg";
 import expand from "../../assets/expand.svg";
-import "./syle.css";
+import "./style.css";
 
 const Questions = () => {
   const questions = [
@@ -14,7 +13,7 @@ const Questions = () => {
     {
       question: "Why do you need my location and IP address?",
       answer:
-        "Your location and IP are used to confirm that you’re voting from an approved region and to prevent fraud. This information is securely processed and never shared.",
+        "Your location and IP are used to confirm that you're voting from an approved region and to prevent fraud. This information is securely processed and never shared.",
     },
     {
       question: "What devices and browsers are supported?",
@@ -39,7 +38,7 @@ const Questions = () => {
     {
       question: "Who can I contact if I need help?",
       answer:
-        "You can reach our support team info through the “Contact Us” link on your dashboard. We’re here to assist you throughout the voting process.",
+        "You can reach our support team info through the 'Contact Us' link on your dashboard. We're here to assist you throughout the voting process.",
     },
   ];
 
@@ -48,11 +47,16 @@ const Questions = () => {
   return (
     <div className="questions-container">
       {questions.map((question, index) => (
-        <div className="questions" key={index}>
-          <p className="rounded-number">{index + 1}</p>
-          <div className="question-section">
-            <div className="question">
-              <p>{question.question}</p>
+        <div
+          className={`question-box ${activeIndex === index ? "active" : ""}`}
+          key={index}
+        >
+          <div
+            className="question-header"
+            onClick={() => setActiveIndex(activeIndex === index ? null : index)}
+          >
+            <h4>{question.question}</h4>
+            <div className="toggle-icon">
               <img
                 src={activeIndex === index ? collapse : expand}
                 alt={
@@ -60,17 +64,13 @@ const Questions = () => {
                     ? "Collapse Question"
                     : "Expand Question"
                 }
-                className={
-                  activeIndex === index
-                    ? "collapse-question"
-                    : "expand-question"
-                }
-                onClick={() =>
-                  setActiveIndex(activeIndex === index ? null : index)
-                }
+                width="24"
+                height="24"
               />
             </div>
-            {activeIndex === index && <p>{question.answer}</p>}
+          </div>
+          <div className="question-answer">
+            <p>{question.answer}</p>
           </div>
         </div>
       ))}
