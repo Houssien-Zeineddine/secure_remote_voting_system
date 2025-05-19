@@ -121,7 +121,12 @@ jobs:
 
   Deploy-Laravel-Docker:
     runs-on: ubuntu-latest
-    needs: Copy-docker-compose-to-EC2
+    needs:
+      [
+        build-and-push-react-image,
+        build-and-push-react-image,
+        Copy-docker-compose-to-EC2,
+      ]
 
     steps:
       - name: Checkout repository
