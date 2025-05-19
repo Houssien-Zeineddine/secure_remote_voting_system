@@ -1,64 +1,34 @@
 services:
-  db:
-    image: mysql:8.0
-    restart: always
-    environment:
-      MYSQL_DATABASE: ${DB_DATABASE:-laravel}
-      MYSQL_ROOT_PASSWORD: ${DB_PASSWORD:-1234}
-      MYSQL_PASSWORD: ${DB_PASSWORD:-1234}
-      MYSQL_USER: ${DB_USERNAME:-laravel}
-    volumes:
-      - mysql-data:/var/lib/mysql
-    networks:
-      - app-network
-    healthcheck:
-      test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-u", "root", "-p${DB_PASSWORD:-1234}"]
-      interval: 10s
-      timeout: 5s
-      retries: 5
-
   backend:
-    image: ${DOCKERHUB_USERNAME:-username}/final_project_laravel_image:latest
-    restart: always
-    depends_on:
-      db:
-        condition: service_healthy
+    image: houssienzd/final-project-laravel-image:latest
     environment:
-      - DB_HOST=db
-      - DB_PORT=3306
-      - DB_DATABASE=${DB_DATABASE:-laravel}
-      - DB_USERNAME=${DB_USERNAME:-laravel}
-      - DB_PASSWORD=${DB_PASSWORD:-1234}
-      - APP_ENV=production
-      - APP_DEBUG=false
-    volumes:
-      - ./server:/app
-      - /app/vendor
-      - /app/node_modules
+      - LARAVEL_DATABASE_HOST=db
+      - LARAVEL_DATABASE_NAME=secure_voting_system
+      - LARAVEL_DATABASE_USER=root
+      - LARAVEL_DATABASE_PASSWORD=1234
+      - LARAVEL_DATABASE_PORT_NUMBER=3306
+    restart: always
     ports:
       - "8000:8000"
-    networks:
-      - app-network
-    healthcheck:
-      test: ["CMD", "php", "artisan", "about"]
-      interval: 10s
-      timeout: 5s
-      retries: 5
+    depends_on:
+      - db
 
   frontend:
-    image: ${DOCKERHUB_USERNAME:-username}/final_project_react_image:latest
-    restart: always
-    depends_on:
-      - backend
+    image: houssienzd/final-project-react-image:latest
     ports:
       - "80:80"
-    networks:
-      - app-network
+    depends_on:
+      - backend
 
-networks:
-  app-network:
-    driver: bridge
+  db:
+    image: mysql:8.0
+    environment:
+      - MYSQL_ROOT_PASSWORD=1234 
+      - MYSQL_DATABASE=secure_voting_system
+    ports:
+      - "3306:3306"
+    volumes:
+      - mysql_data:/var/lib/mysql
 
 volumes:
-  mysql-data:
-    driver: local
+  mysql_data:
