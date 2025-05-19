@@ -170,7 +170,7 @@ const AdminPage = () => {
       {ongoingActiveElections ? (
         <div className="add-candidate-container">
           <div className="inside-add-candidate-container">
-            <h2>{capitalizeFirstLetter(ongoingActiveElections.title)}</h2>
+            <h2>{ongoingActiveElections.title}</h2>
 
             <div className="add-candidate-btn-wrapper">
               <h4>Candidates List</h4>

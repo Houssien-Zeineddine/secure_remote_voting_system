@@ -187,10 +187,6 @@ jobs:
               exit 1
             fi
 
-            docker exec $BACKEND_CONTAINER mkdir -p /app/storage/psysh
-            docker exec $BACKEND_CONTAINER chmod -R 775 /app/storage/psysh
-            docker exec $BACKEND_CONTAINER /bin/sh -c "echo 'PSYSH_CONFIG_DIR=/app/storage/psysh' >> /app/.env"
-
             docker exec $BACKEND_CONTAINER php artisan jwt:secret --force
 
             docker exec $BACKEND_CONTAINER chown -R www-data:www-data /app/storage
