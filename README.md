@@ -48,7 +48,7 @@
 | --------------------------------------- | ------------------------------------- | ------------------------------------- |
 | ![Landing](./readme/demo/1440x1024.png) | ![fsdaf](./readme/demo/1440x1024.png) | ![fsdaf](./readme/demo/1440x1024.png) | -->
 
-### Admin Screens (Web)
+### Screens Demo
 
 | Login screen                               | Register screen                             |
 | ------------------------------------------ | ------------------------------------------- |
@@ -61,6 +61,16 @@
 | Malicious Vote Detected (Malicious User Behaviour) | Malicious Vote (Outside Region)                         |
 | -------------------------------------------------- | ------------------------------------------------------- |
 | ![Landing](./readme/demo/malicious%20vote.png)     | ![fsdaf](./readme/demo/malicious%20vote%20location.png) |
+
+### Interactive Walkthrough
+
+| Login screen                               | Register screen                             |
+| ------------------------------------------ | ------------------------------------------- |
+| ![Landing](./readme/demo/login%20page.png) | ![fsdaf](./readme/demo/register%20page.png) |
+
+| Landing Page                                 | Dashboard                              |
+| -------------------------------------------- | -------------------------------------- |
+| ![Landing](./readme/demo/landing%20page.png) | ![fsdaf](./readme//demo/dashboard.png) |
 
 <br><br>
 
