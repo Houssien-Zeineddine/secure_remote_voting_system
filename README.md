@@ -58,9 +58,9 @@
 | -------------------------------------------- | -------------------------------------- |
 | ![Landing](./readme/demo/landing%20page.png) | ![fsdaf](./readme//demo/dashboard.png) |
 
-| Login screen                               | Register screen                             |
-| ------------------------------------------ | ------------------------------------------- |
-| ![Landing](./readme/demo/login%20page.png) | ![fsdaf](./readme/demo/register%20page.png) |
+| Malicious Vote Detected (Malicious User Behaviour) | Malicious Vote (Outside Region)                         |
+| -------------------------------------------------- | ------------------------------------------------------- |
+| ![Landing](./readme/demo/malicious%20vote.png)     | ![fsdaf](./readme/demo/malicious%20vote%20location.png) |
 
 <br><br>
 
