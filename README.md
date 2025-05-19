@@ -68,9 +68,9 @@
 | -------------------------------------------------- | --------------------------------------- |
 | ![Landing](./readme/gifs/landing%20page%20gif.gif) | ![fsdaf](./readme/gifs/Login%20gif.gif) |
 
-| Landing Page                                 | Dashboard                              |
-| -------------------------------------------- | -------------------------------------- |
-| ![Landing](./readme/demo/landing%20page.png) | ![fsdaf](./readme//demo/dashboard.png) |
+| Successfull Vote                                       | Malicious Vote Detection                                       |
+| ------------------------------------------------------ | -------------------------------------------------------------- |
+| ![Landing](./readme/gifs/successful%20vote%20gif'.gif) | ![fsdaf](./readme/gifs/malicious%20vote%20detection%20gif.gif) |
 
 <br><br>
 
