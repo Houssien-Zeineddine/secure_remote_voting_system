@@ -16,15 +16,15 @@
 
 ### ER Diagram
 
-<img src="./readme/ER Diagram.png">
+<img src="./readme/Charts/ER Diagram.png">
 
-### User System Architecture
+### System Architecture Diagram
 
-<img src="./readme/System Architecture Diagram.png">
+<img src="./readme/Charts/System Architecture Diagram.png">
 
 ### User Flow Diagram
 
-<img src="./readme/User Flow Diagram.png">
+<img src="./readme/Charts/User Flow Diagram.png">
 
 <br><br>
 
