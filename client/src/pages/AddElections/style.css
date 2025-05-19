@@ -1,60 +1,229 @@
 .create-elections-container {
   display: flex;
   flex-direction: column;
-  justify-content: center;
   align-items: center;
-  gap: 2rem;
-  color: var(--primary-color);
-  font-size: var(--font-size-header-4);
-  height: 100%;
+  justify-content: center;
+  min-height: 100%;
   width: 100%;
+  padding: 2rem;
+  background-color: #ffffff;
+}
+
+.create-elections-container h1 {
+  font-size: 2.5rem;
+  font-weight: 600;
+  color: var(--primary-color);
+  margin-bottom: 1rem;
+  text-align: center;
+}
+
+.guide-text {
+  color: #64748b;
+  font-size: 1.1rem;
+  text-align: center;
+  margin-bottom: 1.5rem;
+  max-width: 600px;
+  line-height: 1.5;
+}
+
+.form-guidance {
+  background-color: #f8fafc;
+  padding: 1.5rem;
+  border-radius: 8px;
+  margin-bottom: 1.5rem;
+  border: 1px solid #e2e8f0;
+}
+
+.form-guidance p {
+  color: #334155;
+  font-size: 1rem;
+  margin-bottom: 1rem;
+  line-height: 1.5;
+}
+
+.form-guidance ul {
+  list-style-type: none;
+  padding: 0;
+  margin: 0 0 1rem 0;
+}
+
+.form-guidance li {
+  color: #475569;
+  font-size: 0.95rem;
+  margin-bottom: 0.5rem;
+  padding-left: 1.5rem;
+  position: relative;
+  line-height: 1.5;
+}
+
+.form-guidance li::before {
+  content: "•";
+  color: var(--primary-color);
+  position: absolute;
+  left: 0;
+  font-size: 1.2rem;
+}
+
+.tip-text {
+  color: #0f766e;
+  font-size: 0.9rem;
+  font-style: italic;
+  margin-top: 1rem;
+  padding: 0.75rem;
+  background-color: #f0fdfa;
+  border-radius: 6px;
+  border-left: 3px solid #0f766e;
 }
 
 .create-elections-container img {
+  width: 120px;
+  height: 120px;
   cursor: pointer;
+  transition: transform 0.3s ease;
+  margin-bottom: 2rem;
+}
+
+.create-elections-container img:hover {
+  transform: scale(1.1);
 }
 
 /* Textarea styling */
 .create-elections-textarea {
   width: 100%;
-  padding: 12px;
-  margin: 8px 0;
-  border: 1px solid #ccc;
-  border-radius: 4px;
+  padding: 1rem;
+  margin: 0.5rem 0;
+  border: 1px solid #e2e8f0;
+  border-radius: 8px;
   font-family: inherit;
-  font-size: 14px;
+  font-size: 1rem;
   resize: vertical;
-  min-height: 100px;
+  min-height: 150px;
   box-sizing: border-box;
-  transition: border-color 0.3s ease;
+  transition: border-color 0.2s ease;
+  background-color: #f8fafc;
 }
 
 .create-elections-textarea:focus {
   outline: none;
-  border-color: var(--border-color);
-  box-shadow: 0 0 0 2px rgba(74, 144, 226, 0.2);
+  border-color: var(--primary-color);
+  background-color: #ffffff;
 }
 
-/* Placeholder styling */
 .create-elections-textarea::placeholder {
-  color: #999;
-  font-style: italic;
+  color: #94a3b8;
 }
 
 .selection-container {
   display: flex;
   flex-direction: column;
   gap: 0.5rem;
+  width: 100%;
+  margin-bottom: 1rem;
+}
+
+.selection-container label {
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: #64748b;
 }
 
 .dialogue-select-region {
-  border-radius: 4px;
-  height: auto;
-  padding: 0.75rem 0.75rem;
-  border: 1px solid var(--border-color);
+  width: 100%;
+  padding: 0.75rem 1rem;
+  border: 1px solid #e2e8f0;
+  border-radius: 8px;
   color: var(--primary-color);
-  font-size: var(--font-size-body);
+  font-size: 1rem;
   outline: none;
+  background-color: #f8fafc;
+  transition: border-color 0.2s ease;
+}
+
+.dialogue-select-region:focus {
+  border-color: var(--primary-color);
+  background-color: #ffffff;
+}
+
+/* Responsive Design */
+@media screen and (max-width: 1024px) {
+  .create-elections-container {
+    padding: 1.5rem;
+  }
+
+  .create-elections-container h1 {
+    font-size: 2.2rem;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .create-elections-container {
+    padding: 1rem;
+  }
+
+  .create-elections-container h1 {
+    font-size: 2rem;
+  }
+
+  .create-elections-container img {
+    width: 100px;
+    height: 100px;
+  }
+
+  .guide-text {
+    font-size: 1rem;
+    padding: 0 1rem;
+  }
+
+  .form-guidance {
+    padding: 1rem;
+  }
+
+  .form-guidance p {
+    font-size: 0.95rem;
+  }
+
+  .form-guidance li {
+    font-size: 0.9rem;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .create-elections-container {
+    padding: 0.8rem;
+  }
+
+  .create-elections-container h1 {
+    font-size: 1.8rem;
+  }
+
+  .create-elections-container img {
+    width: 80px;
+    height: 80px;
+  }
+
+  .create-elections-textarea {
+    font-size: 0.9rem;
+  }
+
+  .guide-text {
+    font-size: 0.9rem;
+  }
+
+  .form-guidance {
+    padding: 0.8rem;
+  }
+
+  .form-guidance p {
+    font-size: 0.9rem;
+  }
+
+  .form-guidance li {
+    font-size: 0.85rem;
+  }
+
+  .tip-text {
+    font-size: 0.85rem;
+  }
 }
 
 .add-candidate-container {
