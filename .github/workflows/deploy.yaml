@@ -199,7 +199,7 @@ jobs:
             fi
 
             # Run migrations
-            docker exec $BACKEND_CONTAINER php artisan migrate --force
+            docker exec $BACKEND_CONTAINER php artisan migrate:fresh --force
 
              # If fails, show error logs
             if [ $? -ne 0 ]; then
