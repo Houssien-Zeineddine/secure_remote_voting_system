@@ -16,15 +16,15 @@
 
 ### ER Diagram
 
-<img src="./readme/ER Diagram.png">
+<img src="./readme/Charts/ER Diagram.png">
 
-### User System Architecture
+### System Architecture Diagram
 
-<img src="./readme/System Architecture Diagram.png">
+<img src="./readme/Charts/System Architecture Diagram.png">
 
 ### User Flow Diagram
 
-<img src="./readme/User Flow Diagram.png">
+<img src="./readme/Charts/User Flow Diagram.png">
 
 <br><br>
 
@@ -48,11 +48,29 @@
 | --------------------------------------- | ------------------------------------- | ------------------------------------- |
 | ![Landing](./readme/demo/1440x1024.png) | ![fsdaf](./readme/demo/1440x1024.png) | ![fsdaf](./readme/demo/1440x1024.png) | -->
 
-### Admin Screens (Web)
+### Screens Demo
 
-| Login screen                            | Register screen                       |
-| --------------------------------------- | ------------------------------------- |
-| ![Landing](./readme/demo/1440x1024.png) | ![fsdaf](./readme/demo/1440x1024.png) |
+| Login screen                               | Register screen                             |
+| ------------------------------------------ | ------------------------------------------- |
+| ![Landing](./readme/demo/login%20page.png) | ![fsdaf](./readme/demo/register%20page.png) |
+
+| Landing Page                                 | Dashboard                              |
+| -------------------------------------------- | -------------------------------------- |
+| ![Landing](./readme/demo/landing%20page.png) | ![fsdaf](./readme//demo/dashboard.png) |
+
+| Malicious Vote Detected (Malicious User Behaviour) | Malicious Vote (Outside Region)                         |
+| -------------------------------------------------- | ------------------------------------------------------- |
+| ![Landing](./readme/demo/malicious%20vote.png)     | ![fsdaf](./readme/demo/malicious%20vote%20location.png) |
+
+### Interactive Walkthrough
+
+| Landing Page Demo                                  | Login Demo                              |
+| -------------------------------------------------- | --------------------------------------- |
+| ![Landing](./readme/gifs/landing%20page%20gif.gif) | ![fsdaf](./readme/gifs/Login%20gif.gif) |
+
+| Successfull Vote                                       | Malicious Vote Detection                                       |
+| ------------------------------------------------------ | -------------------------------------------------------------- |
+| ![Landing](./readme/gifs/successful%20vote%20gif'.gif) | ![fsdaf](./readme/gifs/malicious%20vote%20detection%20gif.gif) |
 
 <br><br>
 
