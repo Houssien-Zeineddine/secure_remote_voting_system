@@ -54,6 +54,14 @@
 | ------------------------------------------ | ------------------------------------------- |
 | ![Landing](./readme/demo/login%20page.png) | ![fsdaf](./readme/demo/register%20page.png) |
 
+| Landing Page                                 | Dashboard                              |
+| -------------------------------------------- | -------------------------------------- |
+| ![Landing](./readme/demo/landing%20page.png) | ![fsdaf](./readme//demo/dashboard.png) |
+
+| Login screen                               | Register screen                             |
+| ------------------------------------------ | ------------------------------------------- |
+| ![Landing](./readme/demo/login%20page.png) | ![fsdaf](./readme/demo/register%20page.png) |
+
 <br><br>
 
 <!-- Development & Testing -->
