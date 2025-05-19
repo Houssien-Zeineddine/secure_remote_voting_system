@@ -124,7 +124,7 @@ jobs:
     needs:
       [
         build-and-push-react-image,
-        build-and-push-react-image,
+        build-and-push-laravel-image,
         Copy-docker-compose-to-EC2,
       ]
 
