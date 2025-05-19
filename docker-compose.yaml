@@ -17,6 +17,10 @@ services:
 
   frontend:
     image: ${DOCKERHUB_USERNAME:-username}/final_project_react_image:latest
+    build:
+      context: ./client
+      args:
+        - VITE_API_URL=http://13.36.171.143:8000/api/v0.1
     ports:
       - "80:80"
     depends_on:
