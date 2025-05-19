@@ -198,8 +198,24 @@ jobs:
               exit 1
             fi
 
-            # Run migrations
-            docker exec $BACKEND_CONTAINER php artisan migrate:fresh --seed --force
+            docker exec $BACKEND_CONTAINER php artisan migrate --force
+
+            # Check if seeding is needed (if ALL tables are empty)
+            SEED_NEEDED=$(docker exec $BACKEND_CONTAINER php artisan tinker --execute '
+                echo (
+                    DB::table("users")->count() === 0 &&
+                    DB::table("elections")->count() === 0 &&
+                    DB::table("counted_votes")->count() === 0
+                    DB::table("malicious_votes")->count() === 0
+                ) ? "true" : "false";
+            ')
+
+            if [ "$SEED_NEEDED" = "true" ]; then
+                echo "Seeding fresh data..."
+                docker exec $BACKEND_CONTAINER php artisan db:seed --force
+            else
+                echo "Database already has data. Skipping seeding."
+            fi
 
              # If fails, show error logs
             if [ $? -ne 0 ]; then
