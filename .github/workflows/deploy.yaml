@@ -18,7 +18,7 @@ jobs:
         image: mysql:8.0
         env:
           MYSQL_ROOT_PASSWORD: 1234
-          MYSQL_DATABASE: secure_voting_system
+          MYSQL_DATABASE: secure_voting_system_testing
         ports:
           - 3306:3306
         options: --health-cmd="mysqladmin ping" --health-interval=10s --health-timeout=5s --health-retries=3
@@ -71,7 +71,6 @@ jobs:
 
   build-and-push-react-image:
     runs-on: ubuntu-latest
-    needs: test
 
     steps:
       - name: Checkout code
@@ -94,10 +93,20 @@ jobs:
         run: docker push ${{ secrets.DOCKERHUB_USERNAME }}/final_project_react_image:latest
 
   Copy-docker-compose-to-EC2:
-    needs: test
+    needs: build-and-push-react-image
     runs-on: ubuntu-latest
 
     steps:
+      - name: Install Docker Compose on EC2
+        uses: appleboy/ssh-action@v0.1.10
+        with:
+          host: ${{ secrets.EC2_HOST }}
+          username: ${{ secrets.EC2_USER }}
+          key: ${{ secrets.EC2_KEY }}
+          script: |
+            sudo apt-get update
+            sudo apt-get install -y docker-compose-plugin
+
       - name: Checkout repository
         uses: actions/checkout@v3
 
@@ -112,12 +121,7 @@ jobs:
 
   Deploy-Laravel-Docker:
     runs-on: ubuntu-latest
-    needs:
-      [
-        build-and-push-laravel-image,
-        build-and-push-react-image,
-        Copy-docker-compose-to-EC2,
-      ]
+    needs: Copy-docker-compose-to-EC2
 
     steps:
       - name: Checkout repository
@@ -130,26 +134,14 @@ jobs:
           username: ${{ secrets.EC2_USER }}
           key: ${{ secrets.EC2_KEY }}
           script: |
-            sudo docker compose down
-            sudo docker rmi ${{ secrets.DOCKERHUB_USERNAME }}/final_project_laravel_image:latest
-            sudo docker rmi ${{ secrets.DOCKERHUB_USERNAME }}/final_project_react_image:latest
-            sudo docker compose pull
-            sudo docker compose up -d db
-            timeout 180 bash -c 'while ! sudo docker compose exec db mysqladmin ping -u root -p1234 --silent; do
-              echo "Waiting for MySQL to start..."
-              sleep 5
-              done' || (echo "MySQL failed to start within 3 minutes"; exit 1)
-
-            sudo docker compose up -d
+            docker compose pull
+            docker compose down
+            docker rmi ${{ secrets.DOCKERHUB_USERNAME }}/final_project_laravel_image:latest || true
+            docker rmi ${{ secrets.DOCKERHUB_USERNAME }}/final_project_react_image:latest || true
+            docker compose up -d
             sleep 10
-
-            sudo docker exec -i ubuntu-backend-1 bash -c "echo 'OPENAI_API_KEY=${{ secrets.OPENAI_API_KEY }}' >> .env"
-
-            sudo docker exec -i ubuntu-backend-1 php artisan config:clear
-            sudo docker exec -i ubuntu-backend-1 php artisan config:cache
-
-            sudo docker exec -it ubuntu-backend-1 php artisan migrate --force
-            sudo docker image prune -a -f
+            docker exec $(docker ps -qf "name=backend") php artisan migrate
+            docker image prune -a -f
 
 # docker-compose down
 #             docker rmi ${{ secrets.DOCKERHUB_USERNAME }}/final_project_laravel_image:latest
@@ -158,3 +150,4 @@ jobs:
 #             docker-compose up -d
 #             sleep 10  # Wait for containers to start
 #             docker exec $(docker ps -qf "name=backend") php artisan migrate
+
