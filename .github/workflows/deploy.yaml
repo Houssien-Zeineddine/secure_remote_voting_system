@@ -70,6 +70,7 @@ jobs:
         run: docker push ${{ secrets.DOCKERHUB_USERNAME }}/final_project_laravel_image:latest
 
   build-and-push-react-image:
+    needs: test
     runs-on: ubuntu-latest
 
     steps:
@@ -93,7 +94,7 @@ jobs:
         run: docker push ${{ secrets.DOCKERHUB_USERNAME }}/final_project_react_image:latest
 
   Copy-docker-compose-to-EC2:
-    needs: build-and-push-react-image
+    needs: test
     runs-on: ubuntu-latest
 
     steps:
