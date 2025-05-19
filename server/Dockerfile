@@ -8,7 +8,8 @@ WORKDIR /app
 COPY . .
 
 # Install dependencies
-RUN composer install --optimize-autoloader --no-dev && \ composer require fakerphp/faker --dev
+RUN composer install --optimize-autoloader --no-dev && \ 
+    composer require fakerphp/faker --dev
 
 # Set permissions
 RUN chown -R daemon:daemon /app/storage /app/bootstrap/cache
