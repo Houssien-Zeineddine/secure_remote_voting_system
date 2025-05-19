@@ -198,6 +198,23 @@ jobs:
               exit 1
             fi
 
+            # Fix PsySH directory
+            docker exec $BACKEND_CONTAINER mkdir -p /app/storage/psysh
+            docker exec $BACKEND_CONTAINER chmod -R 775 /app/storage/psysh
+            docker exec $BACKEND_CONTAINER /bin/sh -c "echo 'PSYSH_CONFIG_DIR=/app/storage/psysh' >> /app/.env"
+
+            # Generate JWT secret
+            docker exec $BACKEND_CONTAINER php artisan jwt:secret --force
+
+            # Set permissions
+            docker exec $BACKEND_CONTAINER chown -R www-data:www-data /app/storage
+            docker exec $BACKEND_CONTAINER chmod -R 775 /app/storage
+            docker exec $BACKEND_CONTAINER chmod -R 775 /app/bootstrap/cache
+
+            # Clear caches
+            docker exec $BACKEND_CONTAINER php artisan optimize:clear
+            docker exec $BACKEND_CONTAINER php artisan config:cache
+
             docker exec $BACKEND_CONTAINER php artisan migrate --force
 
             # Check if seeding is needed (if ALL tables are empty)
