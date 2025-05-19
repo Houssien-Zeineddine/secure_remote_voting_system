@@ -1,7 +1,7 @@
 import React, { useContext, useEffect, useState } from "react";
 import Button from "../../../components/Button";
 import politician from "../../../assets/Politician giving his speech to public.svg";
-import axiosInstance from "../../../Utils/axios";
+import axiosBaseUrl from "../../../Utils/axios";
 import { useNavigate } from "react-router-dom";
 import { capitalizeTitle } from "../../../Utils/helpers";
 import { CheckElectionsContext } from "../../../components/Context/CheckElectionsContext";
@@ -19,7 +19,7 @@ const Elections = () => {
 
   const getStats = async () => {
     try {
-      const response = await axiosInstance.get("/user/getstats", {
+      const response = await axiosBaseUrl.get("/user/getstats", {
         headers: { Authorization: `Bearer ${access_token}` },
       });
       setStats(response.data);
