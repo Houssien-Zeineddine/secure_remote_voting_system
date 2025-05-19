@@ -1,14 +1,13 @@
 import React from "react";
 import { Routes, Route, Outlet } from "react-router-dom";
-import Navbar from "../components/Navbar";
-import Login from "../pages/Login";
-import Register from "../pages/Register";
 import Home from "../pages/Home";
-import Dashboard from "../pages/Dashboard";
+import Login from "../pages/Login";
+import Navbar from "../components/Navbar";
 import Profile from "../pages/Profile";
+import Register from "../pages/Register";
+import Dashboard from "../pages/Dashboard";
 import Candidates from "../pages/Candidates";
 import Guidelines from "../pages/Guidelines";
-import Settings from "../pages/Settings";
 import AddCampaign from "../pages/AddCampaign";
 import AddElections from "../pages/AddElections";
 import LayoutWithSidebarAndProvider from "../layouts/LayoutWithSidebarAndProvider";
@@ -39,7 +38,6 @@ const AppRoutes = () => {
           <Route path="/profile" element={<Profile />} />
           <Route path="/candidates" element={<Candidates />} />
           <Route path="/guidelines" element={<Guidelines />} />
-          <Route path="/settings" element={<Settings />} />
           <Route path="/addelections" element={<AddElections />} />
           <Route path="/addcampaign" element={<AddCampaign />} />
         </Route>
@@ -48,4 +46,4 @@ const AppRoutes = () => {
   );
 };
 
-export default AppRoutes; 
+export default AppRoutes;

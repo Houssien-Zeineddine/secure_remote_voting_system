@@ -233,7 +233,6 @@
     gap: 5rem;
     width: 100%;
     margin: 0 auto;
-    padding: 2rem 1rem;
 }
 
 .about-us-text {
@@ -292,7 +291,6 @@ div>h4 {
 }
 
 .faqs-container {
-
     color: var(--primary-color);
     width: 100%;
     display: flex;
@@ -300,6 +298,8 @@ div>h4 {
     justify-content: center;
     align-items: center;
     gap: 5rem;
+    background-color: #ffffff;
+    padding: 4rem 0;
 }
 
 .faqs-title {
@@ -310,19 +310,24 @@ div>h4 {
     justify-content: center;
     align-items: center;
     font-size: var(--font-size-header-2);
+    color: var(--primary-color);
 }
 
 .faqs-body {
     display: flex;
     justify-content: space-evenly;
     align-items: flex-start;
-    gap: 10rem;
+    gap: 6rem;
     width: 90%;
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 2rem;
 }
 
 .faqs-body>img {
-    max-width: 30%;
+    max-width: 35%;
     max-height: 100vh;
+    animation: float 6s ease-in-out infinite;
 }
 
 /* when scrolling to these sections tha navbar dont cover them */
@@ -347,23 +352,10 @@ div>h4 {
 /* Footer Styles */
 .landing-footer {
     width: 100%;
-    background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+    background-color: var(--primary-color);
     color: var(--white-color);
     padding: 4rem 2rem 2rem 2rem;
     margin-top: 4rem;
-    position: relative;
-    overflow: hidden;
-}
-
-.landing-footer::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: radial-gradient(circle at center, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0) 70%);
-    pointer-events: none;
 }
 
 .footer-content {
@@ -371,7 +363,7 @@ div>h4 {
     justify-content: space-between;
     max-width: 1200px;
     margin: 0 auto;
-    gap: 4rem;
+    gap: 3rem;
 }
 
 .footer-section {
@@ -384,29 +376,14 @@ div>h4 {
 .footer-section h3 {
     font-size: var(--font-size-header-4);
     font-weight: var(--font-weight-bold);
-    margin-bottom: 0.5rem;
-    position: relative;
-}
-
-.footer-section h3::after {
-    content: '';
-    position: absolute;
-    left: 0;
-    bottom: -8px;
-    width: 40px;
-    height: 2px;
-    background-color: var(--white-color);
-    transition: width 0.3s ease;
-}
-
-.footer-section:hover h3::after {
-    width: 60px;
+    margin-bottom: 1rem;
+    color: var(--white-color);
 }
 
 .footer-section p {
     font-size: 0.95rem;
     line-height: 1.6;
-    opacity: 0.9;
+    color: rgba(255, 255, 255, 0.9);
 }
 
 .footer-links {
@@ -420,18 +397,14 @@ div>h4 {
 }
 
 .footer-links a {
-    color: var(--white-color);
+    color: rgba(255, 255, 255, 0.9);
     text-decoration: none;
-    transition: all 0.3s ease;
-    opacity: 0.9;
-    display: inline-flex;
-    align-items: center;
-    gap: 0.5rem;
+    transition: color 0.3s ease;
+    display: inline-block;
 }
 
 .footer-links a:hover {
-    opacity: 1;
-    transform: translateX(5px);
+    color: var(--white-color);
 }
 
 .footer-contact {
@@ -443,14 +416,23 @@ div>h4 {
 .contact-item {
     display: flex;
     align-items: center;
-    gap: 1rem;
-    opacity: 0.9;
-    transition: all 0.3s ease;
+    gap: 0.75rem;
+    color: rgba(255, 255, 255, 0.9);
 }
 
-.contact-item:hover {
-    opacity: 1;
-    transform: translateX(5px);
+.contact-item span {
+    font-weight: var(--font-weight-semibold);
+    color: var(--white-color);
+}
+
+.contact-item a {
+    color: rgba(255, 255, 255, 0.9);
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.contact-item a:hover {
+    color: var(--white-color);
 }
 
 .footer-bottom {
@@ -459,7 +441,7 @@ div>h4 {
     border-top: 1px solid rgba(255, 255, 255, 0.1);
     text-align: center;
     font-size: 0.9rem;
-    opacity: 0.8;
+    color: rgba(255, 255, 255, 0.8);
 }
 
 .footer-bottom p {
@@ -470,12 +452,23 @@ div>h4 {
 @media screen and (max-width: 968px) {
     .footer-content {
         flex-wrap: wrap;
-        gap: 3rem;
+        gap: 2rem;
     }
 
     .footer-section {
         flex: 1 1 calc(50% - 2rem);
         min-width: 250px;
+    }
+
+    .faqs-body {
+        flex-direction: column;
+        align-items: center;
+        gap: 3rem;
+        padding: 1.5rem;
+    }
+
+    .faqs-body>img {
+        max-width: 60%;
     }
 }
 
@@ -486,7 +479,7 @@ div>h4 {
 
     .footer-content {
         flex-direction: column;
-        gap: 2.5rem;
+        gap: 2rem;
     }
 
     .footer-section {
@@ -496,5 +489,28 @@ div>h4 {
     .footer-bottom {
         margin-top: 2rem;
         padding-top: 1.5rem;
+    }
+
+    .faqs-title {
+        height: 10rem;
+        font-size: 1.8rem;
+    }
+
+    .faqs-body>img {
+        max-width: 80%;
+    }
+}
+
+@keyframes float {
+    0% {
+        transform: translateY(0px);
+    }
+
+    50% {
+        transform: translateY(-10px);
+    }
+
+    100% {
+        transform: translateY(0px);
     }
 }

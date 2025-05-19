@@ -137,6 +137,7 @@ const AddCampaign = () => {
       ) : (
         <div className="create-elections-container">
           <h1>Add Campaign</h1>
+          <p className="guide-text">Click the plus icon below to create your campaign platform</p>
           <img
             src={addCampaign}
             alt="Add Campaign"
@@ -157,6 +158,16 @@ const AddCampaign = () => {
               />
             }
           >
+            <div className="form-guidance">
+              <p>Create your campaign platform by providing:</p>
+              <ul>
+                <li>Your vision and goals for the position</li>
+                <li>Key policies and initiatives you plan to implement</li>
+                <li>Your experience and qualifications</li>
+                <li>How you plan to address community needs</li>
+              </ul>
+              <p className="tip-text">Tip: Be specific and clear about your plans to help voters understand your platform better.</p>
+            </div>
             <textarea
               className="create-elections-textarea"
               value={candidateCampaign}
