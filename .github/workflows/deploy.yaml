@@ -178,6 +178,13 @@ jobs:
             # Run migrations
             docker exec $BACKEND_CONTAINER php artisan migrate --force
 
+             # If fails, show error logs
+            if [ $? -ne 0 ]; then
+              echo "Migration failed! Showing logs:"
+              docker logs $BACKEND_CONTAINER | grep -i error
+              exit 1
+            fi
+
             # Clean up unused images
             docker image prune -a -f
 
