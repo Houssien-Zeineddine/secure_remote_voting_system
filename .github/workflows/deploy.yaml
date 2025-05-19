@@ -49,6 +49,7 @@ jobs:
   build-and-push-laravel-image:
     needs: test
     runs-on: ubuntu-latest
+
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
@@ -58,13 +59,6 @@ jobs:
         with:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
-
-      - name: Prepare PsySH directory
-        working-directory: server
-        run: |
-          mkdir -p storage/psysh
-          chmod -R 775 storage/psysh
-          echo "PSYSH_CONFIG_DIR=/app/storage/psysh" >> .env
 
       - name: Build laravel image
         working-directory: server
