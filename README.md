@@ -50,9 +50,9 @@
 
 ### Admin Screens (Web)
 
-| Login screen                            | Register screen                       |
-| --------------------------------------- | ------------------------------------- |
-| ![Landing](./readme/demo/1440x1024.png) | ![fsdaf](./readme/demo/1440x1024.png) |
+| Login screen                               | Register screen                             |
+| ------------------------------------------ | ------------------------------------------- |
+| ![Landing](./readme/demo/login%20page.png) | ![fsdaf](./readme/demo/register%20page.png) |
 
 <br><br>
 
