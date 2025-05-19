@@ -64,9 +64,9 @@
 
 ### Interactive Walkthrough
 
-| Login screen                               | Register screen                             |
-| ------------------------------------------ | ------------------------------------------- |
-| ![Landing](./readme/demo/login%20page.png) | ![fsdaf](./readme/demo/register%20page.png) |
+| Landing Page Demo                                  | Login Demo                              |
+| -------------------------------------------------- | --------------------------------------- |
+| ![Landing](./readme/gifs/landing%20page%20gif.gif) | ![fsdaf](./readme/gifs/Login%20gif.gif) |
 
 | Landing Page                                 | Dashboard                              |
 | -------------------------------------------- | -------------------------------------- |
