@@ -59,7 +59,12 @@ const VoteForCandidate = () => {
   };
 
   const handleVote = async () => {
+    if (isGettingLocation) return; // Prevent multiple clicks
+    
     try {
+      setIsGettingLocation(true);
+      setLocationError(null);
+      
       const location = await getCurrentLocation();
 
       const voteData = {
@@ -95,13 +100,19 @@ const VoteForCandidate = () => {
         }, 2000);
       }
     } catch (error) {
+      console.error("Voting error:", error);
       setLocationError(error.message || "Failed to verify your location");
+    } finally {
+      setIsGettingLocation(false);
     }
   };
 
   const openVoteToCandidateDialog = (candidate) => {
     setSelectedCandidate(candidate);
     setIsVoteToCandidateOpen(true);
+    // Reset any previous errors or status
+    setLocationError(null);
+    setVoteStatus({ message: "", type: "" });
   };
 
   const closeVoteToCandidateDialog = () => {
@@ -109,6 +120,7 @@ const VoteForCandidate = () => {
     setIsVoteToCandidateOpen(false);
     setVoteStatus({ message: "", type: "" });
     setLocationError(null);
+    setIsGettingLocation(false);
   };
 
   const getCandidateWithCampaign = (candidate) => {

@@ -29,6 +29,28 @@
   color: var(--primary-color);
   font-weight: var(--font-weight-bold);
   border-bottom: 1px solid #eee;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.dialogue-header h2 {
+  margin: 0;
+  font-size: inherit;
+}
+
+.close-button {
+  background: none;
+  border: none;
+  font-size: 1.5rem;
+  color: var(--primary-color);
+  cursor: pointer;
+  opacity: 0.7;
+  transition: opacity 0.2s;
+}
+
+.close-button:hover {
+  opacity: 1;
 }
 
 .dialogue-body {
@@ -64,15 +86,25 @@
 
 /* Responsive styles */
 @media screen and (max-width: 767px) {
+  .dialogue-backdrop {
+    align-items: center;
+  }
+
   .dialogue-content {
     width: 90%;
     max-width: 450px;
     max-height: 85vh;
+    margin: 10vh auto;
   }
 
   .dialogue-header {
     padding: 1.25rem;
     font-size: 1.2rem;
+  }
+
+  .close-button {
+    font-size: 1.3rem;
+    padding: 0.3rem;
   }
 
   .dialogue-body {
@@ -86,14 +118,23 @@
 }
 
 @media screen and (max-width: 480px) {
+  .dialogue-backdrop {
+    padding: 0 0.5rem;
+  }
+
   .dialogue-content {
     width: 95%;
     max-height: 90vh;
+    margin: 5vh auto;
   }
 
   .dialogue-header {
     padding: 1rem;
     font-size: 1.1rem;
+  }
+
+  .close-button {
+    font-size: 1.2rem;
   }
 
   .dialogue-body {

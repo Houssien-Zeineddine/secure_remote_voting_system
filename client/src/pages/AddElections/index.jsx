@@ -199,12 +199,12 @@ const AdminPage = () => {
               <tbody>
                 {candidates.map((candidate) => (
                   <tr key={candidate.id}>
-                    <td>
+                    <td data-label="Name">
                       {candidate.first_name} {candidate.middle_name}{" "}
                       {candidate.last_name}
                     </td>
-                    <td>{candidate.email}</td>
-                    <td>
+                    <td data-label="Email">{candidate.email}</td>
+                    <td data-label="Action">
                       <a
                         href="#remove"
                         onClick={(e) => {

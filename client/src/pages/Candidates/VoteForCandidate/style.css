@@ -8,6 +8,7 @@
     color: var(--primary-color);
     background-color: #f8f9fa;
     position: relative;
+    z-index: 0;
 }
 
 .candidates-container h1 {
@@ -93,6 +94,15 @@
     padding: 1rem 0;
 }
 
+.vote-view-details-btns button {
+    position: relative;
+    z-index: 2;
+}
+
+.vote-view-details-btns button:active {
+    transform: scale(0.98);
+}
+
 /* Scrollbar styling */
 .candidates-cards-container::-webkit-scrollbar {
     width: 8px;
@@ -132,12 +142,51 @@
     font-weight: 500;
 }
 
+/* Location status styling */
+.location-loading {
+    background-color: #e6f7ff;
+    color: #0070f3;
+    padding: 0.8rem;
+    border-radius: 6px;
+    margin-top: 1rem;
+    font-weight: 500;
+    text-align: center;
+    border: 1px solid #b3e0ff;
+    animation: pulse 1.5s infinite;
+}
+
+.location-error {
+    background-color: #fff2f0;
+    color: #ff4d4f;
+    padding: 0.8rem;
+    border-radius: 6px;
+    margin-top: 1rem;
+    font-weight: 500;
+    border: 1px solid #ffccc7;
+}
+
+/* Add pulse animation for loading state */
+@keyframes pulse {
+    0% {
+        opacity: 0.6;
+    }
+
+    50% {
+        opacity: 1;
+    }
+
+    100% {
+        opacity: 0.6;
+    }
+}
+
 .vote-status {
     margin: 1rem 0;
     padding: 1rem;
     border-radius: 8px;
     font-weight: 500;
     animation: fadeIn 0.3s ease-out;
+    text-align: center;
 }
 
 .vote-status.success {
@@ -202,6 +251,7 @@
 
     .vote-view-details-btns button {
         width: 100%;
+        padding: 0.75rem;
     }
 
     .vote-success-message {
@@ -233,6 +283,20 @@
     .candidate-card::before {
         height: 100px;
     }
+
+    .yes-no-btn-wrapper {
+        flex-direction: column;
+        width: 100%;
+        align-items: stretch;
+        gap: 0.8rem;
+    }
+
+    .location-loading,
+    .location-error,
+    .vote-status {
+        padding: 0.7rem;
+        font-size: 0.9rem;
+    }
 }
 
 @keyframes slideDown {
@@ -257,4 +321,9 @@
         opacity: 1;
         transform: translateY(0);
     }
+}
+
+/* Ensure dialogue appears above other elements */
+.MuiDialog-root {
+    z-index: 1500 !important;
 }
