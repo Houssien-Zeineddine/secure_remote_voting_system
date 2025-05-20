@@ -65,13 +65,13 @@ const Profile = () => {
       <div className="profile-container">
         {isEditing ? (
           <>
-            <div className="add-remove-photo-editing">
-              <div className="profile-header-wrapper">
-                <h1>Profile</h1>
-              </div>
-              <ImageUpload />
-            </div>
             <form onSubmit={handleSubmit} className="profile-form-container">
+              <div className="add-remove-photo-editing">
+                <div className="profile-header-wrapper">
+                  <h1>Profile</h1>
+                </div>
+                <ImageUpload />
+              </div>
               <Input
                 label="first_name"
                 labelText="First Name"
@@ -131,7 +131,7 @@ const Profile = () => {
                   type="submit"
                 />
               </div>
-            </form>{" "}
+            </form>
           </>
         ) : (
           <div className="view-mode">

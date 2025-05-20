@@ -92,14 +92,86 @@
     color: var(--primary-color);
     font-weight: var(--font-weight-medium);
     font-size: var(--font-size-header-4);
+    animation: fadeIn 0.8s ease-out forwards;
+    animation-delay: calc(0.1s * var(--index, 0));
+    opacity: 0;
+    position: relative;
+    height: 2rem;
+    padding-right: 60px;
+    /* Space for percentage text */
+}
+
+.bar-result-container:after {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    height: 2rem;
+    width: 100%;
+    background-color: rgba(0, 0, 0, 0.05);
+    border-radius: 100px;
+    z-index: 1;
 }
 
 .vote-bar {
     height: 2rem;
     background-color: var(--primary-color);
     border-radius: 100px;
-    width: var(--target-width);
-    animation: growBar 1s ease-out forwards;
+    width: 0;
+    animation: growBar 1.5s cubic-bezier(0.26, 0.86, 0.44, 0.985) forwards;
+    position: absolute;
+    left: 0;
+    top: 0;
+    overflow: hidden;
+    z-index: 2;
+}
+
+.vote-bar::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(90deg,
+            rgba(255, 255, 255, 0.1) 0%,
+            rgba(255, 255, 255, 0.2) 50%,
+            rgba(255, 255, 255, 0.1) 100%);
+    width: 75%;
+    height: 100%;
+    animation: shimmer 2s infinite;
+    transform: translateX(-100%);
+}
+
+@keyframes shimmer {
+    100% {
+        transform: translateX(150%);
+    }
+}
+
+@keyframes growBar {
+    from {
+        width: 0;
+    }
+
+    to {
+        width: var(--target-width);
+    }
+}
+
+.bar-result-container p {
+    min-width: 50px;
+    text-align: right;
+    font-weight: 600;
+    animation: countUp 2s forwards;
+    z-index: 3;
+    position: absolute;
+    right: 0;
+    top: 0;
+    margin: 0;
+    height: 2rem;
+    display: flex;
+    align-items: center;
 }
 
 /* statistics container */
@@ -121,6 +193,7 @@
 
 .statistics-container h4 {
     font-size: var(--font-size-header-4);
+    text-align: center;
 }
 
 .round-div {
@@ -240,18 +313,47 @@
     }
 
     .candidates-names {
-        width: 100%;
-        gap: 1.5rem;
-        margin-bottom: 1rem;
+        display: none;
     }
 
     .bar-result-container {
-        gap: 0.5rem;
-        margin-bottom: 0.5rem;
+        position: relative;
+        margin-bottom: 1.5rem;
+        padding-top: 1.5rem;
+        background: transparent;
+        height: auto;
+        padding-right: 0;
     }
 
-    .vote-bar {
+    .bar-result-container:before {
+        content: attr(data-name);
+        position: absolute;
+        top: 0;
+        left: 0;
+        font-weight: 600;
+        color: var(--primary-color);
+        font-size: 0.95rem;
+        margin-bottom: 0.3rem;
+    }
+
+    .bar-result-container .vote-bar {
+        position: absolute;
+        left: 0;
+        top: 1.5rem;
         height: 1.5rem;
+        width: var(--target-width) !important;
+        margin: 0;
+    }
+
+    .bar-result-container:after {
+        top: 1.5rem;
+        width: 100%;
+    }
+
+    .bar-result-container p {
+        top: 0;
+        right: 0;
+        height: auto;
     }
 
     .statistics-container {
@@ -317,6 +419,14 @@
     .statistics-container p {
         margin: 0.25rem 0;
     }
+
+    .bar-result-container:before {
+        font-size: 0.9rem;
+    }
+
+    .bar-result-container:after {
+        height: 1.2rem;
+    }
 }
 
 @media screen and (max-width: 360px) {
@@ -347,5 +457,19 @@
     .dashboard-live-results,
     .statistics-container {
         padding: 0.5rem;
+    }
+
+    .bar-result-container {
+        padding-top: 1.8rem;
+    }
+
+    .bar-result-container:before {
+        font-size: 0.85rem;
+    }
+
+    .bar-result-container .vote-bar,
+    .bar-result-container:after {
+        height: 1.2rem;
+        top: 1.8rem;
     }
 }

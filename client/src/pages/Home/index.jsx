@@ -13,6 +13,7 @@ import securedPlatform from "../../assets/web-security 2.svg";
 import realTimeResults from "../../assets/pie-chart 1.svg";
 import { AuthContext } from "../../components/Context/AuthorizationContext";
 import "./styles.css";
+import "./responsive.css";
 
 const Home = () => {
   const { user } = useContext(AuthContext);
