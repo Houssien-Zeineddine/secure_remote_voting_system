@@ -5,9 +5,9 @@
 <!-- project overview -->
 <img src="./readme/title2.svg"/>
 
-> This innovative project simulates a real-world election platform while tackling some of the most pressing challenges of our time—security, accessibility, and trust. With this system, users can cast their votes remotely in a manner that is not only secure but also transparent and efficient.
+> This innovative project revolutionizes the electoral process by decisively tackling the critical challenges of our time—security, accessibility, and trust. Our platform empowers users to vote remotely while guaranteeing the highest standards of security, transparency, and efficiency.
 >
-> What sets this system apart is its integration of cutting-edge AI technology to detect suspicious voting behavior and the use of geolocation to ensure that votes are cast from verified locations. Furthermore, we prioritize a seamless user experience, guiding individuals smoothly from the start to the finish of the voting process.
+> What sets this system apart is its cutting-edge integration of AI technology, expertly designed to detect and counter any suspicious voting behavior. Additionally, our geolocation features ensure that votes are cast from verified locations, reinforcing the integrity of the process. We are committed to delivering an outstanding user experience, guiding individuals confidently from start to finish in their voting journey. With this groundbreaking solution, we are not only redefining elections but also reigniting confidence and engagement among voters everywhere.
 
 <br><br>
 
@@ -30,12 +30,13 @@
 
 <!-- Project Highlights -->
 <img src="./readme/title4.svg"/>
+<img ser="./readme/project highlights image.png">
 
 ### A Secure, Smart, and Trustworthy Digital Voting Experience
 
-- **Secure Remote Voting:** Enables users to cast their votes safely from anywhere, with strong protections against tampering.
-- **AI-Powered Fraud Detection:** Leverages artificial intelligence to identify and flag suspicious or abnormal voting behavior in real time.
-- **Geolocation-Based Validation:** Ensures each vote originates from an authorized location, enhancing legitimacy and trust in the process.
+- **Secure Remote Voting:** Cast your vote with confidence from anywhere in the world, thanks to our cutting-edge security measures designed to protect your voice against tampering.
+- **AI-Powered Fraud Detection:** By harnessing the power of artificial intelligence, our system diligently monitors voting patterns to swiftly identify and flag any suspicious activities. This proactive approach guarantees the integrity of the electoral process, safeguarding the foundation of our democracy.
+- **Geolocation-Based Validation:** Our innovative solution ensures that each vote is cast from an authorized location, enhancing the legitimacy of every ballot and fostering an unwavering trust in the democratic process.
 
 <br><br>
 
@@ -90,10 +91,23 @@
 
 ### Add Title Here
 
-- Description here.
+<!-- - Description here.
 
 | Postman API 1                           | Postman API 2                         | Postman API 3                         |
 | --------------------------------------- | ------------------------------------- | ------------------------------------- |
-| ![Landing](./readme/demo/1440x1024.png) | ![fsdaf](./readme/demo/1440x1024.png) | ![fsdaf](./readme/demo/1440x1024.png) |
+| ![Landing](./readme/demo/1440x1024.png) | ![fsdaf](./readme/demo/1440x1024.png) | ![fsdaf](./readme/demo/1440x1024.png) | -->
+
+<br><br>
+
+<!-- Deployment -->
+<img src="./readme/title8.svg"/>
+
+### API Showcase
+
+- Explore the key API endpoints powering the system, including authentication, candidate management, and secure data access. Below are sample screenshots and descriptions of three primary API operations:
+
+| Login API                                           | Get Candidates API                                     | Add Candidate API (Admin Only)                        |
+| --------------------------------------------------- | ------------------------------------------------------ | ----------------------------------------------------- |
+| ![Landing](./readme/postman%20apis/login%20api.png) | ![fsdaf](./readme/postman%20apis/get%20candidates.png) | ![fsdaf](./readme/postman%20apis/add%20candidate.png) |
 
 <br><br>
