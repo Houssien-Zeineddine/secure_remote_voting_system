@@ -83,9 +83,9 @@
 
 ### Some Code Snippets!
 
-| Analyze Vote behavior (using AI and prismphp)                       | Edit Profile Backend Validation                                              | Register Login Testing                                         |
-| ------------------------------------------------------------------- | ---------------------------------------------------------------------------- | -------------------------------------------------------------- |
-| ![Landing](./readme/code%20snippets/analyze%20vote%20behaviour.png) | ![fsdaf](./readme/code%20snippets/edit%20profile%20backend%20validation.png) | ![fsdaf](./readme/code%20snippets/register%20login%20test.png) |
+| Get Stats Service (Dashboard)                                | Edit Profile Backend Validation                                              | Register Login Testing                                         |
+| ------------------------------------------------------------ | ---------------------------------------------------------------------------- | -------------------------------------------------------------- |
+| ![Landing](./readme/code%20snippets/Dashboard%20service.png) | ![fsdaf](./readme/code%20snippets/edit%20profile%20backend%20validation.png) | ![fsdaf](./readme/code%20snippets/register%20login%20test.png) |
 
 <br><br>
 
