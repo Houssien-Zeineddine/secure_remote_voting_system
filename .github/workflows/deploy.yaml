@@ -169,6 +169,8 @@ jobs:
 
             echo "${{ secrets.DOCKERHUB_TOKEN }}" | docker login -u "${{ secrets.DOCKERHUB_USERNAME }}" --password-stdin
 
+            sudo usermod -aG docker $USER
+
             docker compose pull
 
             docker compose down
