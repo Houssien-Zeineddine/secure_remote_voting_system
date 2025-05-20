@@ -62,7 +62,6 @@ const ImageUpload = () => {
         }
       }
     } catch (error) {
-      console.error("Upload failed:", error);
       const currentProfilePic = user?.profile_picture_path
         ? getProfilePictureUrl(user.profile_picture_path)
         : defaultImage;
