@@ -130,12 +130,10 @@
 
 <br>
 
-- **AI Behavioral Analysis**
+- **Based on the AI's assessment:**
 
-For geolocation-valid votes, our AI model, utilizing the Prism PHP framework, conducts an in-depth analysis of voter behavior. It confidently constructs a context-aware prompt that considers:
-
-- The number of votes a user has cast in the last 10 minutes
-- The exact time of voting.
+  - When a vote is classified as counted, it is confidently stored in the CountedVotes table.
+  - When a vote is identified as malicious, it is confidently recorded in the MaliciousVotes table, accompanied by the rationale provided by AI.
 
 | Postman API 1                           |
 | --------------------------------------- |
