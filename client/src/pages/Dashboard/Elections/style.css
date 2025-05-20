@@ -193,6 +193,7 @@
 
 .statistics-container h4 {
     font-size: var(--font-size-header-4);
+    text-align: center;
 }
 
 .round-div {
