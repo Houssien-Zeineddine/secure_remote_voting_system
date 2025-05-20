@@ -157,9 +157,9 @@
 | ------------------------------------------------------ | ----------------------------------------------------------------- |
 | ![Landing](./readme/code%20snippets/filter%20vote.png) | ![fsdaf](./readme/code%20snippets/analyze%20vote%20behaviour.png) |
 
-| Successfull Vote                                       | Malicious Vote Detection                                       |
-| ------------------------------------------------------ | -------------------------------------------------------------- |
-| ![Landing](./readme/gifs/successful%20vote%20gif'.gif) | ![fsdaf](./readme/gifs/malicious%20vote%20detection%20gif.gif) |
+| Fallback Vote Analysis Function                                                      | Malicious Vote Detection                                       |
+| ------------------------------------------------------------------------------------ | -------------------------------------------------------------- |
+| ![Landing](./readme/code%20snippets/fallback%20function%20incase%20ai%20crashed.png) | ![fsdaf](./readme/gifs/malicious%20vote%20detection%20gif.gif) |
 
 <br><br>
 
