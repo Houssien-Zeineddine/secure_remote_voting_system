@@ -17,7 +17,6 @@ export const CheckElectionsProvider = ({ children }) => {
 
       if (elections && elections.id) {
         setOngoingActiveElections(elections);
-        console.log("from fetch elections context", elections);
       } else {
         setOngoingActiveElections(null);
       }
@@ -32,7 +31,6 @@ export const CheckElectionsProvider = ({ children }) => {
       // };
       // return null;}
     } catch (error) {
-      console.error("Error fetching elections:", error);
       setOngoingActiveElections(null);
     }
   };
