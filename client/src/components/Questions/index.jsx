@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-import collapse from "../../assets/Shape.svg";
 import expand from "../../assets/expand.svg";
+import collapse from "../../assets/Shape.svg";
 import "./style.css";
 
 const Questions = () => {
