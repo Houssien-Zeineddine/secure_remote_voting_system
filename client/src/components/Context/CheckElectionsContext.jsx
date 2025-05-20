@@ -20,16 +20,6 @@ export const CheckElectionsProvider = ({ children }) => {
       } else {
         setOngoingActiveElections(null);
       }
-      //expecting calling API to get elections name if exist, or null if not
-
-      // return {
-      //   id: 1,
-      //   region: "Beirut", //in elections table region_id, not to get it when calling the api
-      //   title: "Municipality Elections",
-      //   description: "description",
-      //   ongoing: true,
-      // };
-      // return null;}
     } catch (error) {
       setOngoingActiveElections(null);
     }
@@ -38,12 +28,6 @@ export const CheckElectionsProvider = ({ children }) => {
   useEffect(() => {
     fetchElections();
   }, []);
-
-  // if (ongoingActiveElections) {
-  //   setOngoingActiveElections(ongoingActiveElections);
-  // } else {
-  //   setOngoingActiveElections(null);
-  // }
 
   return (
     <CheckElectionsContext.Provider
