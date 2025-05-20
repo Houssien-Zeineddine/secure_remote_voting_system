@@ -139,11 +139,11 @@
 
   In the event of an AI request failure—whether from rate limiting or unforeseen errors—the system will confidently revert to a robust fallback heuristic. This guarantees that the service remains stable, preventing any disruptions to the voting process.
 
-- **The fallback employs two definitive rules**
+  - **The fallback employs two definitive rules**
 
-  - High-Frequency Detection: Any user casting more than 5 votes within a span of 10 minutes triggers a flag.
+    - High-Frequency Detection: Any user casting more than 5 votes within a span of 10 minutes triggers a flag.
 
-  - Odd-Hour Activity: Voting attempts occurring between 12:00 AM and 5:00 AM are scrutinized closely.
+    - Odd-Hour Activity: Voting attempts occurring between 12:00 AM and 5:00 AM are scrutinized closely.
 
 Any violations of these patterns mark the vote as malicious with clear reasoning, while otherwise, the vote is accepted as valid.
 
