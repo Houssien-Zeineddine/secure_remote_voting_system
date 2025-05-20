@@ -30,6 +30,7 @@
 
 <!-- Project Highlights -->
 <img src="./readme/title4.svg"/>
+<br>
 <img src="./readme/project highlights image.png">
 
 ### A Secure, Smart, and Trustworthy Digital Voting Experience
