@@ -223,3 +223,41 @@
         font-size: 0.8rem;
     }
 }
+
+.along-sidebar-positioning {
+    position: relative;
+    left: 19rem;
+    width: calc(100% - 19rem);
+    height: calc(100vh - 6rem);
+    transition: all 0.3s ease;
+}
+
+@media screen and (max-width: 767px) {
+    .along-sidebar-positioning {
+        left: 0;
+        width: 100%;
+        padding: 1rem;
+    }
+
+    .guidelines-container {
+        padding: 1rem 0;
+    }
+
+    .guidelines-and-image {
+        flex-direction: column-reverse;
+        gap: 2rem;
+    }
+
+    .guidelines-list-text {
+        width: 100%;
+    }
+
+    .checklist-image {
+        width: 70%;
+        margin: 0 auto;
+    }
+
+    .guidelines-box {
+        padding: 0.8rem;
+    }
+}

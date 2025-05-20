@@ -27,7 +27,7 @@
     justify-content: space-between;
     align-items: center;
     background-color: white;
-    box-shadow: -8px -8px 15px rgba(255, 255, 255, 0.1), 5px 5px 15px rgba(0, 0, 0, 0.2);   
+    box-shadow: -8px -8px 15px rgba(255, 255, 255, 0.1), 5px 5px 15px rgba(0, 0, 0, 0.2);
     padding: 2rem;
     border-radius: 10px;
     animation: slideIn 0.6s ease-out;
@@ -61,12 +61,12 @@
     height: calc(50% - 1rem);
     overflow-y: auto;
     overflow-y: auto;
-    scrollbar-width: none; 
-    -ms-overflow-style: none;  
+    scrollbar-width: none;
+    -ms-overflow-style: none;
 }
 
 .dashboard-live-results::-webkit-scrollbar {
-  display: none;
+    display: none;
 }
 
 .candidates-names {
@@ -175,5 +175,110 @@
 
     100% {
         transform: rotate(360deg);
+    }
+}
+
+/* Responsive styles */
+@media screen and (max-width: 1024px) {
+    .elections-dashboard-container {
+        padding: 1.5rem;
+        gap: 1.5rem;
+    }
+
+    .dashboard-description-container {
+        padding: 1.5rem;
+    }
+
+    .dashboard-description h2 {
+        font-size: 2rem;
+    }
+
+    .dashboard-live-results,
+    .statistics-container {
+        padding: 1.5rem;
+    }
+}
+
+@media screen and (max-width: 767px) {
+    .elections-dashboard-container {
+        flex-direction: column;
+        padding: 1rem;
+        gap: 1rem;
+        overflow-y: auto;
+        height: auto;
+        min-height: calc(100vh - 8rem);
+    }
+
+    .description-live-results-container {
+        height: auto;
+    }
+
+    .dashboard-description-container {
+        height: auto;
+        padding: 1rem;
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .dashboard-description-container img {
+        width: 60%;
+        margin-top: 1rem;
+    }
+
+    .dashboard-description {
+        align-items: center;
+    }
+
+    .dashboard-live-results {
+        height: auto;
+        padding: 1rem;
+        flex-direction: column;
+    }
+
+    .bars-container {
+        width: 100%;
+    }
+
+    .candidates-names {
+        width: 100%;
+        gap: 1.5rem;
+    }
+
+    .bar-result-container {
+        gap: 0.5rem;
+    }
+
+    .vote-bar {
+        height: 1.5rem;
+    }
+
+    .statistics-container {
+        padding: 1rem;
+        height: auto;
+    }
+
+    .round-div {
+        height: 6rem;
+        width: 6rem;
+        font-size: 1.8rem;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .dashboard-description h2 {
+        font-size: 1.5rem;
+    }
+
+    .dashboard-description h4,
+    .candidates-names,
+    .bar-result-container,
+    .statistics-container h4 {
+        font-size: 1.2rem;
+    }
+
+    .round-div {
+        height: 5rem;
+        width: 5rem;
+        font-size: 1.5rem;
     }
 }

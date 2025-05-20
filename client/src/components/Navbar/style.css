@@ -78,7 +78,6 @@
 
 .nav-link.active a {
     font-weight: bold;
-
     border-bottom: 2px solid currentColor;
     padding-bottom: 4px;
 }
@@ -148,6 +147,7 @@
         padding: 2rem;
         transition: all 0.3s ease-in-out;
         box-shadow: -5px 0 15px rgba(0, 0, 0, 0.1);
+        z-index: 1010;
     }
 
     .navbar-logo {
@@ -229,5 +229,11 @@
     .nav-btn button {
         padding: 0.6rem 1.2rem;
         font-size: 0.9rem;
+    }
+
+    /* Better positioning for mobile sidebar trigger when navbar is smaller */
+    .mobile-trigger {
+        bottom: 1.5rem;
+        left: 1.5rem;
     }
 }

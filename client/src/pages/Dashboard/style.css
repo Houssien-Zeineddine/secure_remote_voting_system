@@ -3,4 +3,13 @@
     left: 19rem;
     width: calc(100% - 19rem);
     height: calc(100vh - 6rem);
+    transition: all 0.3s ease;
+}
+
+@media screen and (max-width: 767px) {
+    .along-sidebar-positioning {
+        left: 0;
+        width: 100%;
+        padding: 1rem;
+    }
 }
