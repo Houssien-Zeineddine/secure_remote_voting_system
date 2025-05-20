@@ -81,7 +81,7 @@
 <!-- Development & Testing -->
 <img src="./readme/title6.svg"/>
 
-### Add Title Here
+### Some Code Snippets!
 
 | Analyze Vote behavior (using AI and prismphp)                       | Edit Profile Backend Validation                                              | Register Login Testing                                         |
 | ------------------------------------------------------------------- | ---------------------------------------------------------------------------- | -------------------------------------------------------------- |
