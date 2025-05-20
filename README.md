@@ -117,8 +117,27 @@
   - The number of votes a user has cast in the last 10 minutes
   - The exact time of voting.
 
-This prompt is then submitted to OpenAI's GPT-4o model, adhering to a strict schema that expects two keys: status (counted or malicious) and result (detailed explanation).
-| Postman API 1 |
+- **AI Behavioral Analysis**
+
+  For geolocation-valid votes, our AI model, utilizing the Prism PHP framework, conducts an in-depth analysis of voter behavior. It confidently constructs a context-aware prompt that considers:
+
+  - The number of votes a user has cast in the last 10 minutes
+  - The exact time of voting.
+
+<br>
+
+**This prompt is then submitted to OpenAI's GPT-4o model, adhering to a strict schema that expects two keys: status (counted or malicious) and result (detailed explanation).**
+
+<br>
+
+- **AI Behavioral Analysis**
+
+For geolocation-valid votes, our AI model, utilizing the Prism PHP framework, conducts an in-depth analysis of voter behavior. It confidently constructs a context-aware prompt that considers:
+
+- The number of votes a user has cast in the last 10 minutes
+- The exact time of voting.
+
+| Postman API 1                           |
 | --------------------------------------- |
 | ![Landing](./readme/demo/1440x1024.png) |
 
