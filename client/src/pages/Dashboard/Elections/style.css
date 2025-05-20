@@ -289,13 +289,11 @@
     }
 
     .bar-result-container {
-        display: grid;
-        grid-template-columns: minmax(100px, 1fr) 3fr 50px;
-        align-items: center;
-        gap: 0.75rem;
+        display: flex;
+        flex-wrap: wrap;
+        padding: 0.75rem 0.5rem;
         margin-bottom: 1rem;
         position: relative;
-        padding: 0.5rem;
         border-radius: 8px;
         background-color: rgba(255, 255, 255, 0.5);
         box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
@@ -309,27 +307,25 @@
 
     .bar-result-container:before {
         content: attr(data-name);
-        grid-column: 1;
-        grid-row: 1;
+        flex: 1 0 100%;
+        margin-bottom: 0.5rem;
+        white-space: normal;
+        overflow: visible;
         font-weight: var(--font-weight-medium);
         color: var(--primary-color);
-        overflow: hidden;
-        text-overflow: ellipsis;
-        white-space: nowrap;
-        min-width: 100px;
-        padding-right: 0.5rem;
+        font-size: 0.95rem;
     }
 
     .bar-result-container .vote-bar {
-        grid-column: 2;
-        grid-row: 1;
+        flex: 1 1 auto;
         height: 1.5rem;
         width: 0;
+        margin-right: 0.5rem;
     }
 
     .bar-result-container p {
-        grid-column: 3;
-        grid-row: 1;
+        flex: 0 0 auto;
+        min-width: 45px;
         font-weight: 600;
         margin: 0;
     }
@@ -355,32 +351,6 @@
         width: 100%;
         max-width: 200px;
         margin-top: 0.5rem;
-    }
-}
-
-@media screen and (max-width: 576px) {
-    .bar-result-container {
-        display: flex;
-        flex-wrap: wrap;
-        padding: 0.75rem 0.5rem;
-    }
-
-    .bar-result-container:before {
-        flex: 1 0 100%;
-        margin-bottom: 0.5rem;
-        white-space: normal;
-        overflow: visible;
-        font-size: 0.9rem;
-    }
-
-    .vote-bar {
-        flex: 1 1 auto;
-        margin-right: 0.5rem;
-    }
-
-    .bar-result-container p {
-        flex: 0 0 auto;
-        min-width: 45px;
     }
 }
 
@@ -436,10 +406,6 @@
     }
 
     .bar-result-container:before {
-        flex: 1 0 100%;
-        margin-bottom: 0.5rem;
-        white-space: normal;
-        overflow: visible;
         font-size: 0.9rem;
     }
 
