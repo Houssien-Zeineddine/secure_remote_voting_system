@@ -259,16 +259,16 @@ const AdminPage = () => {
             >
               <div className="yes-no-btn-wrapper">
                 <Button
-                  text="Yes"
-                  variant="white"
-                  size="small"
-                  onClick={handleConfirmStopElections}
-                />
-                <Button
                   text="No"
                   variant="red"
                   size="small"
                   onClick={closeStopElectionsDialogue}
+                />
+                <Button
+                  text="Yes"
+                  variant="white"
+                  size="small"
+                  onClick={handleConfirmStopElections}
                 />
               </div>
             </Dialogue>
