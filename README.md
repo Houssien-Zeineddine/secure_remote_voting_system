@@ -68,8 +68,6 @@
 | -------------------------------------------------- | ------------------------------------------------------- |
 | ![Landing](./readme/demo/malicious%20vote.png)     | ![fsdaf](./readme/demo/malicious%20vote%20location.png) |
 
-### Interactive Walkthrough
-
 | Landing Page Demo                                  | Login Demo                              |
 | -------------------------------------------------- | --------------------------------------- |
 | ![Landing](./readme/gifs/landing%20page%20gif.gif) | ![fsdaf](./readme/gifs/Login%20gif.gif) |
