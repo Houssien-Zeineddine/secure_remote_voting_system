@@ -101,12 +101,12 @@
 <!-- Deployment -->
 <img src="./readme/title8.svg"/>
 
-### Add Title Here
+### API Showcase
 
-- Description here.
+- Explore the key API endpoints powering the system, including authentication, candidate management, and secure data access. Below are sample screenshots and descriptions of three primary API operations:
 
-| Postman API 1                           | Postman API 2                         | Postman API 3                         |
-| --------------------------------------- | ------------------------------------- | ------------------------------------- |
-| ![Landing](./readme/demo/1440x1024.png) | ![fsdaf](./readme/demo/1440x1024.png) | ![fsdaf](./readme/demo/1440x1024.png) |
+| Login API                                           | Get Candidates API                                     | Add Candidate API (Admin Only)                        |
+| --------------------------------------------------- | ------------------------------------------------------ | ----------------------------------------------------- |
+| ![Landing](./readme/postman%20apis/login%20api.png) | ![fsdaf](./readme/postman%20apis/get%20candidates.png) | ![fsdaf](./readme/postman%20apis/add%20candidate.png) |
 
 <br><br>
