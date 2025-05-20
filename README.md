@@ -153,7 +153,7 @@
 
 <br>
 
-| Filter Vote Function                                   | Analyze Vote Behavior (PrismPHP) Demo                             |
+| Filter Vote                                            | Analyze Vote Behavior (PrismPHP) Demo                             |
 | ------------------------------------------------------ | ----------------------------------------------------------------- |
 | ![Landing](./readme/code%20snippets/filter%20vote.png) | ![fsdaf](./readme/code%20snippets/analyze%20vote%20behaviour.png) |
 
