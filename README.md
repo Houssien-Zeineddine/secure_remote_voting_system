@@ -64,11 +64,9 @@
 | -------------------------------------------- | -------------------------------------- |
 | ![Landing](./readme/demo/landing%20page.png) | ![fsdaf](./readme//demo/dashboard.png) |
 
-| Malicious Vote Detected (Malicious User Behaviour) | Malicious Vote (Outside Region)                         |
-| -------------------------------------------------- | ------------------------------------------------------- |
-| ![Landing](./readme/demo/malicious%20vote.png)     | ![fsdaf](./readme/demo/malicious%20vote%20location.png) |
-
-### Interactive Walkthrough
+| Malicious Vote Detected (Malicious User Behavior) | Malicious Vote (Outside Region)                         |
+| ------------------------------------------------- | ------------------------------------------------------- |
+| ![Landing](./readme/demo/malicious%20vote.png)    | ![fsdaf](./readme/demo/malicious%20vote%20location.png) |
 
 | Landing Page Demo                                  | Login Demo                              |
 | -------------------------------------------------- | --------------------------------------- |
@@ -83,24 +81,85 @@
 <!-- Development & Testing -->
 <img src="./readme/title6.svg"/>
 
-### Add Title Here
+### Some Code Snippets!
 
-| Services                                | Validation                            | Testing                               |
-| --------------------------------------- | ------------------------------------- | ------------------------------------- |
-| ![Landing](./readme/demo/1440x1024.png) | ![fsdaf](./readme/demo/1440x1024.png) | ![fsdaf](./readme/demo/1440x1024.png) |
+| Get Stats Service (Dashboard)                                | Edit Profile Backend Validation                                              | Register Login Testing                                         |
+| ------------------------------------------------------------ | ---------------------------------------------------------------------------- | -------------------------------------------------------------- |
+| ![Landing](./readme/code%20snippets/Dashboard%20service.png) | ![fsdaf](./readme/code%20snippets/edit%20profile%20backend%20validation.png) | ![fsdaf](./readme/code%20snippets/register%20login%20test.png) |
 
 <br><br>
 
-<!-- Deployment -->
+### Some Code Snippets!
+
+| Working Pipeline                                |
+| ----------------------------------------------- |
+| ![Landing](./readme/working%20pipeline%201.png) |
+
+<br><br>
+
+<!-- AI-Powered App -->
 <img src="./readme/title7.svg"/>
 
-### Add Title Here
+### AI-Powered Vote Validation
 
-<!-- - Description here.
+- **How it Works**
 
-| Postman API 1                           | Postman API 2                         | Postman API 3                         |
-| --------------------------------------- | ------------------------------------- | ------------------------------------- |
-| ![Landing](./readme/demo/1440x1024.png) | ![fsdaf](./readme/demo/1440x1024.png) | ![fsdaf](./readme/demo/1440x1024.png) | -->
+  To guarantee the integrity of the remote voting process, this system confidently utilizes AI to swiftly detect and filter out any suspicious or potentially malicious votes in real time.
+
+- **Geolocation Validation**
+
+  Each vote undergoes rigorous verification against the election region’s established geofence utilizing the Haversine formula. If a voter's latitude and longitude fall outside the designated radius, the vote is promptly flagged as malicious and recorded with the reason: “Location outside election region.”
+
+- **AI Behavioral Analysis**
+
+  For geolocation-valid votes, our AI model, utilizing the Prism PHP framework, conducts an in-depth analysis of voter behavior. It confidently constructs a context-aware prompt that considers:
+
+  - The number of votes a user has cast in the last 10 minutes
+  - The exact time of voting.
+
+- **AI Behavioral Analysis**
+
+  For geolocation-valid votes, our AI model, utilizing the Prism PHP framework, conducts an in-depth analysis of voter behavior. It confidently constructs a context-aware prompt that considers:
+
+  - The number of votes a user has cast in the last 10 minutes
+  - The exact time of voting.
+
+<br>
+
+**This prompt is then submitted to OpenAI's GPT-4o model, adhering to a strict schema that expects two keys: status (counted or malicious) and result (detailed explanation).**
+
+<br>
+
+- **Based on the AI's assessment**
+
+  - When a vote is classified as counted, it is confidently stored in the CountedVotes table.
+  - When a vote is identified as malicious, it is confidently recorded in the MaliciousVotes table, accompanied by the rationale provided by AI.
+
+- **Failsafe: Smart Fallback Logic**
+
+  In the event of an AI request failure—whether from rate limiting or unforeseen errors—the system will confidently revert to a robust fallback heuristic. This guarantees that the service remains stable, preventing any disruptions to the voting process.
+
+  - **The fallback employs two definitive rules**
+
+    - High-Frequency Detection: Any user casting more than 5 votes within a span of 10 minutes triggers a flag.
+
+    - Odd-Hour Activity: Voting attempts occurring between 12:00 AM and 5:00 AM are scrutinized closely.
+
+    <br>
+
+**Any deviation from these established patterns will categorize the vote as malicious, backed by clear reasoning; otherwise, the vote will be recognized as valid.**
+
+**This robust validation mechanism not only bolsters trust and security but also guarantees high availability through effective error handling, ensuring the system remains reliable in all conditions.**
+
+<br>
+
+| Filter Vote                                            | Analyze Vote Behavior (PrismPHP) Demo                             |
+| ------------------------------------------------------ | ----------------------------------------------------------------- |
+| ![Landing](./readme/code%20snippets/filter%20vote.png) | ![fsdaf](./readme/code%20snippets/analyze%20vote%20behaviour.png) |
+
+| Fallback Vote Analysis Function                                                      | Haversine Distance Calculation Function                                |
+| ------------------------------------------------------------------------------------ | ---------------------------------------------------------------------- |
+| ![Landing](./readme/code%20snippets/fallback%20function%20incase%20ai%20crashed.png) | ![fsdaf](./readme/code%20snippets/haversine%20distance%20function.png) |
 
 <br><br>
 
