@@ -106,9 +106,12 @@
   > To guarantee the integrity of the remote voting process, this system confidently utilizes AI to swiftly detect and filter out any suspicious or potentially malicious votes in real time.
 - **Geolocation Validation**
   > Each vote undergoes rigorous verification against the election region’s established geofence utilizing the Haversine formula. If a voter's latitude and longitude fall outside the designated radius, the vote is promptly flagged as malicious and recorded with the reason: “Location outside election region.”
-- **Geolocation-Based Validation:** Our innovative solution ensures that each vote is cast from an authorized location, enhancing the legitimacy of every ballot and fostering an unwavering trust in the democratic process.
+- **AI Behavioral Analysis**
 
-| Postman API 1                           |
+  > For geolocation-valid votes, our AI model, utilizing the Prism PHP framework, conducts an in-depth analysis of voter behavior. It confidently constructs a context-aware prompt that considers the number of votes a user has cast in the last 10 minutes, and the exact time of voting.
+
+This prompt is then submitted to OpenAI's GPT-4o model, adhering to a strict schema that expects two keys: status (counted or malicious) and result (detailed explanation).
+| Postman API 1 |
 | --------------------------------------- |
 | ![Landing](./readme/demo/1440x1024.png) |
 
