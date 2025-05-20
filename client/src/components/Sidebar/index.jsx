@@ -4,11 +4,9 @@ import { AuthContext } from "../Context/AuthorizationContext";
 import { CheckElectionsContext } from "../Context/CheckElectionsContext";
 import vote from "../../assets/sidebar icons/white icons/vote icon.svg";
 import blueVote from "../../assets/sidebar icons/blue icons/vote icon.svg";
-import settings from "../../assets/sidebar icons/white icons/settings icon.svg";
 import guidelines from "../../assets/sidebar icons/white icons/guidelines icon.svg";
 import viewProfile from "../../assets/sidebar icons/white icons/profile icon.svg";
 import addElections from "../../assets/sidebar icons/white icons/plus icon.svg";
-import blueSettings from "../../assets/sidebar icons/blue icons/settings icon.svg";
 import defaultImage from "../../assets/sidebar icons/default profile picture.jpg";
 import dashboardIcon from "../../assets/sidebar icons/white icons/dashboard icon.svg";
 import blueGuidelines from "../../assets/sidebar icons/blue icons/guidelines icon.svg";
@@ -130,18 +128,6 @@ const Sidebar = () => {
             alt=""
           />
           <p className="sidebar-tag">Guidelines</p>
-        </Link>
-        <Link
-          to="/settings"
-          className={
-            location === "/settings" ? "sidebar-link-current" : "sidebar-link"
-          }
-        >
-          <img
-            src={location === "/settings" ? settings : blueSettings}
-            alt=""
-          />
-          <p className="sidebar-tag">Settings</p>
         </Link>
       </div>
     </div>

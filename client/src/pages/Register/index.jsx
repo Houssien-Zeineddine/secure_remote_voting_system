@@ -37,15 +37,10 @@ const Register = () => {
       return;
     }
 
-    console.log(userData);
-
     try {
       const response = await axiosInstance.post("guest/register", userData);
       navigate("/login");
-      console.log(response.data);
     } catch (err) {
-      console.error(err);
-
       if (err.response && err.response.data) {
         const { message, errors } = err.response.data;
 

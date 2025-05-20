@@ -15,7 +15,6 @@ export const FetchCandidatesProvider = ({ children }) => {
         headers: { Authorization: `Bearer ${access_token}` },
       });
 
-      console.log("from fetchcandiates context ", response.data);
       setCandidates(response.data);
     } catch (error) {
       return error;

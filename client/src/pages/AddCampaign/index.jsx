@@ -4,16 +4,15 @@ import Dialogue from "../../components/Dialogue";
 import addCampaign from "../../assets/plus (1) 1.svg";
 import { AuthContext } from "../../components/Context/AuthorizationContext";
 import { CheckCampaignContext } from "../../components/Context/CheckCampaignContext";
-import { FetchCandidatesContext } from "../../components/Context/FetchCandidatesContext";
 import { CheckElectionsContext } from "../../components/Context/CheckElectionsContext";
 import { capitalizeFirstLetter } from "../../Utils/helpers";
-import "./style.css";
 import axiosInstance from "../../Utils/axios";
+import "./style.css";
 
 const AddCampaign = () => {
   const { user } = useContext(AuthContext);
-  const { campaigns, fetchCampaigns } = useContext(CheckCampaignContext);
   const { ongoingActiveElections } = useContext(CheckElectionsContext);
+  const { campaigns, fetchCampaigns } = useContext(CheckCampaignContext);
 
   const [isAddCampaignOpen, setIsAddCampaignOpen] = useState(false);
   const [isEditCampaignOpen, setIsEditCampaignOpen] = useState(false);
@@ -49,8 +48,6 @@ const AddCampaign = () => {
       }
     }
   }, [user, campaigns]);
-
-  console.log("editing campaign t4ext", editingCampaignText);
 
   const handleAddCampaign = async () => {
     try {
@@ -137,7 +134,9 @@ const AddCampaign = () => {
       ) : (
         <div className="create-elections-container">
           <h1>Add Campaign</h1>
-          <p className="guide-text">Click the plus icon below to create your campaign platform</p>
+          <p className="guide-text">
+            Click the plus icon below to create your campaign platform
+          </p>
           <img
             src={addCampaign}
             alt="Add Campaign"
@@ -166,7 +165,10 @@ const AddCampaign = () => {
                 <li>Your experience and qualifications</li>
                 <li>How you plan to address community needs</li>
               </ul>
-              <p className="tip-text">Tip: Be specific and clear about your plans to help voters understand your platform better.</p>
+              <p className="tip-text">
+                Tip: Be specific and clear about your plans to help voters
+                understand your platform better.
+              </p>
             </div>
             <textarea
               className="create-elections-textarea"

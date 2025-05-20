@@ -1,11 +1,10 @@
 import React, { useContext, useRef, useState, useEffect } from "react";
-import defaultImage from "../../assets/sidebar icons/default profile picture.jpg";
 import editIcon from "../../assets/image-edit.svg";
-import uploadingAnimation from "../../assets/Cloud uploading.gif";
-import "./style.css";
-import { AuthContext } from "../Context/AuthorizationContext";
+import defaultImage from "../../assets/sidebar icons/default profile picture.jpg";
 import axiosInstance from "../../Utils/axios";
 import getProfilePictureUrl from "../../Utils/helpers";
+import { AuthContext } from "../Context/AuthorizationContext";
+import "./style.css";
 
 const ImageUpload = () => {
   const { user, setUser } = useContext(AuthContext);
@@ -62,7 +61,6 @@ const ImageUpload = () => {
         }
       }
     } catch (error) {
-      console.error("Upload failed:", error);
       const currentProfilePic = user?.profile_picture_path
         ? getProfilePictureUrl(user.profile_picture_path)
         : defaultImage;
