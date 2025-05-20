@@ -91,9 +91,9 @@
 
 ### Some Code Snippets!
 
-| Working Pipeline                            |
-| ------------------------------------------- |
-| ![Landing](./readme/working%20pipeline.png) |
+| Working Pipeline                                |
+| ----------------------------------------------- |
+| ![Landing](./readme/working%20pipeline%201.png) |
 
 <br><br>
 
