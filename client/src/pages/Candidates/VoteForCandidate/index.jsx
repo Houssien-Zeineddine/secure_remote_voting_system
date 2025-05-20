@@ -59,7 +59,12 @@ const VoteForCandidate = () => {
   };
 
   const handleVote = async () => {
+    if (isGettingLocation) return; // Prevent multiple clicks
+
     try {
+      setIsGettingLocation(true);
+      setLocationError(null);
+
       const location = await getCurrentLocation();
 
       const voteData = {
@@ -95,13 +100,19 @@ const VoteForCandidate = () => {
         }, 2000);
       }
     } catch (error) {
+      console.error("Voting error:", error);
       setLocationError(error.message || "Failed to verify your location");
+    } finally {
+      setIsGettingLocation(false);
     }
   };
 
   const openVoteToCandidateDialog = (candidate) => {
     setSelectedCandidate(candidate);
     setIsVoteToCandidateOpen(true);
+    // Reset any previous errors or status
+    setLocationError(null);
+    setVoteStatus({ message: "", type: "" });
   };
 
   const closeVoteToCandidateDialog = () => {
@@ -109,6 +120,7 @@ const VoteForCandidate = () => {
     setIsVoteToCandidateOpen(false);
     setVoteStatus({ message: "", type: "" });
     setLocationError(null);
+    setIsGettingLocation(false);
   };
 
   const getCandidateWithCampaign = (candidate) => {
@@ -130,47 +142,50 @@ const VoteForCandidate = () => {
   };
 
   return (
-    <div className="candidates-container">
-      {voteStatus.type === "success" && !isVoteToCandidateOpen && (
-        <div className="vote-success-message">
-          <p>{voteStatus.message}</p>
-        </div>
-      )}
-      <h1>Vote for your Preferred Candidate</h1>
-      <div className="candidates-cards-container">
-        {candidates.map((candidate, index) => (
-          <div key={index} className="candidate-card">
-            <img
-              src={
-                candidate.profile_picture_path
-                  ? getProfilePictureUrl(candidate.profile_picture_path)
-                  : defaultProfilePicture
-              }
-              alt=""
-            />
-            <h2>
-              {capitalizeFirstLetter(candidate.first_name)}{" "}
-              {capitalizeFirstLetter(candidate.middle_name)}{" "}
-              {capitalizeFirstLetter(candidate.last_name)}
-            </h2>
-            <div className="vote-view-details-btns">
-              <Button
-                text="Vote"
-                variant="blue"
-                size="small"
-                onClick={() => openVoteToCandidateDialog(candidate)}
-              />
-              <Button
-                text="View Details"
-                variant="white"
-                size="small"
-                onClick={() => handleViewDetails(candidate)}
-              />
-            </div>
+    <>
+      <div className="candidates-container">
+        {voteStatus.type === "success" && !isVoteToCandidateOpen && (
+          <div className="vote-success-message">
+            <p>{voteStatus.message}</p>
           </div>
-        ))}
+        )}
+        <h1>Vote for your Preferred Candidate</h1>
+        <div className="candidates-cards-container">
+          {candidates.map((candidate, index) => (
+            <div key={index} className="candidate-card">
+              <img
+                src={
+                  candidate.profile_picture_path
+                    ? getProfilePictureUrl(candidate.profile_picture_path)
+                    : defaultProfilePicture
+                }
+                alt=""
+              />
+              <h2>
+                {capitalizeFirstLetter(candidate.first_name)}{" "}
+                {capitalizeFirstLetter(candidate.middle_name)}{" "}
+                {capitalizeFirstLetter(candidate.last_name)}
+              </h2>
+              <div className="vote-view-details-btns">
+                <Button
+                  text="Vote"
+                  variant="blue"
+                  size="small"
+                  onClick={() => openVoteToCandidateDialog(candidate)}
+                />
+                <Button
+                  text="View Details"
+                  variant="white"
+                  size="small"
+                  onClick={() => handleViewDetails(candidate)}
+                />
+              </div>
+            </div>
+          ))}
+        </div>
       </div>
 
+      {/* Dialogues moved outside the main container */}
       {/* Dialogue for candidate details */}
       <Dialogue
         isOpen={isDialogueOpen}
@@ -205,13 +220,13 @@ const VoteForCandidate = () => {
           <div className="yes-no-btn-wrapper">
             <Button
               text="No"
-              variant="white"
+              variant="red"
               size="small"
               onClick={closeVoteToCandidateDialog}
             />
             <Button
               text="Yes"
-              variant="red"
+              variant="blue"
               size="small"
               onClick={handleVote}
               disabled={isGettingLocation || voteStatus.type === "success"}
@@ -252,7 +267,7 @@ const VoteForCandidate = () => {
           </>
         )}
       </Dialogue>
-    </div>
+    </>
   );
 };
 

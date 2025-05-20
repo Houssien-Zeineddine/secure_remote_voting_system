@@ -3,4 +3,14 @@
     left: 15rem;
     width: calc(100% - 15rem);
     height: 100%;
+    transition: all 0.3s ease;
+    overflow: visible;
+}
+
+@media screen and (max-width: 767px) {
+    .along-sidebar-positioning {
+        left: 0;
+        width: 100%;
+        padding: 1rem;
+    }
 }

@@ -12,7 +12,7 @@ const Dialogue = ({
   if (!isOpen) return null;
 
   return (
-    <div className="dialogue-overlay">
+    <div className="dialogue-backdrop">
       <div className="dialogue-content">
         <div className="dialogue-header">
           <h2>{title}</h2>
