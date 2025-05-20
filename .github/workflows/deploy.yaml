@@ -184,7 +184,7 @@ jobs:
             docker pull ${{ secrets.DOCKERHUB_USERNAME }}/final_project_laravel_image:latest
             docker pull ${{ secrets.DOCKERHUB_USERNAME }}/final_project_react_image:latest
 
-            docker-compose up -d --build
+            docker-compose up -d
 
             sleep 30
 
