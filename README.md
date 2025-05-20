@@ -153,9 +153,9 @@
 
 <br>
 
-| Landing Page Demo                                  | Login Demo                              |
-| -------------------------------------------------- | --------------------------------------- |
-| ![Landing](./readme/gifs/landing%20page%20gif.gif) | ![fsdaf](./readme/gifs/Login%20gif.gif) |
+| Filter Vote Function                                   | Analyze Vote Behavior (PrismPHP) Demo                             |
+| ------------------------------------------------------ | ----------------------------------------------------------------- |
+| ![Landing](./readme/code%20snippets/filter%20vote.png) | ![fsdaf](./readme/code%20snippets/analyze%20vote%20behaviour.png) |
 
 | Successfull Vote                                       | Malicious Vote Detection                                       |
 | ------------------------------------------------------ | -------------------------------------------------------------- |
