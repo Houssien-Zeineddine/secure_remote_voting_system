@@ -260,7 +260,7 @@ const AdminPage = () => {
               <div className="yes-no-btn-wrapper">
                 <Button
                   text="Yes"
-                  variant="blue"
+                  variant="white"
                   size="small"
                   onClick={handleConfirmStopElections}
                 />
