@@ -89,6 +89,14 @@
 
 <br><br>
 
+### Some Code Snippets!
+
+| Working Pipeline                            |
+| ------------------------------------------- |
+| ![Landing](./readme/working%20pipeline.png) |
+
+<br><br>
+
 <!-- Deployment -->
 <img src="./readme/title7.svg"/>
 
