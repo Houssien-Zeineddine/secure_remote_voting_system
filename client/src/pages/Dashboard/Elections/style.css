@@ -92,14 +92,59 @@
     color: var(--primary-color);
     font-weight: var(--font-weight-medium);
     font-size: var(--font-size-header-4);
+    animation: fadeIn 0.8s ease-out forwards;
+    animation-delay: calc(0.1s * var(--index, 0));
+    opacity: 0;
 }
 
 .vote-bar {
     height: 2rem;
     background-color: var(--primary-color);
     border-radius: 100px;
-    width: var(--target-width);
-    animation: growBar 1s ease-out forwards;
+    width: 0;
+    animation: growBar 1.5s cubic-bezier(0.26, 0.86, 0.44, 0.985) forwards;
+    position: relative;
+    overflow: hidden;
+}
+
+.vote-bar::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(90deg,
+            rgba(255, 255, 255, 0.1) 0%,
+            rgba(255, 255, 255, 0.2) 50%,
+            rgba(255, 255, 255, 0.1) 100%);
+    width: 75%;
+    height: 100%;
+    animation: shimmer 2s infinite;
+    transform: translateX(-100%);
+}
+
+@keyframes shimmer {
+    100% {
+        transform: translateX(150%);
+    }
+}
+
+@keyframes growBar {
+    from {
+        width: 0;
+    }
+
+    to {
+        width: var(--target-width);
+    }
+}
+
+.bar-result-container p {
+    min-width: 50px;
+    text-align: right;
+    font-weight: 600;
+    animation: countUp 2s forwards;
 }
 
 /* statistics container */
@@ -240,18 +285,58 @@
     }
 
     .candidates-names {
-        width: 100%;
-        gap: 1.5rem;
-        margin-bottom: 1rem;
+        display: none;
     }
 
     .bar-result-container {
-        gap: 0.5rem;
-        margin-bottom: 0.5rem;
+        display: grid;
+        grid-template-columns: minmax(100px, 1fr) 3fr 50px;
+        align-items: center;
+        gap: 0.75rem;
+        margin-bottom: 1rem;
+        position: relative;
+        padding: 0.5rem;
+        border-radius: 8px;
+        background-color: rgba(255, 255, 255, 0.5);
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+        transition: all 0.3s ease;
+    }
+
+    .bar-result-container:hover {
+        background-color: white;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    }
+
+    .bar-result-container:before {
+        content: attr(data-name);
+        grid-column: 1;
+        grid-row: 1;
+        font-weight: var(--font-weight-medium);
+        color: var(--primary-color);
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        min-width: 100px;
+        padding-right: 0.5rem;
+    }
+
+    .bar-result-container .vote-bar {
+        grid-column: 2;
+        grid-row: 1;
+        height: 1.5rem;
+        width: 0;
+    }
+
+    .bar-result-container p {
+        grid-column: 3;
+        grid-row: 1;
+        font-weight: 600;
+        margin: 0;
     }
 
     .vote-bar {
         height: 1.5rem;
+        flex-grow: 1;
     }
 
     .statistics-container {
@@ -270,6 +355,32 @@
         width: 100%;
         max-width: 200px;
         margin-top: 0.5rem;
+    }
+}
+
+@media screen and (max-width: 576px) {
+    .bar-result-container {
+        display: flex;
+        flex-wrap: wrap;
+        padding: 0.75rem 0.5rem;
+    }
+
+    .bar-result-container:before {
+        flex: 1 0 100%;
+        margin-bottom: 0.5rem;
+        white-space: normal;
+        overflow: visible;
+        font-size: 0.9rem;
+    }
+
+    .vote-bar {
+        flex: 1 1 auto;
+        margin-right: 0.5rem;
+    }
+
+    .bar-result-container p {
+        flex: 0 0 auto;
+        min-width: 45px;
     }
 }
 
@@ -317,6 +428,30 @@
     .statistics-container p {
         margin: 0.25rem 0;
     }
+
+    .bar-result-container {
+        gap: 0.5rem;
+        margin-bottom: 0.8rem;
+        animation-duration: 0.6s;
+    }
+
+    .bar-result-container:before {
+        flex: 1 0 100%;
+        margin-bottom: 0.5rem;
+        white-space: normal;
+        overflow: visible;
+        font-size: 0.9rem;
+    }
+
+    .vote-bar {
+        flex: 1 1 auto;
+        margin-right: 0.5rem;
+    }
+
+    .bar-result-container p {
+        flex: 0 0 auto;
+        min-width: 45px;
+    }
 }
 
 @media screen and (max-width: 360px) {
@@ -347,5 +482,13 @@
     .dashboard-live-results,
     .statistics-container {
         padding: 0.5rem;
+    }
+
+    .bar-result-container {
+        padding: 0.5rem 0.4rem;
+    }
+
+    .bar-result-container:before {
+        font-size: 0.85rem;
     }
 }
