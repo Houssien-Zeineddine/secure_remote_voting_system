@@ -1,6 +1,5 @@
-// components/Dialogue/index.js
 import React from "react";
-import "./style.css"; // You might want to create separate styles
+import "./style.css";
 
 const Dialogue = ({
   isOpen,
@@ -23,9 +22,7 @@ const Dialogue = ({
             </button>
           )}
         </div>
-        <div className="dialogue-body">
-          {children} {/* This allows any content to be passed in */}
-        </div>
+        <div className="dialogue-body">{children}</div>
         {footerContent && (
           <div className="dialogue-footer">{footerContent}</div>
         )}
