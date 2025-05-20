@@ -100,9 +100,10 @@
 <!-- AI-Powered App -->
 <img src="./readme/title7.svg"/>
 
-### A Secure, Smart, and Trustworthy Digital Voting Experience
+### AI-Powered Vote Validation
 
-- **Secure Remote Voting:** Cast your vote with confidence from anywhere in the world, thanks to our cutting-edge security measures designed to protect your voice against tampering.
+- **How it Works**
+  > To guarantee the integrity of the remote voting process, this system confidently utilizes AI to swiftly detect and filter out any suspicious or potentially malicious votes in real time.
 - **AI-Powered Fraud Detection:** By harnessing the power of artificial intelligence, our system diligently monitors voting patterns to swiftly identify and flag any suspicious activities. This proactive approach guarantees the integrity of the electoral process, safeguarding the foundation of our democracy.
 - **Geolocation-Based Validation:** Our innovative solution ensures that each vote is cast from an authorized location, enhancing the legitimacy of every ballot and fostering an unwavering trust in the democratic process.
 
