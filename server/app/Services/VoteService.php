@@ -142,10 +142,6 @@ class VoteService {
         }
     }
     
-    /**
-     * Fallback vote analysis method when AI service is unavailable
-     * Uses basic rules to determine if a vote might be malicious
-     */
     private function fallbackVoteAnalysis($recentVotes, $voteTime) {
         // Convert time to hours for comparison
         $hourMinute = explode(':', $voteTime);
