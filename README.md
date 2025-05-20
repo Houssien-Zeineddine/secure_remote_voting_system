@@ -145,11 +145,17 @@
 
     - Odd-Hour Activity: Voting attempts occurring between 12:00 AM and 5:00 AM are scrutinized closely.
 
-Any violations of these patterns mark the vote as malicious with clear reasoning, while otherwise, the vote is accepted as valid.
+    <br>
 
-| Postman API 1                           |
-| --------------------------------------- |
-| ![Landing](./readme/demo/1440x1024.png) |
+**Any deviation from these established patterns will categorize the vote as malicious, backed by clear reasoning; otherwise, the vote will be recognized as valid.**
+
+**This robust validation mechanism not only bolsters trust and security but also guarantees high availability through effective error handling, ensuring the system remains reliable in all conditions.**
+
+<br>
+
+| Postman API 1                                                       | Postman API 1                                                       |
+| ------------------------------------------------------------------- | ------------------------------------------------------------------- |
+| ![Landing](./readme/code%20snippets/analyze%20vote%20behaviour.png) | ![Landing](./readme/code%20snippets/analyze%20vote%20behaviour.png) |
 
 <br><br>
 
