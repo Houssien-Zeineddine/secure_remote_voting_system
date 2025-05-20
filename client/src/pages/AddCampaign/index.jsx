@@ -11,8 +11,8 @@ import "./style.css";
 
 const AddCampaign = () => {
   const { user } = useContext(AuthContext);
-  const { campaigns, fetchCampaigns } = useContext(CheckCampaignContext);
   const { ongoingActiveElections } = useContext(CheckElectionsContext);
+  const { campaigns, fetchCampaigns } = useContext(CheckCampaignContext);
 
   const [isAddCampaignOpen, setIsAddCampaignOpen] = useState(false);
   const [isEditCampaignOpen, setIsEditCampaignOpen] = useState(false);
@@ -48,8 +48,6 @@ const AddCampaign = () => {
       }
     }
   }, [user, campaigns]);
-
-  console.log("editing campaign t4ext", editingCampaignText);
 
   const handleAddCampaign = async () => {
     try {
