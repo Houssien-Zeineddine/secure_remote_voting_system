@@ -106,7 +106,9 @@ jobs:
           key: ${{ secrets.EC2_KEY }}
           script: |
             sudo apt-get update
-            sudo apt-get install -y docker-compose
+            sudo apt-get install -y docker.io docker-compose-plugin
+            sudo usermod -aG docker $USER
+            newgrp docker
 
       - name: Checkout repository
         uses: actions/checkout@v3
@@ -177,6 +179,9 @@ jobs:
 
             docker rmi ${{ secrets.DOCKERHUB_USERNAME }}/final_project_laravel_image:latest || true
             docker rmi ${{ secrets.DOCKERHUB_USERNAME }}/final_project_react_image:latest || true
+
+            docker pull ${{ secrets.DOCKERHUB_USERNAME }}/final_project_laravel_image:latest
+            docker pull ${{ secrets.DOCKERHUB_USERNAME }}/final_project_react_image:latest
 
             docker compose up -d
 
