@@ -83,9 +83,9 @@
 
 ### Add Title Here
 
-| Analyze Vote behavior (using AI and prismphp)                       | Edit Profile Backend Validation                                              | Testing                               |
-| ------------------------------------------------------------------- | ---------------------------------------------------------------------------- | ------------------------------------- |
-| ![Landing](./readme/code%20snippets/analyze%20vote%20behaviour.png) | ![fsdaf](./readme/code%20snippets/edit%20profile%20backend%20validation.png) | ![fsdaf](./readme/demo/1440x1024.png) |
+| Analyze Vote behavior (using AI and prismphp)                       | Edit Profile Backend Validation                                              | Register Login Testing                                         |
+| ------------------------------------------------------------------- | ---------------------------------------------------------------------------- | -------------------------------------------------------------- |
+| ![Landing](./readme/code%20snippets/analyze%20vote%20behaviour.png) | ![fsdaf](./readme/code%20snippets/edit%20profile%20backend%20validation.png) | ![fsdaf](./readme/code%20snippets/register%20login%20test.png) |
 
 <br><br>
 
