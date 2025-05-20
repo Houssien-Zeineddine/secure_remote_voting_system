@@ -104,7 +104,8 @@
 
 - **How it Works**
   > To guarantee the integrity of the remote voting process, this system confidently utilizes AI to swiftly detect and filter out any suspicious or potentially malicious votes in real time.
-- **AI-Powered Fraud Detection:** By harnessing the power of artificial intelligence, our system diligently monitors voting patterns to swiftly identify and flag any suspicious activities. This proactive approach guarantees the integrity of the electoral process, safeguarding the foundation of our democracy.
+- **Geolocation Validation**
+  > Each vote undergoes rigorous verification against the election region’s established geofence utilizing the Haversine formula. If a voter's latitude and longitude fall outside the designated radius, the vote is promptly flagged as malicious and recorded with the reason: “Location outside election region.”
 - **Geolocation-Based Validation:** Our innovative solution ensures that each vote is cast from an authorized location, enhancing the legitimacy of every ballot and fostering an unwavering trust in the democratic process.
 
 | Postman API 1                           |
