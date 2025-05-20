@@ -23,7 +23,6 @@ const Profile = () => {
       setProfileData(user);
       setTempData(user);
     }
-    console.log(user);
   }, [user]);
 
   if (!profileData) {
@@ -46,15 +45,12 @@ const Profile = () => {
     setIsLoading(true);
     setError(null);
 
-    console.log("Access token:", access_token);
     try {
       const response = await axiosInstance.post("/user/editprofile", tempData, {
         headers: {
           Authorization: `Bearer ${access_token}`,
         },
       });
-
-      console.log("Edit profile API response", response);
 
       setProfileData({ ...tempData });
       setIsEditing(false);
