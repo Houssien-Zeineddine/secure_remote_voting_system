@@ -174,9 +174,9 @@ jobs:
 
             sudo usermod -aG docker $USER
 
-            docker compose pull
+            docker-compose pull
 
-            docker compose down
+            docker-compose down
 
             docker rmi ${{ secrets.DOCKERHUB_USERNAME }}/final_project_laravel_image:latest || true
             docker rmi ${{ secrets.DOCKERHUB_USERNAME }}/final_project_react_image:latest || true
@@ -184,7 +184,7 @@ jobs:
             docker pull ${{ secrets.DOCKERHUB_USERNAME }}/final_project_laravel_image:latest
             docker pull ${{ secrets.DOCKERHUB_USERNAME }}/final_project_react_image:latest
 
-            docker compose up -d
+            docker-compose up -d
 
             sleep 30
 
