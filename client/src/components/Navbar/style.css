@@ -98,7 +98,7 @@
     background: none;
     border: none;
     padding: 0;
-    z-index: 1002;
+    z-index: 1020;
 }
 
 .hamburger span {
@@ -161,11 +161,17 @@
         height: 100vh;
         background-color: var(--primary-color);
         flex-direction: column;
-        justify-content: center;
-        padding: 2rem;
+        justify-content: flex-start;
+        padding: 4.5rem 2rem 2rem 2rem;
         transition: all 0.3s ease-in-out;
         box-shadow: -5px 0 15px rgba(0, 0, 0, 0.1);
         z-index: 1010;
+    }
+
+    .hamburger.active {
+        position: fixed;
+        top: 1.5rem;
+        right: 1.5rem;
     }
 
     .navbar-logo {
@@ -232,9 +238,14 @@
         transform: scale(0.8);
     }
 
+    .hamburger.active {
+        top: 1.2rem;
+        right: 1.2rem;
+    }
+
     .nav-items {
         width: 250px;
-        padding: 1.5rem;
+        padding: 4rem 1.5rem 1.5rem 1.5rem;
     }
 
     .nav-link a {
@@ -251,7 +262,6 @@
         font-size: 0.9rem;
     }
 
-    /* Better positioning for mobile sidebar trigger when navbar is smaller */
     .mobile-trigger {
         bottom: 1.5rem;
         left: 1.5rem;
