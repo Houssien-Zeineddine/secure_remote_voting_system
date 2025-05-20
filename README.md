@@ -18,6 +18,10 @@
 
 <img src="./readme/Charts/ER Diagram.png">
 
+### Component Diagram
+
+<img src="./readme/Charts/component diagram.png">
+
 ### System Architecture Diagram
 
 <img src="./readme/Charts/System Architecture Diagram.png">
