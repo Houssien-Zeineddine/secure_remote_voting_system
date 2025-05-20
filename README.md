@@ -153,9 +153,13 @@
 
 <br>
 
-| Postman API 1                                                       | Postman API 1                                                       |
-| ------------------------------------------------------------------- | ------------------------------------------------------------------- |
-| ![Landing](./readme/code%20snippets/analyze%20vote%20behaviour.png) | ![Landing](./readme/code%20snippets/analyze%20vote%20behaviour.png) |
+| Landing Page Demo                                  | Login Demo                              |
+| -------------------------------------------------- | --------------------------------------- |
+| ![Landing](./readme/gifs/landing%20page%20gif.gif) | ![fsdaf](./readme/gifs/Login%20gif.gif) |
+
+| Successfull Vote                                       | Malicious Vote Detection                                       |
+| ------------------------------------------------------ | -------------------------------------------------------------- |
+| ![Landing](./readme/gifs/successful%20vote%20gif'.gif) | ![fsdaf](./readme/gifs/malicious%20vote%20detection%20gif.gif) |
 
 <br><br>
 
