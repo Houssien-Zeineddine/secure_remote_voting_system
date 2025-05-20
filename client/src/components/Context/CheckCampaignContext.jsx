@@ -21,7 +21,6 @@ export const CheckCampaignProvider = ({ children }) => {
         setCampaigns(null);
       }
     } catch (error) {
-      console.log(error);
       setCampaigns(null);
     }
   };
