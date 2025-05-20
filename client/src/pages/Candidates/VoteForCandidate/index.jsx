@@ -44,8 +44,6 @@ const VoteForCandidate = () => {
         });
       });
 
-      console.log("Position from getcurrentposition", position);
-
       setIsGettingLocation(false);
 
       return {
