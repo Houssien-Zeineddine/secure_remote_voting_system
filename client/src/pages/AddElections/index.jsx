@@ -85,13 +85,10 @@ const AdminPage = () => {
       );
 
       if (response.status === 200) {
-        console.log(response.data);
         await fetchElections();
         setOngoingActiveElections(response.data);
-        console.log("ongoing active elections id", response.data.id);
       }
     } catch (err) {
-      console.error("Add elections failed", err);
       setError("Failed to create elections. Please try again.");
     } finally {
       setElectionsTitle("");
