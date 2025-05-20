@@ -63,6 +63,10 @@
     animation: slideInRight 1s ease-out;
 }
 
+.politician-img-container img {
+    width: 100%;
+}
+
 .landing-page-text {
     display: flex;
     flex-direction: column;
@@ -286,6 +290,19 @@
     margin-bottom: 2.5rem;
 }
 
+.rounded-number {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--primary-color);
+    color: white;
+    width: 35px;
+    height: 35px;
+    min-width: 35px;
+    border-radius: 50%;
+    font-weight: var(--font-weight-bold);
+}
+
 div>h4 {
     font-size: var(--font-size-header-4);
 }
@@ -450,6 +467,10 @@ div>h4 {
 
 /* Footer Responsive Design */
 @media screen and (max-width: 968px) {
+    .landing-page-text{
+        margin-top: 5rem;
+    }
+
     .footer-content {
         flex-wrap: wrap;
         gap: 2rem;
@@ -514,3 +535,5 @@ div>h4 {
         transform: translateY(0px);
     }
 }
+
+/* Responsive Design for Home Page can be found in responsive.css */
