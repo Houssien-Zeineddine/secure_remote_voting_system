@@ -97,16 +97,18 @@
 
 <br><br>
 
-<!-- Deployment -->
+<!-- AI-Powered App -->
 <img src="./readme/title7.svg"/>
 
-### Add Title Here
+### A Secure, Smart, and Trustworthy Digital Voting Experience
 
-<!-- - Description here.
+- **Secure Remote Voting:** Cast your vote with confidence from anywhere in the world, thanks to our cutting-edge security measures designed to protect your voice against tampering.
+- **AI-Powered Fraud Detection:** By harnessing the power of artificial intelligence, our system diligently monitors voting patterns to swiftly identify and flag any suspicious activities. This proactive approach guarantees the integrity of the electoral process, safeguarding the foundation of our democracy.
+- **Geolocation-Based Validation:** Our innovative solution ensures that each vote is cast from an authorized location, enhancing the legitimacy of every ballot and fostering an unwavering trust in the democratic process.
 
-| Postman API 1                           | Postman API 2                         | Postman API 3                         |
-| --------------------------------------- | ------------------------------------- | ------------------------------------- |
-| ![Landing](./readme/demo/1440x1024.png) | ![fsdaf](./readme/demo/1440x1024.png) | ![fsdaf](./readme/demo/1440x1024.png) | -->
+| Postman API 1                           |
+| --------------------------------------- |
+| ![Landing](./readme/demo/1440x1024.png) |
 
 <br><br>
 
