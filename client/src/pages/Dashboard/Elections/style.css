@@ -95,6 +95,22 @@
     animation: fadeIn 0.8s ease-out forwards;
     animation-delay: calc(0.1s * var(--index, 0));
     opacity: 0;
+    position: relative;
+    height: 2rem;
+    padding-right: 60px;
+    /* Space for percentage text */
+}
+
+.bar-result-container:after {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    height: 2rem;
+    width: 100%;
+    background-color: rgba(0, 0, 0, 0.05);
+    border-radius: 100px;
+    z-index: 1;
 }
 
 .vote-bar {
@@ -103,8 +119,11 @@
     border-radius: 100px;
     width: 0;
     animation: growBar 1.5s cubic-bezier(0.26, 0.86, 0.44, 0.985) forwards;
-    position: relative;
+    position: absolute;
+    left: 0;
+    top: 0;
     overflow: hidden;
+    z-index: 2;
 }
 
 .vote-bar::after {
@@ -145,6 +164,14 @@
     text-align: right;
     font-weight: 600;
     animation: countUp 2s forwards;
+    z-index: 3;
+    position: absolute;
+    right: 0;
+    top: 0;
+    margin: 0;
+    height: 2rem;
+    display: flex;
+    align-items: center;
 }
 
 /* statistics container */
@@ -289,50 +316,43 @@
     }
 
     .bar-result-container {
-        display: flex;
-        flex-wrap: wrap;
-        padding: 0.75rem 0.5rem;
-        margin-bottom: 1rem;
         position: relative;
-        border-radius: 8px;
-        background-color: rgba(255, 255, 255, 0.5);
-        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
-        transition: all 0.3s ease;
-    }
-
-    .bar-result-container:hover {
-        background-color: white;
-        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        margin-bottom: 1.5rem;
+        padding-top: 1.5rem;
+        background: transparent;
+        height: auto;
+        padding-right: 0;
     }
 
     .bar-result-container:before {
         content: attr(data-name);
-        flex: 1 0 100%;
-        margin-bottom: 0.5rem;
-        white-space: normal;
-        overflow: visible;
-        font-weight: var(--font-weight-medium);
+        position: absolute;
+        top: 0;
+        left: 0;
+        font-weight: 600;
         color: var(--primary-color);
         font-size: 0.95rem;
+        margin-bottom: 0.3rem;
     }
 
     .bar-result-container .vote-bar {
-        flex: 1 1 auto;
+        position: absolute;
+        left: 0;
+        top: 1.5rem;
         height: 1.5rem;
-        width: 0;
-        margin-right: 0.5rem;
-    }
-
-    .bar-result-container p {
-        flex: 0 0 auto;
-        min-width: 45px;
-        font-weight: 600;
+        width: var(--target-width) !important;
         margin: 0;
     }
 
-    .vote-bar {
-        height: 1.5rem;
-        flex-grow: 1;
+    .bar-result-container:after {
+        top: 1.5rem;
+        width: 100%;
+    }
+
+    .bar-result-container p {
+        top: 0;
+        right: 0;
+        height: auto;
     }
 
     .statistics-container {
@@ -399,24 +419,12 @@
         margin: 0.25rem 0;
     }
 
-    .bar-result-container {
-        gap: 0.5rem;
-        margin-bottom: 0.8rem;
-        animation-duration: 0.6s;
-    }
-
     .bar-result-container:before {
         font-size: 0.9rem;
     }
 
-    .vote-bar {
-        flex: 1 1 auto;
-        margin-right: 0.5rem;
-    }
-
-    .bar-result-container p {
-        flex: 0 0 auto;
-        min-width: 45px;
+    .bar-result-container:after {
+        height: 1.2rem;
     }
 }
 
@@ -451,10 +459,16 @@
     }
 
     .bar-result-container {
-        padding: 0.5rem 0.4rem;
+        padding-top: 1.8rem;
     }
 
     .bar-result-container:before {
         font-size: 0.85rem;
+    }
+
+    .bar-result-container .vote-bar,
+    .bar-result-container:after {
+        height: 1.2rem;
+        top: 1.8rem;
     }
 }
