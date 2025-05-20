@@ -64,9 +64,9 @@
 | -------------------------------------------- | -------------------------------------- |
 | ![Landing](./readme/demo/landing%20page.png) | ![fsdaf](./readme//demo/dashboard.png) |
 
-| Malicious Vote Detected (Malicious User Behaviour) | Malicious Vote (Outside Region)                         |
-| -------------------------------------------------- | ------------------------------------------------------- |
-| ![Landing](./readme/demo/malicious%20vote.png)     | ![fsdaf](./readme/demo/malicious%20vote%20location.png) |
+| Malicious Vote Detected (Malicious User Behavior) | Malicious Vote (Outside Region)                         |
+| ------------------------------------------------- | ------------------------------------------------------- |
+| ![Landing](./readme/demo/malicious%20vote.png)    | ![fsdaf](./readme/demo/malicious%20vote%20location.png) |
 
 | Landing Page Demo                                  | Login Demo                              |
 | -------------------------------------------------- | --------------------------------------- |
@@ -83,9 +83,9 @@
 
 ### Add Title Here
 
-| Services                                | Validation                            | Testing                               |
-| --------------------------------------- | ------------------------------------- | ------------------------------------- |
-| ![Landing](./readme/demo/1440x1024.png) | ![fsdaf](./readme/demo/1440x1024.png) | ![fsdaf](./readme/demo/1440x1024.png) |
+| Analyze Vote behavior (using AI and prismphp)                       | Validation                            | Testing                               |
+| ------------------------------------------------------------------- | ------------------------------------- | ------------------------------------- |
+| ![Landing](./readme/code%20snippets/analyze%20vote%20behaviour.png) | ![fsdaf](./readme/demo/1440x1024.png) | ![fsdaf](./readme/demo/1440x1024.png) |
 
 <br><br>
 
