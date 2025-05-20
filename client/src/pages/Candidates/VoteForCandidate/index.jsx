@@ -60,11 +60,11 @@ const VoteForCandidate = () => {
 
   const handleVote = async () => {
     if (isGettingLocation) return; // Prevent multiple clicks
-    
+
     try {
       setIsGettingLocation(true);
       setLocationError(null);
-      
+
       const location = await getCurrentLocation();
 
       const voteData = {
@@ -220,13 +220,13 @@ const VoteForCandidate = () => {
           <div className="yes-no-btn-wrapper">
             <Button
               text="No"
-              variant="white"
+              variant="red"
               size="small"
               onClick={closeVoteToCandidateDialog}
             />
             <Button
               text="Yes"
-              variant="red"
+              variant="blue"
               size="small"
               onClick={handleVote}
               disabled={isGettingLocation || voteStatus.type === "success"}
