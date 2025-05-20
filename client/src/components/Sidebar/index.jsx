@@ -131,18 +131,6 @@ const Sidebar = () => {
           />
           <p className="sidebar-tag">Guidelines</p>
         </Link>
-        <Link
-          to="/settings"
-          className={
-            location === "/settings" ? "sidebar-link-current" : "sidebar-link"
-          }
-        >
-          <img
-            src={location === "/settings" ? settings : blueSettings}
-            alt=""
-          />
-          <p className="sidebar-tag">Settings</p>
-        </Link>
       </div>
     </div>
   );
