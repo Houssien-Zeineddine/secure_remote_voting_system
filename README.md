@@ -116,3 +116,11 @@
 | ![Landing](./readme/postman%20apis/login%20api.png) | ![fsdaf](./readme/postman%20apis/get%20candidates.png) | ![fsdaf](./readme/postman%20apis/add%20candidate.png) |
 
 <br><br>
+
+### API Showcase
+
+- These APIs enable managing elections by allowing authorized users (admin) to add new elections, delete existing ones, and retrieve election details or lists. They support creating, removing, and fetching election data to facilitate the election lifecycle and user interaction.:
+
+| Add Elections API (Admin Only)                          | Delete Elections API (Admin Only)                        | Get Elections API                                      |
+| ------------------------------------------------------- | -------------------------------------------------------- | ------------------------------------------------------ |
+| ![Landing](./readme/postman%20apis/add%20elections.png) | ![fsdaf](./readme/postman%20apis/delete%20elections.png) | ![fsdaf](./readme/postman%20apis/get%20elections'.png) |
