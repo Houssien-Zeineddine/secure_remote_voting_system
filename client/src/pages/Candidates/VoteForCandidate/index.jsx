@@ -142,47 +142,50 @@ const VoteForCandidate = () => {
   };
 
   return (
-    <div className="candidates-container">
-      {voteStatus.type === "success" && !isVoteToCandidateOpen && (
-        <div className="vote-success-message">
-          <p>{voteStatus.message}</p>
-        </div>
-      )}
-      <h1>Vote for your Preferred Candidate</h1>
-      <div className="candidates-cards-container">
-        {candidates.map((candidate, index) => (
-          <div key={index} className="candidate-card">
-            <img
-              src={
-                candidate.profile_picture_path
-                  ? getProfilePictureUrl(candidate.profile_picture_path)
-                  : defaultProfilePicture
-              }
-              alt=""
-            />
-            <h2>
-              {capitalizeFirstLetter(candidate.first_name)}{" "}
-              {capitalizeFirstLetter(candidate.middle_name)}{" "}
-              {capitalizeFirstLetter(candidate.last_name)}
-            </h2>
-            <div className="vote-view-details-btns">
-              <Button
-                text="Vote"
-                variant="blue"
-                size="small"
-                onClick={() => openVoteToCandidateDialog(candidate)}
-              />
-              <Button
-                text="View Details"
-                variant="white"
-                size="small"
-                onClick={() => handleViewDetails(candidate)}
-              />
-            </div>
+    <>
+      <div className="candidates-container">
+        {voteStatus.type === "success" && !isVoteToCandidateOpen && (
+          <div className="vote-success-message">
+            <p>{voteStatus.message}</p>
           </div>
-        ))}
+        )}
+        <h1>Vote for your Preferred Candidate</h1>
+        <div className="candidates-cards-container">
+          {candidates.map((candidate, index) => (
+            <div key={index} className="candidate-card">
+              <img
+                src={
+                  candidate.profile_picture_path
+                    ? getProfilePictureUrl(candidate.profile_picture_path)
+                    : defaultProfilePicture
+                }
+                alt=""
+              />
+              <h2>
+                {capitalizeFirstLetter(candidate.first_name)}{" "}
+                {capitalizeFirstLetter(candidate.middle_name)}{" "}
+                {capitalizeFirstLetter(candidate.last_name)}
+              </h2>
+              <div className="vote-view-details-btns">
+                <Button
+                  text="Vote"
+                  variant="blue"
+                  size="small"
+                  onClick={() => openVoteToCandidateDialog(candidate)}
+                />
+                <Button
+                  text="View Details"
+                  variant="white"
+                  size="small"
+                  onClick={() => handleViewDetails(candidate)}
+                />
+              </div>
+            </div>
+          ))}
+        </div>
       </div>
 
+      {/* Dialogues moved outside the main container */}
       {/* Dialogue for candidate details */}
       <Dialogue
         isOpen={isDialogueOpen}
@@ -264,7 +267,7 @@ const VoteForCandidate = () => {
           </>
         )}
       </Dialogue>
-    </div>
+    </>
   );
 };
 

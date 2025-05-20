@@ -4,6 +4,7 @@
     width: calc(100% - 15rem);
     height: 100%;
     transition: all 0.3s ease;
+    overflow: visible;
 }
 
 @media screen and (max-width: 767px) {
