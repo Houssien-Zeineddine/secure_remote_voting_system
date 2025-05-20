@@ -106,7 +106,7 @@ jobs:
           key: ${{ secrets.EC2_KEY }}
           script: |
             sudo apt-get update
-            sudo apt-get install -y docker-compose-plugin
+            sudo apt-get install -y docker-compose
 
       - name: Checkout repository
         uses: actions/checkout@v3
