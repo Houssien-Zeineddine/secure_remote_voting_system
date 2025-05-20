@@ -4,7 +4,6 @@ import Button from "../../components/Button";
 import Dialogue from "../../components/Dialogue";
 import addElections from "../../assets/plus (1) 1.svg";
 import axiosInstance from "../../Utils/axios";
-import { capitalizeFirstLetter } from "../../Utils/helpers";
 import { CheckElectionsContext } from "../../components/Context/CheckElectionsContext";
 import { FetchCandidatesContext } from "../../components/Context/FetchCandidatesContext";
 import "./style.css";
@@ -318,7 +317,9 @@ const AdminPage = () => {
       ) : (
         <div className="create-elections-container">
           <h1>Create Elections</h1>
-          <p className="guide-text">Click the plus icon below to start creating a new election</p>
+          <p className="guide-text">
+            Click the plus icon below to start creating a new election
+          </p>
           <img
             src={addElections}
             alt="Create Elections"
@@ -340,11 +341,16 @@ const AdminPage = () => {
             }
           >
             <div className="form-guidance">
-              <p>Please fill in the following details to create a new election:</p>
+              <p>
+                Please fill in the following details to create a new election:
+              </p>
               <ul>
                 <li>Title: A clear and descriptive name for the election</li>
                 <li>Region: Select the geographical area for this election</li>
-                <li>Description: Provide details about the election's purpose and scope</li>
+                <li>
+                  Description: Provide details about the election's purpose and
+                  scope
+                </li>
               </ul>
             </div>
             <Input
