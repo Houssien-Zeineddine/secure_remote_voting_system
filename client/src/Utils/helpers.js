@@ -12,7 +12,7 @@ export const capitalizeTitle = (str) => {
     .join(' ');
 };
 
-const BASE_URL = "http://127.0.0.1:8000";
+const BASE_URL = "http://13.38.84.88:8000";
 export default function getProfilePictureUrl(path) {
   if (!path) return null;
   return `${BASE_URL}/storage/${path}`;
