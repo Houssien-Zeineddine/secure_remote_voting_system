@@ -183,3 +183,26 @@
 | Add Elections API (Admin Only)                          | Delete Elections API (Admin Only)                        | Get Elections API                                      |
 | ------------------------------------------------------- | -------------------------------------------------------- | ------------------------------------------------------ |
 | ![Landing](./readme/postman%20apis/add%20elections.png) | ![fsdaf](./readme/postman%20apis/delete%20elections.png) | ![fsdaf](./readme/postman%20apis/get%20elections'.png) |
+
+<br><br>
+
+### To login to the system:
+
+A default admin user is available with the credentials:
+
+    email:  test@example.com
+
+    password: 123456
+
+Admins have full control over the system. They can:
+
+- Create and manage elections
+- Add candidate users
+- Start and stop elections at any time
+
+  Despite their administrative privileges, admins can also participate in voting like regular users.
+
+Candidates can:
+
+- Create and update their campaign profiles
+- Participate in elections as voters
